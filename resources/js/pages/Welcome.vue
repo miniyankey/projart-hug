@@ -1,4 +1,4 @@
-<script lang="fr" setup>
+<script setup>
 import { Head } from '@inertiajs/vue3';
 </script>
 
