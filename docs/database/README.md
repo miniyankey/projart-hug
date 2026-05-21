@@ -1,4 +1,8 @@
-# Configurer la base de données (MariaDB)
+# Configurer la base de données (MariaDB) — installation native
+
+> ⚠️ **Cette doc est pour une installation sans Docker.**
+> La méthode recommandée est désormais **Docker / Laravel Sail** — voir [docs/docker](../docker/README.md).
+> Avec Docker, tu n'as **rien à installer** (ni MariaDB, ni PHP, ni Node). Cette doc reste utile si tu veux tout faire tourner nativement sur ta machine.
 
 Ce guide explique comment installer **MariaDB** sur ta machine et brancher le projet dessus.
 
