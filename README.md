@@ -6,6 +6,7 @@ Application web bâtie sur **Laravel 13 + Inertia v3 + Vue 3 + MariaDB**, conten
 
 - [Prérequis](#prérequis)
 - [Installation from scratch](#installation-from-scratch)
+- [Spécifique Windows](#spécifique-windows)
 - [Workflow de développement](#workflow-de-développement)
 - [Commandes utiles](#commandes-utiles)
 - [Documentation détaillée](#documentation-détaillée)
@@ -94,6 +95,39 @@ Cela lance :
 ### 9. Vérifier
 
 Ouvre **http://localhost:8000** dans ton navigateur — la page d'accueil Inertia doit s'afficher.
+
+---
+
+## Spécifique Windows
+
+`./vendor/bin/sail` est un script bash et ne fonctionne pas dans CMD/PowerShell. Sur Windows **sans WSL2**, utilise directement `docker compose` à la place de `sail` :
+
+| Commande Sail | Équivalent Windows (PowerShell / CMD) |
+| --- | --- |
+| `./vendor/bin/sail up -d` | `docker compose up -d` |
+| `./vendor/bin/sail down` | `docker compose down` |
+| `./vendor/bin/sail artisan migrate` | `docker compose exec laravel.test php artisan migrate` |
+| `./vendor/bin/sail composer install` | `docker compose exec laravel.test composer install` |
+| `./vendor/bin/sail npm install` | `docker compose exec laravel.test npm install` |
+| `./vendor/bin/sail npm run dev` | `docker compose exec laravel.test npm run dev` |
+| `./vendor/bin/sail test` | `docker compose exec laravel.test php artisan test` |
+| `./vendor/bin/sail shell` | `docker compose exec laravel.test bash` |
+
+Exemple complet de l'installation sur Windows (à partir de l'étape 4) :
+
+```powershell
+docker compose up -d
+docker compose exec laravel.test php artisan key:generate
+docker compose exec laravel.test php artisan migrate
+docker compose exec laravel.test npm install
+docker compose exec laravel.test npm run dev
+```
+
+> 💡 Pour gagner du temps, ajoute un alias dans ton `$PROFILE` PowerShell :
+> ```powershell
+> function sail { docker compose exec laravel.test $args }
+> ```
+> Puis : `sail php artisan migrate`, `sail npm run dev`, etc.
 
 ---
 
