@@ -55,17 +55,7 @@ Avant le premier `up`, il faut Composer pour installer Sail. Deux options :
 composer install --ignore-platform-reqs
 ```
 
-**Option B — Sans Composer local, via un container jetable :**
-```bash
-docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v "$(pwd):/var/www/html" \
-    -w /var/www/html \
-    laravelsail/php85-composer:latest \
-    composer install --ignore-platform-reqs
-```
-
-### 4. Démarrer les containers
+### 3. Démarrer les containers
 
 ```bash
 ./vendor/bin/sail up -d
@@ -95,7 +85,7 @@ Cela lance :
 ./vendor/bin/sail npm install
 ```
 
-### 8. Builder les assets (ou lancer le HMR — voir plus bas)
+### 8. Builder les assets (ou lancer le HMR, voir plus bas)
 
 ```bash
 ./vendor/bin/sail npm run build
@@ -132,45 +122,3 @@ Pour aussi supprimer les volumes (⚠️ efface la base de données) :
 ```bash
 ./vendor/bin/sail down -v
 ```
-
----
-
-## Commandes utiles
-
-| Action | Commande |
-| --- | --- |
-| Voir les containers | `./vendor/bin/sail ps` |
-| Logs Laravel | `./vendor/bin/sail logs -f laravel.test` |
-| Shell dans le container | `./vendor/bin/sail shell` |
-| Tinker | `./vendor/bin/sail artisan tinker` |
-| Tests Pest | `./vendor/bin/sail artisan test --compact` |
-| Lint PHP (Pint) | `./vendor/bin/sail composer exec -- pint --dirty` |
-| Lint JS/Vue | `./vendor/bin/sail npm run lint` |
-| Migrations fraîches | `./vendor/bin/sail artisan migrate:fresh --seed` |
-| Connexion MariaDB (hôte) | `mysql -h 127.0.0.1 -P 3307 -u projart -p` |
-
-Plus de commandes : [`docs/docker/03-commandes-courantes.md`](docs/docker/03-commandes-courantes.md)
-
----
-
-## Documentation détaillée
-
-- **Docker / Sail** → [`docs/docker/`](docs/docker/)
-  - Prérequis, démarrage, commandes courantes, dépannage
-- **Base de données (MariaDB)** → [`docs/database/`](docs/database/)
-  - Installation par OS, configuration projet, dépannage
-- **Inertia** → [`docs/inertia/`](docs/inertia/)
-  - Architecture, côté serveur/client, navigation, formulaires, SSR, FAQ
-
----
-
-## Dépannage rapide
-
-| Symptôme | Solution |
-| --- | --- |
-| `Unable to locate file in Vite manifest` | `./vendor/bin/sail npm run build` ou lance `npm run dev` |
-| Permissions refusées sur `storage/` ou `bootstrap/cache/` | Vérifie `WWWUSER`/`WWWGROUP` dans `.env`, puis `./vendor/bin/sail down && up -d` |
-| Port 8000 ou 3307 déjà utilisé | Change `APP_PORT` / `FORWARD_DB_PORT` dans `.env` |
-| Migrations échouent | Vérifie que `mariadb` est `healthy` : `./vendor/bin/sail ps` |
-
-Plus de cas : [`docs/docker/04-depannage.md`](docs/docker/04-depannage.md) et [`docs/database/05-depannage.md`](docs/database/05-depannage.md)
