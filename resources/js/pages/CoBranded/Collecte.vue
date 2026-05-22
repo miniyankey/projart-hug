@@ -1,10 +1,10 @@
 <script setup>
-import { Head } from '@inertiajs/vue3'
+import { Head } from '@inertiajs/vue3';
 
 defineProps({
     brandName: String,
     token: String,
-})
+});
 </script>
 
 <template>
