@@ -15,5 +15,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@hug.ch',
             'password' => 'password',
         ]);
+
+        $this->call([
+            CompanySeeder::class,
+            PlaceSeeder::class,
+        ]);
     }
 }
