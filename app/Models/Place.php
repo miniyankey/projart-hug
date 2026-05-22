@@ -26,4 +26,9 @@ class Place extends Model
             'locality' => 'integer',
         ];
     }
+
+    public function collects()
+    {
+        return $this->hasMany(Collect::class);
+    }
 }
