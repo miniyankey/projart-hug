@@ -37,4 +37,9 @@ class Company extends Model
     {
         return $this->hasMany(Collect::class);
     }
+
+    public function trophees()
+    {
+        return $this->hasMany(Trophee::class);
+    }
 }
