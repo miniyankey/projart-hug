@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             PlaceSeeder::class,
             CollectSeeder::class,
+            TropheeSeeder::class,
         ]);
     }
 }
