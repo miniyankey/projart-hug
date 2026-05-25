@@ -37,4 +37,9 @@ class Collect extends Model
     {
         return $this->belongsTo(Place::class);
     }
+
+    public function eligibiliteSteps()
+    {
+        return $this->hasMany(EventsEligibiliteStep::class);
+    }
 }
