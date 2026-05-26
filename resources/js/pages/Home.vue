@@ -9,7 +9,9 @@ const { t } = useI18n();
 <template>
     <Head :title="t('home.title')" />
     <div class="min-h-screen bg-white text-gray-900">
-        <header class="flex items-center justify-end border-b border-gray-200 px-6 py-4">
+        <header
+            class="flex items-center justify-end border-b border-gray-200 px-6 py-4"
+        >
             <LanguageSwitcher />
         </header>
         <main class="mx-auto max-w-3xl px-6 py-16">

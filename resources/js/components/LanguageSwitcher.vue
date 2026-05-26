@@ -24,16 +24,28 @@ function switchTo(locale) {
 </script>
 
 <template>
-    <div class="inline-flex items-center gap-1 text-sm" role="group" :aria-label="t('languageSwitcher.label')">
+    <div
+        class="inline-flex items-center gap-1 text-sm"
+        role="group"
+        :aria-label="t('languageSwitcher.label')"
+    >
         <button
             v-for="locale in SUPPORTED_LOCALES"
             :key="locale"
             type="button"
             class="cursor-pointer rounded border border-gray-300 px-2 py-1 uppercase transition-colors disabled:cursor-default"
-            :class="locale === currentLocale ? 'bg-gray-900 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
+            :class="
+                locale === currentLocale
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
+            "
             :disabled="locale === currentLocale"
             :aria-pressed="locale === currentLocale"
-            :title="t('languageSwitcher.switchTo', { language: t(`common.languages.${locale}`) })"
+            :title="
+                t('languageSwitcher.switchTo', {
+                    language: t(`common.languages.${locale}`),
+                })
+            "
             @click="switchTo(locale)"
         >
             {{ locale }}

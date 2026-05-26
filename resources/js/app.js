@@ -24,6 +24,7 @@ createInertiaApp({
         // success se déclenche quand une navigation réussie a lieu, c'est à dire que la page a été chargée et rendue avec succès
         router.on('success', (event) => {
             const locale = resolveLocale(event.detail.page.props.locale);
+
             if (i18n.global.locale.value !== locale) {
                 // permet de notifier tous les components qui utilisent la locale (ou la fn t()) que celle ci a changé
                 i18n.global.locale.value = locale;

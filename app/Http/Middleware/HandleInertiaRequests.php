@@ -37,7 +37,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
-     public function share(Request $request): array
+    public function share(Request $request): array
     {
         $locale = $request->cookie('locale');
 
@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
 
         app()->setLocale($locale);
 
-        //on retourne la locale aux vues (dans les props)
+        // on retourne la locale aux vues (dans les props)
         return [
             ...parent::share($request),
             'name' => config('app.name'),
