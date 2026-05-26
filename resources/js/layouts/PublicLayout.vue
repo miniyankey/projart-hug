@@ -1,59 +1,16 @@
 <script setup>
-import { Link, router } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
-import {
-    Menubar,
-    MenubarMenu,
-    MenubarTrigger,
-} from '@/components/ui/menubar';
+import Navbar from '@/components/Navbar.vue';
 import * as routes from '@/routes/index.ts';
+
 
 const { t } = useI18n();
 </script>
 
 <template>
     <div class="flex min-h-screen flex-col bg-white">
-        <header class="border-b border-gray-200">
-            <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-                <Link
-                    :href="routes.home.url()"
-                    class="text-sm font-semibold tracking-wide text-gray-900 uppercase"
-                >
-                    CTS — Trophée de la générosité
-                </Link>
-
-                <div class="flex items-center gap-4">
-                    <Menubar class="border-none bg-transparent shadow-none">
-                        <MenubarMenu>
-                            <MenubarTrigger
-                                class="text-gray-600 hover:bg-transparent hover:text-gray-900 focus:bg-transparent focus:text-gray-900 data-[state=open]:bg-transparent data-[state=open]:text-gray-900"
-                                @click="router.visit(routes.trophee.url())"
-                            >
-                                {{ t('nav.trophee') }}
-                            </MenubarTrigger>
-                        </MenubarMenu>
-                        <MenubarMenu>
-                            <MenubarTrigger
-                                class="text-gray-600 hover:bg-transparent hover:text-gray-900 focus:bg-transparent focus:text-gray-900 data-[state=open]:bg-transparent data-[state=open]:text-gray-900"
-                                @click="router.visit(routes.collecte.url())"
-                            >
-                                {{ t('nav.collecte') }}
-                            </MenubarTrigger>
-                        </MenubarMenu>
-                        <MenubarMenu>
-                            <MenubarTrigger
-                                class="text-gray-600 hover:bg-transparent hover:text-gray-900 focus:bg-transparent focus:text-gray-900 data-[state=open]:bg-transparent data-[state=open]:text-gray-900"
-                                @click="router.visit(routes.inscription.url())"
-                            >
-                                {{ t('nav.inscription') }}
-                            </MenubarTrigger>
-                        </MenubarMenu>
-                    </Menubar>
-                    <LanguageSwitcher />
-                </div>
-            </nav>
-        </header>
+        <Navbar />
 
         <main class="flex-1">
             <slot />
