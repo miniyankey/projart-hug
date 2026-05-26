@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,7 +15,7 @@ Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::inertia('/inscription', 'Inscription')->name('inscription');
 
 // Administration
-Route::prefix('/admin')->name('admin.')->group(function () {
+Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::inertia('/', 'Admin/Index')->name('index');
 
     Route::prefix('/vainqueurs')->name('vainqueurs.')->group(function () {
@@ -40,6 +41,11 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/{token}', fn () => Inertia::render('Admin/Kpi/Show'))->name('show');
     });
 });
+
+// Routes de login et logout
+Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('login');
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 // A completer
 Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
