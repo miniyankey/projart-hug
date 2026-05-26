@@ -17,6 +17,7 @@ class CompanySeeder extends Seeder
                 'name' => $name,
                 'slug' => Str::slug($name),
                 'email_contact' => fake()->unique()->companyEmail(),
+                'color' => fake()->hexColor(),
                 'is_labelled' => false,
             ]);
         }
@@ -28,6 +29,7 @@ class CompanySeeder extends Seeder
                 'name' => $name,
                 'slug' => Str::slug($name),
                 'email_contact' => fake()->unique()->companyEmail(),
+                'color' => fake()->hexColor(),
                 'is_labelled' => true,
                 'labelled_at' => fake()->dateTimeBetween('-2 years', 'now'),
             ]);

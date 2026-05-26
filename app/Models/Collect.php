@@ -14,6 +14,7 @@ class Collect extends Model
         'place_id',
         'day',
         'link_appointment',
+        'token',
         'is_active',
     ];
 
