@@ -1,0 +1,17 @@
+{
+    "common": {
+        "languages": {
+            "fr": "French",
+            "en": "English"
+        }
+    },
+    "languageSwitcher": {
+        "label": "Language",
+        "switchTo": "Switch to {language}"
+    },
+    "home": {
+        "title": "Home",
+        "heading": "Generosity Trophy",
+        "subheading": "Let's energize blood collection drives in companies together."
+    }
+}

@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+// Langue, pour changer
+Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update');
 
 // Pages publiques
 Route::inertia('/', 'Home')->name('home');
