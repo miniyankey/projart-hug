@@ -58,7 +58,7 @@ class AdminAuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:admins,email'],
-            //password default fait en sorte que le mot de passe doit faire au moins 8 caractères, contenir une majuscule, une minuscule, un chiffre et un symbole
+            // password default fait en sorte que le mot de passe doit faire au moins 8 caractères, contenir une majuscule, une minuscule, un chiffre et un symbole
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 

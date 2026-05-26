@@ -1,11 +1,11 @@
 <script setup>
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 import {
     logout,
     showRegister,
 } from '@/actions/App/Http/Controllers/AdminAuthController';
 import { Button } from '@/components/ui/button';
-import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
 
 const page = usePage();
 const flash = computed(() => page.props.flash);
@@ -21,7 +21,9 @@ function submitLogout() {
     <Head title="Administration" />
 
     <div class="min-h-screen bg-white">
-        <header class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+        <header
+            class="flex items-center justify-between border-b border-gray-200 px-6 py-4"
+        >
             <h1 class="text-lg font-semibold">Tableau de bord</h1>
 
             <div class="flex items-center gap-3">

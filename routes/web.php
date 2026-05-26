@@ -47,7 +47,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
 // Routes de login et logout
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('login');
-//throttle pour limiter les tentatives de login à 5 par minute (cf bruteforce)
+// throttle pour limiter les tentatives de login à 5 par minute (cf bruteforce)
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 

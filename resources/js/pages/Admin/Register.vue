@@ -1,11 +1,11 @@
 <script setup>
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 import { register } from '@/actions/App/Http/Controllers/AdminAuthController';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
@@ -30,7 +30,9 @@ function submit() {
     <div class="flex min-h-screen items-center justify-center bg-gray-50">
         <Card class="w-full max-w-sm">
             <CardHeader>
-                <CardTitle class="text-xl">{{ t('auth.register.title') }}</CardTitle>
+                <CardTitle class="text-xl">{{
+                    t('auth.register.title')
+                }}</CardTitle>
             </CardHeader>
 
             <CardContent>
@@ -50,7 +52,9 @@ function submit() {
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <Label for="surname">{{ t('auth.register.surname') }}</Label>
+                        <Label for="surname">{{
+                            t('auth.register.surname')
+                        }}</Label>
                         <Input
                             id="surname"
                             v-model="form.surname"
@@ -58,13 +62,18 @@ function submit() {
                             autocomplete="family-name"
                             :aria-invalid="!!form.errors.surname"
                         />
-                        <p v-if="form.errors.surname" class="text-sm text-red-600">
+                        <p
+                            v-if="form.errors.surname"
+                            class="text-sm text-red-600"
+                        >
                             {{ form.errors.surname }}
                         </p>
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <Label for="email">{{ t('auth.register.email') }}</Label>
+                        <Label for="email">{{
+                            t('auth.register.email')
+                        }}</Label>
                         <Input
                             id="email"
                             v-model="form.email"
@@ -72,13 +81,18 @@ function submit() {
                             autocomplete="email"
                             :aria-invalid="!!form.errors.email"
                         />
-                        <p v-if="form.errors.email" class="text-sm text-red-600">
+                        <p
+                            v-if="form.errors.email"
+                            class="text-sm text-red-600"
+                        >
                             {{ form.errors.email }}
                         </p>
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <Label for="password">{{ t('auth.register.password') }}</Label>
+                        <Label for="password">{{
+                            t('auth.register.password')
+                        }}</Label>
                         <Input
                             id="password"
                             v-model="form.password"
@@ -86,7 +100,10 @@ function submit() {
                             autocomplete="new-password"
                             :aria-invalid="!!form.errors.password"
                         />
-                        <p v-if="form.errors.password" class="text-sm text-red-600">
+                        <p
+                            v-if="form.errors.password"
+                            class="text-sm text-red-600"
+                        >
                             {{ form.errors.password }}
                         </p>
                     </div>
@@ -103,7 +120,11 @@ function submit() {
                         />
                     </div>
 
-                    <Button type="submit" class="w-full" :disabled="form.processing">
+                    <Button
+                        type="submit"
+                        class="w-full"
+                        :disabled="form.processing"
+                    >
                         {{ t('auth.register.submit') }}
                     </Button>
 
