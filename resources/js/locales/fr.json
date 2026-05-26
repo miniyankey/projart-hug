@@ -1,0 +1,17 @@
+{
+    "common": {
+        "languages": {
+            "fr": "Français",
+            "en": "Anglais"
+        }
+    },
+    "languageSwitcher": {
+        "label": "Langue",
+        "switchTo": "Passer en {language}"
+    },
+    "home": {
+        "title": "Accueil",
+        "heading": "Trophée de la générosité",
+        "subheading": "Dynamisons ensemble les collectes de sang en entreprise."
+    }
+}
