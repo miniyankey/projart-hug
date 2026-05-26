@@ -7,6 +7,10 @@ use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
+    public const SUPPORTED_LOCALES = ['fr', 'en'];
+
+    public const DEFAULT_LOCALE = 'fr';
+
     /**
      * The root template that's loaded on the first page visit.
      *
@@ -33,11 +37,21 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
-    public function share(Request $request): array
+     public function share(Request $request): array
     {
+        $locale = $request->cookie('locale');
+
+        if (! in_array($locale, self::SUPPORTED_LOCALES, true)) {
+            $locale = self::DEFAULT_LOCALE;
+        }
+
+        app()->setLocale($locale);
+
+        //on retourne la locale aux vues (dans les props)
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'locale' => $locale,
         ];
     }
 }
