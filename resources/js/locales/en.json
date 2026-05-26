@@ -9,6 +9,25 @@
         "label": "Language",
         "switchTo": "Switch to {language}"
     },
+    "auth": {
+        "login": {
+            "title": "Sign in",
+            "email": "Email address",
+            "password": "Password",
+            "submit": "Sign in"
+        },
+        "register": {
+            "title": "Create admin account",
+            "name": "First name",
+            "surname": "Last name",
+            "email": "Email address",
+            "password": "Password",
+            "password_confirmation": "Confirm password",
+            "submit": "Create account",
+            "success": "Administrator account created successfully.",
+            "back": "Back to dashboard"
+        }
+    },
     "home": {
         "title": "Home",
         "heading": "Generosity Trophy",
