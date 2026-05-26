@@ -12,7 +12,8 @@
     "nav": {
         "trophee": "Trophy",
         "collecte": "Blood Drive",
-        "inscription": "Register"
+        "inscription": "Register",
+        "jeu": "Am I eligible?"
     },
     "footer": {
         "copyright": "© 2026 Blood Transfusion Centre — HUG",

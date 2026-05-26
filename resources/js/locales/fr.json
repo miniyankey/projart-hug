@@ -12,7 +12,8 @@
     "nav": {
         "trophee": "Trophée",
         "collecte": "Collecte",
-        "inscription": "Inscription"
+        "inscription": "Inscription",
+        "jeu": "Suis-je éligible ?"
     },
     "footer": {
         "copyright": "© 2026 Centre de Transfusion Sanguine — HUG",

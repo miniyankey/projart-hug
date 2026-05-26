@@ -38,6 +38,13 @@ const { t } = useI18n();
                 >
                     {{ t('nav.inscription') }}
                 </Link>
+
+                <Link
+                    href="/jeu"
+                    class="text-sm text-gray-600 transition-colors hover:text-gray-900"
+                >
+                    {{ t('nav.jeu') }}
+                </Link>
                 <LanguageSwitcher />
             </div>
         </nav>
