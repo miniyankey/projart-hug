@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             PlaceSeeder::class,
             CollectSeeder::class,
             TropheeSeeder::class,
+            FormSubmissionSeeder::class,
         ]);
     }
 }
