@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,31 @@ class AdminAuthController extends Controller
     }
 
     /**
+     * Display the admin register form.
+     */
+    public function showRegister(): Response
+    {
+        return Inertia::render('Admin/Register');
+    }
+
+    /**
+     * Handle an admin register attempt.
+     */
+    public function register(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:admins,email'],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+
+        Admin::create($validated);
+
+        return redirect()->route('admin.index')->with('success', 'Compte administrateur créé avec succès.');
+    }
+
+    /**
      * Log the admin out and invalidate the session.
      */
     public function logout(Request $request): RedirectResponse
@@ -49,6 +75,6 @@ class AdminAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }
