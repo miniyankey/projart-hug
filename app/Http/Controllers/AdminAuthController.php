@@ -20,13 +20,11 @@ class AdminAuthController extends Controller
 
     /**
      * Handle an admin login attempt.
-     *
-     * @param  Request  $request
      */
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email'    => ['required', 'email'],
+            'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
@@ -43,8 +41,6 @@ class AdminAuthController extends Controller
 
     /**
      * Log the admin out and invalidate the session.
-     *
-     * @param  Request  $request
      */
     public function logout(Request $request): RedirectResponse
     {

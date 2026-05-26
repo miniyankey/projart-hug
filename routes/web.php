@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Pages publiques
@@ -38,11 +38,10 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     });
 });
 
-//Routes de login et logout
+// Routes de login et logout
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
-
 
 // A completer
 Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
