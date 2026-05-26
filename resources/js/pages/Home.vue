@@ -5,8 +5,6 @@ import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
-defineOptions({ layout: PublicLayout });
-
 const { t } = useI18n();
 
 
@@ -19,6 +17,7 @@ const placeholderWinners = [
 </script>
 
 <template>
+    <PublicLayout>
     <Head :title="t('home.title')" />
 
     <!-- Hero -->
@@ -187,4 +186,5 @@ const placeholderWinners = [
             </div>
         </div>
     </section>
+    </PublicLayout>
 </template>
