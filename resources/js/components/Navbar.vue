@@ -9,7 +9,9 @@ const { t } = useI18n();
 
 <template>
     <header class="border-b border-gray-200">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <nav
+            class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4"
+        >
             <Link
                 :href="routes.home.url()"
                 class="text-sm font-semibold tracking-wide text-gray-900 uppercase"

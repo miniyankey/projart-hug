@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n';
 import Navbar from '@/components/Navbar.vue';
 import * as routes from '@/routes/index.ts';
 
-
 const { t } = useI18n();
 </script>
 
@@ -22,7 +21,9 @@ const { t } = useI18n();
                 <div class="grid gap-12 py-14 sm:grid-cols-3">
                     <!-- Col 1 : Brand -->
                     <div>
-                        <p class="text-sm font-semibold tracking-wide text-gray-900 uppercase">
+                        <p
+                            class="text-sm font-semibold tracking-wide text-gray-900 uppercase"
+                        >
                             CTS — Trophée de la générosité
                         </p>
                         <p class="mt-3 text-sm leading-relaxed text-gray-500">
@@ -32,7 +33,9 @@ const { t } = useI18n();
 
                     <!-- Col 2 : Navigation -->
                     <div>
-                        <p class="text-xs font-semibold tracking-widest text-gray-400 uppercase">
+                        <p
+                            class="text-xs font-semibold tracking-widest text-gray-400 uppercase"
+                        >
                             {{ t('footer.nav_title') }}
                         </p>
                         <ul class="mt-4 space-y-2">
@@ -72,7 +75,9 @@ const { t } = useI18n();
                     </div>
 
                     <!-- Col 3 : CTA collaborateur -->
-                    <div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                    <div
+                        class="rounded-lg border border-gray-200 bg-gray-50 p-6"
+                    >
                         <p class="text-sm font-semibold text-gray-900">
                             {{ t('footer.collaborateur.title') }}
                         </p>
@@ -90,7 +95,9 @@ const { t } = useI18n();
                 </div>
 
                 <!-- Bas de footer -->
-                <div class="border-t border-gray-100 py-6 text-sm text-gray-400">
+                <div
+                    class="border-t border-gray-100 py-6 text-sm text-gray-400"
+                >
                     {{ t('footer.copyright') }}
                 </div>
             </div>
