@@ -17,6 +17,7 @@ class Company extends Model
         'name',
         'slug',
         'logo',
+        'color',
         'email_contact',
         'is_labelled',
         'labelled_at',
