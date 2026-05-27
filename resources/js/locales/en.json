@@ -26,6 +26,8 @@
             "submit": "Create account",
             "success": "Administrator account created successfully.",
             "back": "Back to dashboard"
+        }
+    },
     "nav": {
         "trophee": "Trophy",
         "collecte": "Blood Drive",
