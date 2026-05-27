@@ -26,11 +26,62 @@
             "submit": "Créer le compte",
             "success": "Compte administrateur créé avec succès.",
             "back": "Retour au tableau de bord"
+    "nav": {
+        "trophee": "Trophée",
+        "collecte": "Collecte",
+        "inscription": "Inscription",
+        "jeu": "Suis-je éligible ?"
+    },
+    "footer": {
+        "copyright": "© 2026 Centre de Transfusion Sanguine — HUG",
+        "description": "Une initiative des HUG pour dynamiser les collectes de sang au sein des entreprises partenaires.",
+        "nav_title": "Navigation",
+        "nav": {
+            "home": "Accueil"
+        },
+        "collaborateur": {
+            "title": "Je suis collaborateur CTS",
+            "description": "Accédez à l'espace d'administration pour gérer les collectes, les entreprises et les trophées.",
+            "cta": "Accès collaborateur"
         }
     },
     "home": {
         "title": "Accueil",
-        "heading": "Trophée de la générosité",
-        "subheading": "Dynamisons ensemble les collectes de sang en entreprise."
+        "hero": {
+            "eyebrow": "HUG × Centre de Transfusion Sanguine",
+            "title": "Dynamisons ensemble les collectes de sang en entreprise",
+            "subtitle": "Le Trophée de la générosité réunit entreprises et HUG pour maximiser la participation aux collectes de sang.",
+            "cta_primary": "Organiser une collecte",
+            "cta_secondary": "En savoir plus"
+        },
+        "trophee": {
+            "label": "Trophée de la générosité",
+            "title": "Récompensons l'engagement de vos équipes",
+            "description": "Chaque année, le Trophée de la générosité distingue les entreprises qui mobilisent le plus de donneurs lors des collectes en entreprise.",
+            "link": "Voir tous les vainqueurs",
+            "winners_title": "Derniers vainqueurs"
+        },
+        "label": {
+            "label": "Label CTS RSE",
+            "title": "La certification qui valorise votre engagement",
+            "description": "Le Label CTS reconnaît les entreprises qui intègrent le don du sang dans leur politique de responsabilité sociale. Un engagement visible, mesurable et valorisable.",
+            "certified_count": "{count} entreprises certifiées",
+            "link": "Découvrir le label",
+            "visual_placeholder": "Visuel label CTS — à intégrer"
+        },
+        "stats": {
+            "title": "Le don du sang en chiffres",
+            "stat1_value": "30 %",
+            "stat1_label": "des dons issus des collectes en entreprise",
+            "stat2_value": "120+",
+            "stat2_label": "entreprises partenaires",
+            "stat3_value": "200+",
+            "stat3_label": "collectes organisées par an"
+        },
+        "cta": {
+            "title": "Votre entreprise veut participer ?",
+            "subtitle": "Rejoignez le réseau des entreprises engagées pour le don du sang.",
+            "button": "Nous contacter"
+        }
     }
 }

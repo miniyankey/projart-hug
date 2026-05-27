@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'url';
 import inertia from '@inertiajs/vite';
 import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
@@ -31,4 +32,9 @@ export default defineConfig({
             formVariants: true,
         }),
     ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
+        },
+    },
 });

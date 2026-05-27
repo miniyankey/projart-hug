@@ -8,4 +8,9 @@
         "noEmit": true
     },
     "include": ["resources/js/**/*"]
+        "allowJs": true,
+        "paths": {
+            "@/*": ["./resources/js/*"]
+        }
+    }
 }

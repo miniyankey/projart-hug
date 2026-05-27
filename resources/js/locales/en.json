@@ -26,11 +26,62 @@
             "submit": "Create account",
             "success": "Administrator account created successfully.",
             "back": "Back to dashboard"
+    "nav": {
+        "trophee": "Trophy",
+        "collecte": "Blood Drive",
+        "inscription": "Register",
+        "jeu": "Am I eligible?"
+    },
+    "footer": {
+        "copyright": "© 2026 Blood Transfusion Centre — HUG",
+        "description": "A HUG initiative to boost blood donation drives within partner companies.",
+        "nav_title": "Navigation",
+        "nav": {
+            "home": "Home"
+        },
+        "collaborateur": {
+            "title": "I'm a CTS staff member",
+            "description": "Access the administration area to manage blood drives, companies and trophies.",
+            "cta": "Staff access"
         }
     },
     "home": {
         "title": "Home",
-        "heading": "Generosity Trophy",
-        "subheading": "Let's energize blood collection drives in companies together."
+        "hero": {
+            "eyebrow": "HUG × Blood Transfusion Centre",
+            "title": "Let's boost blood donation drives in companies together",
+            "subtitle": "The Generosity Trophy brings companies and HUG together to maximise participation in workplace blood drives.",
+            "cta_primary": "Organise a blood drive",
+            "cta_secondary": "Learn more"
+        },
+        "trophee": {
+            "label": "Generosity Trophy",
+            "title": "Recognising your teams' commitment",
+            "description": "Each year, the Generosity Trophy honours the companies that mobilise the most donors during their workplace blood drives.",
+            "link": "See all winners",
+            "winners_title": "Recent winners"
+        },
+        "label": {
+            "label": "CTS CSR Label",
+            "title": "The certification that recognises your commitment",
+            "description": "The CTS Label recognises companies that integrate blood donation into their corporate social responsibility policy. A visible, measurable and valuable commitment.",
+            "certified_count": "{count} certified companies",
+            "link": "Discover the label",
+            "visual_placeholder": "CTS label visual — to be integrated"
+        },
+        "stats": {
+            "title": "Blood donation in numbers",
+            "stat1_value": "30%",
+            "stat1_label": "of donations from workplace blood drives",
+            "stat2_value": "120+",
+            "stat2_label": "partner companies",
+            "stat3_value": "200+",
+            "stat3_label": "blood drives organised per year"
+        },
+        "cta": {
+            "title": "Does your company want to take part?",
+            "subtitle": "Join the network of companies committed to blood donation.",
+            "button": "Contact us"
+        }
     }
 }
