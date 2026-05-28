@@ -39,7 +39,7 @@ const placeholderWinners = [
                     class="mt-10 flex flex-col justify-center gap-4 sm:flex-row"
                 >
                     <Button as-child size="lg">
-                        <Link :href="routes.inscription.url()">
+                        <Link :href="routes.collecte.url()">
                             {{ t('home.hero.cta_primary') }}
                         </Link>
                     </Button>
@@ -196,7 +196,7 @@ const placeholderWinners = [
                         variant="ghost"
                         class="border border-white text-white hover:bg-white! hover:text-gray-900!"
                     >
-                        <Link :href="routes.inscription.url()">
+                        <Link :href="routes.collecte.url()">
                             {{ t('home.cta.button') }}
                         </Link>
                     </Button>
