@@ -31,7 +31,7 @@ class FormSubmissionController extends Controller
             'type' => FormSubmissionType::CollectRequest,
         ]);
 
-        return redirect()->route('inscription')
-            ->with('success', 'flash.inscription_sent');
+        return redirect()->route('home')
+            ->with('success', 'flash.collect_request_sent');
     }
 }
