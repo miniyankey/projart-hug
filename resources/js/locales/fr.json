@@ -35,7 +35,9 @@
         "jeu": "Suis-je éligible ?",
         "eligibilite": "Pouvez-vous donner ?",
         "certification": "Certification",
-        "cta_creer_collecte": "Créer une collecte"
+        "cta_creer_collecte": "Créer une collecte",
+        "menu_open": "Ouvrir le menu",
+        "menu_close": "Fermer le menu"
     },
     "eligibilite": {
         "title": "Pouvez-vous donner ?",
