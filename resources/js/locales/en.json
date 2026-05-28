@@ -31,8 +31,18 @@
     "nav": {
         "trophee": "Trophy",
         "collecte": "Blood Drive",
-        "inscription": "Register",
-        "jeu": "Am I eligible?"
+        "jeu": "Am I eligible?",
+        "eligibilite": "Can you donate?",
+        "certification": "Certification",
+        "cta_creer_collecte": "Create a blood drive"
+    },
+    "eligibilite": {
+        "title": "Can you donate?",
+        "intro": "Find out in a few questions whether you're eligible to give blood."
+    },
+    "certification": {
+        "title": "CTS CSR Label",
+        "intro": "The certification that recognises your company's commitment to blood donation."
     },
     "footer": {
         "copyright": "© 2026 Blood Transfusion Centre — HUG",

@@ -31,8 +31,18 @@
     "nav": {
         "trophee": "Trophée",
         "collecte": "Collecte",
-        "inscription": "Inscription",
-        "jeu": "Suis-je éligible ?"
+        "jeu": "Suis-je éligible ?",
+        "eligibilite": "Pouvez-vous donner ?",
+        "certification": "Certification",
+        "cta_creer_collecte": "Créer une collecte"
+    },
+    "eligibilite": {
+        "title": "Pouvez-vous donner ?",
+        "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang."
+    },
+    "certification": {
+        "title": "Label CTS RSE",
+        "intro": "La certification qui valorise l'engagement de votre entreprise pour le don du sang."
     },
     "footer": {
         "copyright": "© 2026 Centre de Transfusion Sanguine — HUG",
