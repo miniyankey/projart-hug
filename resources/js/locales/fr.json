@@ -9,6 +9,25 @@
         "label": "Langue",
         "switchTo": "Passer en {language}"
     },
+    "auth": {
+        "login": {
+            "title": "Connexion",
+            "email": "Adresse e-mail",
+            "password": "Mot de passe",
+            "submit": "Se connecter"
+        },
+        "register": {
+            "title": "Créer un compte admin",
+            "name": "Prénom",
+            "surname": "Nom",
+            "email": "Adresse e-mail",
+            "password": "Mot de passe",
+            "password_confirmation": "Confirmer le mot de passe",
+            "submit": "Créer le compte",
+            "success": "Compte administrateur créé avec succès.",
+            "back": "Retour au tableau de bord"
+        }
+    },
     "nav": {
         "trophee": "Trophée",
         "collecte": "Collecte",

@@ -40,11 +40,15 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
         Route::inertia('/', 'Admin/Kpi/Index')->name('index');
         Route::get('/{token}', fn () => Inertia::render('Admin/Kpi/Show'))->name('show');
     });
+
+    Route::get('/register', [AdminAuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AdminAuthController::class, 'register']);
 });
 
 // Routes de login et logout
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('login');
-Route::post('/admin/login', [AdminAuthController::class, 'login']);
+// throttle pour limiter les tentatives de login à 5 par minute (cf bruteforce)
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 // A completer

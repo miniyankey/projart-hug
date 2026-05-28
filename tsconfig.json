@@ -1,6 +1,13 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/js/*"]
+        },
+        "allowJs": true,
+        "noEmit": true
+    },
+    "include": ["resources/js/**/*"]
         "allowJs": true,
         "paths": {
             "@/*": ["./resources/js/*"]
