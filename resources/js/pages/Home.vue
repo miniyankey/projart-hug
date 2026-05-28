@@ -1,18 +1,12 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import PodiumCard from '@/components/PodiumCard.vue';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
-
-//mettre les infos des gagnants depuis la BD, ici des données fictives pour l'affichage
-const placeholderWinners = [
-    { year: 2024, company: 'Entreprise A', category: 'Grande entreprise' },
-    { year: 2023, company: 'Entreprise B', category: 'PME' },
-    { year: 2022, company: 'Entreprise C', category: 'Grande entreprise' },
-];
 </script>
 
 <template>
@@ -38,7 +32,7 @@ const placeholderWinners = [
                 <div
                     class="mt-10 flex flex-col justify-center gap-4 sm:flex-row"
                 >
-                    <Button as-child size="lg">
+                    <Button variant="pixel_violet" >
                         <Link :href="routes.inscription.url()">
                             {{ t('home.hero.cta_primary') }}
                         </Link>
@@ -68,37 +62,38 @@ const placeholderWinners = [
                         <p class="mt-4 leading-relaxed text-gray-600">
                             {{ t('home.trophee.description') }}
                         </p>
-                        <Link
-                            :href="routes.trophee.url()"
-                            class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gray-900 underline-offset-4 hover:underline"
-                        >
-                            {{ t('home.trophee.link') }}
-                            <span aria-hidden="true">→</span>
-                        </Link>
+                        <Button as-child variant="pixel_violet" class="mt-6">
+                            <Link :href="routes.trophee.url()">
+                                {{ t('home.trophee.link') }}
+                            </Link>
+                        </Button>
                     </div>
 
-                    <div class="space-y-3">
-                        <p class="mb-4 text-sm font-medium text-gray-500">
-                            {{ t('home.trophee.winners_title') }}
-                        </p>
-                        <div
-                            v-for="winner in placeholderWinners"
-                            :key="winner.year"
-                            class="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-5 py-4"
-                        >
-                            <div>
-                                <p class="font-medium text-gray-900">
-                                    {{ winner.company }}
-                                </p>
-                                <p class="mt-0.5 text-sm text-gray-500">
-                                    {{ winner.category }}
-                                </p>
-                            </div>
-                            <span
-                                class="text-2xl font-semibold text-gray-300"
-                                >{{ winner.year }}</span
-                            >
-                        </div>
+                    <div class="flex items-end justify-center gap-3">
+                        <PodiumCard
+                            :rank="2"
+                            logo-src="/img/migros.png"
+                            logo-alt="Migros"
+                            :category="t('home.trophee.winners_title')"
+                            description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
+                            class="w-40"
+                        />
+                        <PodiumCard
+                            :rank="1"
+                            logo-src="/img/rolex.svg"
+                            logo-alt="Rolex"
+                            :category="t('home.trophee.winners_title')"
+                            description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
+                            class="w-40"
+                        />
+                        <PodiumCard
+                            :rank="3"
+                            logo-src="/img/nestle.png"
+                            logo-alt="Nestlé"
+                            :category="t('home.trophee.winners_title')"
+                            description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
+                            class="w-40"
+                        />
                     </div>
                 </div>
             </div>
@@ -133,13 +128,11 @@ const placeholderWinners = [
                         <p class="mt-6 text-2xl font-semibold text-gray-900">
                             {{ t('home.label.certified_count', { count: 47 }) }}
                         </p>
-                        <Link
-                            :href="routes.collecte.url()"
-                            class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gray-900 underline-offset-4 hover:underline"
-                        >
-                            {{ t('home.label.link') }}
-                            <span aria-hidden="true"></span>
-                        </Link>
+                        <Button as-child variant="pixel_blue" class="mt-4">
+                            <Link :href="routes.collecte.url()">
+                                {{ t('home.label.link') }}
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>
