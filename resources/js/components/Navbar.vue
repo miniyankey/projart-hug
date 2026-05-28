@@ -3,9 +3,9 @@ import { Link, router } from '@inertiajs/vue3';
 import { Menu, X } from 'lucide-vue-next';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import hugLogo from '@/../images/logos/hug.png';
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 import { Button } from '@/components/ui/button';
-import hugLogo from '@/../images/logos/hug.png';
 import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
@@ -79,9 +79,7 @@ onBeforeUnmount(() => removeListener?.());
             <button
                 type="button"
                 class="inline-flex h-10 w-10 cursor-pointer items-center justify-center text-gray-800 md:hidden"
-                :aria-label="
-                    open ? t('nav.menu_close') : t('nav.menu_open')
-                "
+                :aria-label="open ? t('nav.menu_close') : t('nav.menu_open')"
                 :aria-expanded="open"
                 aria-controls="mobile-menu"
                 @click="open = !open"

@@ -22,6 +22,7 @@ function close() {
 
 function switchTo(locale) {
     close();
+
     if (locale === currentLocale.value) {
         return;
     }

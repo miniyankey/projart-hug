@@ -1,12 +1,12 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import facebookIcon from '@/../images/icons/facebook.svg';
 import instagramIcon from '@/../images/icons/instagram.svg';
 import linkedinIcon from '@/../images/icons/linkedin.svg';
 import tiktokIcon from '@/../images/icons/tiktok.svg';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
@@ -94,12 +94,7 @@ const socials = [
                         <p class="mt-2 text-sm leading-relaxed text-gray-500">
                             {{ t('footer.collaborateur.description') }}
                         </p>
-                        <Button
-                            as-child
-                            variant="cta"
-                            size="cta"
-                            class="mt-4"
-                        >
+                        <Button as-child variant="cta" size="cta" class="mt-4">
                             <Link :href="routes.login.url()">
                                 {{ t('footer.collaborateur.cta') }}
                             </Link>
