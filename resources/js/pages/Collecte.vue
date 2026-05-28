@@ -1,10 +1,20 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import PublicLayout from '@/layouts/PublicLayout.vue';
+
+const { t } = useI18n();
 </script>
 
 <template>
-    <Head title="Label CTS &amp; Collecte" />
-    <div>
-        <h1>Label CTS &amp; Collecte</h1>
-    </div>
+    <PublicLayout>
+        <Head :title="t('nav.cta_creer_collecte')" />
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16">
+            <h1
+                class="text-2xl font-semibold text-gray-900 sm:text-3xl"
+            >
+                {{ t('nav.cta_creer_collecte') }}
+            </h1>
+        </div>
+    </PublicLayout>
 </template>
