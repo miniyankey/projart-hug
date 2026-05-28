@@ -29,18 +29,32 @@
         }
     },
     "nav": {
+        "home": "Accueil",
         "trophee": "Trophée",
         "collecte": "Collecte",
-        "inscription": "Inscription",
-        "jeu": "Suis-je éligible ?"
+        "jeu": "Suis-je éligible ?",
+        "eligibilite": "Pouvez-vous donner ?",
+        "certification": "Certification",
+        "cta_creer_collecte": "Créer une collecte",
+        "menu_open": "Ouvrir le menu",
+        "menu_close": "Fermer le menu"
+    },
+    "eligibilite": {
+        "title": "Pouvez-vous donner ?",
+        "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang."
+    },
+    "certification": {
+        "title": "Label CTS RSE",
+        "intro": "La certification qui valorise l'engagement de votre entreprise pour le don du sang."
     },
     "footer": {
-        "copyright": "© 2026 Centre de Transfusion Sanguine — HUG",
+        "copyright": "© 2026 Centre de Transfusion Sanguine - HUG - Faits par des étudiants de la HEIG-VD dans le cadre d'un projet d'intégration.",
         "description": "Une initiative des HUG pour dynamiser les collectes de sang au sein des entreprises partenaires.",
         "nav_title": "Navigation",
         "nav": {
             "home": "Accueil"
         },
+        "social_title": "Suivez-nous",
         "collaborateur": {
             "title": "Je suis collaborateur CTS",
             "description": "Accédez à l'espace d'administration pour gérer les collectes, les entreprises et les trophées.",
