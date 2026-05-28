@@ -29,6 +29,7 @@
         }
     },
     "nav": {
+        "home": "Home",
         "trophee": "Trophy",
         "collecte": "Blood Drive",
         "jeu": "Am I eligible?",
@@ -45,12 +46,13 @@
         "intro": "The certification that recognises your company's commitment to blood donation."
     },
     "footer": {
-        "copyright": "© 2026 Blood Transfusion Centre — HUG",
+        "copyright": "© 2026 Blood Transfusion Centre - HUG",
         "description": "A HUG initiative to boost blood donation drives within partner companies.",
         "nav_title": "Navigation",
         "nav": {
             "home": "Home"
         },
+        "social_title": "Follow us",
         "collaborateur": {
             "title": "I'm a CTS staff member",
             "description": "Access the administration area to manage blood drives, companies and trophies.",
