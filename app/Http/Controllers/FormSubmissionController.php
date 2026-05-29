@@ -19,7 +19,7 @@ class FormSubmissionController extends Controller
         // on les neutralise avant validation pour éviter qu'ils soient enregistrés (et prennent de la place pour r)
         if ($request->input('type') === FormSubmissionType::Contact->value) {
             $request->merge([
-            //si contacte, on force cela 
+                // si contacte, on force cela
                 'trophy_participation' => false,
                 'preferred_dates' => null,
             ]);

@@ -7,6 +7,13 @@ import MultiDatePicker from '@/components/MultiDatePicker.vue';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 
+const props = defineProps({
+    company: {
+        type: String,
+        default: '',
+    },
+});
+
 const { t } = useI18n();
 
 const TYPE_CONTACT = 'contact';
@@ -27,7 +34,7 @@ const form = useForm({
 
 const isCollect = computed(() => form.type === TYPE_COLLECT);
 
-// Date minimale = demain 
+// Date minimale = demain (le back-end exige after:today)
 const minDate = computed(() => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -43,7 +50,7 @@ function selectType(type) {
     form.type = type;
     form.clearErrors();
 
-    // On masque la bannière de retour lors d'un changement de vue
+    // On masque la bannière de retour lors d'un changement de vue.
     status.value = null;
 
     if (type === TYPE_CONTACT) {
