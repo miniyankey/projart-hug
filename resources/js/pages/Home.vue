@@ -35,7 +35,7 @@ const { t } = useI18n();
                         </Link>
                     </Button>
                     <Button variant="pixel_blue">
-                        <Link :href="routes.trophee.url()">
+                        <Link :href="routes.collecte.url()">
                             {{ t('home.hero.cta_secondary') }}
                         </Link>
                     </Button>
