@@ -6,7 +6,6 @@ use App\Models\Collect;
 use App\Models\Company;
 use App\Models\Place;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class CollectSeeder extends Seeder
 {
@@ -38,7 +37,6 @@ class CollectSeeder extends Seeder
                 'place_id' => $places->random()->id,
                 'day' => fake()->dateTimeBetween('+1 week', '+3 months')->format('Y-m-d'),
                 'link_appointment' => fake()->optional(0.7)->url(),
-                'token' => Str::random(12),
                 'is_active' => true,
             ]);
         }
