@@ -124,6 +124,14 @@
     --sidebar-border: hsl(0 0% 91%);
     --sidebar-ring: hsl(217.2 91.2% 59.8%);
     --sidebar: hsl(0 0% 98%);
+
+    /* Couleur de marque par défaut (violet HUG).
+    on modifie si nécessaire por le mode cobranding
+    */
+    --brand: #8b2cf1;
+    --brand-shadow: #4c1d95;
+    --brand-hover: #7a1fe0;
+    --brand-tint: color-mix(in srgb, var(--brand) 10%, white);
 }
 
 .dark {
