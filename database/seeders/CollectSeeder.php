@@ -26,7 +26,6 @@ class CollectSeeder extends Seeder
                 'place_id' => $places->random()->id,
                 'day' => now()->addWeeks(2)->format('Y-m-d'),
                 'link_appointment' => null,
-                'token' => 'heig-demo',
                 'is_active' => true,
             ]);
         }
