@@ -110,6 +110,61 @@
             "button": "Submit an application"
         }
     },
+    "trophee": {
+        "title": "Generosity Trophy",
+        "hero": {
+            "title": "The Generosity Trophy",
+            "subtitle": "Each year, the Trophy honours the companies that mobilise the most donors during their blood drives. A friendly competition in service of a vital cause.",
+            "cta_primary": "Register my company",
+            "cta_secondary": "See the winners",
+            "mascot_alt": "Pixel art trophy mascot",
+            "bubble": "Join the blood donation champions!"
+        },
+        "trophee_visuel": {
+            "title": "A unique trophy",
+            "desc": "This crystal trophy, engraved with the image of a blood bag, is awarded each year to the company that mobilised the most donors. A rare reward for an exceptional commitment.",
+            "alt": "Generosity Trophy — crystal engraved blood bag"
+        },
+        "stats": {
+            "s1_value": "30%",
+            "s1_label": "of donations from workplace blood drives",
+            "s2_value": "120+",
+            "s2_label": "participating companies",
+            "s3_value": "500+",
+            "s3_label": "donations per blood drive on average"
+        },
+        "vainqueurs": {
+            "title": "The winners",
+            "subtitle": "Discover the companies awarded across each edition.",
+            "edition": "Edition",
+            "prev": "Previous edition",
+            "next": "Next edition",
+            "suspended": "Editions suspended from 2011 to 2025"
+        },
+        "histoire": {
+            "title": "An idea born in 2008, relaunched in 2026",
+            "p1": "The Generosity Trophy was conceived in 2008 by the HUG Blood Transfusion Centre to recognise Geneva companies that organise blood drives and mobilise the most donors.",
+            "p2": "After three successful editions (2008, 2009, 2010), the project was put on hold due to a lack of resources to sustain it.",
+            "p3": "In 2026, in partnership with HEIG-VD and thanks to a dedicated digital platform, the Trophy is officially relaunched — more ambitious, more accessible, and open to all companies in French-speaking Switzerland.",
+            "tag_2008": "Launch",
+            "tag_2010": "Suspension",
+            "tag_2026": "Relaunch"
+        },
+        "participer": {
+            "title": "How to compete?",
+            "subtitle": "4 steps to try to win the Generosity Trophy.",
+            "step1": "ORGANISE A BLOOD DRIVE",
+            "step2": "REGISTER YOUR COMPANY",
+            "step3": "MOBILISE YOUR TEAMS",
+            "step4": "WIN THE TROPHY!",
+            "cta": "Register now"
+        },
+        "cta": {
+            "title": "Does your company have what it takes?",
+            "subtitle": "Join the companies making a difference and try to win the Generosity Trophy.",
+            "button": "Register my company"
+        }
+    },
     "collecte": {
         "title": "Organise a blood drive",
         "intro": "Have a question about workplace blood donation, or want to set up a blood drive at your premises? Use the form below: choose \"Contact us\" for a simple information request, or \"Organise a blood drive\" to get the project started with the Transfusion Centre.",

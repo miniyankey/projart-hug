@@ -110,6 +110,61 @@
             "button": "Soumettre une candidature"
         }
     },
+    "trophee": {
+        "title": "Trophée de la générosité",
+        "hero": {
+            "title": "Le Trophée de la générosité",
+            "subtitle": "Chaque année, le Trophée distingue les entreprises qui mobilisent le plus de donneurs lors de leurs collectes. Une compétition bienveillante au service d'une cause vitale.",
+            "cta_primary": "Inscrire mon entreprise",
+            "cta_secondary": "Voir les vainqueurs",
+            "mascot_alt": "Mascotte pixel art trophée",
+            "bubble": "Rejoignez les champions du don de sang !"
+        },
+        "trophee_visuel": {
+            "title": "Un trophée unique",
+            "desc": "Ce trophée en cristal, gravé à l'effigie d'une poche de sang, est remis chaque année à l'entreprise ayant mobilisé le plus grand nombre de donneurs. Une récompense rare, pour un engagement exceptionnel.",
+            "alt": "Trophée de la générosité — cristal gravé poche de sang"
+        },
+        "stats": {
+            "s1_value": "30 %",
+            "s1_label": "des dons issus de collectes en entreprise",
+            "s2_value": "120+",
+            "s2_label": "entreprises participantes",
+            "s3_value": "500+",
+            "s3_label": "dons par collecte en moyenne"
+        },
+        "vainqueurs": {
+            "title": "Les vainqueurs",
+            "subtitle": "Découvrez les entreprises récompensées au fil des éditions.",
+            "edition": "Édition",
+            "prev": "Édition précédente",
+            "next": "Édition suivante",
+            "suspended": "Éditions suspendues de 2011 à 2025"
+        },
+        "histoire": {
+            "title": "Une idée née en 2008, relancée en 2026",
+            "p1": "Le Trophée de la générosité a été imaginé en 2008 par le Centre de Transfusion Sanguine des HUG pour valoriser les entreprises genevoises qui organisent des collectes de sang et mobilisent le plus grand nombre de donneurs.",
+            "p2": "Après trois éditions couronnées de succès (2008, 2009, 2010), le projet a été mis en pause faute de ressources pour le pérenniser.",
+            "p3": "En 2026, en partenariat avec la HEIG-VD et grâce à une plateforme digitale dédiée, le Trophée est officiellement réactivé — plus ambitieux, plus accessible, et ouvert à toutes les entreprises de Suisse romande.",
+            "tag_2008": "Lancement",
+            "tag_2010": "Suspension",
+            "tag_2026": "Réactivation"
+        },
+        "participer": {
+            "title": "Comment concourir ?",
+            "subtitle": "4 étapes pour tenter de remporter le Trophée de la générosité.",
+            "step1": "ORGANISER UNE COLLECTE",
+            "step2": "INSCRIRE SON ENTREPRISE",
+            "step3": "MOBILISER SES ÉQUIPES",
+            "step4": "REMPORTER LE TROPHÉE !",
+            "cta": "S'inscrire maintenant"
+        },
+        "cta": {
+            "title": "Votre entreprise a ce qu'il faut ?",
+            "subtitle": "Rejoignez les entreprises qui font la différence et tentez de remporter le Trophée de la générosité.",
+            "button": "Inscrire mon entreprise"
+        }
+    },
     "collecte": {
         "title": "Organiser une collecte",
         "intro": "Une question sur le don du sang en entreprise, ou l'envie de mettre en place une collecte dans vos locaux ? Utilisez le formulaire ci-dessous : choisissez « Nous contacter » pour une simple demande d'information, ou « Organiser une collecte » pour lancer concrètement le projet avec le Centre de transfusion.",
