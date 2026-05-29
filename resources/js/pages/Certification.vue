@@ -20,11 +20,13 @@ const { t } = useI18n();
         <Head :title="t('certification.title')" />
 
         <!-- Hero -->
-        <section style="background-color: #EDE9F8" class="py-16 lg:py-24">
+        <section style="background-color: #ede9f8" class="py-16 lg:py-24">
             <div class="mx-auto max-w-7xl px-6">
                 <div class="grid items-center gap-10 lg:grid-cols-2">
                     <div>
-                        <h1 class="font-pixel mt-6 text-[1.35rem] leading-loose text-gray-900">
+                        <h1
+                            class="mt-6 font-pixel text-[1.35rem] leading-loose text-gray-900"
+                        >
                             {{ t('certification.hero.title') }}
                         </h1>
                         <p class="mt-6 max-w-md leading-relaxed text-gray-700">
@@ -44,7 +46,9 @@ const { t } = useI18n();
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-center lg:justify-end">
+                    <div
+                        class="flex items-center justify-center lg:justify-end"
+                    >
                         <img
                             src="/img/label-cts.png"
                             :alt="t('certification.hero.label_alt')"
@@ -54,7 +58,6 @@ const { t } = useI18n();
                 </div>
             </div>
         </section>
-
 
         <!-- Avantages -->
         <section class="py-24">
@@ -93,9 +96,11 @@ const { t } = useI18n();
         </section>
 
         <!-- Parcours — header -->
-        <section style="background-color: #EDE9F8" class="py-16">
+        <section style="background-color: #ede9f8" class="py-16">
             <div class="mx-auto max-w-7xl px-6">
-                <h2 class="font-pixel text-[1.1rem] leading-loose text-gray-900">
+                <h2
+                    class="font-pixel text-[1.1rem] leading-loose text-gray-900"
+                >
                     {{ t('certification.parcours.title') }}
                 </h2>
                 <p class="mt-2 max-w-xl leading-relaxed text-gray-600">
@@ -109,7 +114,9 @@ const { t } = useI18n();
             <div class="mx-auto max-w-5xl px-6">
                 <div class="relative">
                     <!-- Ligne violette -->
-                    <div class="absolute top-0 bottom-0 left-1/2 w-1 -translate-x-1/2 bg-violet-700"></div>
+                    <div
+                        class="absolute top-0 bottom-0 left-1/2 w-1 -translate-x-1/2 bg-violet-700"
+                    ></div>
 
                     <div
                         v-for="(side, i) in sides"
@@ -121,8 +128,16 @@ const { t } = useI18n();
                             <LabelStepCard
                                 v-if="side === 'left'"
                                 :step="i + 1"
-                                :title="t(`certification.parcours.step${i + 1}_title`)"
-                                :description="t(`certification.parcours.step${i + 1}_desc`)"
+                                :title="
+                                    t(
+                                        `certification.parcours.step${i + 1}_title`,
+                                    )
+                                "
+                                :description="
+                                    t(
+                                        `certification.parcours.step${i + 1}_desc`,
+                                    )
+                                "
                                 class="w-full max-w-xs"
                             />
                         </div>
@@ -131,7 +146,10 @@ const { t } = useI18n();
                         <div class="flex justify-center">
                             <div
                                 class="z-10 h-12 w-12 rounded-full border-4"
-                                :style="{ backgroundColor: circleColors[i], borderColor: circleShadows[i] }"
+                                :style="{
+                                    backgroundColor: circleColors[i],
+                                    borderColor: circleShadows[i],
+                                }"
                             ></div>
                         </div>
 
@@ -140,8 +158,16 @@ const { t } = useI18n();
                             <LabelStepCard
                                 v-if="side === 'right'"
                                 :step="i + 1"
-                                :title="t(`certification.parcours.step${i + 1}_title`)"
-                                :description="t(`certification.parcours.step${i + 1}_desc`)"
+                                :title="
+                                    t(
+                                        `certification.parcours.step${i + 1}_title`,
+                                    )
+                                "
+                                :description="
+                                    t(
+                                        `certification.parcours.step${i + 1}_desc`,
+                                    )
+                                "
                                 class="w-full max-w-xs"
                             />
                         </div>
@@ -160,7 +186,7 @@ const { t } = useI18n();
                     {{ t('certification.cta.subtitle') }}
                 </p>
                 <div class="mt-10">
-                    <Button variant="pixel_violet" >
+                    <Button variant="pixel_violet">
                         <Link :href="routes.collecte.url()">
                             {{ t('certification.cta.button') }}
                         </Link>
