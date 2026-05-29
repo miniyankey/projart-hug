@@ -1,5 +1,9 @@
 import { createInertiaApp, router } from '@inertiajs/vue3';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createApp, h } from 'vue';
+
+gsap.registerPlugin(ScrollTrigger);
 import { createAppI18n, DEFAULT_LOCALE, SUPPORTED_LOCALES } from './i18n.js';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
