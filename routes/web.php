@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\CobrandController;
 use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
@@ -54,8 +55,9 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('log
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-// A completer
+// Pages co-brandées : l'entreprise est résolue via {brandName} (son slug).
 Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
-    Route::inertia('/collecte', 'CoBranded/Collecte')->name('collecte');
-    Route::inertia('/jeu', 'CoBranded/Jeu')->name('jeu');
+    Route::get('/collecte', [CobrandController::class, 'collecte'])->name('collecte');
+    Route::get('/jeu', [CobrandController::class, 'jeu'])->name('jeu');
+    Route::get('/don-du-sang', [CobrandController::class, 'donSang'])->name('don-sang');
 });

@@ -13,12 +13,12 @@ defineProps({
 
 <template>
     <PublicLayout :company="company" :token="token">
-        <Head :title="t('eligibilite.title')" />
+        <Head :title="t('nav.don_sang_info')" />
         <div class="mx-auto max-w-7xl px-6 py-16">
             <h1 class="text-3xl font-semibold text-gray-900">
-                {{ t('eligibilite.title') }}
+                {{ t('nav.don_sang_info') }}
             </h1>
-            <p class="mt-4 text-gray-600">{{ t('eligibilite.intro') }}</p>
+            <p class="mt-4 text-gray-600">{{ t('don_sang.intro') }}</p>
         </div>
     </PublicLayout>
 </template>

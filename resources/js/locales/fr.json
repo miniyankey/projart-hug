@@ -35,13 +35,22 @@
         "jeu": "Suis-je éligible ?",
         "eligibilite": "Pouvez-vous donner ?",
         "certification": "Certification",
+        "collecte_info": "La collecte",
+        "don_sang_info": "Informations générales",
         "cta_creer_collecte": "Créer une collecte",
+        "cta_inscrire_collecte": "S'inscrire à la collecte",
         "menu_open": "Ouvrir le menu",
         "menu_close": "Fermer le menu"
     },
     "eligibilite": {
         "title": "Pouvez-vous donner ?",
         "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang."
+    },
+    "cobrand": {
+        "intro": "Collecte de sang organisée avec {company} et les HUG."
+    },
+    "don_sang": {
+        "intro": "Tout ce qu'il faut savoir sur le don du sang : conditions, déroulement et impact de votre geste."
     },
     "certification": {
         "title": "Label CTS RSE",

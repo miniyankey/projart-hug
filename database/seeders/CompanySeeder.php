@@ -10,6 +10,17 @@ class CompanySeeder extends Seeder
 {
     public function run(): void
     {
+        // Entreprise d'exemple pour les pages co-brandées :
+        Company::create([
+            'name' => 'HEIG-VD',
+            'slug' => 'heig-vd',
+            'email_contact' => 'collecte@heig-vd.ch',
+            'logo' => 'logos/heig.png',
+            'color' => '#E40521',
+            'is_labelled' => true,
+            'labelled_at' => now(),
+        ]);
+
         for ($i = 0; $i < 6; $i++) {
             $name = fake()->unique()->company();
 

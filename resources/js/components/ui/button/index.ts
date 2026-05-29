@@ -26,7 +26,7 @@ export const buttonVariants = cva(
         pixel_white:
           "bg-white text-violet-800 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.35)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.35)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         cta:
-          "rounded-none bg-[#8B2CF1] text-white shadow-[4px_4px_0_0_#4C1D95] hover:bg-[#7A1FE0] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_#4C1D95] active:translate-y-0 active:shadow-[2px_2px_0_0_#4C1D95]",
+          "rounded-none bg-[var(--brand)] text-white shadow-[4px_4px_0_0_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--brand-shadow)] active:translate-y-0 active:shadow-[2px_2px_0_0_var(--brand-shadow)]",
       },
       size: {
         "default": "h-9 px-4 py-2 has-[>svg]:px-3",

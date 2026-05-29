@@ -48,7 +48,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick));
     <div ref="root" class="relative text-sm">
         <button
             type="button"
-            class="inline-flex cursor-pointer items-center gap-2 border border-[#8B2CF1] bg-white px-3 py-1.5 font-medium text-[#8B2CF1] uppercase shadow-[3px_3px_0_0_#8B2CF1] transition-all hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_#8B2CF1] active:translate-y-0 active:shadow-[2px_2px_0_0_#8B2CF1]"
+            class="inline-flex cursor-pointer items-center gap-2 border border-[var(--brand)] bg-white px-3 py-1.5 font-medium text-[var(--brand)] uppercase shadow-[3px_3px_0_0_var(--brand)] transition-all hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--brand)] active:translate-y-0 active:shadow-[2px_2px_0_0_var(--brand)]"
             :aria-label="t('languageSwitcher.label')"
             :aria-expanded="open"
             aria-haspopup="listbox"
@@ -74,7 +74,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick));
         <ul
             v-if="open"
             role="listbox"
-            class="absolute right-0 z-20 mt-1 min-w-full border border-[#8B2CF1] bg-white shadow-sm"
+            class="absolute right-0 z-20 mt-1 min-w-full border border-[var(--brand)] bg-white shadow-sm"
         >
             <li v-for="locale in SUPPORTED_LOCALES" :key="locale" role="option">
                 <button
@@ -82,7 +82,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick));
                     class="block w-full cursor-pointer px-3 py-1.5 text-left uppercase transition-colors"
                     :class="
                         locale === currentLocale
-                            ? 'bg-[#8B2CF1]/10 text-[#8B2CF1]'
+                            ? 'bg-[var(--brand-tint)] text-[var(--brand)]'
                             : 'text-gray-700 hover:bg-gray-50'
                     "
                     :aria-selected="locale === currentLocale"
