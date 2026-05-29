@@ -6,13 +6,13 @@ import PublicLayout from '@/layouts/PublicLayout.vue';
 const { t } = useI18n();
 
 defineProps({
-    brandName: String,
+    company: Object,
     token: String,
 });
 </script>
 
 <template>
-    <PublicLayout>
+    <PublicLayout :company="company" :token="token">
         <Head :title="t('eligibilite.title')" />
         <div class="mx-auto max-w-7xl px-6 py-16">
             <h1 class="text-3xl font-semibold text-gray-900">
