@@ -14,7 +14,6 @@ const props = defineProps({
         type: Object,
         default: null,
     },
-    // Jeton de l'URL co-brandée /{brandName}/{token} (requis avec company).
     token: {
         type: String,
         default: null,
@@ -57,7 +56,7 @@ const cta = computed(() =>
         : { href: routes.collecte.url(), label: 'nav.cta_creer_collecte' },
 );
 
-// Couleur de l'entreprise posée en variables CSS, qui cascadent vers tous les
+// Couleur de l'entreprise posée en variables CSS, qui cascadent
 const brandVars = computed(() => {
     const color = props.company?.color;
     if (!color) {
