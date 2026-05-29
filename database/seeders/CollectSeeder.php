@@ -19,6 +19,19 @@ class CollectSeeder extends Seeder
             return;
         }
 
+        // Collecte d'exemple pour la démo co-brandée HEIG-VD.
+        $heigVd = $companies->firstWhere('slug', 'heig-vd');
+        if ($heigVd) {
+            Collect::create([
+                'company_id' => $heigVd->id,
+                'place_id' => $places->random()->id,
+                'day' => now()->addWeeks(2)->format('Y-m-d'),
+                'link_appointment' => null,
+                'token' => 'heig-demo',
+                'is_active' => true,
+            ]);
+        }
+
         for ($i = 0; $i < 5; $i++) {
             Collect::create([
                 'company_id' => $companies->random()->id,
