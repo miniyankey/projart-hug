@@ -31,7 +31,6 @@ class CobrandController extends Controller
 
     /**
      * Résout la collecte par son token en vérifiant que le slug de l'entreprise
-
      */
     private function resolveCollect(string $brandName, string $token): Collect
     {

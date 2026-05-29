@@ -59,6 +59,7 @@ const cta = computed(() =>
 // Couleur de l'entreprise posée en variables CSS, qui cascadent
 const brandVars = computed(() => {
     const color = props.company?.color;
+
     if (!color) {
         return {};
     }

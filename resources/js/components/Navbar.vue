@@ -20,7 +20,7 @@ defineProps({
         type: Object,
         required: true,
     },
-    // Entreprise partenaire pour le mode co-brandé : { name, logo 
+    // Entreprise partenaire pour le mode co-brandé : { name, logo
     // null = mode HUG normal (logo seul, cliquable vers l'accueil)
     company: {
         type: Object,
