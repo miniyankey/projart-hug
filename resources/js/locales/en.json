@@ -47,6 +47,29 @@
         "title": "CTS CSR Label",
         "intro": "The certification that recognises your company's commitment to blood donation."
     },
+    "collecte": {
+        "title": "Organise a blood drive",
+        "intro": "Have a question about workplace blood donation, or want to set up a blood drive at your premises? Use the form below: choose \"Contact us\" for a simple information request, or \"Organise a blood drive\" to get the project started with the Transfusion Centre.",
+        "form": {
+            "tab_contact": "Contact us",
+            "tab_collect": "Organise a blood drive",
+            "name": "Your name",
+            "name_placeholder": "First and last name",
+            "email": "Your email",
+            "email_placeholder": "first.last{'@'}company.ch",
+            "company": "Your company",
+            "company_placeholder": "Company name",
+            "dates": "Preferred dates",
+            "add_date": "Add a date",
+            "remove_date": "Remove this date",
+            "message": "Your message",
+            "message_placeholder": "Your message here...",
+            "trophy": "Take part in the Generosity Trophy",
+            "submit": "Send",
+            "success": "Thank you, your request has been sent. The Transfusion Centre will get back to you shortly.",
+            "error": "Something went wrong. Please check the fields below."
+        }
+    },
     "footer": {
         "copyright": "© 2026 Blood Transfusion Centre - HUG - Made by students of HEIG-VD within the context of an integration project.",
         "description": "A HUG initiative to boost blood donation drives within partner companies.",
