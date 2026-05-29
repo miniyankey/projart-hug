@@ -6,32 +6,39 @@ use App\Enums\FormSubmissionType;
 use App\Models\FormSubmission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class FormSubmissionController extends Controller
 {
     /**
-     * Store a new collect request submission from a company.
+     * Store a contact message or a collect request sent from the public form.
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        // Les champs spécifiques à la collecte n'ont pas de sens pour un contact :
+        // on les neutralise avant validation pour éviter qu'ils soient enregistrés (et prennent de la place pour r)
+        if ($request->input('type') === FormSubmissionType::Contact->value) {
+            $request->merge([
+            //si contacte, on force cela 
+                'trophy_participation' => false,
+                'preferred_dates' => null,
+            ]);
+        }
+
+        $validated = $request->validate([
+            'type' => ['required', Rule::enum(FormSubmissionType::class)],
             'company_name' => ['required', 'string', 'max:255'],
-            'company_address' => ['required', 'string', 'max:255'],
-            'company_city' => ['required', 'string', 'max:255'],
-            'company_postal_code' => ['required', 'string', 'max:10'],
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'contact_email' => ['required', 'email'],
-            'message' => ['nullable', 'string'],
-            'preferred_date' => ['nullable', 'date', 'after:today'],
+            'name' => ['required', 'string', 'max:255'],
+            'contact_email' => ['required', 'email', 'max:255'],
+            'message' => ['required_if:type,'.FormSubmissionType::Contact->value, 'nullable', 'string', 'max:2000'],
+            'trophy_participation' => ['boolean'],
+            'preferred_dates' => ['required_if:type,'.FormSubmissionType::CollectRequest->value, 'nullable', 'array', 'max:10'],
+            'preferred_dates.*' => ['required', 'date', 'after:today'],
         ]);
 
-        FormSubmission::create([
-            ...$request->validated(),
-            'type' => FormSubmissionType::CollectRequest,
-        ]);
+        FormSubmission::create($validated);
 
-        return redirect()->route('home')
-            ->with('success', 'flash.collect_request_sent');
+        return redirect()->back()
+            ->with('success', 'flash.form_submission_sent');
     }
 }
