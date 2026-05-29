@@ -59,4 +59,5 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logo
 Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
     Route::get('/collecte', [CobrandController::class, 'collecte'])->name('collecte');
     Route::get('/jeu', [CobrandController::class, 'jeu'])->name('jeu');
+    Route::get('/don-du-sang', [CobrandController::class, 'donSang'])->name('don-sang');
 });

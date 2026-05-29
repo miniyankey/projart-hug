@@ -35,7 +35,8 @@
         "jeu": "Am I eligible?",
         "eligibilite": "Can you donate?",
         "certification": "Certification",
-        "collecte_info": "Blood drive information",
+        "collecte_info": "The blood drive",
+        "don_sang_info": "General information",
         "cta_creer_collecte": "Create a blood drive",
         "cta_inscrire_collecte": "Sign up for the blood drive",
         "menu_open": "Open menu",
@@ -47,6 +48,9 @@
     },
     "cobrand": {
         "intro": "Blood drive organised with {company} and the HUG."
+    },
+    "don_sang": {
+        "intro": "Everything you need to know about blood donation: requirements, what to expect and the impact of your gift."
     },
     "certification": {
         "title": "CTS CSR Label",
