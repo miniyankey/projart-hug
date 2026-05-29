@@ -83,6 +83,18 @@
             "c3_title": "Renew your commitment each year",
             "c3_desc": "The label is renewable annually, recognising a long-term commitment."
         },
+        "parcours": {
+            "title": "The path to certification",
+            "subtitle": "End-to-end support from our teams to guarantee the success of your blood drive.",
+            "step1_title": "Application",
+            "step1_desc": "Fill in the online form to express your wish to organise an in-company blood drive.",
+            "step2_title": "Organisation",
+            "step2_desc": "Our teams assess your premises and set a date. We provide all the awareness materials you need.",
+            "step3_title": "Day of the drive",
+            "step3_desc": "The CTS deploys its mobile unit. Your employees donate blood at their workplace in complete safety.",
+            "step4_title": "Certification",
+            "step4_desc": "Official handover of your certification and integration into the community of committed companies."
+        },
         "cta": {
             "title": "Ready to commit?",
             "subtitle": "Join the companies making a difference. Submit your application and earn the CTS CSR Label.",

@@ -83,6 +83,18 @@
             "c3_title": "Renouveler l'engagement chaque année",
             "c3_desc": "Le label est renouvelable annuellement, valorisant un engagement sur la durée."
         },
+        "parcours": {
+            "title": "Le parcours vers le label",
+            "subtitle": "Un accompagnement clé en main par nos équipes pour garantir le succès de votre collecte.",
+            "step1_title": "Candidature",
+            "step1_desc": "Remplissez le formulaire en ligne pour exprimer votre volonté d'organiser une collecte intra-entreprise.",
+            "step2_title": "Organisation",
+            "step2_desc": "Nos équipes viennent évaluer vos locaux et fixer une date. Nous vous fournissons tout le matériel de sensibilisation.",
+            "step3_title": "Jour-J",
+            "step3_desc": "Le CTS déploie son unité mobile. Vos collaborateurs donnent leur sang sur leur lieu de travail en toute sécurité.",
+            "step4_title": "Labellisation",
+            "step4_desc": "Remise officielle de votre certification et intégration au club des entreprises solidaires."
+        },
         "cta": {
             "title": "Prêt à vous engager ?",
             "subtitle": "Rejoignez les entreprises qui font la différence. Soumettez votre candidature et obtenez le label CTS RSE.",
