@@ -6,6 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collect extends Model
 {
+    protected static function booted(): void
+    {
+        static::creating(function (Collect $collect) {
+            if (empty($collect->token)) {
+                do {
+                    $token = (string) random_int(10000, 99999);
+                } while (self::where('token', $token)->exists());
+
+                $collect->token = $token;
+            }
+        });
+    }
+
     /**
      * @var list<string>
      */

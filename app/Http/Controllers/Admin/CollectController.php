@@ -8,7 +8,6 @@ use App\Models\Company;
 use App\Models\Place;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -48,10 +47,7 @@ class CollectController extends Controller
             'is_active' => ['boolean'],
         ]);
 
-        Collect::create([
-            ...$validated,
-            'token' => Str::random(12),
-        ]);
+        Collect::create($validated);
 
         return redirect()->route('admin.collectes.index')
             ->with('success', 'flash.collect_created');
