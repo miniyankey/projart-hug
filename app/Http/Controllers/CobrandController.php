@@ -29,6 +29,16 @@ class CobrandController extends Controller
         ]);
     }
 
+    public function donSang(string $brandName, string $token): Response
+    {
+        $collect = $this->resolveCollect($brandName, $token);
+
+        return Inertia::render('CoBranded/DonSang', [
+            'token' => $token,
+            'company' => $this->companyData($collect),
+        ]);
+    }
+
     /**
      * Résout la collecte par son token en vérifiant que le slug de l'entreprise
      */

@@ -4,6 +4,7 @@ import Footer from '@/components/Footer.vue';
 import Navbar from '@/components/Navbar.vue';
 import {
     collecte as cobrandCollecte,
+    donSang as cobrandDonSang,
     jeu as cobrandJeu,
 } from '@/routes/cobrand';
 import * as routes from '@/routes/index.ts';
@@ -31,12 +32,16 @@ const links = computed(() =>
     isCobrand.value
         ? [
               {
+                  href: cobrandCollecte.url(routeParams.value),
+                  label: 'nav.collecte_info',
+              },
+              {
                   href: cobrandJeu.url(routeParams.value),
                   label: 'nav.eligibilite',
               },
               {
-                  href: cobrandCollecte.url(routeParams.value),
-                  label: 'nav.collecte_info',
+                  href: cobrandDonSang.url(routeParams.value),
+                  label: 'nav.don_sang_info',
               },
           ]
         : [
