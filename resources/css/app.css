@@ -1,3 +1,4 @@
+@import url('https://fonts.bunny.net/css2?family=press-start-2p&display=swap');
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
@@ -8,6 +9,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+    --font-pixel: 'Press Start 2P', monospace;
     --font-sans:
         Instrument Sans, ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
@@ -179,5 +181,15 @@
     }
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    .font-pixel {
+        font-family: var(--font-pixel);
+        -webkit-font-smoothing: none;
+        -moz-osx-font-smoothing: unset;
+        font-smooth: never;
+        image-rendering: pixelated;
     }
 }
