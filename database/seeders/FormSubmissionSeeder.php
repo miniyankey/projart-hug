@@ -13,40 +13,36 @@ class FormSubmissionSeeder extends Seeder
         FormSubmission::create([
             'type' => FormSubmissionType::Contact,
             'company_name' => 'Banque Cantonale de Genève',
-            'company_address' => 'Quai de l\'Île 17',
-            'company_city' => 'Genève',
-            'company_postal_code' => '1204',
-            'firstname' => 'Marie',
-            'lastname' => 'Dupont',
+            'name' => 'Marie Dupont',
             'contact_email' => 'marie.dupont@bcge.ch',
-            'message' => 'Nous aimerions organiser une collecte de sang dans nos locaux.',
-            'preferred_date' => now()->addMonths(2)->toDateString(),
+            'message' => 'Nous aimerions en savoir plus sur l\'organisation d\'une collecte de sang dans nos locaux.',
+            'trophy_participation' => false,
+            'preferred_dates' => null,
         ]);
 
         FormSubmission::create([
-            'type' => FormSubmissionType::TropheeParticipation,
+            'type' => FormSubmissionType::CollectRequest,
             'company_name' => 'Rolex SA',
-            'company_address' => 'Rue François-Dussaud 3-7',
-            'company_city' => 'Genève',
-            'company_postal_code' => '1211',
-            'firstname' => 'Jean',
-            'lastname' => 'Müller',
+            'name' => 'Jean Müller',
             'contact_email' => 'j.muller@rolex.com',
-            'message' => 'Nous souhaitons participer à l\'édition de cette année.',
-            'preferred_date' => null,
+            'message' => 'Nous souhaitons organiser une collecte et participer au Trophée de la générosité.',
+            'trophy_participation' => true,
+            'preferred_dates' => [
+                now()->addMonths(2)->toDateString(),
+                now()->addMonths(2)->addWeek()->toDateString(),
+            ],
         ]);
 
         FormSubmission::create([
             'type' => FormSubmissionType::CollectRequest,
             'company_name' => 'CERN',
-            'company_address' => 'Esplanade des Particules 1',
-            'company_city' => 'Meyrin',
-            'company_postal_code' => '1217',
-            'firstname' => 'Sophie',
-            'lastname' => 'Rossi',
+            'name' => 'Sophie Rossi',
             'contact_email' => 'sophie.rossi@cern.ch',
             'message' => null,
-            'preferred_date' => now()->addMonth()->toDateString(),
+            'trophy_participation' => false,
+            'preferred_dates' => [
+                now()->addMonth()->toDateString(),
+            ],
         ]);
     }
 }
