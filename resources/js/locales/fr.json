@@ -45,7 +45,49 @@
     },
     "certification": {
         "title": "Label CTS RSE",
-        "intro": "La certification qui valorise l'engagement de votre entreprise pour le don du sang."
+        "intro": "La certification qui valorise l'engagement de votre entreprise pour le don du sang.",
+        "hero": {
+            "eyebrow": "Label CTS RSE",
+            "title": "Devenez une entreprise solidaire. Sauvez des vies !",
+            "subtitle": "Rejoignez le mouvement. Engagez votre entreprise dans une démarche citoyenne en organisant des collectes de sang et obtenez le label officiel des HUG.",
+            "cta_primary": "Soumettre une candidature",
+            "cta_secondary": "Découvrir les avantages",
+            "label_alt": "Label CTS RSE"
+        },
+        "avantages": {
+            "title": "Bien plus qu'un simple don.",
+            "subtitle": "Le Label CTS certifie votre engagement sociétal et transforme votre culture d'entreprise en un véritable moteur de solidarité locale.",
+            "item1_title": "Marque employeur sublimée",
+            "item1_desc": "Attirez et fidélisez les talents en prouvant que votre entreprise agit concrètement pour sa région. Une fierté d'appartenance décuplée pour vos collaborateurs.",
+            "item2_title": "Visibilité RSE certifiée",
+            "item2_desc": "Valorisez votre engagement avec le label officiel CTS sur tous vos supports de communication, site web et réseaux sociaux.",
+            "item3_title": "Réseau d'entreprises engagées",
+            "item3_desc": "Rejoignez un réseau de partenaires et participez aux événements annuels du Trophée de la générosité."
+        },
+        "chiffres": {
+            "title": "Notre impact en chiffres",
+            "c1_value": "3",
+            "c1_label": "vies sauvées par don",
+            "c2_value": "47",
+            "c2_label": "entreprises labellisées",
+            "c3_value": "500+",
+            "c3_label": "dons par collecte en moyenne"
+        },
+        "criteres": {
+            "title": "Comment obtenir le label ?",
+            "subtitle": "Le Label CTS RSE récompense les entreprises qui s'engagent durablement dans le don du sang.",
+            "c1_title": "Organiser au moins une collecte",
+            "c1_desc": "Votre entreprise doit avoir organisé au minimum une collecte de sang avec les HUG dans l'année.",
+            "c2_title": "Atteindre un taux de participation",
+            "c2_desc": "Un minimum de collaborateurs doit s'être présenté à la collecte par rapport au nombre d'inscrits.",
+            "c3_title": "Renouveler l'engagement chaque année",
+            "c3_desc": "Le label est renouvelable annuellement, valorisant un engagement sur la durée."
+        },
+        "cta": {
+            "title": "Prêt à vous engager ?",
+            "subtitle": "Rejoignez les entreprises qui font la différence. Soumettez votre candidature et obtenez le label CTS RSE.",
+            "button": "Soumettre une candidature"
+        }
     },
     "footer": {
         "copyright": "© 2026 Centre de Transfusion Sanguine - HUG - Faits par des étudiants de la HEIG-VD dans le cadre d'un projet d'intégration.",
