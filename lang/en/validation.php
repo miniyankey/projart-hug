@@ -1,7 +1,26 @@
 <?php
 
 return [
+    'required' => 'The :attribute field is required.',
+    'email' => 'The :attribute field must be a valid email address.',
+    'string' => 'The :attribute field must be a string.',
+    'unique' => 'This :attribute is already taken.',
+    'confirmed' => 'The :attribute confirmation does not match.',
     'after' => 'The :attribute must be a date after today.',
+    'max' => [
+        'string' => 'The :attribute field must not be greater than :max characters.',
+        'array' => 'The :attribute field must not have more than :max items.',
+    ],
+    'min' => [
+        'string' => 'The :attribute field must be at least :min characters.',
+    ],
+
+    // Rules used by Password::defaults()
+    'letters' => 'The :attribute field must contain at least one letter.',
+    'mixed' => 'The :attribute field must contain at least one uppercase and one lowercase letter.',
+    'numbers' => 'The :attribute field must contain at least one number.',
+    'symbols' => 'The :attribute field must contain at least one symbol.',
+    'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
 
     'custom' => [
         'message' => [
@@ -14,6 +33,9 @@ return [
 
     'attributes' => [
         'name' => 'name',
+        'surname' => 'surname',
+        'email' => 'email address',
+        'password' => 'password',
         'contact_email' => 'email',
         'company_name' => 'company',
         'message' => 'message',
