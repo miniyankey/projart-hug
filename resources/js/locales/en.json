@@ -80,6 +80,15 @@
             "stat3_value": "200+",
             "stat3_label": "blood drives organised per year"
         },
+        "steps": {
+            "title": "Does your company want to join the trophy?",
+            "subtitle": "4 simple steps to join the movement and compete for the Generosity Trophy.",
+            "step1": "ORGANISE A FIRST BLOOD DRIVE",
+            "step2": "RECEIVE THE CTS LABEL",
+            "step3": "REGISTER YOUR COMPANY FOR THE TROPHY",
+            "step4": "GIVE AS MUCH AS POSSIBLE!",
+            "cta": "Register"
+        },
         "cta": {
             "title": "Does your company want to take part?",
             "subtitle": "Join the network of companies committed to blood donation.",

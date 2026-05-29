@@ -80,6 +80,15 @@
             "stat3_value": "200+",
             "stat3_label": "collectes organisées par an"
         },
+        "steps": {
+            "title": "Votre entreprise veut participer au trophée?",
+            "subtitle": "4 étapes simples pour rejoindre le mouvement et concourir pour le Trophée de la générosité.",
+            "step1": "ORGANISER UNE PREMIÈRE COLLECTE",
+            "step2": "RECEVEZ LE LABEL CTS",
+            "step3": "INSCRIVEZ VOTRE ENTREPRISE AU TROPHÉE",
+            "step4": "DONNEZ UN MAXIMUM !",
+            "cta": "S'inscrire"
+        },
         "cta": {
             "title": "Votre entreprise veut participer ?",
             "subtitle": "Rejoignez le réseau des entreprises engagées pour le don du sang.",

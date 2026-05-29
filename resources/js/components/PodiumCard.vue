@@ -54,7 +54,7 @@ const rankPadding = computed(() => ({ 1: 'py-14', 2: 'py-9', 3: 'py-5' }[props.r
                 <div class="absolute bottom-2 right-2 h-3 w-3" :style="rivetStyle" />
 
                 <span
-                    class="select-none font-mono text-5xl font-bold text-white"
+                    class="font-pixel select-none text-2xl text-white"
                     style="text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35)"
                 >{{ rankLabel }}</span>
             </div>
