@@ -30,12 +30,12 @@ const { t } = useI18n();
                 </p>
                 <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
                     <Button variant="pixel_violet">
-                        <Link :href="routes.inscription.url()">
+                        <Link :href="routes.collecte.url()">
                             {{ t('home.hero.cta_primary') }}
                         </Link>
                     </Button>
                     <Button variant="pixel_blue">
-                        <Link :href="routes.collecte.url()">
+                        <Link :href="routes.trophee.url()">
                             {{ t('home.hero.cta_secondary') }}
                         </Link>
                     </Button>
