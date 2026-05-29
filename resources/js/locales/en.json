@@ -29,18 +29,32 @@
         }
     },
     "nav": {
+        "home": "Home",
         "trophee": "Trophy",
         "collecte": "Blood Drive",
-        "inscription": "Register",
-        "jeu": "Am I eligible?"
+        "jeu": "Am I eligible?",
+        "eligibilite": "Can you donate?",
+        "certification": "Certification",
+        "cta_creer_collecte": "Create a blood drive",
+        "menu_open": "Open menu",
+        "menu_close": "Close menu"
+    },
+    "eligibilite": {
+        "title": "Can you donate?",
+        "intro": "Find out in a few questions whether you're eligible to give blood."
+    },
+    "certification": {
+        "title": "CTS CSR Label",
+        "intro": "The certification that recognises your company's commitment to blood donation."
     },
     "footer": {
-        "copyright": "© 2026 Blood Transfusion Centre — HUG",
+        "copyright": "© 2026 Blood Transfusion Centre - HUG - Made by students of HEIG-VD within the context of an integration project.",
         "description": "A HUG initiative to boost blood donation drives within partner companies.",
         "nav_title": "Navigation",
         "nav": {
             "home": "Home"
         },
+        "social_title": "Follow us",
         "collaborateur": {
             "title": "I'm a CTS staff member",
             "description": "Access the administration area to manage blood drives, companies and trophies.",

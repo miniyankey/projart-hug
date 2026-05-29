@@ -30,6 +30,10 @@ const { t } = useI18n();
                 </p>
                 <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
                     <Button variant="pixel_violet">
+                <div
+                    class="mt-10 flex flex-col justify-center gap-4 sm:flex-row"
+                >
+                    <Button as-child size="lg">
                         <Link :href="routes.collecte.url()">
                             {{ t('home.hero.cta_primary') }}
                         </Link>
@@ -161,9 +165,13 @@ const { t } = useI18n();
                     {{ t('home.cta.subtitle') }}
                 </p>
                 <div class="mt-10">
-                    <Button as-child size="lg" variant="ghost"
-                        class="border border-white text-white hover:bg-white! hover:text-gray-900!">
-                        <Link :href="routes.inscription.url()">
+                    <Button
+                        as-child
+                        size="lg"
+                        variant="ghost"
+                        class="border border-white text-white hover:bg-white! hover:text-gray-900!"
+                    >
+                        <Link :href="routes.collecte.url()">
                             {{ t('home.cta.button') }}
                         </Link>
                     </Button>

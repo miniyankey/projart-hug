@@ -12,7 +12,8 @@ Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update
 Route::inertia('/', 'Home')->name('home');
 Route::inertia('/trophee', 'Trophee')->name('trophee');
 Route::inertia('/collecte', 'Collecte')->name('collecte');
-Route::inertia('/inscription', 'Inscription')->name('inscription');
+Route::inertia('/eligibilite', 'Eligibilite')->name('eligibilite');
+Route::inertia('/certification', 'Certification')->name('certification');
 
 // Administration
 Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
@@ -55,5 +56,4 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logo
 Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
     Route::inertia('/collecte', 'CoBranded/Collecte')->name('collecte');
     Route::inertia('/jeu', 'CoBranded/Jeu')->name('jeu');
-    Route::inertia('/inscription', 'CoBranded/Inscription')->name('inscription');
 });
