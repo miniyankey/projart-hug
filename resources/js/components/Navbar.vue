@@ -6,9 +6,33 @@ import { useI18n } from 'vue-i18n';
 import hugLogo from '@/../images/logos/hug.png';
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 import { Button } from '@/components/ui/button';
-import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
+
+defineProps({
+    // Liens de navigation : [{ href, label }] où label est une clé i18n
+    links: {
+        type: Array,
+        required: true,
+    },
+    // Bouton d'action principal : { href, label } (label = clé i18n)
+    cta: {
+        type: Object,
+        required: true,
+    },
+    // Entreprise partenaire pour le mode co-brandé : { name, logo 
+    // null = mode HUG normal (logo seul, cliquable vers l'accueil)
+    company: {
+        type: Object,
+        default: null,
+    },
+    // Lien du logo HUG en mode normal.
+    homeUrl: {
+        type: String,
+        default: '#',
+    },
+});
+
 const open = ref(false);
 
 function close() {
@@ -28,8 +52,37 @@ onBeforeUnmount(() => removeListener?.());
         <nav
             class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:gap-8 md:px-6 md:py-4"
         >
+            <!-- Mode co-brandé : logo HUG × logo entreprise -->
+            <div
+                v-if="company"
+                class="flex shrink-0 items-center gap-3 md:gap-4"
+            >
+                <img
+                    :src="hugLogo"
+                    alt="Hôpitaux Universitaires Genève"
+                    class="h-8 w-auto md:h-12"
+                />
+                <span class="text-lg font-light text-gray-400 md:text-xl"
+                    >×</span
+                >
+                <img
+                    v-if="company.logo"
+                    :src="company.logo"
+                    :alt="company.name"
+                    class="h-8 w-auto md:h-12"
+                />
+                <span
+                    v-else
+                    class="text-base font-semibold text-gray-900 md:text-lg"
+                >
+                    {{ company.name }}
+                </span>
+            </div>
+
+            <!-- Mode normal : logo HUG cliquable -->
             <Link
-                :href="routes.home.url()"
+                v-else
+                :href="homeUrl"
                 class="flex shrink-0 items-center"
                 aria-label="Hôpitaux Universitaires Genève"
             >
@@ -42,36 +95,18 @@ onBeforeUnmount(() => removeListener?.());
 
             <div class="hidden items-center gap-10 md:flex">
                 <Link
-                    :href="routes.home.url()"
+                    v-for="link in links"
+                    :key="link.href"
+                    :href="link.href"
                     class="text-sm text-gray-800 transition-colors hover:text-gray-900"
                 >
-                    {{ t('nav.home') }}
-                </Link>
-                <Link
-                    :href="routes.eligibilite.url()"
-                    class="text-sm text-gray-800 transition-colors hover:text-gray-900"
-                >
-                    {{ t('nav.eligibilite') }}
-                </Link>
-                <Link
-                    :href="routes.trophee.url()"
-                    class="text-sm text-gray-800 transition-colors hover:text-gray-900"
-                >
-                    {{ t('nav.trophee') }}
-                </Link>
-                <Link
-                    :href="routes.certification.url()"
-                    class="text-sm text-gray-800 transition-colors hover:text-gray-900"
-                >
-                    {{ t('nav.certification') }}
+                    {{ t(link.label) }}
                 </Link>
             </div>
 
             <div class="hidden items-center gap-6 md:flex">
                 <Button as-child variant="cta" size="cta">
-                    <Link :href="routes.collecte.url()">
-                        {{ t('nav.cta_creer_collecte') }}
-                    </Link>
+                    <Link :href="cta.href">{{ t(cta.label) }}</Link>
                 </Button>
                 <LanguageSwitcher />
             </div>
@@ -96,37 +131,19 @@ onBeforeUnmount(() => removeListener?.());
         >
             <div class="flex flex-col gap-1 px-4 py-4">
                 <Link
-                    :href="routes.home.url()"
+                    v-for="link in links"
+                    :key="link.href"
+                    :href="link.href"
                     class="rounded px-2 py-2 text-base text-gray-800 hover:bg-gray-50"
                 >
-                    {{ t('nav.home') }}
-                </Link>
-                <Link
-                    :href="routes.eligibilite.url()"
-                    class="rounded px-2 py-2 text-base text-gray-800 hover:bg-gray-50"
-                >
-                    {{ t('nav.eligibilite') }}
-                </Link>
-                <Link
-                    :href="routes.trophee.url()"
-                    class="rounded px-2 py-2 text-base text-gray-800 hover:bg-gray-50"
-                >
-                    {{ t('nav.trophee') }}
-                </Link>
-                <Link
-                    :href="routes.certification.url()"
-                    class="rounded px-2 py-2 text-base text-gray-800 hover:bg-gray-50"
-                >
-                    {{ t('nav.certification') }}
+                    {{ t(link.label) }}
                 </Link>
 
                 <div
                     class="mt-4 flex flex-col gap-4 border-t border-gray-200 pt-4"
                 >
                     <Button as-child variant="cta" size="cta" class="w-fit">
-                        <Link :href="routes.collecte.url()">
-                            {{ t('nav.cta_creer_collecte') }}
-                        </Link>
+                        <Link :href="cta.href">{{ t(cta.label) }}</Link>
                     </Button>
                     <LanguageSwitcher />
                 </div>
