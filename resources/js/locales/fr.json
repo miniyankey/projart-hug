@@ -101,6 +101,30 @@
             "button": "Soumettre une candidature"
         }
     },
+    "collecte": {
+        "title": "Organiser une collecte",
+        "intro": "Une question sur le don du sang en entreprise, ou l'envie de mettre en place une collecte dans vos locaux ? Utilisez le formulaire ci-dessous : choisissez « Nous contacter » pour une simple demande d'information, ou « Organiser une collecte » pour lancer concrètement le projet avec le Centre de transfusion.",
+        "form": {
+            "tab_contact": "Nous contacter",
+            "tab_collect": "Organiser une collecte",
+            "name": "Votre nom",
+            "name_placeholder": "Prénom et nom",
+            "email": "Votre email",
+            "email_placeholder": "prenom.nom{'@'}entreprise.ch",
+            "company": "Votre entreprise",
+            "company_placeholder": "Nom de l'entreprise",
+            "dates": "Dates souhaitées",
+            "dates_placeholder": "Choisir une ou plusieurs dates",
+            "dates_selected": "{count} date sélectionnée | {count} dates sélectionnées",
+            "remove_date": "Retirer cette date",
+            "message": "Votre message",
+            "message_placeholder": "Votre message ici...",
+            "trophy": "Participer au Trophée de la générosité",
+            "submit": "Envoyer",
+            "success": "Merci, votre demande a bien été envoyée. Le Centre de transfusion vous recontactera rapidement.",
+            "error": "Une erreur est survenue. Veuillez vérifier les champs ci-dessous."
+        }
+    },
     "footer": {
         "copyright": "© 2026 Centre de Transfusion Sanguine - HUG - Faits par des étudiants de la HEIG-VD dans le cadre d'un projet d'intégration.",
         "description": "Une initiative des HUG pour dynamiser les collectes de sang au sein des entreprises partenaires.",
@@ -122,7 +146,10 @@
             "title": "Dynamisons ensemble les collectes de sang en entreprise",
             "subtitle": "Le Trophée de la générosité réunit entreprises et HUG pour maximiser la participation aux collectes de sang.",
             "cta_primary": "Organiser une collecte",
-            "cta_secondary": "En savoir plus"
+            "cta_secondary": "Jouer au jeu",
+            "game_cta": "Testez notre jeu afin de savoir si vous êtes éligibles au don de sang !",
+            "mascot_alt": "Mascotte pixel art poche de sang",
+            "bubble": "Chaque don peut sauver jusqu'à 3 vies !"
         },
         "trophee": {
             "label": "Trophée de la générosité",
@@ -156,6 +183,19 @@
             "step3": "INSCRIVEZ VOTRE ENTREPRISE AU TROPHÉE",
             "step4": "DONNEZ UN MAXIMUM !",
             "cta": "S'inscrire"
+        },
+        "faq": {
+            "title": "Questions fréquentes",
+            "q1": "Comment organiser une collecte de sang dans mon entreprise ?",
+            "a1": "Contactez le Centre de Transfusion Sanguine des HUG via le formulaire d'inscription. Une équipe vous accompagnera pour planifier la date, le lieu et la communication interne.",
+            "q2": "Qu'est-ce que le Trophée de la générosité ?",
+            "a2": "Le Trophée de la générosité récompense chaque année les entreprises ayant mobilisé le plus grand nombre de donneurs lors de leurs collectes. Il a été lancé en 2008 et réactivé pour valoriser l'engagement des entreprises partenaires.",
+            "q3": "Qui peut participer au Trophée ?",
+            "a3": "Toute entreprise ayant organisé au moins une collecte de sang avec les HUG dans l'année en cours peut concourir pour le Trophée, quelle que soit sa taille.",
+            "q4": "Qu'est-ce que le Label CTS RSE ?",
+            "a4": "Le Label CTS RSE est une certification délivrée par le Centre de Transfusion Sanguine aux entreprises qui intègrent durablement le don du sang dans leur politique de responsabilité sociale. Il est renouvelable chaque année.",
+            "q5": "Comment savoir si je suis éligible au don de sang ?",
+            "a5": "Utilisez notre parcours interactif « Suis-je éligible ? » pour vérifier rapidement vos conditions d'éligibilité. En cas de doute, les équipes HUG restent disponibles pour répondre à vos questions."
         },
         "cta": {
             "title": "Votre entreprise veut participer ?",
