@@ -23,6 +23,8 @@ export const buttonVariants = cva(
           "bg-violet-600 text-white rounded-none shadow-[4px_4px_0px_0px_#4c1d95] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#4c1d95] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_blue:
           "bg-blue-600 text-white rounded-none shadow-[4px_4px_0px_0px_#3b82f6] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#3b82f6] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
+        pixel_white:
+          "bg-white text-violet-800 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.35)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.35)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         cta:
           "rounded-none bg-[#8B2CF1] text-white shadow-[4px_4px_0_0_#4C1D95] hover:bg-[#7A1FE0] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_#4C1D95] active:translate-y-0 active:shadow-[2px_2px_0_0_#4C1D95]",
       },

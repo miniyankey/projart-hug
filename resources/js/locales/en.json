@@ -92,7 +92,10 @@
             "title": "Let's boost blood donation drives in companies together",
             "subtitle": "The Generosity Trophy brings companies and HUG together to maximise participation in workplace blood drives.",
             "cta_primary": "Organise a blood drive",
-            "cta_secondary": "Learn more"
+            "cta_secondary": "Play the game",
+            "game_cta": "Try our game to find out if you are eligible to donate blood!",
+            "mascot_alt": "Pixel art blood bag mascot",
+            "bubble": "Each donation can save up to 3 lives!"
         },
         "trophee": {
             "label": "Generosity Trophy",
@@ -126,6 +129,19 @@
             "step3": "REGISTER YOUR COMPANY FOR THE TROPHY",
             "step4": "GIVE AS MUCH AS POSSIBLE!",
             "cta": "Register"
+        },
+        "faq": {
+            "title": "Frequently asked questions",
+            "q1": "How do I organise a blood drive at my company?",
+            "a1": "Contact the HUG Blood Transfusion Centre via the registration form. A team will guide you through planning the date, venue and internal communications.",
+            "q2": "What is the Generosity Trophy?",
+            "a2": "The Generosity Trophy is an annual award for companies that mobilise the most donors during their blood drives. Launched in 2008, it has been reactivated to recognise the commitment of partner companies.",
+            "q3": "Who can enter the Trophy?",
+            "a3": "Any company that has organised at least one blood drive with HUG during the current year can compete for the Trophy, regardless of its size.",
+            "q4": "What is the CTS CSR Label?",
+            "a4": "The CTS CSR Label is a certification awarded by the Blood Transfusion Centre to companies that sustainably integrate blood donation into their corporate social responsibility policy. It is renewable each year.",
+            "q5": "How do I know if I am eligible to donate blood?",
+            "a5": "Use our interactive 'Am I eligible?' journey to quickly check your eligibility. If in doubt, the HUG teams are available to answer your questions."
         },
         "cta": {
             "title": "Does your company want to take part?",
