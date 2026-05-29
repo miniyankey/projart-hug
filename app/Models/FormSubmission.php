@@ -13,14 +13,11 @@ class FormSubmission extends Model
     protected $fillable = [
         'type',
         'company_name',
-        'company_address',
-        'company_city',
-        'company_postal_code',
-        'firstname',
-        'lastname',
+        'name',
         'contact_email',
         'message',
-        'preferred_date',
+        'trophy_participation',
+        'preferred_dates',
     ];
 
     /**
@@ -30,7 +27,8 @@ class FormSubmission extends Model
     {
         return [
             'type' => FormSubmissionType::class,
-            'preferred_date' => 'date',
+            'trophy_participation' => 'boolean',
+            'preferred_dates' => 'array',
         ];
     }
 }
