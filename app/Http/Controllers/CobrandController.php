@@ -2,43 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
+use App\Models\Collect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class CobrandController extends Controller
 {
-    /**
-     * Page « Informations sur la collecte » co-brandée.
-     */
     public function collecte(string $brandName, string $token): Response
     {
+        $collect = $this->resolveCollect($brandName, $token);
+
         return Inertia::render('CoBranded/Collecte', [
             'token' => $token,
-            'company' => $this->resolveCompany($brandName),
+            'company' => $this->companyData($collect),
         ]);
     }
 
-    /**
-     * Page « Pouvez-vous donner ? » co-brandée.
-     */
     public function jeu(string $brandName, string $token): Response
     {
+        $collect = $this->resolveCollect($brandName, $token);
+
         return Inertia::render('CoBranded/Jeu', [
             'token' => $token,
-            'company' => $this->resolveCompany($brandName),
+            'company' => $this->companyData($collect),
         ]);
     }
 
     /**
-     * Résout l'entreprise à partir de son slug et expose au front les seules
-     * informations de co-branding : nom, couleur et URL publique du logo.
-     *
+     * Résout la collecte par son token en vérifiant que le slug de l'entreprise
+
      */
-    private function resolveCompany(string $brandName): array
+    private function resolveCollect(string $brandName, string $token): Collect
     {
-        $company = Company::where('slug', $brandName)->firstOrFail();
+        return Collect::with('company')
+            ->where('token', $token)
+            ->whereHas('company', fn ($q) => $q->where('slug', $brandName))
+            ->firstOrFail();
+    }
+
+    /**
+     * @return array{name: string, slug: string, color: string|null, logo: string|null}
+     */
+    private function companyData(Collect $collect): array
+    {
+        $company = $collect->company;
 
         return [
             'name' => $company->name,
