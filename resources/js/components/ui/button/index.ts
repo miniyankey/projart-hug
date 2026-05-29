@@ -20,7 +20,7 @@ export const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         cta:
-          "rounded-none bg-[#8B2CF1] text-white shadow-[4px_4px_0_0_#4C1D95] hover:bg-[#7A1FE0] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_#4C1D95] active:translate-y-0 active:shadow-[2px_2px_0_0_#4C1D95]",
+          "rounded-none bg-[var(--brand)] text-white shadow-[4px_4px_0_0_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--brand-shadow)] active:translate-y-0 active:shadow-[2px_2px_0_0_var(--brand-shadow)]",
       },
       size: {
         "default": "h-9 px-4 py-2 has-[>svg]:px-3",
