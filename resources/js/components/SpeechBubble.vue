@@ -1,12 +1,14 @@
 <script setup>
 defineProps({
     text: { type: String, required: true },
-})
+});
 </script>
 
 <template>
     <div class="speech-bubble">
-        <p class="font-pixel text-[0.65rem] leading-relaxed text-gray-900">{{ text }}</p>
+        <p class="font-pixel text-[0.65rem] leading-relaxed text-gray-900">
+            {{ text }}
+        </p>
     </div>
 </template>
 
