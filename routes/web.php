@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -12,6 +13,7 @@ Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update
 Route::inertia('/', 'Home')->name('home');
 Route::inertia('/trophee', 'Trophee')->name('trophee');
 Route::inertia('/collecte', 'Collecte')->name('collecte');
+Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
 Route::inertia('/eligibilite', 'Eligibilite')->name('eligibilite');
 Route::inertia('/certification', 'Certification')->name('certification');
 

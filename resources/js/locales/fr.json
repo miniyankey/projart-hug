@@ -47,6 +47,30 @@
         "title": "Label CTS RSE",
         "intro": "La certification qui valorise l'engagement de votre entreprise pour le don du sang."
     },
+    "collecte": {
+        "title": "Organiser une collecte",
+        "intro": "Une question sur le don du sang en entreprise, ou l'envie de mettre en place une collecte dans vos locaux ? Utilisez le formulaire ci-dessous : choisissez « Nous contacter » pour une simple demande d'information, ou « Organiser une collecte » pour lancer concrètement le projet avec le Centre de transfusion.",
+        "form": {
+            "tab_contact": "Nous contacter",
+            "tab_collect": "Organiser une collecte",
+            "name": "Votre nom",
+            "name_placeholder": "Prénom et nom",
+            "email": "Votre email",
+            "email_placeholder": "prenom.nom{'@'}entreprise.ch",
+            "company": "Votre entreprise",
+            "company_placeholder": "Nom de l'entreprise",
+            "dates": "Dates souhaitées",
+            "dates_placeholder": "Choisir une ou plusieurs dates",
+            "dates_selected": "{count} date sélectionnée | {count} dates sélectionnées",
+            "remove_date": "Retirer cette date",
+            "message": "Votre message",
+            "message_placeholder": "Votre message ici...",
+            "trophy": "Participer au Trophée de la générosité",
+            "submit": "Envoyer",
+            "success": "Merci, votre demande a bien été envoyée. Le Centre de transfusion vous recontactera rapidement.",
+            "error": "Une erreur est survenue. Veuillez vérifier les champs ci-dessous."
+        }
+    },
     "footer": {
         "copyright": "© 2026 Centre de Transfusion Sanguine - HUG - Faits par des étudiants de la HEIG-VD dans le cadre d'un projet d'intégration.",
         "description": "Une initiative des HUG pour dynamiser les collectes de sang au sein des entreprises partenaires.",
