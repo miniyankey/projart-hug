@@ -45,7 +45,61 @@
     },
     "certification": {
         "title": "CTS CSR Label",
-        "intro": "The certification that recognises your company's commitment to blood donation."
+        "intro": "The certification that recognises your company's commitment to blood donation.",
+        "hero": {
+            "eyebrow": "CTS CSR Label",
+            "title": "Become a company that makes a difference. Save lives!",
+            "subtitle": "Join the movement. Commit your company to a civic initiative by organising blood drives and earn the official HUG label.",
+            "cta_primary": "Submit an application",
+            "cta_secondary": "Discover the benefits",
+            "label_alt": "CTS CSR Label"
+        },
+        "avantages": {
+            "title": "Much more than a simple donation.",
+            "subtitle": "The CTS Label certifies your social commitment and transforms your company culture into a genuine engine of local solidarity.",
+            "item1_title": "Elevated employer brand",
+            "item1_desc": "Attract and retain talent by proving your company takes concrete action for its region. A sense of belonging multiplied for your employees.",
+            "item2_title": "Certified CSR visibility",
+            "item2_desc": "Showcase your commitment with the official CTS label across all your communication materials, website and social media.",
+            "item3_title": "Network of committed companies",
+            "item3_desc": "Join a network of partner companies and take part in the annual Generosity Trophy events."
+        },
+        "chiffres": {
+            "title": "Our impact in numbers",
+            "c1_value": "3",
+            "c1_label": "lives saved per donation",
+            "c2_value": "47",
+            "c2_label": "certified companies",
+            "c3_value": "500+",
+            "c3_label": "donations per blood drive on average"
+        },
+        "criteres": {
+            "title": "How to obtain the label?",
+            "subtitle": "The CTS CSR Label rewards companies that make a lasting commitment to blood donation.",
+            "c1_title": "Organise at least one blood drive",
+            "c1_desc": "Your company must have organised at least one blood drive with HUG during the year.",
+            "c2_title": "Reach a participation rate",
+            "c2_desc": "A minimum number of employees must have attended the blood drive relative to the number of registered participants.",
+            "c3_title": "Renew your commitment each year",
+            "c3_desc": "The label is renewable annually, recognising a long-term commitment."
+        },
+        "parcours": {
+            "title": "The path to certification",
+            "subtitle": "End-to-end support from our teams to guarantee the success of your blood drive.",
+            "step1_title": "Application",
+            "step1_desc": "Fill in the online form to express your wish to organise an in-company blood drive.",
+            "step2_title": "Organisation",
+            "step2_desc": "Our teams assess your premises and set a date. We provide all the awareness materials you need.",
+            "step3_title": "Day of the drive",
+            "step3_desc": "The CTS deploys its mobile unit. Your employees donate blood at their workplace in complete safety.",
+            "step4_title": "Certification",
+            "step4_desc": "Official handover of your certification and integration into the community of committed companies."
+        },
+        "cta": {
+            "title": "Ready to commit?",
+            "subtitle": "Join the companies making a difference. Submit your application and earn the CTS CSR Label.",
+            "button": "Submit an application"
+        }
     },
     "collecte": {
         "title": "Organise a blood drive",
