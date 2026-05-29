@@ -37,7 +37,7 @@ class AdminAuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Ces identifiants ne correspondent à aucun compte.',
+            'email' => __('auth.failed'),
         ]);
     }
 
