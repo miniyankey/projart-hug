@@ -13,6 +13,25 @@ const circleShadows = ['#C4A800', '#4E8A42', '#4A7AAD', '#A05050'];
 const sides = ['right', 'left', 'right', 'left'];
 
 const { t } = useI18n();
+
+// Avantages du label : icône (composant lucide) + textes traduits.
+const avantages = [
+    {
+        icon: Building2,
+        title: t('certification.avantages.item1_title'),
+        description: t('certification.avantages.item1_desc'),
+    },
+    {
+        icon: Award,
+        title: t('certification.avantages.item2_title'),
+        description: t('certification.avantages.item2_desc'),
+    },
+    {
+        icon: Users,
+        title: t('certification.avantages.item3_title'),
+        description: t('certification.avantages.item3_desc'),
+    },
+];
 </script>
 
 <template>
@@ -72,24 +91,14 @@ const { t } = useI18n();
                 </div>
                 <div class="grid gap-6 lg:grid-cols-3">
                     <PixelFeatureCard
-                        :title="t('certification.avantages.item1_title')"
-                        :description="t('certification.avantages.item1_desc')"
-                        :active="false"
+                        v-for="(item, i) in avantages"
+                        :key="i"
+                        :title="item.title"
+                        :description="item.description"
                     >
-                        <template #icon><Building2 :size="20" /></template>
-                    </PixelFeatureCard>
-                    <PixelFeatureCard
-                        :title="t('certification.avantages.item2_title')"
-                        :description="t('certification.avantages.item2_desc')"
-                        :active="false"
-                    >
-                        <template #icon><Award :size="20" /></template>
-                    </PixelFeatureCard>
-                    <PixelFeatureCard
-                        :title="t('certification.avantages.item3_title')"
-                        :description="t('certification.avantages.item3_desc')"
-                    >
-                        <template #icon><Users :size="20" /></template>
+                        <template #icon>
+                            <component :is="item.icon" :size="20" />
+                        </template>
                     </PixelFeatureCard>
                 </div>
             </div>
