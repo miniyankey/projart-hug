@@ -132,7 +132,10 @@ function submitLogout() {
                     <h1 class="text-2xl font-bold tracking-tight">
                         <slot name="title">{{ props.title }}</slot>
                     </h1>
-                    <p v-if="$slots.subtitle" class="mt-1 text-sm text-gray-500">
+                    <p
+                        v-if="$slots.subtitle"
+                        class="mt-1 text-sm text-gray-500"
+                    >
                         <slot name="subtitle" />
                     </p>
                 </div>

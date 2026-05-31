@@ -19,7 +19,9 @@ defineProps({
 <template>
     <div class="border-2 border-gray-900 bg-white p-5">
         <div class="flex items-start justify-between">
-            <p class="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            <p
+                class="text-sm font-semibold tracking-wide text-gray-500 uppercase"
+            >
                 {{ label }}
             </p>
             <component

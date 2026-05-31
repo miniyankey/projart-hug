@@ -26,7 +26,7 @@ const displayName = computed(
 
 <template>
     <div>
-        <p class="mb-3 text-xs font-bold uppercase tracking-wide text-gray-500">
+        <p class="mb-3 text-xs font-bold tracking-wide text-gray-500 uppercase">
             {{ t('admin.entreprises.create.preview_title') }}
         </p>
 
@@ -48,7 +48,7 @@ const displayName = computed(
                     <Building2 v-else class="size-6 text-gray-400" />
                 </span>
                 <div class="min-w-0">
-                    <p class="truncate text-base font-bold leading-tight">
+                    <p class="truncate text-base leading-tight font-bold">
                         {{ displayName }}
                     </p>
                     <p v-if="city" class="truncate text-xs text-white/80">

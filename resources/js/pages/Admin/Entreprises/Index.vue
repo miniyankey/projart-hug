@@ -45,13 +45,21 @@ function remove(company) {
         <div class="overflow-x-auto border-2 border-gray-900 bg-white">
             <table class="w-full text-left text-sm">
                 <thead
-                    class="border-b-2 border-gray-900 bg-gray-50 text-xs uppercase tracking-wide text-gray-600"
+                    class="border-b-2 border-gray-900 bg-gray-50 text-xs tracking-wide text-gray-600 uppercase"
                 >
                     <tr>
-                        <th class="px-5 py-3 font-bold">{{ t('admin.entreprises.col_name') }}</th>
-                        <th class="px-5 py-3 font-bold">{{ t('admin.entreprises.col_contact') }}</th>
-                        <th class="px-5 py-3 font-bold">{{ t('admin.entreprises.col_link') }}</th>
-                        <th class="px-5 py-3 font-bold">{{ t('admin.entreprises.col_label') }}</th>
+                        <th class="px-5 py-3 font-bold">
+                            {{ t('admin.entreprises.col_name') }}
+                        </th>
+                        <th class="px-5 py-3 font-bold">
+                            {{ t('admin.entreprises.col_contact') }}
+                        </th>
+                        <th class="px-5 py-3 font-bold">
+                            {{ t('admin.entreprises.col_link') }}
+                        </th>
+                        <th class="px-5 py-3 font-bold">
+                            {{ t('admin.entreprises.col_label') }}
+                        </th>
                         <th class="px-5 py-3 text-right font-bold">
                             {{ t('admin.entreprises.col_actions') }}
                         </th>
@@ -59,7 +67,10 @@ function remove(company) {
                 </thead>
                 <tbody>
                     <tr v-if="companies.length === 0">
-                        <td colspan="5" class="px-5 py-10 text-center text-gray-500">
+                        <td
+                            colspan="5"
+                            class="px-5 py-10 text-center text-gray-500"
+                        >
                             {{ t('admin.entreprises.empty') }}
                         </td>
                     </tr>
@@ -75,17 +86,27 @@ function remove(company) {
                                     :color="company.color"
                                     :name="company.name"
                                 />
-                                <span class="font-bold text-gray-900">{{ company.name }}</span>
+                                <span class="font-bold text-gray-900">{{
+                                    company.name
+                                }}</span>
                             </div>
                         </td>
                         <td class="px-5 py-4">
-                            <div v-if="company.contact_name" class="font-semibold text-gray-900">
+                            <div
+                                v-if="company.contact_name"
+                                class="font-semibold text-gray-900"
+                            >
                                 {{ company.contact_name }}
                             </div>
-                            <div class="text-gray-500">{{ company.email_contact }}</div>
+                            <div class="text-gray-500">
+                                {{ company.email_contact }}
+                            </div>
                         </td>
                         <td class="px-5 py-4">
-                            <CobrandLink :slug="company.slug" :token="company.token" />
+                            <CobrandLink
+                                :slug="company.slug"
+                                :token="company.token"
+                            />
                         </td>
                         <td class="px-5 py-4">
                             <span

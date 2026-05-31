@@ -34,7 +34,9 @@ const model = defineModel({ default: '' });
 
 <template>
     <div>
-        <Label class="mb-1.5 block font-semibold text-gray-900">{{ label }}</Label>
+        <Label class="mb-1.5 block font-semibold text-gray-900">{{
+            label
+        }}</Label>
         <slot :field-class="'admin-field'">
             <Input
                 v-model="model"

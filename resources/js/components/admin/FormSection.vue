@@ -15,7 +15,7 @@ defineProps({
 <template>
     <section class="border-2 border-gray-900 bg-white">
         <h2
-            class="border-b-2 border-gray-900 bg-gray-50 px-5 py-3 text-sm font-bold uppercase tracking-wide text-gray-900"
+            class="border-b-2 border-gray-900 bg-gray-50 px-5 py-3 text-sm font-bold tracking-wide text-gray-900 uppercase"
         >
             {{ title }}
         </h2>

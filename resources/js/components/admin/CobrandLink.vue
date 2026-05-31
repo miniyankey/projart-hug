@@ -49,7 +49,11 @@ async function copy() {
             @click="copy"
         >
             <component :is="copied ? Check : Copy" class="size-3.5" />
-            {{ copied ? t('admin.entreprises.copied') : t('admin.entreprises.copy') }}
+            {{
+                copied
+                    ? t('admin.entreprises.copied')
+                    : t('admin.entreprises.copy')
+            }}
         </button>
     </div>
 </template>
