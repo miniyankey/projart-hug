@@ -4,7 +4,7 @@ import { cva } from "class-variance-authority"
 export { default as Button } from "./Button.vue"
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-150 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -20,7 +20,7 @@ export const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         pixel_violet:
-          "bg-violet-600 text-white rounded-none shadow-[4px_4px_0px_0px_#4c1d95] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#4c1d95] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
+          "bg-[var(--brand)] text-white rounded-none shadow-[4px_4px_0px_0px_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_blue:
           "bg-blue-600 text-white rounded-none shadow-[4px_4px_0px_0px_#3b82f6] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#3b82f6] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_white:
@@ -28,7 +28,7 @@ export const buttonVariants = cva(
         pixel_yellow:
           "bg-yellow-300 text-gray-900 rounded-none shadow-[4px_4px_0px_0px_#a16207] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#a16207] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         cta:
-          "rounded-none bg-[var(--brand)] text-white shadow-[4px_4px_0_0_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--brand-shadow)] active:translate-y-0 active:shadow-[2px_2px_0_0_var(--brand-shadow)]",
+          "rounded-none bg-[var(--brand)] text-white shadow-[4px_4px_0_0_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
       },
       size: {
         "default": "h-9 px-4 py-2 has-[>svg]:px-3",

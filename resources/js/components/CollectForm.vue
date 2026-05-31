@@ -95,11 +95,11 @@ function submit() {
         <div class="mb-8 flex flex-col gap-2 sm:flex-row">
             <button
                 type="button"
-                class="flex-1 border-2 border-black px-4 py-2.5 font-mono text-sm font-bold tracking-wide uppercase transition-all"
+                class="flex-1 border-2 border-black px-4 py-2.5 font-mono text-sm font-bold tracking-wide uppercase transition-all duration-150"
                 :class="
                     form.type === TYPE_CONTACT
-                        ? 'bg-[#5B21B6] text-white shadow-[4px_4px_0_0_#2D1B4E] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_#2D1B4E] active:translate-y-0 active:shadow-[2px_2px_0_0_#2D1B4E]'
-                        : 'bg-white text-[#2D1B4E] shadow-[4px_4px_0_0_#000] hover:-translate-y-0.5 hover:bg-gray-50 hover:shadow-[5px_5px_0_0_#000] active:translate-y-0 active:shadow-[2px_2px_0_0_#000]'
+                        ? 'bg-[var(--brand)] text-white shadow-[4px_4px_0_0_var(--brand-shadow)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none'
+                        : 'bg-white text-[#2D1B4E] shadow-[4px_4px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-gray-50 hover:shadow-[2px_2px_0_0_#000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none'
                 "
                 @click="selectType(TYPE_CONTACT)"
             >
@@ -107,11 +107,11 @@ function submit() {
             </button>
             <button
                 type="button"
-                class="flex-1 border-2 border-black px-4 py-2.5 font-mono text-sm font-bold tracking-wide uppercase transition-all"
+                class="flex-1 border-2 border-black px-4 py-2.5 font-mono text-sm font-bold tracking-wide uppercase transition-all duration-150"
                 :class="
                     form.type === TYPE_COLLECT
-                        ? 'bg-[#5B21B6] text-white shadow-[4px_4px_0_0_#2D1B4E] hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_#2D1B4E] active:translate-y-0 active:shadow-[2px_2px_0_0_#2D1B4E]'
-                        : 'bg-white text-[#2D1B4E] shadow-[4px_4px_0_0_#000] hover:-translate-y-0.5 hover:bg-gray-50 hover:shadow-[5px_5px_0_0_#000] active:translate-y-0 active:shadow-[2px_2px_0_0_#000]'
+                        ? 'bg-[var(--brand)] text-white shadow-[4px_4px_0_0_var(--brand-shadow)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none'
+                        : 'bg-white text-[#2D1B4E] shadow-[4px_4px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-gray-50 hover:shadow-[2px_2px_0_0_#000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none'
                 "
                 @click="selectType(TYPE_COLLECT)"
             >
