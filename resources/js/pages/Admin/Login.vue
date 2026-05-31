@@ -1,6 +1,7 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import hugLogo from '@/../images/logos/hug.png';
 import { login } from '@/actions/App/Http/Controllers/AdminAuthController';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,22 +23,41 @@ function submit() {
 <template>
     <Head :title="t('auth.login.title')" />
 
-    <div class="flex min-h-screen items-center justify-center bg-gray-50">
-        <Card class="w-full max-w-sm">
-            <CardHeader>
-                <CardTitle class="text-xl">{{
-                    t('auth.login.title')
-                }}</CardTitle>
+    <div
+        class="flex min-h-screen items-center justify-center px-4 py-12"
+        style="
+            background-color: #6b21a8;
+            background-image: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.07) 1px,
+                transparent 1px
+            );
+            background-size: 28px 28px;
+        "
+    >
+        <Card variant="pixel" class="w-full max-w-sm">
+            <CardHeader class="justify-items-center text-center">
+                <img :src="hugLogo" alt="HUG" class="mb-4 h-12 w-auto" />
+                <CardTitle
+                    class="font-pixel text-[1rem] leading-loose text-gray-900"
+                >
+                    {{ t('auth.login.title') }}
+                </CardTitle>
             </CardHeader>
 
             <CardContent>
-                <form class="flex flex-col gap-4" @submit.prevent="submit">
+                <form class="flex flex-col gap-5" @submit.prevent="submit">
                     <div class="flex flex-col gap-1.5">
-                        <Label for="email">{{ t('auth.login.email') }}</Label>
+                        <Label
+                            for="email"
+                            class="font-semibold text-gray-900"
+                            >{{ t('auth.login.email') }}</Label
+                        >
                         <Input
                             id="email"
                             v-model="form.email"
                             type="email"
+                            variant="pixel"
                             autocomplete="email"
                             :aria-invalid="!!form.errors.email"
                         />
@@ -50,13 +70,16 @@ function submit() {
                     </div>
 
                     <div class="flex flex-col gap-1.5">
-                        <Label for="password">{{
-                            t('auth.login.password')
-                        }}</Label>
+                        <Label
+                            for="password"
+                            class="font-semibold text-gray-900"
+                            >{{ t('auth.login.password') }}</Label
+                        >
                         <Input
                             id="password"
                             v-model="form.password"
                             type="password"
+                            variant="pixel"
                             autocomplete="current-password"
                             :aria-invalid="!!form.errors.password"
                         />
@@ -70,7 +93,8 @@ function submit() {
 
                     <Button
                         type="submit"
-                        class="w-full"
+                        variant="pixel_violet"
+                        class="mt-2 w-full"
                         :disabled="form.processing"
                     >
                         {{ t('auth.login.submit') }}
