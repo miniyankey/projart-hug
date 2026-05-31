@@ -148,7 +148,7 @@ function submit() {
                     id="name"
                     v-model="form.name"
                     type="text"
-                    class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[#5B21B6]"
+                    class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[var(--brand)]"
                     :placeholder="t('collecte.form.name_placeholder')"
                 />
                 <p
@@ -172,7 +172,7 @@ function submit() {
                     v-model="form.contact_email"
                     type="email"
                     autocomplete="email"
-                    class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[#5B21B6]"
+                    class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[var(--brand)]"
                     :placeholder="t('collecte.form.email_placeholder')"
                 />
                 <p
@@ -196,7 +196,7 @@ function submit() {
                     v-model="form.company_name"
                     type="text"
                     :readonly="!!company"
-                    class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 read-only:bg-gray-100 read-only:text-gray-600 focus:ring-2 focus:ring-[#5B21B6]"
+                    class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 read-only:bg-gray-100 read-only:text-gray-600 focus:ring-2 focus:ring-[var(--brand)]"
                     :placeholder="t('collecte.form.company_placeholder')"
                 />
                 <p
@@ -238,7 +238,7 @@ function submit() {
                     id="message"
                     v-model="form.message"
                     rows="5"
-                    class="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[#5B21B6]"
+                    class="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[var(--brand)]"
                     :placeholder="t('collecte.form.message_placeholder')"
                 ></textarea>
                 <p

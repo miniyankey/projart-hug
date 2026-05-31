@@ -14,7 +14,7 @@ const sides = ['right', 'left', 'right', 'left'];
 
 const { t } = useI18n();
 
-// Avantages du label : icône (composant lucide) + textes traduits.
+// Avantages du label 
 const avantages = [
     {
         icon: Building2,

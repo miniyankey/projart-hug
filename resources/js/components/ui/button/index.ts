@@ -24,7 +24,7 @@ export const buttonVariants = cva(
         pixel_blue:
           "bg-blue-600 text-white rounded-none shadow-[4px_4px_0px_0px_#3b82f6] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#3b82f6] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_white:
-          "bg-white text-violet-800 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.35)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.35)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
+          "bg-white text-[var(--brand)] rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.35)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.35)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_yellow:
           "bg-yellow-300 text-gray-900 rounded-none shadow-[4px_4px_0px_0px_#a16207] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#a16207] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         cta:
