@@ -58,6 +58,7 @@ function submit() {
                             v-model="form.email"
                             type="email"
                             variant="pixel"
+                            class="bg-white dark:bg-white dark:text-gray-900"
                             autocomplete="email"
                             :aria-invalid="!!form.errors.email"
                         />
@@ -80,6 +81,7 @@ function submit() {
                             v-model="form.password"
                             type="password"
                             variant="pixel"
+                            class="bg-white dark:bg-white dark:text-gray-900"
                             autocomplete="current-password"
                             :aria-invalid="!!form.errors.password"
                         />

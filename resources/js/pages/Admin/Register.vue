@@ -61,6 +61,7 @@ function submit() {
                             v-model="form.name"
                             type="text"
                             variant="pixel"
+                            class="bg-white dark:bg-white dark:text-gray-900"
                             autocomplete="given-name"
                             :aria-invalid="!!form.errors.name"
                         />
@@ -80,6 +81,7 @@ function submit() {
                             v-model="form.surname"
                             type="text"
                             variant="pixel"
+                            class="bg-white dark:bg-white dark:text-gray-900"
                             autocomplete="family-name"
                             :aria-invalid="!!form.errors.surname"
                         />
@@ -102,6 +104,7 @@ function submit() {
                             v-model="form.email"
                             type="email"
                             variant="pixel"
+                            class="bg-white dark:bg-white dark:text-gray-900"
                             autocomplete="email"
                             :aria-invalid="!!form.errors.email"
                         />
@@ -124,6 +127,7 @@ function submit() {
                             v-model="form.password"
                             type="password"
                             variant="pixel"
+                            class="bg-white dark:bg-white dark:text-gray-900"
                             autocomplete="new-password"
                             :aria-invalid="!!form.errors.password"
                         />
@@ -147,6 +151,7 @@ function submit() {
                             v-model="form.password_confirmation"
                             type="password"
                             variant="pixel"
+                            class="bg-white dark:bg-white dark:text-gray-900"
                             autocomplete="new-password"
                         />
                     </div>
