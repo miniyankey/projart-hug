@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { store } from '@/actions/App/Http/Controllers/FormSubmissionController';
-import MultiDatePicker from '@/components/MultiDatePicker.vue';
+import MultiDatePicker from '@/components/forms/MultiDatePicker.vue';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 

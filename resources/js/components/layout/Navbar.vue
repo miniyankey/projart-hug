@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-vue-next';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import hugLogo from '@/../images/logos/hug.png';
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher.vue';
 import { Button } from '@/components/ui/button';
 
 const { t } = useI18n();

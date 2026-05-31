@@ -2,8 +2,8 @@
 import { router, usePage } from '@inertiajs/vue3';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import LocaleController from '../actions/App/Http/Controllers/LocaleController';
-import { SUPPORTED_LOCALES } from '../i18n.js';
+import LocaleController from '@/actions/App/Http/Controllers/LocaleController';
+import { SUPPORTED_LOCALES } from '@/i18n.js';
 
 const page = usePage();
 const { t } = useI18n();
@@ -48,7 +48,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick));
     <div ref="root" class="relative text-sm">
         <button
             type="button"
-            class="inline-flex cursor-pointer items-center gap-2 border border-[var(--brand)] bg-white px-3 py-1.5 font-medium text-[var(--brand)] uppercase shadow-[3px_3px_0_0_var(--brand)] transition-all hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--brand)] active:translate-y-0 active:shadow-[2px_2px_0_0_var(--brand)]"
+            class="inline-flex cursor-pointer items-center gap-2 border border-[var(--brand)] bg-white px-3 py-1.5 font-medium text-[var(--brand)] uppercase shadow-[3px_3px_0_0_var(--brand)] transition-all duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0_0_var(--brand)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
             :aria-label="t('languageSwitcher.label')"
             :aria-expanded="open"
             aria-haspopup="listbox"

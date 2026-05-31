@@ -2,8 +2,8 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { Award, Building2, Users } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
-import LabelStepCard from '@/components/LabelStepCard.vue';
-import PixelFeatureCard from '@/components/PixelFeatureCard.vue';
+import LabelStepCard from '@/components/cards/LabelStepCard.vue';
+import PixelFeatureCard from '@/components/cards/PixelFeatureCard.vue';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
