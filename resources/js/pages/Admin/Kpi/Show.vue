@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="KPI collecte — Administration" />
+    <Head title="KPI collecte - Administration" />
     <div>
         <h1>Métriques de la collecte</h1>
     </div>
