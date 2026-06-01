@@ -14,8 +14,8 @@ return new class extends Migration
             $table->foreignId('view_id')->nullable()->constrained()->nullOnDelete();
             $table->string('text');
             $table->text('descr')->nullable();
-            /* Plus ineligibility est grand plus il devient prioritaire sur les autres, sauf s'il est négatif et là il prime sur tout */
-            $table->integer('ineligibility'); // <0 = à vie, 0 = éligible, >0 = inéligible en jours
+            $table->boolean('eligible'); // true = éligible, false = inéligible
+            $table->integer('ineligibility_days')->nullable(); // null = éligible, <0 = à vie, >0 = inéligible en jours
             $table->unsignedInteger('order');
             $table->timestamps();
 
