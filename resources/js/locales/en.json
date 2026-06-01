@@ -138,7 +138,43 @@
         "intro": "Find out in a few questions whether you're eligible to give blood."
     },
     "cobrand": {
-        "intro": "Blood drive organised with {company} and the HUG."
+        "intro": "Your company “{company}” is organising a blood drive in partnership with the Geneva University Hospitals.",
+        "collecte": {
+            "eyebrow": "Ongoing blood drive",
+            "title": "Give blood, save lives",
+            "info": {
+                "date": "Date",
+                "horaires": "Hours",
+                "lieu": "Location"
+            },
+            "cta_eligible": "Am I eligible?",
+            "cta_rdv": "Book an appointment",
+            "map_alt": "Map of the blood drive location",
+            "eligible_section_title": "Am I eligible?",
+            "eligible_card_eyebrow": "Mini-game",
+            "eligible_card_title": "Play our game to test your eligibility!",
+            "eligible_card_text": "Find out in a few questions whether you can give blood at this drive.",
+            "eligible_card_cta": "Start the test",
+            "infos_title": "Useful information",
+            "faq": {
+                "q1": "How should I prepare?",
+                "a1": "Eat and drink well before coming, avoid alcohol and bring an ID document.",
+                "q2": "How does the drive work?",
+                "a2": "A confidential interview precedes the donation, which lasts about 10 minutes. A snack is offered afterwards.",
+                "q3": "How long does it take?",
+                "a3": "Allow about 45 minutes in total, including check-in, interview, donation and rest time.",
+                "q4": "Can I donate if I take medication?",
+                "a4": "It depends on the treatment. The eligibility test and the on-site medical interview will confirm it.",
+                "q5": "Is donating painful?",
+                "a5": "You only feel a slight prick when the needle is inserted. The donation itself is painless.",
+                "q6": "How often can I donate?",
+                "a6": "Men can donate up to 4 times a year and women up to 3 times, with a minimum of 3 months between two donations.",
+                "q7": "What happens to the donated blood?",
+                "a7": "The blood is tested, prepared and distributed to hospitals for patients who need it: emergencies, surgeries, cancer treatments.",
+                "q8": "Do I need to register in advance?",
+                "a8": "Booking an appointment is recommended to reduce waiting time, but you can also drop in during the drive's opening hours."
+            }
+        }
     },
     "don_sang": {
         "intro": "Everything you need to know about blood donation: requirements, what to expect and the impact of your gift."
