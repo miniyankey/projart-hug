@@ -1,12 +1,12 @@
 <script setup>
-import { Link, router } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import { Award, Pencil, Plus, Trash2 } from 'lucide-vue-next';
-import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import CobrandLink from '@/components/admin/CobrandLink.vue';
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
+import { useDeleteConfirm } from '@/composables/useDeleteConfirm';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import { create, destroy, edit } from '@/routes/admin/entreprises';
 
@@ -19,35 +19,13 @@ defineProps({
     },
 });
 
-const companyToDelete = ref(null);
-const deleting = ref(false);
-
-function askRemove(company) {
-    companyToDelete.value = company;
-}
-
-function confirmRemove() {
-    if (!companyToDelete.value) {
-        return;
-    }
-
-    router.delete(destroy(companyToDelete.value.id).url, {
-        preserveScroll: true,
-        onStart: () => {
-            deleting.value = true;
-        },
-        onFinish: () => {
-            deleting.value = false;
-            companyToDelete.value = null;
-        },
-    });
-}
-
-function onDialogOpenChange(open) {
-    if (!open && !deleting.value) {
-        companyToDelete.value = null;
-    }
-}
+const {
+    target: companyToDelete,
+    processing: deleting,
+    ask: askRemove,
+    confirm: confirmRemove,
+    onOpenChange: onDialogOpenChange,
+} = useDeleteConfirm((company) => destroy(company.id).url);
 </script>
 
 <template>
