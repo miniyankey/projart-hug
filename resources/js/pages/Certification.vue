@@ -60,9 +60,12 @@ onMounted(() => {
         );
 
         // Cacher les éléments animés via onEnter avant que le scroll trigger ne se déclenche
-        gsap.set(['.anim-step-left', '.anim-step-right', '.anim-timeline-circle'], {
-            opacity: 0,
-        });
+        gsap.set(
+            ['.anim-step-left', '.anim-step-right', '.anim-timeline-circle'],
+            {
+                opacity: 0,
+            },
+        );
 
         // ── Hero ──────────────────────────────────────────────
         gsap.timeline({ defaults: { ease: 'power3.out' } })
@@ -172,20 +175,27 @@ onMounted(() => {
         });
 
         // Cercles : apparaissent quand le trait les atteint
-        gsap.utils.toArray('.anim-timeline-circle', root.value).forEach((el) => {
-            ScrollTrigger.create({
-                trigger: el,
-                start: 'top center',
-                once: true,
-                onEnter() {
-                    gsap.fromTo(
-                        el,
-                        { scale: 0, opacity: 0 },
-                        { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)' },
-                    );
-                },
+        gsap.utils
+            .toArray('.anim-timeline-circle', root.value)
+            .forEach((el) => {
+                ScrollTrigger.create({
+                    trigger: el,
+                    start: 'top center',
+                    once: true,
+                    onEnter() {
+                        gsap.fromTo(
+                            el,
+                            { scale: 0, opacity: 0 },
+                            {
+                                scale: 1,
+                                opacity: 1,
+                                duration: 0.6,
+                                ease: 'back.out(2)',
+                            },
+                        );
+                    },
+                });
             });
-        });
 
         // Cartes gauche
         gsap.utils.toArray('.anim-step-left', root.value).forEach((el) => {
@@ -412,7 +422,9 @@ onUnmounted(() => {
                                         )
                                     "
                                     class="w-full max-w-xs"
-                                    :class="side === 'left' ? 'block lg:hidden' : ''"
+                                    :class="
+                                        side === 'left' ? 'block lg:hidden' : ''
+                                    "
                                 />
                             </div>
                         </div>

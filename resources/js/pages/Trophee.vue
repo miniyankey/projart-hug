@@ -1,7 +1,14 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
-import { ChevronLeft, ChevronRight, Heart, RefreshCw, TrendingUp, Trophy } from 'lucide-vue-next';
+import {
+    ChevronLeft,
+    ChevronRight,
+    Heart,
+    RefreshCw,
+    TrendingUp,
+    Trophy,
+} from 'lucide-vue-next';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import PodiumCard from '@/components/cards/PodiumCard.vue';
@@ -318,7 +325,11 @@ onMounted(() => {
             text: t('trophee.cta.title'),
             duration: 1.2,
             ease: 'none',
-            scrollTrigger: { trigger: '.anim-cta', start: 'top 85%', once: true },
+            scrollTrigger: {
+                trigger: '.anim-cta',
+                start: 'top 85%',
+                once: true,
+            },
         });
 
         gsap.from('.anim-cta', {
@@ -464,7 +475,9 @@ onUnmounted(() => {
                     class="anim-vainqueurs mx-auto max-w-7xl bg-white px-20 py-12 shadow-[8px_8px_0px_0px_#3d8080]"
                 >
                     <div class="mb-12 text-center">
-                        <h2 class="anim-vainqueurs-title text-2xl font-semibold text-gray-900">
+                        <h2
+                            class="anim-vainqueurs-title text-2xl font-semibold text-gray-900"
+                        >
                             {{ t('trophee.vainqueurs.title') }}
                         </h2>
                         <p class="mt-3 text-gray-700">

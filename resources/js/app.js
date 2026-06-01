@@ -6,7 +6,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { createApp, h } from 'vue';
 
-gsap.registerPlugin(ScrollTrigger, TextPlugin, ScrambleTextPlugin, ScrollToPlugin);
+gsap.registerPlugin(
+    ScrollTrigger,
+    TextPlugin,
+    ScrambleTextPlugin,
+    ScrollToPlugin,
+);
 import { createAppI18n, DEFAULT_LOCALE, SUPPORTED_LOCALES } from './i18n.js';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

@@ -18,15 +18,27 @@ export const editions = [
                 id: 'grand_prix',
                 nominations: [
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: true },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                 ],
             },
             {
                 id: 'progression',
                 nominations: [
                     { logo: '/img/migros.png', name: 'Migros', isWinner: true },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
                 ],
             },
@@ -35,14 +47,22 @@ export const editions = [
                 nominations: [
                     { logo: '/img/nestle.png', name: 'Nestlé', isWinner: true },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
                 ],
             },
             {
                 id: 'coup_de_coeur',
                 nominations: [
                     { logo: '/img/migros.png', name: 'Migros', isWinner: true },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
                 ],
             },
@@ -61,22 +81,38 @@ export const editions = [
                 nominations: [
                     { logo: '/img/nestle.png', name: 'Nestlé', isWinner: true },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
                 ],
             },
             {
                 id: 'progression',
                 nominations: [
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: true },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                 ],
             },
             {
                 id: 'fidelite',
                 nominations: [
                     { logo: '/img/migros.png', name: 'Migros', isWinner: true },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
                 ],
             },
@@ -85,7 +121,11 @@ export const editions = [
                 nominations: [
                     { logo: '/img/nestle.png', name: 'Nestlé', isWinner: true },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
                 ],
             },
         ],
@@ -102,7 +142,11 @@ export const editions = [
                 id: 'grand_prix',
                 nominations: [
                     { logo: '/img/migros.png', name: 'Migros', isWinner: true },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
                 ],
             },
@@ -111,15 +155,27 @@ export const editions = [
                 nominations: [
                     { logo: '/img/nestle.png', name: 'Nestlé', isWinner: true },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
                 ],
             },
             {
                 id: 'fidelite',
                 nominations: [
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: true },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                 ],
             },
             {
@@ -127,7 +183,11 @@ export const editions = [
                 nominations: [
                     { logo: '/img/nestle.png', name: 'Nestlé', isWinner: true },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
                 ],
             },
         ],
@@ -144,8 +204,16 @@ export const editions = [
                 id: 'grand_prix',
                 nominations: [
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: true },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
                 ],
             },
             {
@@ -153,14 +221,22 @@ export const editions = [
                 nominations: [
                     { logo: '/img/migros.png', name: 'Migros', isWinner: true },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                 ],
             },
             {
                 id: 'fidelite',
                 nominations: [
                     { logo: '/img/nestle.png', name: 'Nestlé', isWinner: true },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: false },
                 ],
             },
@@ -168,8 +244,16 @@ export const editions = [
                 id: 'coup_de_coeur',
                 nominations: [
                     { logo: '/img/rolex.svg', name: 'Rolex', isWinner: true },
-                    { logo: '/img/migros.png', name: 'Migros', isWinner: false },
-                    { logo: '/img/nestle.png', name: 'Nestlé', isWinner: false },
+                    {
+                        logo: '/img/migros.png',
+                        name: 'Migros',
+                        isWinner: false,
+                    },
+                    {
+                        logo: '/img/nestle.png',
+                        name: 'Nestlé',
+                        isWinner: false,
+                    },
                 ],
             },
         ],

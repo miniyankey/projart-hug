@@ -214,7 +214,11 @@ onMounted(() => {
             text: t('home.faq.title'),
             duration: 1,
             ease: 'none',
-            scrollTrigger: { trigger: '.anim-faq-title', start: 'top 80%', once: true },
+            scrollTrigger: {
+                trigger: '.anim-faq-title',
+                start: 'top 80%',
+                once: true,
+            },
         });
 
         gsap.from('.anim-faq-title', {
@@ -304,7 +308,7 @@ onUnmounted(() => {
             </section>
 
             <!-- Section Trophée -->
-            <section class="py-32 bg-white">
+            <section class="bg-white py-32">
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="grid items-start gap-12 lg:grid-cols-2">
                         <div class="anim-trophee-text">
