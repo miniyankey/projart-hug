@@ -36,10 +36,7 @@ const { t } = useI18n();
                     </h1>
                     <div
                         class="absolute inset-0 font-pixel text-[6rem] leading-none text-purple-300 opacity-30 select-none md:text-[8rem]"
-                        style="
-                            text-shadow: none;
-                            clip-path: inset(60% 0 0 20%);
-                        "
+                        style="text-shadow: none; clip-path: inset(60% 0 0 20%)"
                     >
                         404
                     </div>
