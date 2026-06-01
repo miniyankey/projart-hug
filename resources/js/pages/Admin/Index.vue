@@ -7,6 +7,7 @@ import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import StatCard from '@/components/admin/StatCard.vue';
 import { Button } from '@/components/ui/button';
 import AdminLayout from '@/layouts/AdminLayout.vue';
+import { formatDay } from '@/lib/utils';
 import { collecte as cobrandCollecte } from '@/routes/cobrand';
 
 const { t } = useI18n();
@@ -25,18 +26,6 @@ defineProps({
 function cobrandUrl(collect) {
     return cobrandCollecte({ brandName: collect.slug, token: collect.token })
         .url;
-}
-
-function formatDay(day) {
-    if (!day) {
-        return '-';
-    }
-
-    return new Date(day).toLocaleDateString('fr-CH', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-    });
 }
 </script>
 
