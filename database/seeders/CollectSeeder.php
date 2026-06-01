@@ -18,24 +18,15 @@ class CollectSeeder extends Seeder
             return;
         }
 
-        // Collecte d'exemple pour la démo co-brandée HEIG-VD.
-        $heigVd = $companies->firstWhere('slug', 'heig-vd');
-        if ($heigVd) {
+     
+        foreach ($companies->values() as $index => $company) {
             Collect::create([
-                'company_id' => $heigVd->id,
-                'place_id' => $places->random()->id,
-                'day' => now()->addWeeks(2)->format('Y-m-d'),
-                'link_appointment' => null,
-                'is_active' => true,
-            ]);
-        }
-
-        for ($i = 0; $i < 5; $i++) {
-            Collect::create([
-                'company_id' => $companies->random()->id,
-                'place_id' => $places->random()->id,
-                'day' => fake()->dateTimeBetween('+1 week', '+3 months')->format('Y-m-d'),
-                'link_appointment' => fake()->optional(0.7)->url(),
+                'company_id' => $company->id,
+                'place_id' => $places[$index % $places->count()]->id,
+                'day' => now()->addWeeks($index + 2)->format('Y-m-d'),
+                'start_time' => '09:00',
+                'end_time' => '17:00',
+                'link_appointment' => 'https://www.hug.ch/don-du-sang/prendre-rendez-vous',
                 'is_active' => true,
             ]);
         }
