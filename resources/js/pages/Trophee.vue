@@ -1,14 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
-import {
-    ChevronLeft,
-    ChevronRight,
-    Heart,
-    RefreshCw,
-    TrendingUp,
-    Trophy,
-} from 'lucide-vue-next';
+import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import PodiumCard from '@/components/cards/PodiumCard.vue';
@@ -66,10 +59,10 @@ const historyMilestones = [
 ];
 
 const prizeConfigs = {
-    grand_prix: { color: '#b8860b', icon: Trophy },
-    progression: { color: '#2a5f5f', icon: TrendingUp },
-    fidelite: { color: '#3d8080', icon: RefreshCw },
-    coup_de_coeur: { color: '#a05050', icon: Heart },
+    grand_prix: { color: '#b8860b', badge: '/img/badge4.png' },
+    progression: { color: '#2a5f5f', badge: '/img/badge3.png' },
+    fidelite: { color: '#3d8080', badge: '/img/badge1.png' },
+    coup_de_coeur: { color: '#a05050', badge: '/img/badge2.png' },
 };
 
 const prizes = ['grand_prix', 'progression', 'fidelite', 'coup_de_coeur'];
@@ -621,36 +614,38 @@ onUnmounted(() => {
                         <div
                             v-for="id in prizes"
                             :key="id"
-                            class="anim-prix-card bg-white p-8 shadow-[6px_6px_0px_0px_#3d8080]"
+                            class="anim-prix-card flex items-center gap-6 bg-white p-8 shadow-[6px_6px_0px_0px_#3d8080]"
                         >
-                            <component
-                                :is="prizeConfigs[id].icon"
-                                :size="32"
-                                class="mb-5"
-                                :style="{ color: prizeConfigs[id].color }"
+                            <img
+                                :src="prizeConfigs[id].badge"
+                                :alt="t(`trophee.prix_honneur.${id}.name`)"
+                                class="h-44 w-44 shrink-0 object-contain"
                             />
-                            <h3
-                                class="font-pixel text-[0.75rem] leading-loose text-gray-900"
-                            >
-                                {{ t(`trophee.prix_honneur.${id}.name`) }}
-                            </h3>
-                            <div
-                                class="my-3 h-1 w-10"
-                                :style="{
-                                    backgroundColor: prizeConfigs[id].color,
-                                }"
-                            ></div>
-                            <p class="text-sm leading-relaxed text-gray-600">
-                                {{
-                                    t(`trophee.prix_honneur.${id}.description`)
-                                }}
-                            </p>
-                            <p
-                                class="mt-4 text-xs font-medium italic"
-                                :style="{ color: prizeConfigs[id].color }"
-                            >
-                                {{ t(`trophee.prix_honneur.${id}.tagline`) }}
-                            </p>
+                            <div>
+                                <div
+                                    class="mb-3 h-1 w-10"
+                                    :style="{
+                                        backgroundColor: prizeConfigs[id].color,
+                                    }"
+                                ></div>
+                                <p
+                                    class="text-sm leading-relaxed text-gray-600"
+                                >
+                                    {{
+                                        t(
+                                            `trophee.prix_honneur.${id}.description`,
+                                        )
+                                    }}
+                                </p>
+                                <p
+                                    class="mt-3 text-xs font-medium italic"
+                                    :style="{ color: prizeConfigs[id].color }"
+                                >
+                                    {{
+                                        t(`trophee.prix_honneur.${id}.tagline`)
+                                    }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
