@@ -294,6 +294,15 @@
             "cta": "Staff access"
         }
     },
+    "error404": {
+        "title": "Page not found",
+        "heading": "Oops! This page doesn't exist.",
+        "description": "The page you're looking for may have been moved, deleted, or the URL is incorrect. Don't worry, you can go back home or organize a blood drive.",
+        "bubble": "404... I think we're lost!",
+        "mascot_alt": "Lost pixel art mascot",
+        "cta_home": "Back to home",
+        "cta_collecte": "Organize a blood drive"
+    },
     "home": {
         "title": "Home",
         "hero": {

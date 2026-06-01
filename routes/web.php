@@ -7,6 +7,7 @@ use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\LocaleController;
 use App\Models\Collect;
 use App\Models\Company;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -88,4 +89,14 @@ Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
     Route::get('/collecte', [CobrandController::class, 'collecte'])->name('collecte');
     Route::get('/jeu', [CobrandController::class, 'jeu'])->name('jeu');
     Route::get('/don-du-sang', [CobrandController::class, 'donSang'])->name('don-sang');
+});
+
+// Page 404 personnalisée
+Route::inertia('/erreur-404', 'Error404')->name('error.404');
+
+// Fallback : toute route non définie affiche la page 404
+Route::fallback(function (Request $request) {
+    return Inertia::render('Error404')
+        ->toResponse($request)
+        ->setStatusCode(404);
 });
