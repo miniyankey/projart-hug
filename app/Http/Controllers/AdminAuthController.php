@@ -64,7 +64,7 @@ class AdminAuthController extends Controller
 
         Admin::create($validated);
 
-        return redirect()->route('admin.index')->with('success', 'Compte administrateur créé avec succès.');
+        return redirect()->route('admin.index')->with('success', 'flash.admin_created');
     }
 
     /**

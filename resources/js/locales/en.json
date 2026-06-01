@@ -31,7 +31,16 @@
     "flash": {
         "company_created": "Company created successfully.",
         "company_updated": "Company updated.",
-        "company_deleted": "Company deleted."
+        "company_deleted": "Company deleted.",
+        "collect_created": "Blood drive created successfully.",
+        "collect_updated": "Blood drive updated.",
+        "collect_deleted": "Blood drive deleted.",
+        "winner_created": "Winner added successfully.",
+        "winner_updated": "Winner updated.",
+        "winner_deleted": "Winner deleted.",
+        "submission_deleted": "Submission deleted.",
+        "form_submission_sent": "Your request has been sent successfully.",
+        "admin_created": "Administrator account created successfully."
     },
     "admin": {
         "nav": {

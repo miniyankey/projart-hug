@@ -31,7 +31,16 @@
     "flash": {
         "company_created": "Entreprise créée avec succès.",
         "company_updated": "Entreprise mise à jour.",
-        "company_deleted": "Entreprise supprimée."
+        "company_deleted": "Entreprise supprimée.",
+        "collect_created": "Collecte créée avec succès.",
+        "collect_updated": "Collecte mise à jour.",
+        "collect_deleted": "Collecte supprimée.",
+        "winner_created": "Vainqueur ajouté avec succès.",
+        "winner_updated": "Vainqueur mis à jour.",
+        "winner_deleted": "Vainqueur supprimé.",
+        "submission_deleted": "Demande supprimée.",
+        "form_submission_sent": "Votre demande a bien été envoyée.",
+        "admin_created": "Compte administrateur créé avec succès."
     },
     "admin": {
         "nav": {
