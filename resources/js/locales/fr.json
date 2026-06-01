@@ -232,6 +232,30 @@
             "next": "Édition suivante",
             "suspended": "Éditions suspendues de 2011 à 2025"
         },
+        "prix_honneur": {
+            "title": "Les prix d'honneur",
+            "subtitle": "Au-delà du podium, le jury CTS récompense chaque année les engagements les plus remarquables.",
+            "grand_prix": {
+                "name": "Grand Prix",
+                "description": "L'entreprise ayant mobilisé la plus grande proportion de ses collaborateurs pour donner leur sang, avec au minimum 10 donneurs effectifs sur l'édition.",
+                "tagline": "Le meilleur de l'année"
+            },
+            "progression": {
+                "name": "Prix de la Progression",
+                "description": "L'entreprise qui a le plus progressé d'une édition à l'autre, quel que soit son niveau de départ. Réservé aux entreprises présentes depuis au moins deux ans.",
+                "tagline": "Pour les entreprises qui s'améliorent"
+            },
+            "fidelite": {
+                "name": "Prix de la Fidélité",
+                "description": "L'entreprise qui organise des collectes de sang sans interruption depuis le plus grand nombre d'années consécutives. Éligible à partir de trois ans.",
+                "tagline": "Pour les entreprises qui durent"
+            },
+            "coup_de_coeur": {
+                "name": "Coup de cœur CTS",
+                "description": "Le prix surprise de l'année : une entreprise dont la mobilisation, le contexte ou l'engagement a particulièrement marqué le jury du Centre de transfusion.",
+                "tagline": "La surprise de l'année"
+            }
+        },
         "histoire": {
             "title": "Une idée née en 2008, relancée en 2026",
             "p1": "Le Trophée de la générosité a été imaginé en 2008 par le Centre de Transfusion Sanguine des HUG pour valoriser les entreprises genevoises qui organisent des collectes de sang et mobilisent le plus grand nombre de donneurs.",
@@ -327,7 +351,8 @@
             "title": "La certification qui valorise votre engagement",
             "description": "Le Label CTS reconnaît les entreprises qui intègrent le don du sang dans leur politique de responsabilité sociale. Un engagement visible, mesurable et valorisable.",
             "certified_count": "{count} entreprises certifiées",
-            "link": "Découvrir le label",
+            "link": "Organiser une collecte",
+            "learn_more": "En savoir plus",
             "visual_placeholder": "Visuel label CTS - à intégrer"
         },
         "stats": {

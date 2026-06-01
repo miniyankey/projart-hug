@@ -6,7 +6,9 @@ defineProps({
 
 <template>
     <div class="speech-bubble">
-        <p class="font-pixel text-[0.65rem] leading-relaxed text-gray-900">
+        <p
+            class="anim-speech-bubble-text font-pixel text-[0.65rem] leading-relaxed break-words text-gray-900"
+        >
             {{ text }}
         </p>
     </div>
