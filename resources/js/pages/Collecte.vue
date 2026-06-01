@@ -1,7 +1,7 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import CollectForm from '@/components/CollectForm.vue';
+import CollectForm from '@/components/forms/CollectForm.vue';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 
 const { t } = useI18n();

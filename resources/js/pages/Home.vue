@@ -1,9 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import PodiumCard from '@/components/PodiumCard.vue';
-import SpeechBubble from '@/components/SpeechBubble.vue';
-import StepCard from '@/components/StepCard.vue';
+import PodiumCard from '@/components/cards/PodiumCard.vue';
+import SpeechBubble from '@/components/cards/SpeechBubble.vue';
+import StepCard from '@/components/cards/StepCard.vue';
 import {
     Accordion,
     AccordionContent,
