@@ -1,5 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import { gsap } from 'gsap';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import PodiumCard from '@/components/cards/PodiumCard.vue';
 import SpeechBubble from '@/components/cards/SpeechBubble.vue';
@@ -15,245 +17,501 @@ import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
+
+const root = ref(null);
+let ctx;
+
+onMounted(() => {
+    if (!root.value) {
+        return;
+    }
+
+    ctx = gsap.context(() => {
+        // Vider les titres avant animation pour que TextPlugin parte de zéro
+        gsap.set(
+            [
+                '.anim-hero-title',
+                '.anim-trophee-title',
+                '.anim-label-title',
+                '.anim-steps-title',
+                '.anim-faq-title',
+            ],
+            { text: '' },
+        );
+
+        // ── Hero ──────────────────────────────────────────────
+        gsap.timeline({ defaults: { ease: 'power3.out' } })
+            .from('.anim-hero-title', { opacity: 0, y: 50, duration: 0.9 })
+            .from(
+                '.anim-hero-subtitle',
+                { opacity: 0, y: 25, duration: 0.7 },
+                '-=0.5',
+            )
+            .from(
+                '.anim-hero-game-cta',
+                { opacity: 0, y: 20, duration: 0.6 },
+                '-=0.4',
+            )
+            .from(
+                '.anim-hero-ctas',
+                { opacity: 0, y: 20, duration: 0.6 },
+                '-=0.35',
+            );
+
+        // Mascotte - entrée depuis la droite + flottement infini
+        gsap.timeline()
+            .from('.anim-hero-mascot', {
+                x: 80,
+                opacity: 0,
+                rotation: -8,
+                duration: 1,
+                ease: 'back.out(1.4)',
+                delay: 0.2,
+            })
+            .to(
+                '.anim-hero-mascot',
+                {
+                    y: -16,
+                    rotation: 2,
+                    duration: 2.4,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'sine.inOut',
+                },
+                '+=0.1',
+            );
+
+        gsap.to('.anim-hero-title', {
+            text: t('home.hero.title'),
+            duration: 1.4,
+            ease: 'none',
+        });
+
+        // Bulle - pop in
+        gsap.from('.anim-hero-bubble', {
+            opacity: 0,
+            scale: 0.5,
+            duration: 0.5,
+            delay: 1.1,
+            ease: 'back.out(2.5)',
+        });
+
+        // ── Section Trophée ───────────────────────────────────
+        gsap.from('.anim-trophee-text > *', {
+            opacity: 0,
+            x: -50,
+            stagger: 0.18,
+            duration: 0.75,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.anim-trophee-text',
+                start: 'top 75%',
+            },
+        });
+
+        gsap.timeline({
+            scrollTrigger: { trigger: '.anim-podium-1', start: 'top 80%' },
+            defaults: { ease: 'power3.out' },
+        })
+            .from('.anim-podium-3', { y: 120, opacity: 0, duration: 1.1 })
+            .from(
+                '.anim-podium-2',
+                { y: 120, opacity: 0, duration: 1.1 },
+                '-=0.6',
+            )
+            .from(
+                '.anim-podium-1',
+                { y: 120, opacity: 0, duration: 1.1 },
+                '-=0.6',
+            );
+
+        gsap.to('.anim-trophee-title', {
+            text: t('home.trophee.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.anim-trophee-text',
+                start: 'top 75%',
+                once: true,
+            },
+        });
+
+        // ── Section Label CTS ─────────────────────────────────
+        gsap.from('.anim-label-img', {
+            x: -60,
+            opacity: 0,
+            scale: 0.95,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: '.anim-label-img', start: 'top 80%' },
+        });
+
+        gsap.from('.anim-label-text > *', {
+            opacity: 0,
+            x: 50,
+            stagger: 0.18,
+            duration: 0.75,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: '.anim-label-text', start: 'top 80%' },
+        });
+
+        gsap.to('.anim-label-title', {
+            text: t('home.label.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.anim-label-text',
+                start: 'top 80%',
+                once: true,
+            },
+        });
+
+        // ── Section étapes ────────────────────────────────────
+        gsap.from('.anim-steps-header', {
+            opacity: 0,
+            y: 30,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: '.anim-steps-header',
+                start: 'top 80%',
+            },
+        });
+
+        gsap.from('.anim-step-card', {
+            opacity: 0,
+            y: 40,
+            stagger: 0.12,
+            duration: 0.65,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.anim-step-card',
+                start: 'top 85%',
+            },
+        });
+
+        gsap.from('.anim-steps-cta', {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: '.anim-steps-cta', start: 'top 90%' },
+        });
+
+        gsap.to('.anim-steps-title', {
+            text: t('home.steps.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.anim-steps-header',
+                start: 'top 80%',
+                once: true,
+            },
+        });
+
+        // ── Section FAQ ───────────────────────────────────────
+        gsap.to('.anim-faq-title', {
+            text: t('home.faq.title'),
+            duration: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: '.anim-faq-title', start: 'top 80%', once: true },
+        });
+
+        gsap.from('.anim-faq-title', {
+            opacity: 0,
+            y: 30,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: '.anim-faq-title', start: 'top 80%' },
+        });
+
+        gsap.from('.anim-faq-item', {
+            opacity: 0,
+            y: 20,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: '.anim-faq-item', start: 'top 85%' },
+        });
+    }, root.value);
+});
+
+onUnmounted(() => {
+    ctx?.revert();
+});
 </script>
 
 <template>
     <PublicLayout>
         <Head :title="t('home.title')" />
 
-        <!-- Hero -->
-        <section style="background-color: #ede9f8" class="py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-6">
-                <div class="grid items-center gap-10 lg:grid-cols-2">
-                    <!-- Texte -->
-                    <div>
-                        <h1
-                            class="font-pixel text-[1.35rem] leading-loose text-gray-900"
-                        >
-                            {{ t('home.hero.title') }}
-                        </h1>
-                        <p class="mt-8 max-w-md leading-relaxed text-gray-700">
-                            {{ t('home.hero.subtitle') }}
-                        </p>
-                        <p class="mt-6 max-w-md font-semibold text-gray-900">
-                            {{ t('home.hero.game_cta') }}
-                        </p>
-                        <div class="mt-8 flex flex-wrap gap-4">
-                            <Button variant="pixel_violet">
-                                <Link :href="routes.collecte.url()">
-                                    {{ t('home.hero.cta_primary') }}
-                                </Link>
-                            </Button>
-                            <Button
-                                variant="pixel_blue"
-                                class="border border-blue-600 text-white"
+        <div ref="root">
+            <!-- Hero -->
+            <section style="background-color: #ede9f8" class="py-24 lg:py-36">
+                <div class="mx-auto max-w-7xl px-6">
+                    <div class="grid items-center gap-10 lg:grid-cols-2">
+                        <!-- Texte -->
+                        <div>
+                            <h1
+                                class="anim-hero-title font-pixel text-[1.35rem] leading-loose text-gray-900"
                             >
-                                <Link :href="routes.eligibilite.url()">
-                                    {{ t('home.hero.cta_secondary') }}
+                                {{ t('home.hero.title') }}
+                            </h1>
+                            <p
+                                class="anim-hero-subtitle mt-8 max-w-md leading-relaxed text-gray-700"
+                            >
+                                {{ t('home.hero.subtitle') }}
+                            </p>
+                            <p
+                                class="anim-hero-game-cta mt-6 max-w-md font-semibold text-gray-900"
+                            >
+                                {{ t('home.hero.game_cta') }}
+                            </p>
+                            <div
+                                class="anim-hero-ctas mt-8 flex flex-wrap gap-4"
+                            >
+                                <Button variant="pixel_violet">
+                                    <Link :href="routes.collecte.url()">
+                                        {{ t('home.hero.cta_primary') }}
+                                    </Link>
+                                </Button>
+                                <Button
+                                    variant="pixel_blue"
+                                    class="border border-blue-600 text-white"
+                                >
+                                    <Link :href="routes.eligibilite.url()">
+                                        {{ t('home.hero.cta_secondary') }}
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+
+                        <!-- Mascotte -->
+                        <div class="flex flex-col items-center lg:items-end">
+                            <SpeechBubble
+                                :text="t('home.hero.bubble')"
+                                class="anim-hero-bubble mb-8 max-w-xs self-start"
+                            />
+                            <img
+                                src="/img/mascotte.png"
+                                :alt="t('home.hero.mascot_alt')"
+                                class="anim-hero-mascot w-72 lg:w-96"
+                                style="image-rendering: pixelated"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Trophée -->
+            <section class="py-32 bg-white">
+                <div class="mx-auto max-w-7xl px-6">
+                    <div class="grid items-start gap-12 lg:grid-cols-2">
+                        <div class="anim-trophee-text">
+                            <span
+                                class="inline-block rounded border border-gray-300 px-2.5 py-1 text-xs font-medium tracking-wide text-gray-600 uppercase"
+                            >
+                                {{ t('home.trophee.label') }}
+                            </span>
+                            <h2
+                                class="anim-trophee-title mt-4 text-3xl font-semibold text-gray-900"
+                            >
+                                {{ t('home.trophee.title') }}
+                            </h2>
+                            <p class="mt-4 leading-relaxed text-gray-600">
+                                {{ t('home.trophee.description') }}
+                            </p>
+                            <Button
+                                as-child
+                                variant="pixel_violet"
+                                class="mt-6"
+                            >
+                                <Link :href="routes.trophee.url()">
+                                    {{ t('home.trophee.link') }}
                                 </Link>
                             </Button>
                         </div>
-                    </div>
 
-                    <!-- Mascotte -->
-                    <div class="flex flex-col items-center lg:items-end">
-                        <SpeechBubble
-                            :text="t('home.hero.bubble')"
-                            class="mb-8 max-w-xs self-start"
-                        />
-                        <img
-                            src="/img/mascotte.png"
-                            :alt="t('home.hero.mascot_alt')"
-                            class="w-72 lg:w-96"
-                            style="image-rendering: pixelated"
-                        />
+                        <div class="flex items-end justify-center gap-3">
+                            <PodiumCard
+                                :rank="2"
+                                logo-src="/img/migros.png"
+                                logo-alt="Migros"
+                                :category="t('home.trophee.winners_title')"
+                                description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
+                                class="anim-podium-2 hidden w-40 lg:flex"
+                            />
+                            <PodiumCard
+                                :rank="1"
+                                logo-src="/img/rolex.svg"
+                                logo-alt="Rolex"
+                                :category="t('home.trophee.winners_title')"
+                                description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
+                                class="anim-podium-1 w-40"
+                            />
+                            <PodiumCard
+                                :rank="3"
+                                logo-src="/img/nestle.png"
+                                logo-alt="Nestlé"
+                                :category="t('home.trophee.winners_title')"
+                                description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
+                                class="anim-podium-3 hidden w-40 lg:flex"
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Section Trophée -->
-        <section class="bg-gray-50 py-32">
-            <div class="mx-auto max-w-7xl px-6">
-                <div class="grid items-start gap-12 lg:grid-cols-2">
-                    <div>
-                        <span
-                            class="inline-block rounded border border-gray-300 px-2.5 py-1 text-xs font-medium tracking-wide text-gray-600 uppercase"
+            <!-- Section Label CTS -->
+            <section class="py-32" style="background-color: #eff6ff">
+                <div class="mx-auto max-w-7xl px-6">
+                    <div class="grid items-center gap-12 lg:grid-cols-2">
+                        <div
+                            class="anim-label-img order-2 flex items-center justify-center lg:order-1"
                         >
-                            {{ t('home.trophee.label') }}
-                        </span>
-                        <h2 class="mt-4 text-3xl font-semibold text-gray-900">
-                            {{ t('home.trophee.title') }}
-                        </h2>
-                        <p class="mt-4 leading-relaxed text-gray-600">
-                            {{ t('home.trophee.description') }}
-                        </p>
-                        <Button as-child variant="pixel_violet" class="mt-6">
-                            <Link :href="routes.trophee.url()">
-                                {{ t('home.trophee.link') }}
-                            </Link>
-                        </Button>
-                    </div>
-
-                    <div class="flex items-end justify-center gap-3">
-                        <PodiumCard
-                            :rank="2"
-                            logo-src="/img/migros.png"
-                            logo-alt="Migros"
-                            :category="t('home.trophee.winners_title')"
-                            description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
-                            class="hidden w-40 lg:flex"
-                        />
-                        <PodiumCard
-                            :rank="1"
-                            logo-src="/img/rolex.svg"
-                            logo-alt="Rolex"
-                            :category="t('home.trophee.winners_title')"
-                            description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
-                            class="w-40"
-                        />
-                        <PodiumCard
-                            :rank="3"
-                            logo-src="/img/nestle.png"
-                            logo-alt="Nestlé"
-                            :category="t('home.trophee.winners_title')"
-                            description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
-                            class="hidden w-40 lg:flex"
-                        />
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Label CTS -->
-        <section class="py-32">
-            <div class="mx-auto max-w-7xl px-6">
-                <div class="grid items-center gap-12 lg:grid-cols-2">
-                    <div class="order-2 lg:order-1">
-                        <div class="flex items-center justify-center">
                             <img
                                 src="/img/label-cts.png"
                                 :alt="t('home.label.label')"
                                 class="max-h-110 w-auto object-contain"
                             />
                         </div>
+
+                        <div class="anim-label-text order-1 lg:order-2">
+                            <h2
+                                class="anim-label-title mt-4 text-3xl font-semibold text-gray-900"
+                            >
+                                {{ t('home.label.title') }}
+                            </h2>
+                            <p class="mt-4 leading-relaxed text-gray-600">
+                                {{ t('home.label.description') }}
+                            </p>
+                            <p
+                                class="mt-6 text-2xl font-semibold text-gray-900"
+                            >
+                                {{
+                                    t('home.label.certified_count', {
+                                        count: 47,
+                                    })
+                                }}
+                            </p>
+                            <div class="mt-6 flex flex-wrap gap-3">
+                                <Button as-child variant="pixel_violet">
+                                    <Link :href="routes.certification.url()">
+                                        {{ t('home.label.learn_more') }}
+                                    </Link>
+                                </Button>
+                                <Button as-child variant="pixel_blue">
+                                    <Link :href="routes.collecte.url()">
+                                        {{ t('home.label.link') }}
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section étapes trophée -->
+            <section
+                class="py-28"
+                style="
+                    background-color: #2a5f5f;
+                    background-image: radial-gradient(
+                        circle,
+                        rgba(255, 255, 255, 0.07) 1px,
+                        transparent 1px
+                    );
+                    background-size: 28px 28px;
+                "
+            >
+                <div class="mx-auto max-w-5xl px-6 text-center">
+                    <div class="anim-steps-header">
+                        <h2
+                            class="anim-steps-title mx-auto max-w-xl font-pixel text-[1rem] leading-loose text-white"
+                        >
+                            {{ t('home.steps.title') }}
+                        </h2>
+                        <p class="mt-5 mb-12 text-sm text-teal-100">
+                            {{ t('home.steps.subtitle') }}
+                        </p>
                     </div>
 
-                    <div class="order-1 lg:order-2">
-                        <h2 class="mt-4 text-3xl font-semibold text-gray-900">
-                            {{ t('home.label.title') }}
-                        </h2>
-                        <p class="mt-4 leading-relaxed text-gray-600">
-                            {{ t('home.label.description') }}
-                        </p>
-                        <p class="mt-6 text-2xl font-semibold text-gray-900">
-                            {{ t('home.label.certified_count', { count: 47 }) }}
-                        </p>
-                        <Button as-child variant="pixel_blue" class="mt-4">
+                    <div
+                        class="grid grid-cols-2 gap-4 lg:flex lg:items-stretch lg:gap-2"
+                    >
+                        <StepCard
+                            :step="1"
+                            :label="t('home.steps.step1')"
+                            class="anim-step-card w-full lg:w-52"
+                        />
+                        <span
+                            class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
+                            >></span
+                        >
+                        <StepCard
+                            :step="2"
+                            :label="t('home.steps.step2')"
+                            class="anim-step-card w-full lg:w-52"
+                        />
+                        <span
+                            class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
+                            >></span
+                        >
+                        <StepCard
+                            :step="3"
+                            :label="t('home.steps.step3')"
+                            class="anim-step-card w-full lg:w-52"
+                        />
+                        <span
+                            class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
+                            >></span
+                        >
+                        <StepCard
+                            :step="4"
+                            :label="t('home.steps.step4')"
+                            class="anim-step-card w-full lg:w-52"
+                        />
+                    </div>
+
+                    <div class="anim-steps-cta mt-12">
+                        <Button as-child variant="pixel_violet">
                             <Link :href="routes.collecte.url()">
-                                {{ t('home.label.link') }}
+                                > {{ t('home.steps.cta') }}
                             </Link>
                         </Button>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Section étapes trophée -->
-        <section
-            class="py-16"
-            style="
-                background-color: #6b21a8;
-                background-image: radial-gradient(
-                    circle,
-                    rgba(255, 255, 255, 0.07) 1px,
-                    transparent 1px
-                );
-                background-size: 28px 28px;
-            "
-        >
-            <div class="mx-auto max-w-5xl px-6 text-center">
-                <h2
-                    class="mx-auto max-w-xl font-pixel text-[1rem] leading-loose text-white"
-                >
-                    {{ t('home.steps.title') }}
-                </h2>
-                <p class="mt-5 mb-12 text-sm text-purple-200">
-                    {{ t('home.steps.subtitle') }}
-                </p>
-
-                <div
-                    class="grid grid-cols-2 gap-4 lg:flex lg:items-stretch lg:gap-2"
-                >
-                    <StepCard
-                        :step="1"
-                        :label="t('home.steps.step1')"
-                        class="w-full lg:w-52"
-                    />
-                    <span
-                        class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
-                        >></span
+            <!-- Section FAQ -->
+            <section class="py-32" style="background-color: #dbeafe">
+                <div class="mx-auto max-w-3xl px-6">
+                    <h2
+                        class="anim-faq-title mb-10 text-center text-2xl font-semibold text-gray-900"
                     >
-                    <StepCard
-                        :step="2"
-                        :label="t('home.steps.step2')"
-                        class="w-full lg:w-52"
-                    />
-                    <span
-                        class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
-                        >></span
-                    >
-                    <StepCard
-                        :step="3"
-                        :label="t('home.steps.step3')"
-                        class="w-full lg:w-52"
-                    />
-                    <span
-                        class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
-                        >></span
-                    >
-                    <StepCard
-                        :step="4"
-                        :label="t('home.steps.step4')"
-                        class="w-full lg:w-52"
-                    />
-                </div>
-
-                <div class="mt-12">
-                    <Button as-child variant="pixel_violet">
-                        <Link :href="routes.collecte.url()">
-                            > {{ t('home.steps.cta') }}
-                        </Link>
-                    </Button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section FAQ -->
-        <section class="py-24">
-            <div class="mx-auto max-w-3xl px-6">
-                <h2
-                    class="mb-10 text-center text-2xl font-semibold text-gray-900"
-                >
-                    {{ t('home.faq.title') }}
-                </h2>
-                <Accordion type="single" collapsible>
-                    <AccordionItem
-                        v-for="(item, i) in 5"
-                        :key="i"
-                        :value="`faq-${i}`"
-                    >
-                        <AccordionTrigger
-                            class="text-left font-medium text-gray-900"
+                        {{ t('home.faq.title') }}
+                    </h2>
+                    <Accordion type="single" collapsible>
+                        <AccordionItem
+                            v-for="(item, i) in 5"
+                            :key="i"
+                            :value="`faq-${i}`"
+                            class="anim-faq-item"
                         >
-                            {{ t(`home.faq.q${i + 1}`) }}
-                        </AccordionTrigger>
-                        <AccordionContent class="leading-relaxed text-gray-600">
-                            {{ t(`home.faq.a${i + 1}`) }}
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
-            </div>
-        </section>
+                            <AccordionTrigger
+                                class="text-left font-medium text-gray-900"
+                            >
+                                {{ t(`home.faq.q${i + 1}`) }}
+                            </AccordionTrigger>
+                            <AccordionContent
+                                class="leading-relaxed text-gray-600"
+                            >
+                                {{ t(`home.faq.a${i + 1}`) }}
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+                </div>
+            </section>
+        </div>
     </PublicLayout>
 </template>
