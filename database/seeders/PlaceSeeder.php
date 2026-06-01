@@ -19,11 +19,11 @@ class PlaceSeeder extends Seeder
 
         for ($i = 0; $i < 4; $i++) {
             Place::create([
-                'name' => 'Siège '.fake()->unique()->company(),
-                'address' => fake()->streetAddress(),
-                'locality' => fake()->numberBetween(1000, 9999),
-                'city' => fake()->city(),
-                'room' => fake()->optional(0.5)->bothify('Salle ##'),
+                'name' => 'Siège '.\fake()->unique()->company(),
+                'address' => \fake()->streetAddress(),
+                'locality' => \fake()->numberBetween(1000, 9999),
+                'city' => \fake()->city(),
+                'room' => \fake()->optional(0.5)->bothify('Salle ##'),
             ]);
         }
     }
