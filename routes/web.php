@@ -89,3 +89,13 @@ Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
     Route::get('/jeu', [CobrandController::class, 'jeu'])->name('jeu');
     Route::get('/don-du-sang', [CobrandController::class, 'donSang'])->name('don-sang');
 });
+
+// Page 404 personnalisée
+Route::inertia('/erreur-404', 'Error404')->name('error.404');
+
+// Fallback : toute route non définie affiche la page 404
+Route::fallback(function (\Illuminate\Http\Request $request) {
+    return Inertia::render('Error404')
+        ->toResponse($request)
+        ->setStatusCode(404);
+});
