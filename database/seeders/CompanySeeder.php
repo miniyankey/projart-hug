@@ -4,11 +4,21 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class CompanySeeder extends Seeder
 {
     public function run(): void
     {
+        // Copie les logos de démo (versionnés dans resources/images/logos) vers le
+        // disque public, qui n'est pas committé.
+        foreach (['heig.png', 'hug.png'] as $logo) {
+            Storage::disk('public')->put(
+                "logos/{$logo}",
+                file_get_contents(resource_path("images/logos/{$logo}"))
+            );
+        }
+
         // Entreprise d'exemple labellisée, support de la démo co-brandée.
         Company::create([
             'name' => 'HEIG-VD',
