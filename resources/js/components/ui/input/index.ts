@@ -12,7 +12,7 @@ export const inputVariants = cva(
           "border-input rounded-md border bg-transparent shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
           //variante pixel like
         pixel:
-          "rounded-none border-2 border-black bg-white shadow-[2px_2px_0_0_rgba(0,0,0,0.25)] focus-visible:border-violet-600 focus-visible:ring-0",
+          "rounded-none border-2 border-black bg-white shadow-[2px_2px_0_0_rgba(0,0,0,0.25)] focus-visible:border-[var(--brand)] focus-visible:ring-0",
       },
     },
     defaultVariants: {

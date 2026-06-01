@@ -2,8 +2,8 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { Award, Building2, Users } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
-import LabelStepCard from '@/components/LabelStepCard.vue';
-import PixelFeatureCard from '@/components/PixelFeatureCard.vue';
+import LabelStepCard from '@/components/cards/LabelStepCard.vue';
+import PixelFeatureCard from '@/components/cards/PixelFeatureCard.vue';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
@@ -13,6 +13,25 @@ const circleShadows = ['#C4A800', '#4E8A42', '#4A7AAD', '#A05050'];
 const sides = ['right', 'left', 'right', 'left'];
 
 const { t } = useI18n();
+
+// Avantages du label
+const avantages = [
+    {
+        icon: Building2,
+        title: t('certification.avantages.item1_title'),
+        description: t('certification.avantages.item1_desc'),
+    },
+    {
+        icon: Award,
+        title: t('certification.avantages.item2_title'),
+        description: t('certification.avantages.item2_desc'),
+    },
+    {
+        icon: Users,
+        title: t('certification.avantages.item3_title'),
+        description: t('certification.avantages.item3_desc'),
+    },
+];
 </script>
 
 <template>
@@ -72,24 +91,14 @@ const { t } = useI18n();
                 </div>
                 <div class="grid gap-6 lg:grid-cols-3">
                     <PixelFeatureCard
-                        :title="t('certification.avantages.item1_title')"
-                        :description="t('certification.avantages.item1_desc')"
-                        :active="false"
+                        v-for="(item, i) in avantages"
+                        :key="i"
+                        :title="item.title"
+                        :description="item.description"
                     >
-                        <template #icon><Building2 :size="20" /></template>
-                    </PixelFeatureCard>
-                    <PixelFeatureCard
-                        :title="t('certification.avantages.item2_title')"
-                        :description="t('certification.avantages.item2_desc')"
-                        :active="false"
-                    >
-                        <template #icon><Award :size="20" /></template>
-                    </PixelFeatureCard>
-                    <PixelFeatureCard
-                        :title="t('certification.avantages.item3_title')"
-                        :description="t('certification.avantages.item3_desc')"
-                    >
-                        <template #icon><Users :size="20" /></template>
+                        <template #icon>
+                            <component :is="item.icon" :size="20" />
+                        </template>
                     </PixelFeatureCard>
                 </div>
             </div>

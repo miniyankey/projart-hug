@@ -4,48 +4,14 @@ import { gsap } from 'gsap';
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import PodiumCard from '@/components/PodiumCard.vue';
-import SpeechBubble from '@/components/SpeechBubble.vue';
+import PodiumCard from '@/components/cards/PodiumCard.vue';
+import SpeechBubble from '@/components/cards/SpeechBubble.vue';
 import { Button } from '@/components/ui/button';
+import { editions } from '@/data/trophee-editions.js';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
-
-const editions = [
-    {
-        year: 2026,
-        winners: [
-            { rank: 1, logo: '/img/rolex.svg', name: 'Rolex' },
-            { rank: 2, logo: '/img/migros.png', name: 'Migros' },
-            { rank: 3, logo: '/img/nestle.png', name: 'Nestlé' },
-        ],
-    },
-    {
-        year: 2010,
-        winners: [
-            { rank: 1, logo: '/img/nestle.png', name: 'Nestlé' },
-            { rank: 2, logo: '/img/rolex.svg', name: 'Rolex' },
-            { rank: 3, logo: '/img/migros.png', name: 'Migros' },
-        ],
-    },
-    {
-        year: 2009,
-        winners: [
-            { rank: 1, logo: '/img/migros.png', name: 'Migros' },
-            { rank: 2, logo: '/img/nestle.png', name: 'Nestlé' },
-            { rank: 3, logo: '/img/rolex.svg', name: 'Rolex' },
-        ],
-    },
-    {
-        year: 2008,
-        winners: [
-            { rank: 1, logo: '/img/rolex.svg', name: 'Rolex' },
-            { rank: 2, logo: '/img/migros.png', name: 'Migros' },
-            { rank: 3, logo: '/img/nestle.png', name: 'Nestlé' },
-        ],
-    },
-];
 
 const currentIndex = ref(0);
 const currentEdition = computed(() => editions[currentIndex.value]);

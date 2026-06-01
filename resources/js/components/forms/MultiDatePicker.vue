@@ -60,7 +60,7 @@ function formatDate(value) {
             <PopoverTrigger as-child>
                 <button
                     type="button"
-                    class="flex h-11 w-full items-center gap-2 border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] transition-transform outline-none hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-[#5B21B6] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000]"
+                    class="flex h-11 w-full items-center gap-2 border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] transition-transform outline-none hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-[var(--brand)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000]"
                 >
                     <CalendarDays class="size-4 shrink-0" />
                     <span :class="{ 'text-gray-400': !modelValue.length }">

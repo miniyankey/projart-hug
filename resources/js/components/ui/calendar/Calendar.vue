@@ -76,7 +76,7 @@ const navButton =
               <CalendarCellTrigger
                 :day="weekDate"
                 :month="month.value"
-                class="flex size-9 cursor-pointer items-center justify-center border-2 border-transparent text-sm transition-colors hover:border-black data-[disabled]:pointer-events-none data-[disabled]:text-gray-300 data-[outside-view]:text-gray-300 data-[selected]:border-black data-[selected]:bg-[#5B21B6] data-[selected]:font-bold data-[selected]:text-white data-[today]:border-[#5B21B6] data-[unavailable]:pointer-events-none data-[unavailable]:text-gray-300 data-[unavailable]:line-through"
+                class="flex size-9 cursor-pointer items-center justify-center border-2 border-transparent text-sm transition-colors hover:border-black data-[disabled]:pointer-events-none data-[disabled]:text-gray-300 data-[outside-view]:text-gray-300 data-[selected]:border-black data-[selected]:bg-[var(--brand)] data-[selected]:font-bold data-[selected]:text-white data-[today]:border-[var(--brand)] data-[unavailable]:pointer-events-none data-[unavailable]:text-gray-300 data-[unavailable]:line-through"
               />
             </CalendarCell>
           </CalendarGridRow>
