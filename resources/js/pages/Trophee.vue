@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
-import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
+import { ChevronLeft, ChevronRight, Heart, RefreshCw, TrendingUp, Trophy } from 'lucide-vue-next';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import PodiumCard from '@/components/cards/PodiumCard.vue';
@@ -12,6 +12,10 @@ import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
+
+function scrollTo(target) {
+    gsap.to(window, { scrollTo: target, duration: 1, ease: 'power2.inOut' });
+}
 
 const currentIndex = ref(0);
 const currentEdition = computed(() => editions[currentIndex.value]);
@@ -54,7 +58,12 @@ const historyMilestones = [
     },
 ];
 
-const displayedBubbleText = ref('');
+const prizeConfigs = {
+    grand_prix: { color: '#b8860b', icon: Trophy },
+    progression: { color: '#2a5f5f', icon: TrendingUp },
+    fidelite: { color: '#3d8080', icon: RefreshCw },
+    coup_de_coeur: { color: '#a05050', icon: Heart },
+};
 
 const statConfigs = [
     { target: 30, suffix: ' %' },
@@ -71,10 +80,20 @@ onMounted(() => {
         return;
     }
 
-    const bubbleFullText = t('trophee.hero.bubble');
-    const charObj = { n: 0 };
-
     ctx = gsap.context(() => {
+        // Vider les titres avant animation pour que TextPlugin parte de zéro
+        gsap.set(
+            [
+                '.anim-hero-title',
+                '.anim-trophy-title',
+                '.anim-vainqueurs-title',
+                '.anim-prix-title',
+                '.anim-histoire-title',
+                '.anim-cta-title',
+            ],
+            { text: '' },
+        );
+
         // ── Hero - timeline séquentielle ──────────────────────
         gsap.timeline({ defaults: { ease: 'power3.out' } })
             .from('.anim-hero-title', { opacity: 0, y: 50, duration: 0.9 })
@@ -112,7 +131,13 @@ onMounted(() => {
                 '+=0.1',
             );
 
-        // Bulle - pop in puis typewriter
+        gsap.to('.anim-hero-title', {
+            text: t('trophee.hero.title'),
+            duration: 1.4,
+            ease: 'none',
+        });
+
+        // Bulle - pop in puis scramble reveal
         gsap.from('.anim-speech-bubble', {
             opacity: 0,
             scale: 0.5,
@@ -120,20 +145,18 @@ onMounted(() => {
             delay: 1.1,
             ease: 'back.out(2.5)',
         });
-        gsap.to(charObj, {
-            n: bubbleFullText.length,
-            duration: bubbleFullText.length * 0.045,
-            ease: 'none',
+        gsap.to('.anim-speech-bubble-text', {
+            duration: 1.8,
             delay: 1.4,
-            onUpdate() {
-                displayedBubbleText.value = bubbleFullText.slice(
-                    0,
-                    Math.round(charObj.n),
-                );
+            scrambleText: {
+                text: t('trophee.hero.bubble'),
+                chars: 'upperCase',
+                speed: 0.4,
+                revealDelay: 0.2,
             },
         });
 
-        // ── Trophée - révélation dramatique ───────────────────
+        // ── Trophée - révélation trophée ───────────────────
         // Texte : stagger des enfants directs
         gsap.timeline({
             scrollTrigger: {
@@ -167,6 +190,17 @@ onMounted(() => {
                 '<',
             );
 
+        gsap.to('.anim-trophy-title', {
+            text: t('trophee.trophee_visuel.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.anim-trophy-section',
+                start: 'top 70%',
+                once: true,
+            },
+        });
+
         // ── Vainqueurs - podiums tombent du haut 3→2→1 ───────
         gsap.timeline({
             scrollTrigger: { trigger: '.anim-vainqueurs', start: 'top 80%' },
@@ -189,6 +223,38 @@ onMounted(() => {
                 '-=0.6',
             );
 
+        gsap.to('.anim-vainqueurs-title', {
+            text: t('trophee.vainqueurs.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.anim-vainqueurs',
+                start: 'top 80%',
+                once: true,
+            },
+        });
+
+        // ── Prix d'honneur ────────────────────────────────────
+        gsap.to('.anim-prix-title', {
+            text: t('trophee.prix_honneur.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.anim-prix-section',
+                start: 'top 80%',
+                once: true,
+            },
+        });
+
+        gsap.from('.anim-prix-card', {
+            opacity: 0,
+            y: 50,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: '.anim-prix-section', start: 'top 75%' },
+        });
+
         // ── Histoire - séquentiel ─────────────────────────────
         gsap.timeline({
             scrollTrigger: {
@@ -205,6 +271,17 @@ onMounted(() => {
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: { trigger: '.anim-milestone', start: 'top 90%' },
+        });
+
+        gsap.to('.anim-histoire-title', {
+            text: t('trophee.histoire.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.anim-histoire-title',
+                start: 'top 85%',
+                once: true,
+            },
         });
 
         // ── Stats - compteur animé ────────────────────────────
@@ -235,6 +312,13 @@ onMounted(() => {
         });
 
         // ── CTA ───────────────────────────────────────────────
+        gsap.to('.anim-cta-title', {
+            text: t('trophee.cta.title'),
+            duration: 1.2,
+            ease: 'none',
+            scrollTrigger: { trigger: '.anim-cta', start: 'top 85%', once: true },
+        });
+
         gsap.from('.anim-cta', {
             opacity: 0,
             y: 30,
@@ -279,7 +363,10 @@ onUnmounted(() => {
                                     </Link>
                                 </Button>
                                 <Button variant="pixel_white">
-                                    <a href="#vainqueurs">
+                                    <a
+                                        href="#vainqueurs"
+                                        @click.prevent="scrollTo('#vainqueurs')"
+                                    >
                                         {{ t('trophee.hero.cta_secondary') }}
                                     </a>
                                 </Button>
@@ -287,7 +374,7 @@ onUnmounted(() => {
                         </div>
                         <div class="flex flex-col items-center lg:items-end">
                             <SpeechBubble
-                                :text="displayedBubbleText"
+                                :text="t('trophee.hero.bubble')"
                                 class="anim-speech-bubble mb-8 max-w-xs self-start"
                             />
                             <img
@@ -315,7 +402,7 @@ onUnmounted(() => {
                                 Remis chaque année
                             </span>
                             <h2
-                                class="mt-6 font-pixel text-[1.5rem] leading-loose text-white"
+                                class="anim-trophy-title mt-6 font-pixel text-[1.5rem] leading-loose text-white"
                             >
                                 {{ t('trophee.trophee_visuel.title') }}
                             </h2>
@@ -375,7 +462,7 @@ onUnmounted(() => {
                     class="anim-vainqueurs mx-auto max-w-7xl bg-white px-20 py-12 shadow-[8px_8px_0px_0px_#3d8080]"
                 >
                     <div class="mb-12 text-center">
-                        <h2 class="text-2xl font-semibold text-gray-900">
+                        <h2 class="anim-vainqueurs-title text-2xl font-semibold text-gray-900">
                             {{ t('trophee.vainqueurs.title') }}
                         </h2>
                         <p class="mt-3 text-gray-700">
@@ -498,6 +585,109 @@ onUnmounted(() => {
                 </div>
             </section>
 
+            <!-- Prix d'honneur -->
+            <section
+                class="anim-prix-section pb-32"
+                style="background-color: #ede9f8"
+            >
+                <div class="mx-auto max-w-7xl px-6">
+                    <div class="mb-10 text-center">
+                        <h2
+                            class="anim-prix-title font-pixel text-[1.1rem] leading-loose text-gray-900"
+                        >
+                            {{ t('trophee.prix_honneur.title') }}
+                        </h2>
+                        <p class="mt-3 text-gray-600">
+                            {{ t('trophee.prix_honneur.subtitle') }}
+                        </p>
+                    </div>
+
+                    <div class="grid gap-6 lg:grid-cols-2">
+                        <div
+                            v-for="prize in currentEdition.specialPrizes"
+                            :key="prize.id"
+                            class="anim-prix-card bg-white shadow-[6px_6px_0px_0px_#3d8080]"
+                        >
+                            <!-- En-tête coloré -->
+                            <div
+                                class="flex items-center gap-3 px-6 py-4"
+                                :style="{
+                                    backgroundColor:
+                                        prizeConfigs[prize.id].color,
+                                }"
+                            >
+                                <component
+                                    :is="prizeConfigs[prize.id].icon"
+                                    :size="18"
+                                    class="shrink-0 text-white"
+                                />
+                                <span
+                                    class="font-pixel text-[0.65rem] leading-loose text-white"
+                                >
+                                    {{
+                                        t(
+                                            `trophee.prix_honneur.${prize.id}.name`,
+                                        )
+                                    }}
+                                </span>
+                            </div>
+
+                            <!-- Critère -->
+                            <div class="border-b border-gray-100 px-6 py-2">
+                                <span class="text-xs text-gray-500 italic">
+                                    {{
+                                        t(
+                                            `trophee.prix_honneur.${prize.id}.criteria`,
+                                        )
+                                    }}
+                                </span>
+                            </div>
+
+                            <!-- Nominations -->
+                            <div class="flex flex-col divide-y divide-gray-100">
+                                <div
+                                    v-for="(nom, i) in prize.nominations"
+                                    :key="nom.name"
+                                    class="flex items-center gap-4 px-6 py-3"
+                                    :class="nom.isWinner ? 'bg-yellow-50' : ''"
+                                >
+                                    <span
+                                        class="w-5 shrink-0 font-pixel text-xs"
+                                        :class="
+                                            nom.isWinner
+                                                ? 'text-yellow-600'
+                                                : 'text-gray-400'
+                                        "
+                                    >
+                                        {{ i + 1 }}
+                                    </span>
+                                    <img
+                                        :src="nom.logo"
+                                        :alt="nom.name"
+                                        class="h-8 w-16 object-contain"
+                                    />
+                                    <span
+                                        class="flex-1 text-sm font-medium text-gray-800"
+                                    >
+                                        {{ nom.name }}
+                                    </span>
+                                    <span
+                                        v-if="nom.isWinner"
+                                        class="shrink-0 bg-yellow-200 px-2 py-0.5 font-pixel text-[0.5rem] text-yellow-800"
+                                    >
+                                        {{
+                                            t(
+                                                'trophee.prix_honneur.winner_label',
+                                            )
+                                        }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Histoire -->
             <section
                 class="anim-histoire-section py-32"
@@ -595,7 +785,7 @@ onUnmounted(() => {
             <section class="py-40" style="background-color: #3d8080">
                 <div class="anim-cta mx-auto max-w-3xl px-6 text-center">
                     <h2
-                        class="font-pixel text-[1.2rem] leading-loose text-white"
+                        class="anim-cta-title font-pixel text-[1.2rem] leading-loose text-white"
                     >
                         {{ t('trophee.cta.title') }}
                     </h2>
