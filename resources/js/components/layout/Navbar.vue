@@ -109,10 +109,10 @@ onBeforeUnmount(() => removeListener?.());
                     :key="link.href"
                     :href="link.href"
                     :class="[
-                        'text-sm transition-colors hover:text-[var(--brand)] border-b-2 pb-1',
+                        'border-b-2 pb-1 text-sm transition-colors hover:text-[var(--brand)]',
                         isActive(link.href)
-                            ? 'text-[var(--brand)] border-[var(--brand)] font-semibold'
-                            : 'text-gray-800 border-transparent',
+                            ? 'border-[var(--brand)] font-semibold text-[var(--brand)]'
+                            : 'border-transparent text-gray-800',
                     ]"
                 >
                     {{ t(link.label) }}
@@ -159,7 +159,7 @@ onBeforeUnmount(() => removeListener?.());
                     :class="[
                         'rounded px-2 py-2 text-base',
                         isActive(link.href)
-                            ? 'bg-[var(--brand-tint)] text-[var(--brand)] font-semibold'
+                            ? 'bg-[var(--brand-tint)] font-semibold text-[var(--brand)]'
                             : 'text-gray-800 hover:bg-gray-50 hover:text-[var(--brand)]',
                     ]"
                 >
