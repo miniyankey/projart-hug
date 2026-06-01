@@ -294,6 +294,15 @@
             "cta": "Accès collaborateur"
         }
     },
+    "error404": {
+        "title": "Page introuvable",
+        "heading": "Oups ! Cette page n'existe pas.",
+        "description": "La page que vous cherchez a peut-être été déplacée, supprimée, ou l'URL est incorrecte. Pas de panique, vous pouvez retourner à l'accueil ou organiser une collecte.",
+        "bubble": "404... Je crois qu'on s'est perdu !",
+        "mascot_alt": "Mascotte pixel art perdue",
+        "cta_home": "Retour à l'accueil",
+        "cta_collecte": "Organiser une collecte"
+    },
     "home": {
         "title": "Accueil",
         "hero": {
