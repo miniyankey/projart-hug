@@ -74,7 +74,6 @@ class CobrandController extends Controller
             ->firstOrFail();
     }
 
-  
     private function collectData(Collect $collect): array
     {
         return [

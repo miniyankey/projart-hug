@@ -18,7 +18,6 @@ class CollectSeeder extends Seeder
             return;
         }
 
-     
         foreach ($companies->values() as $index => $company) {
             Collect::create([
                 'company_id' => $company->id,

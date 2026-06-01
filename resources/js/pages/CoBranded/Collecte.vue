@@ -10,8 +10,8 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { formatDay } from '@/lib/utils';
 import PublicLayout from '@/layouts/PublicLayout.vue';
+import { formatDay } from '@/lib/utils';
 import { jeu as cobrandJeu } from '@/routes/cobrand';
 
 const { t } = useI18n();
@@ -39,7 +39,7 @@ const horaires = computed(() => {
 
 const place = computed(() => props.collect?.place ?? null);
 
-// Carte Google Maps géocodée sur l'adresse de la collecte 
+// Carte Google Maps géocodée sur l'adresse de la collecte
 const mapUrl = computed(() => {
     const p = place.value;
 
@@ -106,7 +106,9 @@ const mapUrl = computed(() => {
                                     <dt
                                         class="text-xs font-semibold tracking-wide text-gray-500 uppercase"
                                     >
-                                        {{ t('cobrand.collecte.info.horaires') }}
+                                        {{
+                                            t('cobrand.collecte.info.horaires')
+                                        }}
                                     </dt>
                                     <dd class="mt-1 font-medium text-gray-900">
                                         {{ horaires }}
@@ -127,7 +129,7 @@ const mapUrl = computed(() => {
                                         <template v-if="place">
                                             {{ place.name }}
                                             <span
-                                                class="mt-0.5 block text-sm font-normal leading-snug text-gray-600"
+                                                class="mt-0.5 block text-sm leading-snug font-normal text-gray-600"
                                             >
                                                 {{ place.address }},
                                                 {{ place.locality }}
@@ -200,7 +202,8 @@ const mapUrl = computed(() => {
                         <span
                             class="font-pixel text-[0.7rem] leading-loose text-[var(--brand)]"
                         >
-                            &gt; {{ t('cobrand.collecte.eligible_card_eyebrow') }}
+                            &gt;
+                            {{ t('cobrand.collecte.eligible_card_eyebrow') }}
                         </span>
                         <h3 class="mt-5 text-xl font-semibold text-gray-900">
                             {{ t('cobrand.collecte.eligible_card_title') }}
@@ -217,7 +220,8 @@ const mapUrl = computed(() => {
                             class="mt-6"
                         >
                             <Link :href="cobrandJeu.url(routeParams)">
-                                &gt; {{ t('cobrand.collecte.eligible_card_cta') }}
+                                &gt;
+                                {{ t('cobrand.collecte.eligible_card_cta') }}
                             </Link>
                         </Button>
                     </div>
