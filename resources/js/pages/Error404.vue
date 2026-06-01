@@ -14,7 +14,7 @@ const { t } = useI18n();
         <Head :title="t('error404.title')" />
 
         <section
-            class="flex min-h-[80vh] items-center justify-center"
+            class="flex min-h-[80vh] items-center justify-center pt-24 pb-16 md:pt-32"
             style="
                 background-color: #6b21a8;
                 background-image: radial-gradient(
@@ -45,17 +45,11 @@ const { t } = useI18n();
                     </div>
                 </div>
 
-                <!-- Mascot + Speech Bubble -->
-                <div class="mx-auto mt-6 flex max-w-md flex-col items-center">
+                <!-- Speech Bubble -->
+                <div class="mx-auto mt-8 flex max-w-md flex-col items-center">
                     <SpeechBubble
                         :text="t('error404.bubble')"
-                        class="mb-8 self-center"
-                    />
-                    <img
-                        src="/img/mascotte.png"
-                        :alt="t('error404.mascot_alt')"
-                        class="w-56 lg:w-64"
-                        style="image-rendering: pixelated"
+                        class="self-center"
                     />
                 </div>
 
@@ -88,19 +82,6 @@ const { t } = useI18n();
                                 {{ t('error404.cta_collecte') }}
                             </Link>
                         </Button>
-                    </div>
-                </div>
-
-                <!-- Decorative pixel steps -->
-                <div class="mx-auto mt-16 flex max-w-sm justify-center gap-3">
-                    <div
-                        v-for="i in 4"
-                        :key="i"
-                        class="border-2 border-white/30 px-4 py-2"
-                    >
-                        <span class="font-pixel text-xs text-white/50">{{
-                            i
-                        }}</span>
                     </div>
                 </div>
             </div>
