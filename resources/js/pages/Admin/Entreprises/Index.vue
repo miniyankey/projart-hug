@@ -21,10 +21,10 @@ defineProps({
 
 const {
     target: companyToDelete,
+    open: confirmOpen,
     processing: deleting,
     ask: askRemove,
     confirm: confirmRemove,
-    onOpenChange: onDialogOpenChange,
 } = useDeleteConfirm((company) => destroy(company.id).url);
 </script>
 
@@ -150,7 +150,7 @@ const {
         </div>
 
         <ConfirmDialog
-            :open="companyToDelete !== null"
+            v-model:open="confirmOpen"
             destructive
             :title="t('admin.entreprises.delete_title')"
             :description="
@@ -163,7 +163,6 @@ const {
             :confirm-label="t('admin.entreprises.delete')"
             :cancel-label="t('admin.entreprises.create.cancel')"
             :processing="deleting"
-            @update:open="onDialogOpenChange"
             @confirm="confirmRemove"
         />
     </AdminLayout>
