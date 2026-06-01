@@ -16,7 +16,7 @@ class CobrandController extends Controller
 
         // Le lien co-brandé est stable, mais la page collecte n'est accessible
         // que si une collecte est active pour l'entreprise (sinon 404).
-        $this->resolveActiveCollect($company);
+        $collect = $this->resolveActiveCollect($company);
 
         return Inertia::render('CoBranded/Collecte', [
             'token' => $token,
