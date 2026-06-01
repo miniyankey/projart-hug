@@ -5,6 +5,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import FormField from '@/components/admin/FormField.vue';
 import FormSection from '@/components/admin/FormSection.vue';
+import TimePicker from '@/components/forms/TimePicker.vue';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -281,17 +282,17 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                     </Popover>
                 </FormField>
                 <FormField
-                    v-model="form.start_time"
-                    type="time"
                     :label="t('admin.collectes.create.start_time')"
                     :error="form.errors.start_time"
-                />
+                >
+                    <TimePicker v-model="form.start_time" />
+                </FormField>
                 <FormField
-                    v-model="form.end_time"
-                    type="time"
                     :label="t('admin.collectes.create.end_time')"
                     :error="form.errors.end_time"
-                />
+                >
+                    <TimePicker v-model="form.end_time" />
+                </FormField>
             </FormSection>
 
             <FormSection :title="t('admin.collectes.create.section_options')">
