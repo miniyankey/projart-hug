@@ -5,9 +5,11 @@ import {
     LayoutDashboard,
     LineChart,
     LogOut,
+    Menu,
     Syringe,
+    X,
 } from 'lucide-vue-next';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import hugLogo from '@/../images/logos/hug.png';
 import { logout } from '@/actions/App/Http/Controllers/AdminAuthController';
@@ -32,6 +34,13 @@ const flash = computed(() => page.props.flash ?? {});
 // Le composant Inertia courant (ex: "Admin/Entreprises/Index") sert à
 // déterminer l'onglet actif de la barre latérale.
 const currentComponent = computed(() => page.component);
+
+// Drawer de navigation mobile : ouvert/fermé, refermé après chaque navigation.
+const mobileMenuOpen = ref(false);
+
+watch(currentComponent, () => {
+    mobileMenuOpen.value = false;
+});
 
 const navItems = computed(() => [
     {
@@ -79,12 +88,47 @@ function submitLogout() {
     <Head :title="props.title" />
 
     <div class="flex min-h-screen bg-gray-50 text-gray-900">
+        <!-- Topbar mobile -->
+        <header
+            class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b-2 border-gray-900 bg-white px-4 lg:hidden"
+        >
+            <img :src="hugLogo" alt="HUG" class="h-8 w-auto" />
+            <button
+                type="button"
+                class="flex size-10 items-center justify-center border-2 border-gray-900 bg-white text-gray-900 transition-colors hover:bg-gray-100"
+                :aria-label="t('admin.nav.open_menu')"
+                aria-haspopup="true"
+                :aria-expanded="mobileMenuOpen"
+                @click="mobileMenuOpen = true"
+            >
+                <Menu class="size-5" />
+            </button>
+        </header>
+
+        <!-- Overlay mobile -->
+        <div
+            v-if="mobileMenuOpen"
+            class="fixed inset-0 z-40 bg-gray-900/50 lg:hidden"
+            @click="mobileMenuOpen = false"
+        />
+
         <!-- Barre latérale -->
         <aside
-            class="fixed inset-y-0 left-0 flex w-64 flex-col border-r-2 border-gray-900 bg-white"
+            class="fixed inset-y-0 left-0 z-50 flex w-64 max-w-[85vw] flex-col border-r-2 border-gray-900 bg-white transition-transform duration-200 ease-out lg:translate-x-0"
+            :class="mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'"
         >
-            <div class="flex items-center border-b-2 border-gray-900 px-6 py-5">
+            <div
+                class="flex items-center justify-between border-b-2 border-gray-900 px-6 py-5"
+            >
                 <img :src="hugLogo" alt="HUG" class="h-9 w-auto" />
+                <button
+                    type="button"
+                    class="flex size-9 items-center justify-center text-gray-500 transition-colors hover:text-gray-900 lg:hidden"
+                    :aria-label="t('admin.nav.close_menu')"
+                    @click="mobileMenuOpen = false"
+                >
+                    <X class="size-5" />
+                </button>
             </div>
 
             <nav class="flex flex-1 flex-col gap-1 p-3">
@@ -124,12 +168,14 @@ function submitLogout() {
         </aside>
 
         <!-- Contenu -->
-        <div class="ml-64 flex min-h-screen flex-1 flex-col">
+        <div
+            class="flex min-h-screen min-w-0 flex-1 flex-col pt-16 lg:ml-64 lg:pt-0"
+        >
             <header
-                class="flex items-center justify-between gap-4 border-b-2 border-gray-900 bg-white px-8 py-6"
+                class="flex flex-col gap-4 border-b-2 border-gray-900 bg-white px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-6 lg:px-8"
             >
-                <div>
-                    <h1 class="text-2xl font-bold tracking-tight">
+                <div class="min-w-0">
+                    <h1 class="text-xl font-bold tracking-tight sm:text-2xl">
                         <slot name="title">{{ props.title }}</slot>
                     </h1>
                     <p
@@ -139,13 +185,13 @@ function submitLogout() {
                         <slot name="subtitle" />
                     </p>
                 </div>
-                <div class="flex items-center gap-3">
+                <div class="flex flex-wrap items-center gap-3">
                     <slot name="actions" />
                     <LanguageSwitcher />
                 </div>
             </header>
 
-            <main class="flex-1 px-8 py-8">
+            <main class="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
                 <div
                     v-if="flash.success"
                     class="mb-6 border-2 border-gray-900 bg-green-50 px-4 py-3 text-sm font-medium text-green-900"

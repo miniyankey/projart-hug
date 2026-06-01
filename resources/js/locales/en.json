@@ -40,7 +40,9 @@
             "kpi": "Statistics & KPIs",
             "entreprises": "Companies",
             "back_to_site": "Back to site",
-            "logout": "Sign out"
+            "logout": "Sign out",
+            "open_menu": "Open menu",
+            "close_menu": "Close menu"
         },
         "overview": {
             "title": "Overview",
