@@ -628,7 +628,9 @@ onUnmounted(() => {
                                         backgroundColor: prizeConfigs[id].color,
                                     }"
                                 ></div>
-                                <p class="text-sm leading-relaxed text-gray-600">
+                                <p
+                                    class="text-sm leading-relaxed text-gray-600"
+                                >
                                     {{
                                         t(
                                             `trophee.prix_honneur.${id}.description`,
