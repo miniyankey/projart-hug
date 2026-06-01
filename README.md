@@ -9,6 +9,7 @@ Application web bâtie sur **Laravel 13 + Inertia v3 + Vue 3 + MariaDB**, conten
 
 - [Prérequis](#prérequis)
 - [Installation from scratch](#installation-from-scratch)
+- [Installation sans Docker](#installation-sans-docker)
 - [Workflow de développement](#workflow-de-développement)
 - [Commandes utiles](#commandes-utiles)
 - [Dépannage](#dépannage)
@@ -24,6 +25,8 @@ Sur une machine neuve, il suffit de :
 - **Git**
 
 Tout le reste (PHP 8.5, Composer, Node.js, MariaDB) tourne **dans les containers** : rien à installer en local.
+
+> **Windows** : utilise Docker Desktop avec le **backend WSL2** (réglage par défaut récent). Les commandes ci-dessous sont à lancer dans **PowerShell**. Pour de meilleures performances, tu peux cloner le projet dans le filesystem WSL plutôt que sur `C:\`, mais ce n'est pas obligatoire.
 
 Vérifie que Docker tourne :
 
@@ -49,8 +52,16 @@ cd projart-hug
 
 ### 2. Créer le fichier `.env`
 
+**Linux / macOS :**
+
 ```bash
 cp .env.example .env
+```
+
+**Windows (PowerShell) :**
+
+```powershell
+Copy-Item .env.example .env
 ```
 
 Sur **Linux**, aligne `WWWUSER` / `WWWGROUP` sur ton utilisateur pour éviter les soucis de permissions sur les fichiers générés par le container :
@@ -140,6 +151,86 @@ docker compose exec laravel.test npm run dev
 ### 9. Vérifier
 
 Ouvre **http://localhost:8000** : la page d'accueil Inertia doit s'afficher.
+
+---
+
+## Installation sans Docker
+
+Si tu préfères tout faire tourner **directement sur ta machine** (sans containers), voici la procédure. C'est plus léger mais tu dois gérer toi-même PHP, Node et la base de données.
+
+> Recommandation : sur ce projet, **Docker reste la voie de référence** (environnement identique pour toute l'équipe, MariaDB préconfigurée). L'install locale est utile si Docker ne passe pas sur ton poste.
+
+### Prérequis (à installer en local)
+
+- **PHP 8.3+** (8.5 idéalement, pour coller à l'environnement Docker) avec les extensions usuelles Laravel : `mbstring`, `xml`, `ctype`, `curl`, `pdo`, `tokenizer`, `bcmath`, `fileinfo`, et selon la base choisie `pdo_mysql` (MariaDB) ou `pdo_sqlite`.
+- **Composer 2**
+- **Node.js 20+** + npm
+- **(Option A)** un serveur **MariaDB 11** ou **MySQL 8** local, **OU (Option B)** rien de plus si tu choisis **SQLite**.
+
+### 1. Cloner et préparer `.env`
+
+```bash
+git clone <url-du-repo> projart-hug
+cd projart-hug
+cp .env.example .env        # Windows PowerShell : Copy-Item .env.example .env
+```
+
+### 2. Installer les dépendances
+
+```bash
+composer install
+npm install
+```
+
+### 3. Configurer la base de données
+
+Choisis **une** des deux options et édite ton `.env` en conséquence.
+
+**Option A - MariaDB / MySQL local** (fidèle au projet)
+
+Crée d'abord la base et l'utilisateur dans ton serveur, puis dans `.env` :
+
+```dotenv
+DB_CONNECTION=mariadb
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=projart_hug
+DB_USERNAME=projart
+DB_PASSWORD=password
+```
+
+> Attention : `DB_HOST=mariadb` et le port `3307` du `.env.example` ne valent **que** pour Docker. En local, c'est `127.0.0.1` et le port réel de ton serveur (3306 par défaut).
+
+**Option B - SQLite** (le plus rapide à mettre en route, zéro serveur)
+
+```bash
+touch database/database.sqlite     # Windows PowerShell : New-Item database/database.sqlite
+```
+
+Puis dans `.env`, mets `DB_CONNECTION=sqlite` et **supprime / commente** les lignes `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
+
+### 4. Générer la clé, migrer et peupler
+
+```bash
+php artisan key:generate
+php artisan migrate --seed
+```
+
+### 5. Lancer l'application
+
+Deux processus à garder ouverts (deux terminaux) :
+
+```bash
+php artisan serve     # backend sur http://localhost:8000
+```
+
+```bash
+npm run dev           # serveur Vite + HMR
+```
+
+Ouvre **http://localhost:8000**.
+
+> Le helper `composer run dev` lance backend + queue + Vite en une commande. Il est pratique **hors Docker** (c'est uniquement avec Sail qu'il fait doublon).
 
 ---
 
