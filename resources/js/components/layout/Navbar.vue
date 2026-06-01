@@ -48,9 +48,7 @@ onBeforeUnmount(() => removeListener?.());
 </script>
 
 <template>
-    <header
-        class="sticky top-0 z-50 border-b border-gray-200 bg-white"
-    >
+    <header class="sticky top-0 z-50 border-b border-gray-200 bg-white">
         <nav
             class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:gap-8 md:px-6 md:py-4"
         >
