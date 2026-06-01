@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Collect;
 use App\Models\Company;
+use App\Models\GameQuestion;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -30,9 +31,14 @@ class CobrandController extends Controller
         $company = $this->resolveCompany($brandName, $token);
         $this->resolveActiveCollect($company);
 
+        $questions = GameQuestion::with(['choices.view'])
+            ->orderBy('order')
+            ->get();
+
         return Inertia::render('CoBranded/Jeu', [
             'token' => $token,
             'company' => $this->companyData($company),
+            'questions' => $questions,
         ]);
     }
 

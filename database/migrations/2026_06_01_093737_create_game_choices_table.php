@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('choices', function (Blueprint $table) {
+        Schema::create('game_choices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('view_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('question_id')->constrained('game_questions')->cascadeOnDelete();
+            $table->foreignId('view_id')->nullable()->constrained('game_views')->nullOnDelete();
             $table->string('text');
             $table->text('descr')->nullable();
             $table->boolean('eligible'); // true = éligible, false = inéligible
@@ -25,6 +25,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('choices');
+        Schema::dropIfExists('game_choices');
     }
 };

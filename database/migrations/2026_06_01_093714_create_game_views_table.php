@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('views', function (Blueprint $table) {
+        Schema::create('game_views', function (Blueprint $table) {
             $table->id();
             $table->string('message');
             $table->text('descr')->nullable();
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('views');
+        Schema::dropIfExists('game_views');
     }
 };
