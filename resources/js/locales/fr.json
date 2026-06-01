@@ -28,6 +28,97 @@
             "back": "Retour au tableau de bord"
         }
     },
+    "flash": {
+        "company_created": "Entreprise créée avec succès.",
+        "company_updated": "Entreprise mise à jour.",
+        "company_deleted": "Entreprise supprimée."
+    },
+    "admin": {
+        "nav": {
+            "overview": "Vue d'ensemble",
+            "collectes": "Collectes",
+            "kpi": "Statistiques & KPIs",
+            "entreprises": "Entreprises",
+            "back_to_site": "Retour au site",
+            "logout": "Se déconnecter",
+            "open_menu": "Ouvrir le menu",
+            "close_menu": "Fermer le menu"
+        },
+        "overview": {
+            "title": "Vue d'ensemble",
+            "subtitle": "Aperçu du réseau d'entreprises et des collectes en cours.",
+            "create_admin": "Créer un compte admin",
+            "stat_companies": "Entreprises partenaires",
+            "stat_labelled": "Entreprises labellisées",
+            "stat_active_collects": "Collectes en cours",
+            "active_collects": "Collectes en cours",
+            "col_company": "Entreprise",
+            "col_date": "Date",
+            "col_place": "Lieu",
+            "col_link": "Lien co-brandé",
+            "open_link": "Ouvrir",
+            "empty": "Aucune collecte active pour le moment."
+        },
+        "entreprises": {
+            "title": "Entreprises Partenaires",
+            "subtitle": "Gérez le réseau des entreprises, leurs contacts et l'attribution des labels.",
+            "new": "Nouvelle Entreprise",
+            "col_name": "Nom de l'entreprise",
+            "col_contact": "Contact Principal",
+            "col_link": "Lien co-brandé",
+            "col_label": "Label CTS",
+            "col_actions": "Actions",
+            "label_active": "Label Actif",
+            "label_inactive": "Non labellisé",
+            "empty": "Aucune entreprise pour le moment.",
+            "view": "Voir le lien co-brandé",
+            "edit": "Modifier",
+            "delete": "Supprimer",
+            "delete_confirm": "Supprimer cette entreprise ? Cette action est irréversible.",
+            "copy": "Copier le lien",
+            "copied": "Lien copié !",
+            "create": {
+                "title": "Nouvelle entreprise",
+                "subtitle": "Renseignez l'identité, le contact et l'habillage de marque de l'entreprise partenaire.",
+                "section_identity": "Identité",
+                "section_contact": "Contact principal",
+                "section_address": "Adresse du siège",
+                "section_branding": "Co-branding",
+                "section_label": "Label CTS RSE",
+                "name": "Nom de l'entreprise",
+                "name_placeholder": "Ex : Rolex SA",
+                "email": "E-mail de contact",
+                "email_placeholder": "contact{'@'}entreprise.ch",
+                "contact_name": "Nom du contact",
+                "contact_name_placeholder": "Prénom et nom",
+                "contact_phone": "Téléphone du contact",
+                "contact_phone_placeholder": "+41 22 000 00 00",
+                "street": "Rue et numéro",
+                "street_placeholder": "Rue de la Paix 12",
+                "postal_code": "Code postal",
+                "postal_code_placeholder": "1201",
+                "city": "Ville",
+                "city_placeholder": "Genève",
+                "country": "Pays",
+                "color": "Couleur principale",
+                "color_hint": "Couleur de marque utilisée pour le co-branding (--brand).",
+                "color_secondary": "Couleur secondaire",
+                "color_secondary_hint": "Accent optionnel.",
+                "logo": "Logo",
+                "logo_hint": "PNG ou JPG, 2 Mo max. Fond transparent recommandé.",
+                "logo_choose": "Choisir un fichier",
+                "logo_remove": "Retirer",
+                "is_labelled": "Entreprise labellisée « Entreprise Solidaire »",
+                "labelled_at": "Date de labellisation",
+                "submit": "Créer l'entreprise",
+                "cancel": "Annuler",
+                "preview_title": "Aperçu du co-branding",
+                "preview_name": "Nom de l'entreprise",
+                "preview_hint": "Aperçu indicatif de l'habillage co-brandé (logo et couleurs) tel qu'il apparaîtra pour les collaborateurs.",
+                "link_note": "Après création, un lien co-brandé unique et stable est généré pour cette entreprise. Il n'est accessible aux collaborateurs que lorsqu'une collecte est active."
+            }
+        }
+    },
     "nav": {
         "home": "Accueil",
         "trophee": "Trophée",
@@ -123,7 +214,7 @@
         "trophee_visuel": {
             "title": "Un trophée unique",
             "desc": "Ce trophée en cristal, gravé à l'effigie d'une poche de sang, est remis chaque année à l'entreprise ayant mobilisé le plus grand nombre de donneurs. Une récompense rare, pour un engagement exceptionnel.",
-            "alt": "Trophée de la générosité — cristal gravé poche de sang"
+            "alt": "Trophée de la générosité - cristal gravé poche de sang"
         },
         "stats": {
             "s1_value": "30 %",
@@ -145,7 +236,7 @@
             "title": "Une idée née en 2008, relancée en 2026",
             "p1": "Le Trophée de la générosité a été imaginé en 2008 par le Centre de Transfusion Sanguine des HUG pour valoriser les entreprises genevoises qui organisent des collectes de sang et mobilisent le plus grand nombre de donneurs.",
             "p2": "Après trois éditions couronnées de succès (2008, 2009, 2010), le projet a été mis en pause faute de ressources pour le pérenniser.",
-            "p3": "En 2026, en partenariat avec la HEIG-VD et grâce à une plateforme digitale dédiée, le Trophée est officiellement réactivé — plus ambitieux, plus accessible, et ouvert à toutes les entreprises de Suisse romande.",
+            "p3": "En 2026, en partenariat avec la HEIG-VD et grâce à une plateforme digitale dédiée, le Trophée est officiellement réactivé - plus ambitieux, plus accessible, et ouvert à toutes les entreprises de Suisse romande.",
             "tag_2008": "Lancement",
             "tag_2010": "Suspension",
             "tag_2026": "Réactivation"
@@ -228,7 +319,7 @@
             "description": "Le Label CTS reconnaît les entreprises qui intègrent le don du sang dans leur politique de responsabilité sociale. Un engagement visible, mesurable et valorisable.",
             "certified_count": "{count} entreprises certifiées",
             "link": "Découvrir le label",
-            "visual_placeholder": "Visuel label CTS — à intégrer"
+            "visual_placeholder": "Visuel label CTS - à intégrer"
         },
         "stats": {
             "title": "Le don du sang en chiffres",

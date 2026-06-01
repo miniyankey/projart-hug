@@ -104,7 +104,7 @@ const avantages = [
             </div>
         </section>
 
-        <!-- Parcours — header -->
+        <!-- Parcours - header -->
         <section style="background-color: #ede9f8" class="py-16">
             <div class="mx-auto max-w-7xl px-6">
                 <h2
@@ -118,7 +118,7 @@ const avantages = [
             </div>
         </section>
 
-        <!-- Parcours — timeline -->
+        <!-- Parcours - timeline -->
         <section class="py-24">
             <div class="mx-auto max-w-5xl px-6">
                 <div class="relative">

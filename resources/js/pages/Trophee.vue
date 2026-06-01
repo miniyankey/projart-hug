@@ -75,7 +75,7 @@ onMounted(() => {
     const charObj = { n: 0 };
 
     ctx = gsap.context(() => {
-        // ── Hero — timeline séquentielle ──────────────────────
+        // ── Hero - timeline séquentielle ──────────────────────
         gsap.timeline({ defaults: { ease: 'power3.out' } })
             .from('.anim-hero-title', { opacity: 0, y: 50, duration: 0.9 })
             .from(
@@ -89,7 +89,7 @@ onMounted(() => {
                 '-=0.35',
             );
 
-        // Mascotte — entrée depuis la droite + flottement infini
+        // Mascotte - entrée depuis la droite + flottement infini
         gsap.timeline()
             .from('.anim-hero-mascot', {
                 x: 80,
@@ -112,7 +112,7 @@ onMounted(() => {
                 '+=0.1',
             );
 
-        // Bulle — pop in puis typewriter
+        // Bulle - pop in puis typewriter
         gsap.from('.anim-speech-bubble', {
             opacity: 0,
             scale: 0.5,
@@ -133,7 +133,7 @@ onMounted(() => {
             },
         });
 
-        // ── Trophée — révélation dramatique ───────────────────
+        // ── Trophée - révélation dramatique ───────────────────
         // Texte : stagger des enfants directs
         gsap.timeline({
             scrollTrigger: {
@@ -167,7 +167,7 @@ onMounted(() => {
                 '<',
             );
 
-        // ── Vainqueurs — podiums tombent du haut 3→2→1 ───────
+        // ── Vainqueurs - podiums tombent du haut 3→2→1 ───────
         gsap.timeline({
             scrollTrigger: { trigger: '.anim-vainqueurs', start: 'top 80%' },
             defaults: { ease: 'power3.out' },
@@ -189,7 +189,7 @@ onMounted(() => {
                 '-=0.6',
             );
 
-        // ── Histoire — séquentiel ─────────────────────────────
+        // ── Histoire - séquentiel ─────────────────────────────
         gsap.timeline({
             scrollTrigger: {
                 trigger: '.anim-histoire-title',
@@ -207,7 +207,7 @@ onMounted(() => {
             scrollTrigger: { trigger: '.anim-milestone', start: 'top 90%' },
         });
 
-        // ── Stats — compteur animé ────────────────────────────
+        // ── Stats - compteur animé ────────────────────────────
         gsap.from('.anim-stat', {
             opacity: 0,
             y: 40,

@@ -28,6 +28,97 @@
             "back": "Back to dashboard"
         }
     },
+    "flash": {
+        "company_created": "Company created successfully.",
+        "company_updated": "Company updated.",
+        "company_deleted": "Company deleted."
+    },
+    "admin": {
+        "nav": {
+            "overview": "Overview",
+            "collectes": "Drives",
+            "kpi": "Statistics & KPIs",
+            "entreprises": "Companies",
+            "back_to_site": "Back to site",
+            "logout": "Sign out",
+            "open_menu": "Open menu",
+            "close_menu": "Close menu"
+        },
+        "overview": {
+            "title": "Overview",
+            "subtitle": "Snapshot of the company network and ongoing drives.",
+            "create_admin": "Create admin account",
+            "stat_companies": "Partner companies",
+            "stat_labelled": "Labelled companies",
+            "stat_active_collects": "Ongoing drives",
+            "active_collects": "Ongoing drives",
+            "col_company": "Company",
+            "col_date": "Date",
+            "col_place": "Location",
+            "col_link": "Co-branded link",
+            "open_link": "Open",
+            "empty": "No active drive at the moment."
+        },
+        "entreprises": {
+            "title": "Partner Companies",
+            "subtitle": "Manage the company network, their contacts and label assignment.",
+            "new": "New Company",
+            "col_name": "Company name",
+            "col_contact": "Main contact",
+            "col_link": "Co-branded link",
+            "col_label": "CTS label",
+            "col_actions": "Actions",
+            "label_active": "Active label",
+            "label_inactive": "Not labelled",
+            "empty": "No company yet.",
+            "view": "View co-branded link",
+            "edit": "Edit",
+            "delete": "Delete",
+            "delete_confirm": "Delete this company? This action is irreversible.",
+            "copy": "Copy link",
+            "copied": "Link copied!",
+            "create": {
+                "title": "New company",
+                "subtitle": "Fill in the identity, contact and brand styling of the partner company.",
+                "section_identity": "Identity",
+                "section_contact": "Main contact",
+                "section_address": "Head office address",
+                "section_branding": "Co-branding",
+                "section_label": "CTS RSE label",
+                "name": "Company name",
+                "name_placeholder": "E.g. Rolex SA",
+                "email": "Contact email",
+                "email_placeholder": "contact{'@'}company.ch",
+                "contact_name": "Contact name",
+                "contact_name_placeholder": "First and last name",
+                "contact_phone": "Contact phone",
+                "contact_phone_placeholder": "+41 22 000 00 00",
+                "street": "Street and number",
+                "street_placeholder": "Rue de la Paix 12",
+                "postal_code": "Postal code",
+                "postal_code_placeholder": "1201",
+                "city": "City",
+                "city_placeholder": "Geneva",
+                "country": "Country",
+                "color": "Primary color",
+                "color_hint": "Brand color used for co-branding (--brand).",
+                "color_secondary": "Secondary color",
+                "color_secondary_hint": "Optional accent.",
+                "logo": "Logo",
+                "logo_hint": "PNG or JPG, 2 MB max. Transparent background recommended.",
+                "logo_choose": "Choose a file",
+                "logo_remove": "Remove",
+                "is_labelled": "Company labelled \"Solidarity Company\"",
+                "labelled_at": "Labelling date",
+                "submit": "Create company",
+                "cancel": "Cancel",
+                "preview_title": "Co-branding preview",
+                "preview_name": "Company name",
+                "preview_hint": "Indicative preview of the co-branded styling (logo and colors) as it will appear to employees.",
+                "link_note": "After creation, a unique and stable co-branded link is generated for this company. It is only accessible to employees while a drive is active."
+            }
+        }
+    },
     "nav": {
         "home": "Home",
         "trophee": "Trophy",
@@ -123,7 +214,7 @@
         "trophee_visuel": {
             "title": "A unique trophy",
             "desc": "This crystal trophy, engraved with the image of a blood bag, is awarded each year to the company that mobilised the most donors. A rare reward for an exceptional commitment.",
-            "alt": "Generosity Trophy — crystal engraved blood bag"
+            "alt": "Generosity Trophy - crystal engraved blood bag"
         },
         "stats": {
             "s1_value": "30%",
@@ -145,7 +236,7 @@
             "title": "An idea born in 2008, relaunched in 2026",
             "p1": "The Generosity Trophy was conceived in 2008 by the HUG Blood Transfusion Centre to recognise Geneva companies that organise blood drives and mobilise the most donors.",
             "p2": "After three successful editions (2008, 2009, 2010), the project was put on hold due to a lack of resources to sustain it.",
-            "p3": "In 2026, in partnership with HEIG-VD and thanks to a dedicated digital platform, the Trophy is officially relaunched — more ambitious, more accessible, and open to all companies in French-speaking Switzerland.",
+            "p3": "In 2026, in partnership with HEIG-VD and thanks to a dedicated digital platform, the Trophy is officially relaunched - more ambitious, more accessible, and open to all companies in French-speaking Switzerland.",
             "tag_2008": "Launch",
             "tag_2010": "Suspension",
             "tag_2026": "Relaunch"
@@ -228,7 +319,7 @@
             "description": "The CTS Label recognises companies that integrate blood donation into their corporate social responsibility policy. A visible, measurable and valuable commitment.",
             "certified_count": "{count} certified companies",
             "link": "Discover the label",
-            "visual_placeholder": "CTS label visual — to be integrated"
+            "visual_placeholder": "CTS label visual - to be integrated"
         },
         "stats": {
             "title": "Blood donation in numbers",

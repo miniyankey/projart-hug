@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collect;
+use App\Models\Company;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -11,52 +12,66 @@ class CobrandController extends Controller
 {
     public function collecte(string $brandName, string $token): Response
     {
-        $collect = $this->resolveCollect($brandName, $token);
+        $company = $this->resolveCompany($brandName, $token);
+
+        // Le lien co-brandé est stable, mais la page collecte n'est accessible
+        // que si une collecte est active pour l'entreprise (sinon 404).
+        $this->resolveActiveCollect($company);
 
         return Inertia::render('CoBranded/Collecte', [
             'token' => $token,
-            'company' => $this->companyData($collect),
+            'company' => $this->companyData($company),
         ]);
     }
 
     public function jeu(string $brandName, string $token): Response
     {
-        $collect = $this->resolveCollect($brandName, $token);
+        $company = $this->resolveCompany($brandName, $token);
+        $this->resolveActiveCollect($company);
 
         return Inertia::render('CoBranded/Jeu', [
             'token' => $token,
-            'company' => $this->companyData($collect),
+            'company' => $this->companyData($company),
         ]);
     }
 
     public function donSang(string $brandName, string $token): Response
     {
-        $collect = $this->resolveCollect($brandName, $token);
+        $company = $this->resolveCompany($brandName, $token);
+        $this->resolveActiveCollect($company);
 
         return Inertia::render('CoBranded/DonSang', [
             'token' => $token,
-            'company' => $this->companyData($collect),
+            'company' => $this->companyData($company),
         ]);
     }
 
     /**
-     * Résout la collecte par son token en vérifiant que le slug de l'entreprise
+     * Résout l'entreprise par son slug et son token permanent.
      */
-    private function resolveCollect(string $brandName, string $token): Collect
+    private function resolveCompany(string $brandName, string $token): Company
     {
-        return Collect::with('company')
+        return Company::where('slug', $brandName)
             ->where('token', $token)
-            ->whereHas('company', fn ($q) => $q->where('slug', $brandName))
+            ->firstOrFail();
+    }
+
+    /**
+     * Garantit qu'une collecte active existe pour l'entreprise, sinon 404.
+     */
+    private function resolveActiveCollect(Company $company): Collect
+    {
+        return $company->collects()
+            ->where('is_active', true)
+            ->latest('day')
             ->firstOrFail();
     }
 
     /**
      * @return array{name: string, slug: string, color: string|null, logo: string|null}
      */
-    private function companyData(Collect $collect): array
+    private function companyData(Company $company): array
     {
-        $company = $collect->company;
-
         return [
             'name' => $company->name,
             'slug' => $company->slug,

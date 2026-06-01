@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Modifier une collecte — Administration" />
+    <Head title="Modifier une collecte - Administration" />
     <div>
         <h1>Modifier une collecte</h1>
     </div>

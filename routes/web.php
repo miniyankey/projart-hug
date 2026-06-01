@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
 use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\LocaleController;
+use App\Models\Collect;
+use App\Models\Company;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,7 +23,29 @@ Route::inertia('/certification', 'Certification')->name('certification');
 
 // Administration
 Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::inertia('/', 'Admin/Index')->name('index');
+    Route::get('/', function () {
+        return Inertia::render('Admin/Index', [
+            'stats' => [
+                'companies' => Company::count(),
+                'labelled' => Company::where('is_labelled', true)->count(),
+                'active_collects' => Collect::where('is_active', true)->count(),
+            ],
+            'activeCollects' => Collect::with(['company:id,name,slug,token,color,logo', 'place:id,city'])
+                ->where('is_active', true)
+                ->orderBy('day')
+                ->get()
+                ->map(fn (Collect $collect) => [
+                    'id' => $collect->id,
+                    'day' => $collect->day?->format('Y-m-d'),
+                    'company' => $collect->company?->name,
+                    'slug' => $collect->company?->slug,
+                    'token' => $collect->company?->token,
+                    'color' => $collect->company?->color,
+                    'logo_url' => $collect->company?->logo_url,
+                    'city' => $collect->place?->city,
+                ]),
+        ]);
+    })->name('index');
 
     Route::prefix('/vainqueurs')->name('vainqueurs.')->group(function () {
         Route::inertia('/', 'Admin/Vainqueurs/Index')->name('index');
@@ -29,9 +54,12 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     });
 
     Route::prefix('/entreprises')->name('entreprises.')->group(function () {
-        Route::inertia('/', 'Admin/Entreprises/Index')->name('index');
-        Route::inertia('/create', 'Admin/Entreprises/Create')->name('create');
-        Route::get('/{entreprise}/edit', fn () => Inertia::render('Admin/Entreprises/Edit'))->name('edit');
+        Route::get('/', [CompanyController::class, 'index'])->name('index');
+        Route::get('/create', [CompanyController::class, 'create'])->name('create');
+        Route::post('/', [CompanyController::class, 'store'])->name('store');
+        Route::get('/{entreprise}/edit', [CompanyController::class, 'edit'])->name('edit');
+        Route::put('/{entreprise}', [CompanyController::class, 'update'])->name('update');
+        Route::delete('/{entreprise}', [CompanyController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('/collectes')->name('collectes.')->group(function () {

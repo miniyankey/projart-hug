@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Modifier une entreprise — Administration" />
+    <Head title="Modifier une entreprise - Administration" />
     <div>
         <h1>Modifier une entreprise</h1>
     </div>
