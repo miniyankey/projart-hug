@@ -1,5 +1,5 @@
 <script setup>
-import { Link, router } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import { Menu, X } from 'lucide-vue-next';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -8,6 +8,7 @@ import LanguageSwitcher from '@/components/layout/LanguageSwitcher.vue';
 import { Button } from '@/components/ui/button';
 
 const { t } = useI18n();
+const page = usePage();
 
 defineProps({
     // Liens de navigation : [{ href, label }] où label est une clé i18n
@@ -31,7 +32,16 @@ defineProps({
         type: String,
         default: '#',
     },
+    // Lien vers le site normal (utilisé comme bouton "retour" en mode co-brandé).
+    normalSiteUrl: {
+        type: String,
+        default: '#',
+    },
 });
+
+function isActive(href) {
+    return page.url === href;
+}
 
 const open = ref(false);
 
@@ -98,13 +108,25 @@ onBeforeUnmount(() => removeListener?.());
                     v-for="link in links"
                     :key="link.href"
                     :href="link.href"
-                    class="text-sm text-gray-800 transition-colors hover:text-gray-900"
+                    :class="[
+                        'text-sm transition-colors hover:text-gray-900 border-b-2 pb-1',
+                        isActive(link.href)
+                            ? 'text-[var(--brand)] border-[var(--brand)] font-semibold'
+                            : 'text-gray-800 border-transparent',
+                    ]"
                 >
                     {{ t(link.label) }}
                 </Link>
             </div>
 
             <div class="hidden items-center gap-6 md:flex">
+                <Link
+                    v-if="company"
+                    :href="normalSiteUrl"
+                    class="text-xs text-gray-500 transition-colors hover:text-[var(--brand)]"
+                >
+                    {{ t('nav.main_site') }}
+                </Link>
                 <Button as-child variant="cta" size="cta">
                     <Link :href="cta.href">{{ t(cta.label) }}</Link>
                 </Button>
@@ -134,7 +156,12 @@ onBeforeUnmount(() => removeListener?.());
                     v-for="link in links"
                     :key="link.href"
                     :href="link.href"
-                    class="rounded px-2 py-2 text-base text-gray-800 hover:bg-gray-50"
+                    :class="[
+                        'rounded px-2 py-2 text-base',
+                        isActive(link.href)
+                            ? 'bg-[var(--brand-tint)] text-[var(--brand)] font-semibold'
+                            : 'text-gray-800 hover:bg-gray-50',
+                    ]"
                 >
                     {{ t(link.label) }}
                 </Link>
@@ -142,6 +169,13 @@ onBeforeUnmount(() => removeListener?.());
                 <div
                     class="mt-4 flex flex-col gap-4 border-t border-gray-200 pt-4"
                 >
+                    <Link
+                        v-if="company"
+                        :href="normalSiteUrl"
+                        class="text-sm text-gray-500 transition-colors hover:text-[var(--brand)]"
+                    >
+                        {{ t('nav.main_site') }}
+                    </Link>
                     <Button as-child variant="cta" size="cta" class="w-fit">
                         <Link :href="cta.href">{{ t(cta.label) }}</Link>
                     </Button>
