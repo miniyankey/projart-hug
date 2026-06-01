@@ -21,6 +21,7 @@ class CobrandController extends Controller
         return Inertia::render('CoBranded/Collecte', [
             'token' => $token,
             'company' => $this->companyData($company),
+            'collect' => $this->collectData($collect),
         ]);
     }
 
@@ -57,14 +58,38 @@ class CobrandController extends Controller
     }
 
     /**
-     * Garantit qu'une collecte active existe pour l'entreprise, sinon 404.
+     * Résout la collecte visible de l'entreprise, sinon 404.
+     *
+     * Fenêtre de visibilité : une collecte est accessible dès qu'elle est
+     * prévue (date future) et le reste jusqu'à 7 jours après le jour J.
+     * On retient la plus imminente (date la plus proche encore dans sa fenêtre).
      */
     private function resolveActiveCollect(Company $company): Collect
     {
         return $company->collects()
+            ->with('place:id,name,address,locality,city,room')
             ->where('is_active', true)
-            ->latest('day')
+            ->whereDate('day', '>=', now()->subWeek()->toDateString())
+            ->orderBy('day')
             ->firstOrFail();
+    }
+
+  
+    private function collectData(Collect $collect): array
+    {
+        return [
+            'day' => $collect->day?->format('Y-m-d'),
+            'start_time' => $collect->start_time ? substr((string) $collect->start_time, 0, 5) : null,
+            'end_time' => $collect->end_time ? substr((string) $collect->end_time, 0, 5) : null,
+            'link_appointment' => $collect->link_appointment,
+            'place' => $collect->place ? [
+                'name' => $collect->place->name,
+                'address' => $collect->place->address,
+                'locality' => $collect->place->locality,
+                'city' => $collect->place->city,
+                'room' => $collect->place->room,
+            ] : null,
+        ];
     }
 
     /**
