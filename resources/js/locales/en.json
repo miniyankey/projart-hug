@@ -75,6 +75,8 @@
             "edit": "Edit",
             "delete": "Delete",
             "delete_confirm": "Delete this company? This action is irreversible.",
+            "delete_title": "Delete company",
+            "delete_description": "Do you really want to delete \"{name}\"? This action cannot be undone.",
             "copy": "Copy link",
             "copied": "Link copied!",
             "create": {
@@ -116,6 +118,11 @@
                 "preview_name": "Company name",
                 "preview_hint": "Indicative preview of the co-branded styling (logo and colors) as it will appear to employees.",
                 "link_note": "After creation, a unique and stable co-branded link is generated for this company. It is only accessible to employees while a drive is active."
+            },
+            "edit_page": {
+                "title": "Edit a company",
+                "subtitle": "Update the company's information and visual identity.",
+                "submit": "Save changes"
             }
         }
     },
