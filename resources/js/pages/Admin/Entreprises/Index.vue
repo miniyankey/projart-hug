@@ -1,10 +1,12 @@
 <script setup>
 import { Link, router } from '@inertiajs/vue3';
 import { Award, Pencil, Plus, Trash2 } from 'lucide-vue-next';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import CobrandLink from '@/components/admin/CobrandLink.vue';
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import { Button } from '@/components/ui/button';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import { create, destroy, edit } from '@/routes/admin/entreprises';
 
@@ -17,12 +19,34 @@ defineProps({
     },
 });
 
-function remove(company) {
-    if (!window.confirm(t('admin.entreprises.delete_confirm'))) {
+const companyToDelete = ref(null);
+const deleting = ref(false);
+
+function askRemove(company) {
+    companyToDelete.value = company;
+}
+
+function confirmRemove() {
+    if (!companyToDelete.value) {
         return;
     }
 
-    router.delete(destroy(company.id).url, { preserveScroll: true });
+    router.delete(destroy(companyToDelete.value.id).url, {
+        preserveScroll: true,
+        onStart: () => {
+            deleting.value = true;
+        },
+        onFinish: () => {
+            deleting.value = false;
+            companyToDelete.value = null;
+        },
+    });
+}
+
+function onDialogOpenChange(open) {
+    if (!open && !deleting.value) {
+        companyToDelete.value = null;
+    }
 }
 </script>
 
@@ -136,7 +160,7 @@ function remove(company) {
                                     type="button"
                                     class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-red-600 transition-colors hover:bg-red-50"
                                     :title="t('admin.entreprises.delete')"
-                                    @click="remove(company)"
+                                    @click="askRemove(company)"
                                 >
                                     <Trash2 class="size-4" />
                                 </button>
@@ -146,5 +170,23 @@ function remove(company) {
                 </tbody>
             </table>
         </div>
+
+        <ConfirmDialog
+            :open="companyToDelete !== null"
+            destructive
+            :title="t('admin.entreprises.delete_title')"
+            :description="
+                companyToDelete
+                    ? t('admin.entreprises.delete_description', {
+                          name: companyToDelete.name,
+                      })
+                    : ''
+            "
+            :confirm-label="t('admin.entreprises.delete')"
+            :cancel-label="t('admin.entreprises.create.cancel')"
+            :processing="deleting"
+            @update:open="onDialogOpenChange"
+            @confirm="confirmRemove"
+        />
     </AdminLayout>
 </template>
