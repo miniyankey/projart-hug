@@ -65,6 +65,8 @@ const prizeConfigs = {
     coup_de_coeur: { color: '#a05050', icon: Heart },
 };
 
+const prizes = ['grand_prix', 'progression', 'fidelite', 'coup_de_coeur'];
+
 const statConfigs = [
     { target: 30, suffix: ' %' },
     { target: 120, suffix: '+' },
@@ -604,85 +606,38 @@ onUnmounted(() => {
 
                     <div class="grid gap-6 lg:grid-cols-2">
                         <div
-                            v-for="prize in currentEdition.specialPrizes"
-                            :key="prize.id"
-                            class="anim-prix-card bg-white shadow-[6px_6px_0px_0px_#3d8080]"
+                            v-for="id in prizes"
+                            :key="id"
+                            class="anim-prix-card bg-white p-8 shadow-[6px_6px_0px_0px_#3d8080]"
                         >
-                            <!-- En-tête coloré -->
-                            <div
-                                class="flex items-center gap-3 px-6 py-4"
-                                :style="{
-                                    backgroundColor:
-                                        prizeConfigs[prize.id].color,
-                                }"
+                            <component
+                                :is="prizeConfigs[id].icon"
+                                :size="32"
+                                class="mb-5"
+                                :style="{ color: prizeConfigs[id].color }"
+                            />
+                            <h3
+                                class="font-pixel text-[0.75rem] leading-loose text-gray-900"
                             >
-                                <component
-                                    :is="prizeConfigs[prize.id].icon"
-                                    :size="18"
-                                    class="shrink-0 text-white"
-                                />
-                                <span
-                                    class="font-pixel text-[0.65rem] leading-loose text-white"
-                                >
-                                    {{
-                                        t(
-                                            `trophee.prix_honneur.${prize.id}.name`,
-                                        )
-                                    }}
-                                </span>
-                            </div>
-
-                            <!-- Critère -->
-                            <div class="border-b border-gray-100 px-6 py-2">
-                                <span class="text-xs text-gray-500 italic">
-                                    {{
-                                        t(
-                                            `trophee.prix_honneur.${prize.id}.criteria`,
-                                        )
-                                    }}
-                                </span>
-                            </div>
-
-                            <!-- Nominations -->
-                            <div class="flex flex-col divide-y divide-gray-100">
-                                <div
-                                    v-for="(nom, i) in prize.nominations"
-                                    :key="nom.name"
-                                    class="flex items-center gap-4 px-6 py-3"
-                                    :class="nom.isWinner ? 'bg-yellow-50' : ''"
-                                >
-                                    <span
-                                        class="w-5 shrink-0 font-pixel text-xs"
-                                        :class="
-                                            nom.isWinner
-                                                ? 'text-yellow-600'
-                                                : 'text-gray-400'
-                                        "
-                                    >
-                                        {{ i + 1 }}
-                                    </span>
-                                    <img
-                                        :src="nom.logo"
-                                        :alt="nom.name"
-                                        class="h-8 w-16 object-contain"
-                                    />
-                                    <span
-                                        class="flex-1 text-sm font-medium text-gray-800"
-                                    >
-                                        {{ nom.name }}
-                                    </span>
-                                    <span
-                                        v-if="nom.isWinner"
-                                        class="shrink-0 bg-yellow-200 px-2 py-0.5 font-pixel text-[0.5rem] text-yellow-800"
-                                    >
-                                        {{
-                                            t(
-                                                'trophee.prix_honneur.winner_label',
-                                            )
-                                        }}
-                                    </span>
-                                </div>
-                            </div>
+                                {{ t(`trophee.prix_honneur.${id}.name`) }}
+                            </h3>
+                            <div
+                                class="my-3 h-1 w-10"
+                                :style="{
+                                    backgroundColor: prizeConfigs[id].color,
+                                }"
+                            ></div>
+                            <p class="text-sm leading-relaxed text-gray-600">
+                                {{
+                                    t(`trophee.prix_honneur.${id}.description`)
+                                }}
+                            </p>
+                            <p
+                                class="mt-4 text-xs font-medium italic"
+                                :style="{ color: prizeConfigs[id].color }"
+                            >
+                                {{ t(`trophee.prix_honneur.${id}.tagline`) }}
+                            </p>
                         </div>
                     </div>
                 </div>
