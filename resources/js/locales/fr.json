@@ -145,7 +145,43 @@
         "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang."
     },
     "cobrand": {
-        "intro": "Collecte de sang organisée avec {company} et les HUG."
+        "intro": "Ton entreprise « {company} » organise une collecte de sang en partenariat avec les Hôpitaux Universitaires de Genève.",
+        "collecte": {
+            "eyebrow": "Collecte en cours",
+            "title": "Donnez votre sang, sauvez des vies",
+            "info": {
+                "date": "Date",
+                "horaires": "Horaires",
+                "lieu": "Lieu"
+            },
+            "cta_eligible": "Suis-je éligible ?",
+            "cta_rdv": "Prendre rendez-vous",
+            "map_alt": "Carte du lieu de la collecte",
+            "eligible_section_title": "Suis-je éligible ?",
+            "eligible_card_eyebrow": "Mini-jeu",
+            "eligible_card_title": "Jouer à notre jeu pour tester votre éligibilité !",
+            "eligible_card_text": "Vérifiez en quelques questions si vous pouvez donner votre sang lors de cette collecte.",
+            "eligible_card_cta": "Lancer le test",
+            "infos_title": "Informations utiles",
+            "faq": {
+                "q1": "Comment se préparer ?",
+                "a1": "Mangez et hydratez-vous bien avant de venir, évitez l'alcool et munissez-vous d'une pièce d'identité.",
+                "q2": "Comment se déroule la collecte ?",
+                "a2": "Un entretien confidentiel précède le don, qui dure environ 10 minutes. Une collation vous est offerte ensuite.",
+                "q3": "Combien de temps cela prend-il ?",
+                "a3": "Comptez environ 45 minutes au total, entre l'accueil, l'entretien, le don et le temps de repos.",
+                "q4": "Puis-je donner si je prends des médicaments ?",
+                "a4": "Cela dépend du traitement. Le test d'éligibilité et l'entretien médical sur place permettent de le vérifier.",
+                "q5": "Est-ce que le don est douloureux ?",
+                "a5": "Vous ne ressentez qu'une légère piqûre au moment de l'insertion de l'aiguille. Le prélèvement lui-même est indolore.",
+                "q6": "À quelle fréquence puis-je donner ?",
+                "a6": "Les hommes peuvent donner jusqu'à 4 fois par an et les femmes jusqu'à 3 fois, en respectant un délai minimum de 3 mois entre deux dons.",
+                "q7": "Que deviennent les dons collectés ?",
+                "a7": "Le sang est analysé, préparé puis distribué aux hôpitaux pour les patients qui en ont besoin : urgences, opérations, traitements du cancer.",
+                "q8": "Dois-je m'inscrire à l'avance ?",
+                "a8": "La prise de rendez-vous est recommandée pour limiter l'attente, mais vous pouvez aussi vous présenter spontanément pendant les horaires de la collecte."
+            }
+        }
     },
     "don_sang": {
         "intro": "Tout ce qu'il faut savoir sur le don du sang : conditions, déroulement et impact de votre geste."

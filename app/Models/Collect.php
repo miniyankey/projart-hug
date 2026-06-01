@@ -26,6 +26,8 @@ class Collect extends Model
         'company_id',
         'place_id',
         'day',
+        'start_time',
+        'end_time',
         'link_appointment',
         'token',
         'is_active',
