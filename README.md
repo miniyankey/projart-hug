@@ -12,7 +12,6 @@ Application web bâtie sur **Laravel 13 + Inertia v3 + Vue 3 + MariaDB**, conten
 - [Installation sans Docker](#installation-sans-docker)
 - [Workflow de développement](#workflow-de-développement)
 - [Commandes utiles](#commandes-utiles)
-- [Dépannage](#dépannage)
 - [Documentation détaillée](#documentation-détaillée)
 
 ---
@@ -291,18 +290,6 @@ Toutes les commandes s'exécutent **dans** le container `laravel.test`. Le préf
 > ```powershell
 > function dc { docker compose exec laravel.test $args }
 > ```
-
----
-
-## Dépannage
-
-- **`Unable to locate file in Vite manifest`** : les assets ne sont pas buildés. Lance `docker compose exec laravel.test npm run dev` (ou `npm run build`).
-- **Page blanche / erreur 500 au premier lancement** : vérifie que `php artisan key:generate` puis `migrate` ont bien tourné (étapes 5 et 6).
-- **Port 8000 ou 3307 déjà utilisé** : change `APP_PORT` / `FORWARD_DB_PORT` dans `.env` puis `docker compose up -d`.
-- **Problèmes de permissions sur les fichiers (Linux)** : assure-toi que `WWWUSER`/`WWWGROUP` dans `.env` correspondent à `id -u` / `id -g`, puis `docker compose up -d --build`.
-- **Connexion DB depuis l'hôte** (ex. DBeaver, TablePlus) : hôte `127.0.0.1`, port **3307**, base `projart_hug`, user `projart`, mot de passe `password`.
-
-Plus de détails : [`docs/docker/04-depannage.md`](docs/docker/04-depannage.md)
 
 ---
 

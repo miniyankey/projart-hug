@@ -1,10 +1,13 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
-    <Head title="Ajouter un vainqueur - Administration" />
+    <Head :title="t('admin.vainqueurs.create_title')" />
     <div>
-        <h1>Ajouter un vainqueur</h1>
+        <h1>{{ t('admin.vainqueurs.create_heading') }}</h1>
     </div>
 </template>
