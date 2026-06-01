@@ -5,6 +5,12 @@
             "en": "English"
         }
     },
+    "ui": {
+        "time_picker": {
+            "hours": "Hours",
+            "minutes": "Minutes"
+        }
+    },
     "languageSwitcher": {
         "label": "Language",
         "switchTo": "Switch to {language}"
