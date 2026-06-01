@@ -13,7 +13,7 @@ import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import hugLogo from '@/../images/logos/hug.png';
 import { logout } from '@/actions/App/Http/Controllers/AdminAuthController';
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher.vue';
 import { home } from '@/routes';
 import { index as adminIndex } from '@/routes/admin';
 import { index as collectesIndex } from '@/routes/admin/collectes';
