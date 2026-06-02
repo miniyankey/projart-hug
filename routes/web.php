@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
 use App\Http\Controllers\FormSubmissionController;
+use App\Http\Controllers\Kpi\CollectEventController;
+use App\Http\Controllers\Kpi\ContactFormConversionController;
 use App\Http\Controllers\LocaleController;
 use App\Models\Collect;
 use App\Models\Company;
@@ -22,6 +24,16 @@ Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
 Route::inertia('/eligibilite', 'Eligibilite')->name('eligibilite');
 Route::inertia('/certification', 'Certification')->name('certification');
+
+// Tracking KPI : endpoints publics « fire-and-forget » appelés depuis le front (pour register evetns)
+Route::prefix('/track')->name('track.')->middleware('throttle:60,1')->group(function () {
+    Route::post('/collecte-view', [CollectEventController::class, 'collecteView'])->name('collecte-view');
+    Route::post('/eligibilite-step', [CollectEventController::class, 'eligibiliteStep'])->name('eligibilite-step');
+    Route::post('/appointment-click', [CollectEventController::class, 'appointmentClick'])->name('appointment-click');
+    Route::post('/contact/click', [ContactFormConversionController::class, 'click'])->name('contact.click');
+    Route::post('/contact/sent', [ContactFormConversionController::class, 'sent'])->name('contact.sent');
+    Route::post('/contact/trophee', [ContactFormConversionController::class, 'trophee'])->name('contact.trophee');
+});
 
 // Administration
 Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
