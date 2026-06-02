@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { Calendar, Clock, MapPin } from 'lucide-vue-next';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import {
     Accordion,
@@ -11,16 +11,26 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { useDateFormatter } from '@/composables/useDates';
+import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { jeu as cobrandJeu } from '@/routes/cobrand';
 
 const { t } = useI18n();
 const { formatLongDate } = useDateFormatter();
+const { trackAppointmentClick, trackCollecteView } = useTracking();
 
 const props = defineProps({
     company: Object,
     token: String,
     collect: Object,
+});
+
+// Toute arrivée sur la page collecte alimente le haut du funnel RDV
+// (visiteur sans inscription = ligne avec appointment_click à false)
+onMounted(() => {
+    if (props.collect?.id) {
+        trackCollecteView(props.collect.id);
+    }
 });
 
 const routeParams = computed(() => ({
@@ -163,6 +173,12 @@ const mapUrl = computed(() => {
                                     :href="collect.link_appointment"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    @click="
+                                        trackAppointmentClick(
+                                            collect.id,
+                                            'collecte',
+                                        )
+                                    "
                                 >
                                     {{ t('cobrand.collecte.cta_rdv') }}
                                 </a>

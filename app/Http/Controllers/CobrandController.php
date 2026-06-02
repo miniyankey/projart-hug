@@ -29,7 +29,7 @@ class CobrandController extends Controller
     public function jeu(string $brandName, string $token): Response
     {
         $company = $this->resolveCompany($brandName, $token);
-        $this->resolveActiveCollect($company);
+        $collect = $this->resolveActiveCollect($company);
 
         $questions = GameQuestion::with(['choices.view'])
             ->orderBy('order')
@@ -38,6 +38,8 @@ class CobrandController extends Controller
         return Inertia::render('CoBranded/Jeu', [
             'token' => $token,
             'company' => $this->companyData($company),
+            // Identifie la collecte pour le tracking du funnel d'éligibilité
+            'collectId' => $collect->id,
             'questions' => $questions,
         ]);
     }
@@ -83,6 +85,7 @@ class CobrandController extends Controller
     private function collectData(Collect $collect): array
     {
         return [
+            'id' => $collect->id,
             'day' => $collect->day?->format('Y-m-d'),
             'start_time' => $collect->start_time ? substr((string) $collect->start_time, 0, 5) : null,
             'end_time' => $collect->end_time ? substr((string) $collect->end_time, 0, 5) : null,

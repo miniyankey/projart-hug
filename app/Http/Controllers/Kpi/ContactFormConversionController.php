@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Kpi;
 
+use App\Enums\FormSubmissionType;
 use App\Http\Controllers\Controller;
 use App\Models\ContactFormConversion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 
 class ContactFormConversionController extends Controller
 {
@@ -15,12 +17,12 @@ class ContactFormConversionController extends Controller
     public function click(Request $request): Response
     {
         $request->validate([
-            'session_id' => ['required', 'string'],
+            'type' => ['required', Rule::enum(FormSubmissionType::class)],
         ]);
 
         ContactFormConversion::updateOrCreate(
-            ['session_id' => $request->session_id],
-            ['form_click' => true]
+            ['session_id' => $request->session()->getId()],
+            ['type' => $request->type, 'form_click' => true]
         );
 
         return response()->noContent();
@@ -32,12 +34,12 @@ class ContactFormConversionController extends Controller
     public function sent(Request $request): Response
     {
         $request->validate([
-            'session_id' => ['required', 'string'],
+            'type' => ['required', Rule::enum(FormSubmissionType::class)],
         ]);
 
         ContactFormConversion::updateOrCreate(
-            ['session_id' => $request->session_id],
-            ['form_sent' => true]
+            ['session_id' => $request->session()->getId()],
+            ['type' => $request->type, 'form_sent' => true]
         );
 
         return response()->noContent();
@@ -49,13 +51,16 @@ class ContactFormConversionController extends Controller
     public function trophee(Request $request): Response
     {
         $request->validate([
-            'session_id' => ['required', 'string'],
+            'type' => ['required', Rule::enum(FormSubmissionType::class)],
             'trophee_participation' => ['required', 'boolean'],
         ]);
 
         ContactFormConversion::updateOrCreate(
-            ['session_id' => $request->session_id],
-            ['trophee_participation' => $request->boolean('trophee_participation')]
+            ['session_id' => $request->session()->getId()],
+            [
+                'type' => $request->type,
+                'trophee_participation' => $request->boolean('trophee_participation'),
+            ]
         );
 
         return response()->noContent();

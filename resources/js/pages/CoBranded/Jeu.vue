@@ -8,6 +8,9 @@ const { t } = useI18n();
 defineProps({
     company: Object,
     token: String,
+    // préparation du quiz, à terme à récupérer pour les KPIS
+    collectId: Number,
+    questions: Array,
 });
 </script>
 
