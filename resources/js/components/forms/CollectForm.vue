@@ -1,11 +1,12 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { store } from '@/actions/App/Http/Controllers/FormSubmissionController';
 import MultiDatePicker from '@/components/forms/MultiDatePicker.vue';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useTracking } from '@/composables/useTracking';
 
 const props = defineProps({
     company: {
@@ -15,6 +16,19 @@ const props = defineProps({
 });
 
 const { t } = useI18n();
+const { trackContactClick, trackContactSent, trackTrophee } = useTracking();
+
+// On ne trace la première interaction qu'une seule fois par montage du formulaire.
+const hasTrackedClick = ref(false);
+
+function handleFirstInteraction() {
+    if (hasTrackedClick.value) {
+        return;
+    }
+
+    hasTrackedClick.value = true;
+    trackContactClick(form.type);
+}
 
 const TYPE_CONTACT = 'contact';
 const TYPE_COLLECT = 'collect_request';
@@ -33,6 +47,12 @@ const form = useForm({
 });
 
 const isCollect = computed(() => form.type === TYPE_COLLECT);
+
+// Intérêt déclaré pour le Trophée : on trace chaque changement de la case.
+watch(
+    () => form.trophy_participation,
+    (participation) => trackTrophee(participation, form.type),
+);
 
 // Date minimale = demain (le back-end exige after:today)
 const minDate = computed(() => {
@@ -70,6 +90,7 @@ function submit() {
         preserveScroll: true,
         onSuccess: () => {
             status.value = 'success';
+            trackContactSent(form.type);
             form.reset(
                 'name',
                 'contact_email',
@@ -135,7 +156,12 @@ function submit() {
             }}
         </p>
 
-        <form class="flex flex-col gap-6" @submit.prevent="submit">
+        <!-- si un el est focus, ... -->
+        <form
+            class="flex flex-col gap-6"
+            @focusin="handleFirstInteraction"
+            @submit.prevent="submit"
+        >
             <!-- Nom -->
             <div class="flex flex-col gap-2">
                 <label
