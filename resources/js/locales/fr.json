@@ -133,6 +133,28 @@
                 "subtitle": "Mettez à jour les informations et l'identité visuelle de l'entreprise.",
                 "submit": "Enregistrer les modifications"
             }
+        },
+        "collectes": {
+            "index_title": "Collectes - Administration",
+            "title": "Collectes",
+            "create_title": "Ajouter une collecte - Administration",
+            "create_heading": "Ajouter une collecte",
+            "edit_title": "Modifier une collecte - Administration",
+            "edit_heading": "Modifier une collecte"
+        },
+        "kpi": {
+            "index_title": "KPI - Administration",
+            "title": "Métriques",
+            "show_title": "KPI collecte - Administration",
+            "show_heading": "Métriques de la collecte"
+        },
+        "vainqueurs": {
+            "index_title": "Vainqueurs - Administration",
+            "title": "Vainqueurs",
+            "create_title": "Ajouter un vainqueur - Administration",
+            "create_heading": "Ajouter un vainqueur",
+            "edit_title": "Modifier un vainqueur - Administration",
+            "edit_heading": "Modifier un vainqueur"
         }
     },
     "nav": {
@@ -146,7 +168,7 @@
         "don_sang_info": "Informations générales",
         "cta_creer_collecte": "Créer une collecte",
         "cta_inscrire_collecte": "S'inscrire à la collecte",
-        "main_site": "Site HUG",
+        "main_site": "Site général",
         "menu_open": "Ouvrir le menu",
         "menu_close": "Fermer le menu"
     },
@@ -297,6 +319,7 @@
             "bubble": "Rejoignez les champions du don de sang !"
         },
         "trophee_visuel": {
+            "tag": "Remis chaque année",
             "title": "Un trophée unique",
             "desc": "Ce trophée en cristal, gravé à l'effigie d'une poche de sang, est remis chaque année à l'entreprise ayant mobilisé le plus grand nombre de donneurs. Une récompense rare, pour un engagement exceptionnel.",
             "alt": "Trophée de la générosité - cristal gravé poche de sang"

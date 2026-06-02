@@ -133,6 +133,28 @@
                 "subtitle": "Update the company's information and visual identity.",
                 "submit": "Save changes"
             }
+        },
+        "collectes": {
+            "index_title": "Drives - Administration",
+            "title": "Drives",
+            "create_title": "Add a drive - Administration",
+            "create_heading": "Add a drive",
+            "edit_title": "Edit a drive - Administration",
+            "edit_heading": "Edit a drive"
+        },
+        "kpi": {
+            "index_title": "KPI - Administration",
+            "title": "Metrics",
+            "show_title": "Drive KPI - Administration",
+            "show_heading": "Drive metrics"
+        },
+        "vainqueurs": {
+            "index_title": "Winners - Administration",
+            "title": "Winners",
+            "create_title": "Add a winner - Administration",
+            "create_heading": "Add a winner",
+            "edit_title": "Edit a winner - Administration",
+            "edit_heading": "Edit a winner"
         }
     },
     "nav": {
@@ -146,7 +168,7 @@
         "don_sang_info": "General information",
         "cta_creer_collecte": "Create a blood drive",
         "cta_inscrire_collecte": "Sign up for the blood drive",
-        "main_site": "HUG Website",
+        "main_site": "General site",
         "menu_open": "Open menu",
         "menu_close": "Close menu"
     },
@@ -265,6 +287,7 @@
             "bubble": "Join the blood donation champions!"
         },
         "trophee_visuel": {
+            "tag": "Awarded every year",
             "title": "A unique trophy",
             "desc": "This crystal trophy, engraved with the image of a blood bag, is awarded each year to the company that mobilised the most donors. A rare reward for an exceptional commitment.",
             "alt": "Generosity Trophy - crystal engraved blood bag"
@@ -284,6 +307,30 @@
             "prev": "Previous edition",
             "next": "Next edition",
             "suspended": "Editions suspended from 2011 to 2025"
+        },
+        "prix_honneur": {
+            "title": "The honour awards",
+            "subtitle": "Beyond the podium, the CTS jury rewards the most remarkable commitments each year.",
+            "grand_prix": {
+                "name": "Grand Prix",
+                "description": "The company that mobilised the largest proportion of its employees to donate blood, with a minimum of 10 effective donors during the edition.",
+                "tagline": "The best of the year"
+            },
+            "progression": {
+                "name": "Progression Award",
+                "description": "The company that progressed the most from one edition to the next, regardless of its starting level. Reserved for companies present for at least two years.",
+                "tagline": "For companies that improve"
+            },
+            "fidelite": {
+                "name": "Loyalty Award",
+                "description": "The company that has organised blood drives without interruption for the greatest number of consecutive years. Eligible from three years.",
+                "tagline": "For companies that last"
+            },
+            "coup_de_coeur": {
+                "name": "CTS Favourite",
+                "description": "The surprise award of the year: a company whose mobilisation, context or commitment particularly impressed the Blood Transfusion Centre jury.",
+                "tagline": "The surprise of the year"
+            }
         },
         "histoire": {
             "title": "An idea born in 2008, relaunched in 2026",
@@ -381,6 +428,7 @@
             "description": "The CTS Label recognises companies that integrate blood donation into their corporate social responsibility policy. A visible, measurable and valuable commitment.",
             "certified_count": "{count} certified companies",
             "link": "Discover the label",
+            "learn_more": "Learn more",
             "visual_placeholder": "CTS label visual - to be integrated"
         },
         "stats": {

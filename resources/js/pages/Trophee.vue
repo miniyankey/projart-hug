@@ -405,7 +405,7 @@ onUnmounted(() => {
                             <span
                                 class="inline-block bg-yellow-300 px-3 py-1 font-pixel text-[0.6rem] tracking-widest text-black uppercase"
                             >
-                                Remis chaque année
+                                {{ t('trophee.trophee_visuel.tag') }}
                             </span>
                             <h2
                                 class="anim-trophy-title mt-6 font-pixel text-[1.5rem] leading-loose text-white"
