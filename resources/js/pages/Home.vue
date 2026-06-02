@@ -1,10 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import PodiumCard from '@/components/cards/PodiumCard.vue';
-import SpeechBubble from '@/components/cards/SpeechBubble.vue';
 import StepCard from '@/components/cards/StepCard.vue';
 import {
     Accordion,
@@ -58,72 +57,49 @@ onMounted(() => {
                 '-=0.35',
             );
 
-        // Mascotte - entrée depuis la droite + flottement infini
-        gsap.timeline()
-            .from('.anim-hero-mascot', {
-                x: 80,
-                opacity: 0,
-                rotation: -8,
-                duration: 1,
-                ease: 'back.out(1.4)',
-                delay: 0.2,
-            })
-            .to(
-                '.anim-hero-mascot',
-                {
-                    y: -16,
-                    rotation: 2,
-                    duration: 2.4,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: 'sine.inOut',
-                },
-                '+=0.1',
-            );
-
         gsap.to('.anim-hero-title', {
             text: t('home.hero.title'),
             duration: 1.4,
             ease: 'none',
         });
 
-        // Bulle - pop in
-        gsap.from('.anim-hero-bubble', {
-            opacity: 0,
-            scale: 0.5,
-            duration: 0.5,
-            delay: 1.1,
-            ease: 'back.out(2.5)',
-        });
-
         // ── Section Trophée ───────────────────────────────────
-        gsap.from('.anim-trophee-text > *', {
+        gsap.from(
+            '.anim-trophee-text > span, .anim-trophee-text > h2, .anim-trophee-text > p',
+            {
+                opacity: 0,
+                x: -50,
+                stagger: 0.18,
+                duration: 0.75,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.anim-trophee-text',
+                    start: 'top 80%',
+                    once: true,
+                },
+            },
+        );
+
+        gsap.from('.anim-trophee-btn', {
             opacity: 0,
-            x: -50,
-            stagger: 0.18,
-            duration: 0.75,
-            ease: 'power3.out',
+            y: 10,
+            duration: 0.5,
+            delay: 0.55,
+            ease: 'power2.out',
             scrollTrigger: {
                 trigger: '.anim-trophee-text',
-                start: 'top 75%',
+                start: 'top 80%',
+                once: true,
             },
         });
 
-        gsap.timeline({
+        gsap.from('.anim-podium-1', {
+            opacity: 0,
+            scale: 0.97,
+            duration: 1,
+            ease: 'power3.out',
             scrollTrigger: { trigger: '.anim-podium-1', start: 'top 80%' },
-            defaults: { ease: 'power3.out' },
-        })
-            .from('.anim-podium-3', { y: 120, opacity: 0, duration: 1.1 })
-            .from(
-                '.anim-podium-2',
-                { y: 120, opacity: 0, duration: 1.1 },
-                '-=0.6',
-            )
-            .from(
-                '.anim-podium-1',
-                { y: 120, opacity: 0, duration: 1.1 },
-                '-=0.6',
-            );
+        });
 
         gsap.to('.anim-trophee-title', {
             text: t('home.trophee.title'),
@@ -237,6 +213,7 @@ onMounted(() => {
             ease: 'power2.out',
             scrollTrigger: { trigger: '.anim-faq-item', start: 'top 85%' },
         });
+        ScrollTrigger.refresh();
     }, root.value);
 });
 
@@ -251,57 +228,45 @@ onUnmounted(() => {
 
         <div ref="root">
             <!-- Hero -->
-            <section style="background-color: #ede9f8" class="py-24 lg:py-36">
+            <section
+                class="py-24 lg:py-36"
+                style="
+                    background-image: url('/img/Bg.webp');
+                    background-size: cover;
+                    background-position: center;
+                "
+            >
                 <div class="mx-auto max-w-7xl px-6">
-                    <div class="grid items-center gap-10 lg:grid-cols-2">
-                        <!-- Texte -->
-                        <div>
-                            <h1
-                                class="anim-hero-title font-pixel text-[1.35rem] leading-loose text-gray-900"
+                    <div class="max-w-xl">
+                        <h1
+                            class="anim-hero-title font-pixel text-[1.35rem] leading-loose text-gray-900"
+                        >
+                            {{ t('home.hero.title') }}
+                        </h1>
+                        <p
+                            class="anim-hero-subtitle mt-8 max-w-md leading-relaxed text-gray-700"
+                        >
+                            {{ t('home.hero.subtitle') }}
+                        </p>
+                        <p
+                            class="anim-hero-game-cta mt-6 max-w-md font-semibold text-gray-900"
+                        >
+                            {{ t('home.hero.game_cta') }}
+                        </p>
+                        <div class="anim-hero-ctas mt-8 flex flex-wrap gap-4">
+                            <Button variant="pixel_violet">
+                                <Link :href="routes.collecte.url()">
+                                    {{ t('home.hero.cta_primary') }}
+                                </Link>
+                            </Button>
+                            <Button
+                                variant="pixel_blue"
+                                class="border border-blue-600 text-white"
                             >
-                                {{ t('home.hero.title') }}
-                            </h1>
-                            <p
-                                class="anim-hero-subtitle mt-8 max-w-md leading-relaxed text-gray-700"
-                            >
-                                {{ t('home.hero.subtitle') }}
-                            </p>
-                            <p
-                                class="anim-hero-game-cta mt-6 max-w-md font-semibold text-gray-900"
-                            >
-                                {{ t('home.hero.game_cta') }}
-                            </p>
-                            <div
-                                class="anim-hero-ctas mt-8 flex flex-wrap gap-4"
-                            >
-                                <Button variant="pixel_violet">
-                                    <Link :href="routes.collecte.url()">
-                                        {{ t('home.hero.cta_primary') }}
-                                    </Link>
-                                </Button>
-                                <Button
-                                    variant="pixel_blue"
-                                    class="border border-blue-600 text-white"
-                                >
-                                    <Link :href="routes.eligibilite.url()">
-                                        {{ t('home.hero.cta_secondary') }}
-                                    </Link>
-                                </Button>
-                            </div>
-                        </div>
-
-                        <!-- Mascotte -->
-                        <div class="flex flex-col items-center lg:items-end">
-                            <SpeechBubble
-                                :text="t('home.hero.bubble')"
-                                class="anim-hero-bubble mb-8 max-w-xs self-start"
-                            />
-                            <img
-                                src="/img/mascotte.png"
-                                :alt="t('home.hero.mascot_alt')"
-                                class="anim-hero-mascot w-72 lg:w-96"
-                                style="image-rendering: pixelated"
-                            />
+                                <Link :href="routes.eligibilite.url()">
+                                    {{ t('home.hero.cta_secondary') }}
+                                </Link>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -312,11 +277,6 @@ onUnmounted(() => {
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="grid items-start gap-12 lg:grid-cols-2">
                         <div class="anim-trophee-text">
-                            <span
-                                class="inline-block rounded border border-gray-300 px-2.5 py-1 text-xs font-medium tracking-wide text-gray-600 uppercase"
-                            >
-                                {{ t('home.trophee.label') }}
-                            </span>
                             <h2
                                 class="anim-trophee-title mt-4 text-3xl font-semibold text-gray-900"
                             >
@@ -328,7 +288,7 @@ onUnmounted(() => {
                             <Button
                                 as-child
                                 variant="pixel_violet"
-                                class="mt-6"
+                                class="anim-trophee-btn mt-6"
                             >
                                 <Link :href="routes.trophee.url()">
                                     {{ t('home.trophee.link') }}
@@ -336,30 +296,11 @@ onUnmounted(() => {
                             </Button>
                         </div>
 
-                        <div class="flex items-end justify-center gap-3">
-                            <PodiumCard
-                                :rank="2"
-                                logo-src="/img/migros.png"
-                                logo-alt="Migros"
-                                :category="t('home.trophee.winners_title')"
-                                description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
-                                class="anim-podium-2 hidden w-40 lg:flex"
-                            />
-                            <PodiumCard
-                                :rank="1"
-                                logo-src="/img/rolex.svg"
-                                logo-alt="Rolex"
-                                :category="t('home.trophee.winners_title')"
-                                description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
-                                class="anim-podium-1 w-40"
-                            />
-                            <PodiumCard
-                                :rank="3"
-                                logo-src="/img/nestle.png"
-                                logo-alt="Nestlé"
-                                :category="t('home.trophee.winners_title')"
-                                description="A gagné pour avoir cumulé plus de 500 dons dans l'année."
-                                class="anim-podium-3 hidden w-40 lg:flex"
+                        <div class="anim-podium-1 overflow-hidden rounded-xl">
+                            <img
+                                src="/img/winners.webp"
+                                :alt="t('home.trophee.winners_title')"
+                                class="h-full w-full object-cover"
                             />
                         </div>
                     </div>
@@ -480,7 +421,7 @@ onUnmounted(() => {
                     <div class="anim-steps-cta mt-12">
                         <Button as-child variant="pixel_violet">
                             <Link :href="routes.collecte.url()">
-                                > {{ t('home.steps.cta') }}
+                                {{ t('home.steps.cta') }}
                             </Link>
                         </Button>
                     </div>
