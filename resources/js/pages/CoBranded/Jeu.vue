@@ -14,7 +14,6 @@ const props = defineProps({
     token: String,
     // préparation du quiz, à terme à récupérer pour les KPIS
     collectId: Number,
-    questions: Array,
 });
 
 const phase = ref('intro'); // 'intro' | 'map' | 'question' | 'result' | 'finished'
