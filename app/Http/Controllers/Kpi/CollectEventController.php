@@ -63,4 +63,24 @@ class CollectEventController extends Controller
 
         return response()->noContent();
     }
+
+    /**
+     * Track a view of the co-branded collect page (top of the appointment
+     * funnel). Ensures a row exists without touching appointment_click, so a
+     * visitor who never clicks the appointment link stays at false.
+     */
+    public function collecteView(Request $request): Response
+    {
+        $request->validate([
+            'session_id' => ['required', 'string'],
+            'collect_id' => ['required', 'exists:collects,id'],
+        ]);
+
+        EventsConversion::firstOrCreate([
+            'session_id' => $request->session_id,
+            'collect_id' => $request->collect_id,
+        ]);
+
+        return response()->noContent();
+    }
 }
