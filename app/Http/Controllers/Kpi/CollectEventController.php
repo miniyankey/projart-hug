@@ -17,7 +17,6 @@ class CollectEventController extends Controller
     public function eligibiliteStep(Request $request): Response
     {
         $request->validate([
-            'session_id' => ['required', 'string'],
             'collect_id' => ['required', 'exists:collects,id'],
             'step' => ['required', 'integer', 'min:1'],
             'result' => ['nullable', 'string'],
@@ -26,7 +25,7 @@ class CollectEventController extends Controller
 
         EventsEligibiliteStep::updateOrCreate(
             [
-                'session_id' => $request->session_id,
+                'session_id' => $request->session()->getId(),
                 'collect_id' => $request->collect_id,
                 'step' => $request->step,
             ],
@@ -45,14 +44,13 @@ class CollectEventController extends Controller
     public function appointmentClick(Request $request): Response
     {
         $request->validate([
-            'session_id' => ['required', 'string'],
             'collect_id' => ['required', 'exists:collects,id'],
             'source' => ['nullable', 'string'],
         ]);
 
         EventsConversion::updateOrCreate(
             [
-                'session_id' => $request->session_id,
+                'session_id' => $request->session()->getId(),
                 'collect_id' => $request->collect_id,
             ],
             [
@@ -72,12 +70,11 @@ class CollectEventController extends Controller
     public function collecteView(Request $request): Response
     {
         $request->validate([
-            'session_id' => ['required', 'string'],
             'collect_id' => ['required', 'exists:collects,id'],
         ]);
 
         EventsConversion::firstOrCreate([
-            'session_id' => $request->session_id,
+            'session_id' => $request->session()->getId(),
             'collect_id' => $request->collect_id,
         ]);
 
