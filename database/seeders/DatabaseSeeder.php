@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             TropheeSeeder::class,
             FormSubmissionSeeder::class,
             GameQuestionSeeder::class,
+            KpiTrackingSeeder::class,
         ]);
     }
 }
