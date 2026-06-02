@@ -5,6 +5,12 @@
             "en": "English"
         }
     },
+    "ui": {
+        "time_picker": {
+            "hours": "Hours",
+            "minutes": "Minutes"
+        }
+    },
     "languageSwitcher": {
         "label": "Language",
         "switchTo": "Switch to {language}"
@@ -135,12 +141,62 @@
             }
         },
         "collectes": {
-            "index_title": "Drives - Administration",
             "title": "Drives",
-            "create_title": "Add a drive - Administration",
-            "create_heading": "Add a drive",
-            "edit_title": "Edit a drive - Administration",
-            "edit_heading": "Edit a drive"
+            "subtitle": "Plan and manage the blood drives organized at partner companies.",
+            "new": "New drive",
+            "col_company": "Company",
+            "col_place": "Location",
+            "col_date": "Date",
+            "col_status": "Status",
+            "col_actions": "Actions",
+            "status_active": "Active",
+            "status_inactive": "Inactive",
+            "empty": "No drives yet.",
+            "edit": "Edit",
+            "delete": "Delete",
+            "delete_title": "Delete drive",
+            "delete_description": "Do you really want to delete the drive for \"{company}\" on {date}? This action cannot be undone.",
+            "create": {
+                "title": "New drive",
+                "subtitle": "Link a company to a location and schedule the drive date.",
+                "section_general": "Company and location",
+                "section_schedule": "Date and times",
+                "section_options": "Options",
+                "company": "Company",
+                "company_placeholder": "Select a company",
+                "place": "Location",
+                "place_placeholder": "Select a location",
+                "place_new_option": "+ Add a new location",
+                "new_place_title": "New location",
+                "place_name": "Location name",
+                "place_name_placeholder": "E.g. Rolex SA headquarters",
+                "place_address": "Address",
+                "place_address_placeholder": "Street and number",
+                "place_locality": "ZIP",
+                "place_locality_placeholder": "1201",
+                "place_city": "City",
+                "place_city_placeholder": "Geneva",
+                "place_room": "Room / details",
+                "place_room_placeholder": "E.g. Conference room (optional)",
+                "day": "Drive date",
+                "day_placeholder": "Pick a date",
+                "start_time": "Start time",
+                "end_time": "End time",
+                "link_appointment": "Appointment booking link",
+                "link_appointment_placeholder": "https://...",
+                "is_active": "Active drive (visible on the co-branded link)",
+                "submit": "Create drive",
+                "cancel": "Cancel",
+                "preview_title": "Drive preview",
+                "preview_company": "Company",
+                "preview_empty": "To be set",
+                "preview_hint": "Indicative preview of the drive as it will appear in the dashboard and on the company's co-branded link."
+            },
+            "edit_page": {
+                "title": "Edit a drive",
+                "subtitle": "Update the drive's information and schedule.",
+                "submit": "Save changes"
+            }
         },
         "kpi": {
             "index_title": "KPI - Administration",

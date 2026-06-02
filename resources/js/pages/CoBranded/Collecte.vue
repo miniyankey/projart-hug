@@ -10,11 +10,12 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { useDateFormatter } from '@/composables/useDates';
 import PublicLayout from '@/layouts/PublicLayout.vue';
-import { formatDay } from '@/lib/utils';
 import { jeu as cobrandJeu } from '@/routes/cobrand';
 
 const { t } = useI18n();
+const { formatLongDate } = useDateFormatter();
 
 const props = defineProps({
     company: Object,
@@ -94,7 +95,7 @@ const mapUrl = computed(() => {
                                         {{ t('cobrand.collecte.info.date') }}
                                     </dt>
                                     <dd class="mt-1 font-medium text-gray-900">
-                                        {{ formatDay(collect?.day) }}
+                                        {{ formatLongDate(collect?.day) }}
                                     </dd>
                                 </div>
                             </div>

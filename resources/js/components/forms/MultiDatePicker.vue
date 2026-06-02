@@ -9,6 +9,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover';
+import { useDateFormatter } from '@/composables/useDates';
 
 const props = defineProps({
     modelValue: {
@@ -20,6 +21,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 
 const { t, locale } = useI18n();
+const { formatLongDate } = useDateFormatter();
 
 // Le back-end exige des dates strictement après aujourd'hui.
 const minValue = today(getLocalTimeZone()).add({ days: 1 });
@@ -41,16 +43,6 @@ function removeDate(value) {
         'update:modelValue',
         props.modelValue.filter((date) => date !== value),
     );
-}
-
-function formatDate(value) {
-    return parseDate(value)
-        .toDate(getLocalTimeZone())
-        .toLocaleDateString(locale.value, {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric',
-        });
 }
 </script>
 
@@ -92,7 +84,7 @@ function formatDate(value) {
                 :key="date"
                 class="flex items-center gap-2 border-2 border-black bg-white px-2 py-1 font-mono text-xs text-[#2D1B4E] shadow-[2px_2px_0_0_#000]"
             >
-                {{ formatDate(date) }}
+                {{ formatLongDate(date) }}
                 <button
                     type="button"
                     class="text-[#2D1B4E] hover:text-red-700"

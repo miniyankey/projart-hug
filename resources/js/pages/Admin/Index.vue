@@ -6,11 +6,12 @@ import { showRegister } from '@/actions/App/Http/Controllers/AdminAuthController
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import StatCard from '@/components/admin/StatCard.vue';
 import { Button } from '@/components/ui/button';
+import { useDateFormatter } from '@/composables/useDates';
 import AdminLayout from '@/layouts/AdminLayout.vue';
-import { formatDay } from '@/lib/utils';
 import { collecte as cobrandCollecte } from '@/routes/cobrand';
 
 const { t } = useI18n();
+const { formatLongDate } = useDateFormatter();
 
 defineProps({
     stats: {
@@ -114,7 +115,7 @@ function cobrandUrl(collect) {
                                 </div>
                             </td>
                             <td class="px-5 py-4 text-gray-700">
-                                {{ formatDay(collect.day) }}
+                                {{ formatLongDate(collect.day) }}
                             </td>
                             <td class="px-5 py-4 text-gray-700">
                                 {{ collect.city ?? '-' }}

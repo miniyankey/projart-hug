@@ -5,6 +5,12 @@
             "en": "Anglais"
         }
     },
+    "ui": {
+        "time_picker": {
+            "hours": "Heures",
+            "minutes": "Minutes"
+        }
+    },
     "languageSwitcher": {
         "label": "Langue",
         "switchTo": "Passer en {language}"
@@ -135,12 +141,62 @@
             }
         },
         "collectes": {
-            "index_title": "Collectes - Administration",
             "title": "Collectes",
-            "create_title": "Ajouter une collecte - Administration",
-            "create_heading": "Ajouter une collecte",
-            "edit_title": "Modifier une collecte - Administration",
-            "edit_heading": "Modifier une collecte"
+            "subtitle": "Planifiez et gérez les collectes de sang organisées chez les entreprises partenaires.",
+            "new": "Nouvelle collecte",
+            "col_company": "Entreprise",
+            "col_place": "Lieu",
+            "col_date": "Date",
+            "col_status": "Statut",
+            "col_actions": "Actions",
+            "status_active": "En cours",
+            "status_inactive": "Inactive",
+            "empty": "Aucune collecte pour le moment.",
+            "edit": "Modifier",
+            "delete": "Supprimer",
+            "delete_title": "Supprimer la collecte",
+            "delete_description": "Voulez-vous vraiment supprimer la collecte de « {company} » du {date} ? Cette action est irréversible.",
+            "create": {
+                "title": "Nouvelle collecte",
+                "subtitle": "Associez une entreprise à un lieu et planifiez la date de la collecte.",
+                "section_general": "Entreprise et lieu",
+                "section_schedule": "Date et horaires",
+                "section_options": "Options",
+                "company": "Entreprise",
+                "company_placeholder": "Sélectionnez une entreprise",
+                "place": "Lieu",
+                "place_placeholder": "Sélectionnez un lieu",
+                "place_new_option": "+ Ajouter un nouveau lieu",
+                "new_place_title": "Nouveau lieu",
+                "place_name": "Nom du lieu",
+                "place_name_placeholder": "Ex : Siège Rolex SA",
+                "place_address": "Adresse",
+                "place_address_placeholder": "Rue et numéro",
+                "place_locality": "NPA",
+                "place_locality_placeholder": "1201",
+                "place_city": "Ville",
+                "place_city_placeholder": "Genève",
+                "place_room": "Salle / précision",
+                "place_room_placeholder": "Ex : Salle de conférence (optionnel)",
+                "day": "Date de la collecte",
+                "day_placeholder": "Choisir une date",
+                "start_time": "Heure de début",
+                "end_time": "Heure de fin",
+                "link_appointment": "Lien de prise de rendez-vous",
+                "link_appointment_placeholder": "https://...",
+                "is_active": "Collecte active (visible sur le lien co-brandé)",
+                "submit": "Créer la collecte",
+                "cancel": "Annuler",
+                "preview_title": "Aperçu de la collecte",
+                "preview_company": "Entreprise",
+                "preview_empty": "À renseigner",
+                "preview_hint": "Aperçu indicatif de la collecte telle qu'elle apparaîtra dans le tableau de bord et sur le lien co-brandé de l'entreprise."
+            },
+            "edit_page": {
+                "title": "Modifier une collecte",
+                "subtitle": "Mettez à jour les informations et la planification de la collecte.",
+                "submit": "Enregistrer les modifications"
+            }
         },
         "kpi": {
             "index_title": "KPI - Administration",

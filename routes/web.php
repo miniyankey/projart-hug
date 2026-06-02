@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
@@ -64,9 +65,12 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     });
 
     Route::prefix('/collectes')->name('collectes.')->group(function () {
-        Route::inertia('/', 'Admin/Collectes/Index')->name('index');
-        Route::inertia('/create', 'Admin/Collectes/Create')->name('create');
-        Route::get('/{collecte}/edit', fn () => Inertia::render('Admin/Collectes/Edit'))->name('edit');
+        Route::get('/', [CollectController::class, 'index'])->name('index');
+        Route::get('/create', [CollectController::class, 'create'])->name('create');
+        Route::post('/', [CollectController::class, 'store'])->name('store');
+        Route::get('/{collecte}/edit', [CollectController::class, 'edit'])->name('edit');
+        Route::put('/{collecte}', [CollectController::class, 'update'])->name('update');
+        Route::delete('/{collecte}', [CollectController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('/kpi')->name('kpi.')->group(function () {
