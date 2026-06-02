@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\KpiController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
 use App\Http\Controllers\FormSubmissionController;
@@ -86,8 +87,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     });
 
     Route::prefix('/kpi')->name('kpi.')->group(function () {
-        Route::inertia('/', 'Admin/Kpi/Index')->name('index');
-        Route::get('/{token}', fn () => Inertia::render('Admin/Kpi/Show'))->name('show');
+        Route::get('/', [KpiController::class, 'index'])->name('index');
+        Route::get('/{company:token}', [KpiController::class, 'show'])->name('show');
     });
 
     Route::get('/register', [AdminAuthController::class, 'showRegister'])->name('register');
