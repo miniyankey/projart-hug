@@ -11,6 +11,7 @@ class ContactFormConversion extends Model
      */
     protected $fillable = [
         'session_id',
+        'type',
         'form_click',
         'form_sent',
         'trophee_participation',
