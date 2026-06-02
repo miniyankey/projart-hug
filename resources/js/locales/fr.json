@@ -210,6 +210,7 @@
         "don_sang_info": "Informations générales",
         "cta_creer_collecte": "Créer une collecte",
         "cta_inscrire_collecte": "S'inscrire à la collecte",
+        "main_site": "Site HUG",
         "menu_open": "Ouvrir le menu",
         "menu_close": "Fermer le menu"
     },
@@ -257,7 +258,39 @@
         }
     },
     "don_sang": {
-        "intro": "Tout ce qu'il faut savoir sur le don du sang : conditions, déroulement et impact de votre geste."
+        "intro": "Tout ce qu'il faut savoir sur le don du sang : conditions, déroulement et impact de votre geste.",
+        "hero": {
+            "eyebrow": "Don du sang",
+            "title": "Votre geste sauve des vies.",
+            "subtitle": "En participant à la collecte organisée par votre entreprise, un seul don peut sauver jusqu'à 3 vies. Voici tout ce qu'il faut savoir avant de vous lancer.",
+            "cta_eligible": "Suis-je éligible ?",
+            "cta_collecte": "Voir la collecte"
+        },
+        "impact": {
+            "stat1_value": "3",
+            "stat1_label": "vies sauvées par un seul don",
+            "stat2_value": "45 min",
+            "stat2_label": "c'est tout le temps que ça prend",
+            "stat3_value": "500 mL",
+            "stat3_label": "de sang prélevé, pas plus"
+        },
+        "deroulement": {
+            "title": "Comment ça se passe ?",
+            "subtitle": "Le don du sang se déroule en 4 étapes simples, dans un cadre médical sécurisé.",
+            "step1_title": "Inscription",
+            "step1_desc": "Prenez rendez-vous via le lien de la collecte ou présentez-vous directement sur place.",
+            "step2_title": "Entretien médical",
+            "step2_desc": "Un médecin vérifie votre aptitude au don en toute confidentialité. Rapide et bienveillant.",
+            "step3_title": "Le don",
+            "step3_desc": "Le prélèvement dure environ 10 minutes. Vous êtes allongé(e) et accompagné(e) tout au long.",
+            "step4_title": "Collation",
+            "step4_desc": "Une pause boisson et collation vous est offerte. Vous repartez en pleine forme quelques minutes plus tard."
+        },
+        "cta": {
+            "title": "Êtes-vous éligible ?",
+            "subtitle": "Quelques questions suffisent pour le savoir. Faites le test — ça ne prend qu'une minute.",
+            "button": "Faire le test d'éligibilité"
+        }
     },
     "certification": {
         "title": "Label CTS RSE",

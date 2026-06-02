@@ -85,6 +85,7 @@ const brandVars = computed(() => {
             :cta="cta"
             :company="company"
             :home-url="routes.home.url()"
+            :normal-site-url="routes.home.url()"
         />
 
         <main class="flex-1">
