@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import { index, update } from '@/routes/admin/collectes';
 
-const { t } = useI18n();
-
 const props = defineProps({
     collect: {
         type: Object,
@@ -23,6 +21,8 @@ const props = defineProps({
         default: () => [],
     },
 });
+
+const { t } = useI18n();
 </script>
 
 <template>

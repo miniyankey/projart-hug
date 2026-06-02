@@ -25,7 +25,7 @@ class TropheeSeeder extends Seeder
                 'company_id' => $companies[$i % $companies->count()]->id,
                 'name' => 'Trophée de la générosité '.$year,
                 'year_of' => $year,
-                'description' => fake()->optional(0.6)->sentence(),
+                'description' => \fake()->optional(0.6)->sentence(),
             ]);
         }
     }
