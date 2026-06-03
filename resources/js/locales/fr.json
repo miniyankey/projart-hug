@@ -46,7 +46,10 @@
         "winner_deleted": "Vainqueur supprimé.",
         "submission_deleted": "Demande supprimée.",
         "form_submission_sent": "Votre demande a bien été envoyée.",
-        "admin_created": "Compte administrateur créé avec succès."
+        "admin_created": "Compte administrateur créé avec succès.",
+        "reminder_scheduled": "C'est noté ! Nous vous écrirons dès que vous pourrez à nouveau donner.",
+        "reminder_already_eligible": "Bonne nouvelle : vous êtes déjà éligible, pas besoin de rappel !",
+        "reminder_lifetime": "D'après vos réponses, le don n'est malheureusement pas possible pour vous. Aucun rappel ne sera envoyé."
     },
     "admin": {
         "nav": {
@@ -300,7 +303,14 @@
     },
     "eligibilite": {
         "title": "Pouvez-vous donner ?",
-        "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang."
+        "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang.",
+        "reminder": {
+            "title": "Pas encore éligible ?",
+            "intro": "Laissez-nous votre adresse e-mail : nous vous préviendrons dès que vous pourrez à nouveau donner votre sang.",
+            "email": "Adresse e-mail",
+            "email_placeholder": "vous@exemple.ch",
+            "submit": "Me prévenir"
+        }
     },
     "cobrand": {
         "intro": "Ton entreprise « {company} » organise une collecte de sang en partenariat avec les Hôpitaux Universitaires de Genève.",
