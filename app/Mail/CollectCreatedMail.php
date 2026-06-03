@@ -100,6 +100,7 @@ class CollectCreatedMail extends Mailable implements ShouldQueue
 
         $line = $place->name;
 
+          //opérateur de concaténation de chaînes en PHP : on ajoute à la suite du nom de lieu, entre parenthèses, le numéro de salle s'il est renseigné, puis la ville si elle est renseignée
         if ($place->room) {
             $line .= ' ('.$place->room.')';
         }
