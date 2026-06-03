@@ -4,7 +4,7 @@
 
 Le jeu est un parcours interactif qui pose à l'utilisateur une série de questions pour déterminer s'il est éligible au don de sang. Il se présente comme une carte pixel art que l'utilisateur parcourt en scrollant. À chaque checkpoint correspond une question. À la fin du parcours, l'utilisateur est soit invité à s'inscrire à une collecte, soit informé de son inéligibilité (temporaire ou permanente). L'inéligibilité est aussi informée lors de la réponse inéligible à une question.
 
-Le jeu est intégré dans une page Inertia Vue. Les données des questions sont transmises via les props Inertia depuis le `CobrandController`. L'état du jeu est maintenu en mémoire avec `<KeepAlive>` — si l'onglet est fermé, la progression est perdue et le jeu recommence.
+Le jeu est intégré dans une page Inertia Vue. Le quiz (structure + traductions) est défini **côté front** (voir §3), pas en base de données. L'état du jeu est maintenu en mémoire — si l'onglet est fermé, la progression est perdue et le jeu recommence.
 
 ---
 
@@ -131,32 +131,33 @@ En haut de l'écran, une barre de progression indique `question actuelle / total
 
 ## 3. Fonctionnement technique
 
-### Données
+### Données — quiz côté front + i18n (PAS de base de données)
 
-Les questions sont transmises depuis le `CobrandController` via les **props Inertia** :
+Le quiz n'est **plus** en base de données. Il vit côté front :
 
-```json
+- **`resources/js/data/eligibilityQuiz.js`** — la *structure* (logique) : pour
+  chaque question `{ key, type, choices: [{ key, eligible, days, view? }] }`.
+  `days` = jours d'inéligibilité (`-1` à vie, `null` aucune). `view` référence
+  une vue d'explication. `QUIZ_VIEWS` porte les données non traduisibles (URL de CTA).
+- **`resources/js/locales/{fr,en}.json`** sous `eligibilite.quiz.*` — tout le
+  *texte* (titre, question, why, libellés des choix, textes des vues), plus
+  `eligibilite.ui.*` (boutons, badges) et `eligibilite.ineligible.*` /
+  `eligibilite.duration.*` (vues génériques + durées avec pluralisation).
+- **`resources/js/composables/useEligibilityQuiz.js`** — assemble structure +
+  traductions en objets `question` (réactif au changement de langue) et fournit
+  `ineligibleView(days)`.
+
+Les contrôleurs (`CobrandController::jeu`, `EligibiliteController::index`) ne
+transmettent **aucune** donnée de question ; ils rendent seulement la page
+(+ `company`/`token` en mode co-brandé). Ajouter/traduire une question = éditer
+le data module + les locales.
+
+L'objet `question` assemblé garde la forme :
+
+```js
 {
-  "questions": [
-    {
-      "id": 1,
-      "titre": "Inéligibilité à vie",
-      "question": "Coche toutes les situations...",
-      "type": "multiple",
-      "why_question": "Certaines personnes ne peuvent pas...",
-      "order": 1,
-      "choices": [
-        {
-          "id": 1,
-          "text": "VIH/SIDA",
-          "eligible": false,
-          "ineligibility_days": -1,
-          "order": 1,
-          "view": null
-        }
-      ]
-    }
-  ]
+  id: 'lifetime', type: 'multiple', titre, question, why_question,
+  choices: [{ id: 'hiv', text, descr|null, eligible: false, ineligibility_days: -1, view: null }]
 }
 ```
 
@@ -234,14 +235,30 @@ Données à envoyer (future route) :
 
 Ce bouton est visible uniquement dans les panels de résultat (éligible ou inéligible). Il ferme le panel et **réaffiche la question courante** avec la réponse précédente **pré-sélectionnée**. L'utilisateur peut modifier sa réponse et re-valider.
 
-### Composant Vue recommandé
+### Structure des fichiers (état actuel)
 
 ```
-pages/CoBranded/Jeu.vue
-├── GameMap.vue          — carte SVG + checkpoints
-├── GameCheckpoint.vue   — point individuel avec icône et état
-├── GameQuestion.vue     — bulle de dialogue + choix (unique/multiple)
-├── GameResult.vue       — panel de résultat (générique ou spécifique)
-├── GameResultView.vue   — vue spécifique depuis view_id
-└── GameFinish.vue       — écran de fin (éligible → CTA inscription)
+pages/CoBranded/Jeu.vue          — orchestrateur (état + phases + overlays)
+components/game/
+├── GameIntro.vue                — écran de lancement
+├── GameMap.vue                  — carte scrollable (caméra + scroll GSAP)
+│   ├── GamePath.vue             — <g> SVG du chemin
+│   ├── GameDecorations.vue      — <g> SVG des décors (<image> externes)
+│   └── GameCheckpoint.vue       — octogone (start / checkpoint coloré / end)
+├── GameScene.vue                — coquille plein écran partagée (barre + Pochy
+│                                   + icône + slots bubble/content/footer)
+├── GameQuestion.vue             — question (utilise GameScene)
+├── GameResult.vue               — résultat / explication (utilise GameScene)
+├── GameSpeechBubble.vue         — bulle de dialogue de Pochy
+├── GameChoice.vue               — bouton de réponse (unique/multiple)
+└── GameProgressBar.vue          — barre de progression fine
+data/eligibilityQuiz.js          — structure du quiz (logique)
+composables/useEligibilityQuiz.js — assemble quiz + i18n, ineligibleView()
+lib/eligibility.js               — computeResult() (pur)
+lib/gameMap.js                   — génération carte/chemin, tile canvas (pur)
+locales/{fr,en}.json             — textes sous eligibilite.quiz.* / .ui.* / .ineligible.*
+public/img/game/                 — pochy + deco/*.svg (assets choisis par URL)
 ```
+
+**Écran de fin** (`GameFinish`, éligible → CTA inscription) : pas encore
+implémenté.
