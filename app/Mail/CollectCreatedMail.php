@@ -11,8 +11,12 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
+// Mailable déclare deux méthodes qu'on override pour décrire le mail
+// Enveloppe : sujet, expéditeur, etc.
+// Contenu : template + données à injecter
 class CollectCreatedMail extends Mailable implements ShouldQueue
 {
+    // le mail n'est pas envoyé pendant la requête HTTP de l'admin (qui resterait bloquée le temps du SMTP), mais poussé dans une file d'attente (table jobs) et envoyé par un worker en arrière-plan
     use Queueable, SerializesModels;
 
     /**
