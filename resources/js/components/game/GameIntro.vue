@@ -1,29 +1,36 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+
 defineProps({
     questionCount: Number,
 });
 
 const emit = defineEmits(['play']);
+
+const { t } = useI18n();
 </script>
 
 <template>
     <div class="intro">
         <!-- Title + badges -->
         <div class="intro__top">
-            <h1 class="intro__title">
-                POUVEZ-VOUS<br />
-                DONNER VOTRE<br />
-                SANG ?<br />
-                FAITES LE CHEMIN<br />
-                AVEC POCHY<br />
-                POUR LE DECOUVRIR.
-            </h1>
+            <h1 class="intro__title">{{ t('eligibilite.ui.intro_title') }}</h1>
             <div class="intro__badges">
-                <span class="intro__badge">2 mn</span>
+                <span class="intro__badge">{{
+                    t('eligibilite.ui.badge_duration')
+                }}</span>
                 <span class="intro__sep">•</span>
-                <span class="intro__badge">{{ questionCount }} questions</span>
+                <span class="intro__badge">
+                    {{
+                        t('eligibilite.ui.badge_questions', {
+                            count: questionCount,
+                        })
+                    }}
+                </span>
                 <span class="intro__sep">•</span>
-                <span class="intro__badge">Sans engagement</span>
+                <span class="intro__badge">{{
+                    t('eligibilite.ui.badge_no_commitment')
+                }}</span>
             </div>
         </div>
 
@@ -34,7 +41,9 @@ const emit = defineEmits(['play']);
         </div>
 
         <!-- CTA -->
-        <button class="intro__btn" @click="emit('play')">JOUER</button>
+        <button class="intro__btn" @click="emit('play')">
+            {{ t('eligibilite.ui.play') }}
+        </button>
     </div>
 </template>
 
@@ -65,9 +74,11 @@ const emit = defineEmits(['play']);
 }
 
 .intro__title {
+    max-width: 22ch;
     font-family: 'Press Start 2P', monospace;
     font-size: clamp(0.55rem, 1.8vw, 0.85rem);
     line-height: 2;
+    text-transform: uppercase;
     color: white;
     text-shadow:
         3px 3px 0 rgba(0, 0, 0, 0.6),

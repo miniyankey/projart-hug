@@ -230,7 +230,157 @@
     },
     "eligibilite": {
         "title": "Pouvez-vous donner ?",
-        "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang."
+        "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang.",
+        "ui": {
+            "intro_title": "Pouvez-vous donner votre sang ? Faites le chemin avec Pochy pour le découvrir.",
+            "badge_duration": "2 mn",
+            "badge_questions": "{count} questions",
+            "badge_no_commitment": "Sans engagement",
+            "play": "JOUER",
+            "back": "Retour",
+            "validate": "Valider la sélection",
+            "ok": "OK",
+            "learn_more": "En savoir plus"
+        },
+        "duration": {
+            "year": "{count} an | {count} ans",
+            "month": "{count} mois | {count} mois",
+            "week": "{count} semaine | {count} semaines",
+            "day": "{count} jour | {count} jours"
+        },
+        "ineligible": {
+            "lifetime": {
+                "message": "Tu n'es malheureusement pas éligible au don de sang.",
+                "descr": "Cette situation est définitive.",
+                "text": "Merci pour ta démarche ! Même sans pouvoir donner ton sang, tu peux soutenir le don autrement."
+            },
+            "temporary": {
+                "message": "Tu pourras donner ton sang dans {duration}.",
+                "descr": "Inéligibilité temporaire.",
+                "text": "Reviens après ce délai pour faire ton don. En attendant, tu peux continuer le parcours."
+            }
+        },
+        "quiz": {
+            "views": {
+                "medication": {
+                    "message": "Ton inéligibilité dépend des médicaments que tu as consommés.",
+                    "text": "Tu peux faire appel au CTS pour avoir plus d'informations sur ton éligibilité au don."
+                },
+                "travel": {
+                    "message": "Ton inéligibilité dépend des pays que tu as visités.",
+                    "text": "Regarde sur le Travel Checker pour connaître la durée d'attente avant de pouvoir donner. Le maximum est de 6 mois, le temps que les éventuels agents pathogènes deviennent détectables."
+                },
+                "vaccine": {
+                    "message": "Si tu ne sais pas quel type de vaccin tu as reçu, rends-toi sur le Check Vaccination et remplis les informations de ton vaccin. Tu sauras alors si tu es éligible ou non.",
+                    "button_text": "Check Vaccination"
+                }
+            },
+            "lifetime": {
+                "titre": "Inéligibilité à vie",
+                "question": "Coche toutes les situations qui te concernent ou t'ont concerné.",
+                "why": "Certaines personnes ne peuvent pas donner leur sang car cela serait risqué pour elles ou pour les autres.",
+                "choices": {
+                    "hiv": "VIH/SIDA",
+                    "diabetes": "Diabète",
+                    "injection_drugs": "Drogue par injection",
+                    "heart": "Troubles cardiaques",
+                    "blood_diseases": "Maladies sanguines",
+                    "hepatitis": "Hépatite B et C",
+                    "none": "Aucune de ces situations"
+                }
+            },
+            "health": {
+                "titre": "Santé",
+                "question": "Es-tu plutôt en bonne santé, et exempt de tout symptôme de rhume ou de fièvre ?",
+                "why": "On ne prend pas de risque ! On préfère que les personnes ayant de légers symptômes se remettent avant de donner.",
+                "choices": {
+                    "yes": "Oui",
+                    "no": "Non"
+                }
+            },
+            "medication": {
+                "titre": "Médicaments",
+                "question": "As-tu pris des médicaments durant les 4 dernières semaines ?",
+                "why": "Certains médicaments ne permettent pas un don de sang sans risquer d'affecter le receveur ou le donneur.",
+                "choices": {
+                    "yes": "Oui",
+                    "no": "Non"
+                }
+            },
+            "travel": {
+                "titre": "Voyage",
+                "question": "Dans quelles régions du monde as-tu voyagé les 6 derniers mois ?",
+                "why": "Dans certaines régions du monde, un agent pathogène peut rentrer en Suisse avec toi et n'être détectable que 6 mois plus tard !",
+                "choices": {
+                    "europe": "Europe",
+                    "other": "Autres régions du monde",
+                    "none": "Aucune"
+                }
+            },
+            "partner": {
+                "titre": "Partenaire",
+                "question": "As-tu eu plusieurs partenaires sexuel·les au cours des 12 derniers mois, ou changé de partenaire dans les 4 derniers mois ?",
+                "why": "J'entre dans ton intimité, mais c'est important pour minimiser les risques de transmission d'IST au receveur.",
+                "choices": {
+                    "yes": "Oui",
+                    "no": "Non"
+                }
+            },
+            "hospitalization": {
+                "titre": "Hospitalisation",
+                "question": "As-tu été hospitalisé·e récemment ?",
+                "why": "Si la personne se remet d'une grosse opération ou d'un accouchement, elle a besoin de temps pour récupérer.",
+                "choices": {
+                    "none": "Non (aucune hospitalisation dans les 12 derniers mois)",
+                    "old": "Oui, urgences/consultation il y a plus de 4 semaines",
+                    "recent": "Oui, urgences/consultation il y a moins de 4 semaines",
+                    "admission": "Oui, hospitalisation avec admission"
+                }
+            },
+            "dentist": {
+                "titre": "Dentiste",
+                "question": "As-tu eu un traitement dentaire au cours des 14 derniers jours ?",
+                "why": "Ces traitements provoquent de petites lésions par lesquelles des bactéries ou virus peuvent s'infiltrer et contaminer le sang.",
+                "choices": {
+                    "no": "Non",
+                    "scaling": "Oui (un détartrage)",
+                    "extraction": "Oui (une extraction dentaire sans complication)",
+                    "complications": "Oui (avec complications, type antibiotique)"
+                }
+            },
+            "tattoo": {
+                "titre": "Tatouage",
+                "question": "Quels styles as-tu ajoutés à ton personnage durant les 4 derniers mois ?",
+                "why": "Ces gestes peuvent causer de petites blessures, qui ouvrent la porte aux bactéries et virus.",
+                "choices": {
+                    "tattoo": "Un tatouage",
+                    "piercing": "Un piercing",
+                    "acupuncture": "Aucun, mais j'ai fait de l'acupuncture",
+                    "none": "Aucun, tu es parfait comme tu es"
+                }
+            },
+            "tick": {
+                "titre": "Piqûre de tique",
+                "question": "Es-tu revenu·e d'une balade en extérieur avec un petit compagnon au cours des 4 dernières semaines ?",
+                "why": "Les tiques, comme les moustiques, sont porteuses de maladies (Lyme…) qui se transmettent par leurs bactéries. Vérifie bien tout ton corps en rentrant d'une sortie dans la nature.",
+                "choices": {
+                    "tick": "Oui, une tique",
+                    "other_companion": "Oui, un autre compagnon",
+                    "alone": "Non, j'étais seul·e"
+                }
+            },
+            "vaccine": {
+                "titre": "Vaccin récent",
+                "question": "As-tu reçu un vaccin récemment ?",
+                "why": "Selon le type de vaccin, un délai peut être nécessaire pour éviter de transmettre un virus vivant atténué, ou simplement s'assurer que tu ne ressens aucun effet secondaire. Dans la plupart des cas, la vaccination n'empêche pas le don.",
+                "choices": {
+                    "none": "Non (aucun vaccin récent)",
+                    "live": "Oui (vaccin vivant atténué : ROR, varicelle, fièvre jaune…) il y a moins de 4 mois",
+                    "inactivated": "Oui (vaccin inactivé/ARNm : grippe, COVID, hépatite, tétanos…) il y a moins de 48 h",
+                    "unknown": "Oui, il y a moins de 4 mois (mais je ne sais pas lequel)"
+                }
+            }
+        }
     },
     "cobrand": {
         "intro": "Ton entreprise « {company} » organise une collecte de sang en partenariat avec les Hôpitaux Universitaires de Genève.",
