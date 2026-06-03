@@ -7,7 +7,6 @@ use App\Models\Collect;
 use App\Models\ContactFormConversion;
 use App\Models\EventsConversion;
 use App\Models\EventsEligibiliteStep;
-use App\Models\GameQuestion;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -27,6 +26,11 @@ class KpiTrackingSeeder extends Seeder
      */
     private const SPREAD_DAYS = 30;
 
+    /**
+     * Nombre d'étapes du quiz (défini côté front : data/eligibilityQuiz.js).
+     */
+    private const QUIZ_STEPS = 10;
+
     public function run(): void
     {
         // Repart d'une base propre pour rester idempotent (re-seed sans doublon).
@@ -35,7 +39,7 @@ class KpiTrackingSeeder extends Seeder
         ContactFormConversion::query()->delete();
 
         $collects = Collect::all();
-        $totalSteps = GameQuestion::count() ?: 10;
+        $totalSteps = self::QUIZ_STEPS;
 
         if ($collects->isEmpty()) {
             return;
