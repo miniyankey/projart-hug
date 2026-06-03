@@ -4,36 +4,119 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import GameIntro from '@/components/game/GameIntro.vue';
 import GameMap from '@/components/game/GameMap.vue';
+import GameProgressBar from '@/components/game/GameProgressBar.vue';
+import GameQuestion from '@/components/game/GameQuestion.vue';
+import GameResult from '@/components/game/GameResult.vue';
+import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
 import PublicLayout from '@/layouts/PublicLayout.vue';
+import { computeResult } from '@/lib/eligibility';
 
-const { t } = useI18n();
-
-const props = defineProps({
-    questions: Array,
+defineProps({
     company: Object,
     token: String,
-    // préparation du quiz, à terme à récupérer pour les KPIS
-    collectId: Number,
 });
 
-const phase = ref('intro'); // 'intro' | 'map' | 'question' | 'result' | 'finished'
-const answers = ref({}); // questionId → choiceId[] — alimenté par les phases suivantes
+const { t } = useI18n();
+const { questions, ineligibleView } = useEligibilityQuiz();
 
-const questionsAnswered = computed(() => Object.keys(answers.value).length);
-const progressPct = computed(() =>
-    props.questions.length > 0
-        ? Math.round((questionsAnswered.value / props.questions.length) * 100)
-        : 0,
+// 'intro' (lancement) | 'map' (parcours). Les écrans question/résultat sont
+// des overlays pilotés par activeIndex / resultView, pas par `phase`.
+const phase = ref('intro');
+
+// Réponses (id question → id choix[]), progression et écrans actifs
+const answers = ref({});
+const clearedCount = ref(0); // checkpoints franchis (= frontière de progression)
+const activeIndex = ref(null); // question actuellement ouverte (ou null)
+const resultView = ref(null); // vue de résultat affichée (ou null)
+// Statut de chaque checkpoint : 'locked' | 'eligible' | 'ineligible'
+const statuses = ref(questions.value.map(() => 'locked'));
+
+const activeQuestion = computed(() =>
+    activeIndex.value !== null ? questions.value[activeIndex.value] : null,
 );
 
 function onPlay() {
     phase.value = 'map';
 }
 
+// Pochy atteint un checkpoint → on affiche sa question
+function onReach(index) {
+    activeIndex.value = index;
+    resultView.value = null;
+}
+
+// Clic sur un checkpoint déjà répondu → réaffiche sa question (pré-remplie)
+function onSelectCheckpoint(index) {
+    activeIndex.value = index;
+    resultView.value = null;
+}
+
+// Ferme question/résultat. Ne libère le checkpoint suivant que si l'on répond à
+// la frontière (pas lors de la modification d'une réponse passée).
+function finishStep() {
+    if (activeIndex.value === clearedCount.value) {
+        clearedCount.value += 1;
+    }
+
+    resultView.value = null;
+    activeIndex.value = null;
+}
+
+// Validation d'une réponse → enregistrement, statut du checkpoint, puis :
+// vue dédiée du choix › vue générique d'inéligibilité › explication (why) › suite.
+function onAnswer(choiceIds) {
+    const question = activeQuestion.value;
+
+    if (!question) {
+        return;
+    }
+
+    answers.value[question.id] = choiceIds;
+
+    const result = computeResult(question, choiceIds);
+
+    statuses.value[activeIndex.value] = result.eligible
+        ? 'eligible'
+        : 'ineligible';
+
+    if (result.view) {
+        resultView.value = result.view;
+
+        return;
+    }
+
+    if (!result.eligible) {
+        resultView.value = ineligibleView(result.days);
+
+        return;
+    }
+
+    if (question.why_question) {
+        resultView.value = { message: question.why_question };
+
+        return;
+    }
+
+    finishStep();
+}
+
+// « OK » du résultat termine l'étape ; « Retour » réaffiche la question
+function onResultOk() {
+    finishStep();
+}
+
+function onResultBack() {
+    resultView.value = null;
+}
+
+// « Retour » de la question → ferme sans valider (Pochy reste sur le checkpoint)
+function onBack() {
+    activeIndex.value = null;
+}
+
 // ─── Hauteur exacte sous la navbar ────────────────────────────────────────────
-// La hauteur de la navbar varie (≈57px mobile, ≈81px desktop), donc un
-// calc(100vh - 64px) déborde et provoque un léger scroll parasite. On mesure
-// la position réelle du conteneur et on l'étire jusqu'au bas du viewport.
+// La navbar varie en hauteur (≈57px mobile, ≈81px desktop) ; on étire le
+// conteneur jusqu'au bas du viewport pour éviter tout scroll parasite.
 const containerRef = ref(null);
 
 function fitHeight() {
@@ -43,9 +126,7 @@ function fitHeight() {
         return;
     }
 
-    const top = el.getBoundingClientRect().top;
-
-    el.style.height = `${window.innerHeight - top}px`;
+    el.style.height = `${window.innerHeight - el.getBoundingClientRect().top}px`;
 }
 
 onMounted(() => {
@@ -59,11 +140,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :token="token">
+    <PublicLayout :company="company" :token="token" hide-footer>
         <Head :title="t('eligibilite.title')" />
 
         <div ref="containerRef" class="game-container">
-            <!-- ── Phase intro ────────────────────────────────────────────── -->
+            <!-- Phase intro -->
             <Transition
                 leave-to-class="opacity-0 scale-105"
                 leave-active-class="transition-all duration-400 ease-in"
@@ -76,28 +157,68 @@ onUnmounted(() => {
                 />
             </Transition>
 
-            <!-- ── Phases suivantes (à implémenter) ───────────────────────── -->
+            <!-- Phase carte -->
             <div v-if="phase !== 'intro'" class="game-layer flex flex-col">
-                <!-- Barre de progression -->
-                <div
-                    class="flex items-center gap-3 border-b border-black/10 bg-white/80 px-4 py-2 backdrop-blur-sm"
-                >
-                    <div class="h-1.5 flex-1 bg-gray-200">
-                        <div
-                            class="h-full bg-[var(--brand,#7c3aed)] transition-all duration-500"
-                            :style="{ width: `${progressPct}%` }"
-                        />
-                    </div>
-                    <span
-                        class="shrink-0 font-pixel text-[0.45rem] text-gray-500"
-                    >
-                        {{ questionsAnswered }} / {{ questions.length }}
-                    </span>
-                </div>
+                <GameProgressBar
+                    :value="clearedCount"
+                    :total="questions.length"
+                />
 
-                <!-- Carte scrollable -->
-                <GameMap :question-count="questions.length" class="flex-1" />
+                <GameMap
+                    :question-count="questions.length"
+                    :cleared-count="clearedCount"
+                    :statuses="statuses"
+                    class="flex-1"
+                    @reach="onReach"
+                    @select="onSelectCheckpoint"
+                />
             </div>
+
+            <!-- Fond blanc persistant : évite d'apercevoir la carte pendant le
+                 fondu croisé question ⇄ résultat -->
+            <div
+                v-if="activeIndex !== null || resultView"
+                class="game-backdrop"
+            />
+
+            <!-- Overlay question -->
+            <Transition
+                enter-from-class="opacity-0"
+                enter-active-class="transition-opacity duration-200"
+                leave-to-class="opacity-0"
+                leave-active-class="transition-opacity duration-150"
+            >
+                <GameQuestion
+                    v-if="activeQuestion && !resultView"
+                    :key="activeQuestion.id"
+                    :question="activeQuestion"
+                    :pre-selected="answers[activeQuestion.id] ?? []"
+                    :answered="clearedCount"
+                    :total="questions.length"
+                    class="game-layer"
+                    @answer="onAnswer"
+                    @back="onBack"
+                />
+            </Transition>
+
+            <!-- Overlay résultat -->
+            <Transition
+                enter-from-class="opacity-0"
+                enter-active-class="transition-opacity duration-200"
+                leave-to-class="opacity-0"
+                leave-active-class="transition-opacity duration-150"
+            >
+                <GameResult
+                    v-if="resultView"
+                    :view="resultView"
+                    :theme="activeQuestion?.titre ?? ''"
+                    :answered="clearedCount"
+                    :total="questions.length"
+                    class="game-layer"
+                    @ok="onResultOk"
+                    @back="onResultBack"
+                />
+            </Transition>
         </div>
     </PublicLayout>
 </template>
@@ -105,9 +226,7 @@ onUnmounted(() => {
 <style scoped>
 .game-container {
     position: relative;
-    height: calc(
-        100vh - 64px
-    ); /* fallback avant le calcul JS dans fitHeight() */
+    height: calc(100vh - 64px); /* fallback avant le calcul JS de fitHeight() */
     overflow: hidden;
 }
 
@@ -116,7 +235,12 @@ onUnmounted(() => {
     inset: 0;
 }
 
-.font-pixel {
-    font-family: 'Press Start 2P', monospace;
+/* Sous les overlays (z-index 50), au-dessus de la carte → masque la carte
+   pendant le fondu entre les écrans question et résultat. */
+.game-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 40;
+    background: white;
 }
 </style>
