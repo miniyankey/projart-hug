@@ -11,6 +11,7 @@ class SendEligibilityReminders extends Command
 {
     /**
      * Grosso modo le nom de la commande
+     *
      * @var string
      */
     protected $signature = 'app:send-eligibility-reminders';
