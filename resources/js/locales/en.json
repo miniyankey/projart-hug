@@ -300,7 +300,10 @@
     },
     "eligibilite": {
         "title": "Can you donate?",
-        "intro": "Find out in a few questions whether you're eligible to give blood."
+        "intro": "Find out in a few questions whether you're eligible to give blood.",
+        "mascotte_speech": "Come play to find out if you're eligible!",
+        "mascotte_cta": "Play!",
+        "mascotte_close": "Close"
     },
     "cobrand": {
         "intro": "Your company “{company}” is organising a blood drive in partnership with the Geneva University Hospitals.",
