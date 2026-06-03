@@ -304,7 +304,7 @@
     "eligibilite": {
         "title": "Pouvez-vous donner ?",
         "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang.",
-"reminder": {
+        "reminder": {
             "title": "Pas encore éligible ?",
             "intro": "Laissez-nous votre adresse e-mail : nous vous préviendrons dès que vous pourrez à nouveau donner votre sang.",
             "email": "Adresse e-mail",

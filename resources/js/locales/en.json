@@ -304,7 +304,7 @@
     "eligibilite": {
         "title": "Can you donate?",
         "intro": "Find out in a few questions whether you're eligible to give blood.",
-"reminder": {
+        "reminder": {
             "title": "Not eligible yet?",
             "intro": "Leave us your email address: we'll let you know as soon as you can give blood again.",
             "email": "Email address",
