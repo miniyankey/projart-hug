@@ -107,7 +107,7 @@ function onClick() {
 </script>
 
 <template>
-    <g :class="{ 'cp--clickable': clickable }" @click="onClick">
+    <g :class="{ 'cursor-pointer': clickable }" @click="onClick">
         <polygon :points="shadowPts" fill="#00000055" />
         <polygon :points="borderPts" fill="#111" />
         <polygon :points="fillPts" :fill="cfg.fill" />
@@ -155,9 +155,3 @@ function onClick() {
         </text>
     </g>
 </template>
-
-<style scoped>
-.cp--clickable {
-    cursor: pointer;
-}
-</style>

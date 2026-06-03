@@ -4,46 +4,17 @@
 </script>
 
 <template>
-    <div class="bubble">
-        <div class="bubble__body">
+    <div class="relative self-start">
+        <div
+            class="relative z-[1] border-4 border-[#111] bg-white px-8 py-7 font-pixel text-[clamp(0.85rem,1.6vw,1.35rem)] leading-[1.9] text-[#1a1a1a] shadow-[6px_6px_0_rgba(0,0,0,0.85)]"
+        >
             <slot />
         </div>
-        <div class="bubble__tail" aria-hidden="true" />
+        <!-- Losange bordé à moitié rentré sous la bulle : seules les deux faces
+             gauches restent visibles (flèche), la moitié droite masque la bordure. -->
+        <div
+            class="absolute bottom-[34px] -left-[11px] z-[2] h-[22px] w-[22px] rotate-45 border-b-4 border-l-4 border-[#111] bg-white"
+            aria-hidden="true"
+        />
     </div>
 </template>
-
-<style scoped>
-.bubble {
-    position: relative;
-    align-self: flex-start;
-}
-
-.bubble__body {
-    position: relative;
-    z-index: 1;
-    background: white;
-    border: 4px solid #111;
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.85);
-    padding: 1.75rem 2rem;
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(0.85rem, 1.6vw, 1.35rem);
-    line-height: 1.9;
-    color: #1a1a1a;
-}
-
-/* Losange bordé à moitié rentré sous la bulle : seules les deux faces
-   gauches restent visibles (flèche), et la moitié droite — posée AU-DESSUS
-   du corps — masque la bordure gauche de la bulle → raccord blanc continu. */
-.bubble__tail {
-    position: absolute;
-    left: -11px;
-    bottom: 34px;
-    z-index: 2;
-    width: 22px;
-    height: 22px;
-    background: white;
-    border-left: 4px solid #111;
-    border-bottom: 4px solid #111;
-    transform: rotate(45deg);
-}
-</style>

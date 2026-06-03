@@ -67,7 +67,7 @@ function validate() {
         </template>
 
         <template #content>
-            <div class="qchoices">
+            <div class="flex flex-wrap gap-3">
                 <GameChoice
                     v-for="choice in question.choices"
                     :key="choice.id"
@@ -97,11 +97,3 @@ function validate() {
         </template>
     </GameScene>
 </template>
-
-<style scoped>
-.qchoices {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-}
-</style>

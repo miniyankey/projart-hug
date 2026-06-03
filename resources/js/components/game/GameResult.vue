@@ -26,18 +26,25 @@ const { t } = useI18n();
                 {{ view.message }}
                 <template v-if="view.descr">
                     <br />
-                    <span class="result__descr">{{ view.descr }}</span>
+                    <span class="text-[0.8em] opacity-[0.85]">{{ view.descr }}</span>
                 </template>
             </GameSpeechBubble>
         </template>
 
         <template #content>
-            <div class="result">
-                <p v-if="view.text" class="result__text">{{ view.text }}</p>
+            <div class="flex flex-col gap-5">
+                <p
+                    v-if="view.text"
+                    class="m-0 text-[1.05rem] leading-normal text-neutral-900"
+                >
+                    {{ view.text }}
+                </p>
 
+                <!-- CTA stylé en bouton primaire (autonome : ce lien est imbriqué,
+                     donc hors de portée du :slotted de GameScene) -->
                 <a
                     v-if="view.button_url"
-                    class="result__cta"
+                    class="self-start border-[3px] border-black bg-[var(--brand,#7c3aed)] px-8 py-[0.8rem] text-base text-white no-underline shadow-[5px_5px_0_#000] transition-[transform,box-shadow] duration-[80ms] active:translate-x-[5px] active:translate-y-[5px] active:shadow-none"
                     :href="view.button_url"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -57,44 +64,3 @@ const { t } = useI18n();
         </template>
     </GameScene>
 </template>
-
-<style scoped>
-.result {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-.result__descr {
-    font-size: 0.8em;
-    opacity: 0.85;
-}
-
-.result__text {
-    margin: 0;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: #1a1a1a;
-}
-
-/* Lien CTA stylé en bouton primaire (autonome : pas de dépendance à :slotted,
-   car ce lien est imbriqué et non un nœud racine du slot). */
-.result__cta {
-    align-self: flex-start;
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    color: white;
-    text-decoration: none;
-    background: var(--brand, #7c3aed);
-    border: 3px solid black;
-    box-shadow: 5px 5px 0 black;
-    transition:
-        transform 80ms ease,
-        box-shadow 80ms ease;
-}
-
-.result__cta:active {
-    transform: translate(5px, 5px);
-    box-shadow: 0 0 0 black;
-}
-</style>
