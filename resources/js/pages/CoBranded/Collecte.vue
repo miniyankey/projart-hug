@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { Calendar, Clock, MapPin } from 'lucide-vue-next';
 import { computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
+import MascottePopup from '@/components/MascottePopup.vue';
 import {
     Accordion,
     AccordionContent,
@@ -270,5 +271,6 @@ const mapUrl = computed(() => {
                 </div>
             </div>
         </section>
+        <MascottePopup :href="cobrandJeu.url(routeParams)" />
     </PublicLayout>
 </template>

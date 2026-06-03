@@ -6,6 +6,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import PodiumCard from '@/components/cards/PodiumCard.vue';
 import SpeechBubble from '@/components/cards/SpeechBubble.vue';
+import MascottePopup from '@/components/MascottePopup.vue';
 import { Button } from '@/components/ui/button';
 import { editions } from '@/data/trophee-editions.js';
 import PublicLayout from '@/layouts/PublicLayout.vue';
@@ -767,5 +768,6 @@ onUnmounted(() => {
                 </div>
             </section>
         </div>
+        <MascottePopup :href="routes.eligibilite.url()" />
     </PublicLayout>
 </template>
