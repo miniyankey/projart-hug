@@ -669,7 +669,9 @@ onUnmounted(() => {
                             class="absolute top-6 right-0 left-0 hidden h-1 bg-gray-900 md:block"
                         ></div>
 
-                        <div class="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+                        <div
+                            class="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8"
+                        >
                             <div
                                 v-for="(m, i) in historyMilestones"
                                 :key="m.year"
