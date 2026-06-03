@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import StepCard from '@/components/cards/StepCard.vue';
+import MascottePopup from '@/components/MascottePopup.vue';
 import {
     Accordion,
     AccordionContent,
@@ -458,5 +459,6 @@ onUnmounted(() => {
                 </div>
             </section>
         </div>
+        <MascottePopup :href="routes.eligibilite.url()" />
     </PublicLayout>
 </template>
