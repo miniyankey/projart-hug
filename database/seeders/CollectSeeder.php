@@ -19,15 +19,29 @@ class CollectSeeder extends Seeder
         }
 
         foreach ($companies->values() as $index => $company) {
-            Collect::create([
-                'company_id' => $company->id,
-                'place_id' => $places[$index % $places->count()]->id,
-                'day' => now()->addWeeks($index + 2)->format('Y-m-d'),
-                'start_time' => '09:00',
-                'end_time' => '17:00',
-                'link_appointment' => 'https://www.hug.ch/don-du-sang/prendre-rendez-vous',
-                'is_active' => true,
-            ]);
+            $base = $index + 2;
+
+            // Par entreprise : une collecte passée (terminée), une active à
+            // venir (mise en avant / co-brandée) et une future non encore
+            // promue. Une seule est active à la fois, conformément à la règle
+            // métier appliquée par CollectController::enforceSingleActiveCollect.
+            $schedule = [
+                ['day' => now()->subWeeks($base), 'is_active' => false],
+                ['day' => now()->addWeeks($base), 'is_active' => true],
+                ['day' => now()->addWeeks($base + 4), 'is_active' => false],
+            ];
+
+            foreach ($schedule as $slot => $config) {
+                Collect::create([
+                    'company_id' => $company->id,
+                    'place_id' => $places[($index + $slot) % $places->count()]->id,
+                    'day' => $config['day']->format('Y-m-d'),
+                    'start_time' => '09:00',
+                    'end_time' => '17:00',
+                    'link_appointment' => 'https://www.hug.ch/don-du-sang/prendre-rendez-vous',
+                    'is_active' => $config['is_active'],
+                ]);
+            }
         }
     }
 }
