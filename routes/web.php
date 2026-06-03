@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
+use App\Http\Controllers\EligibiliteController;
 use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\Kpi\CollectEventController;
 use App\Http\Controllers\Kpi\ContactFormConversionController;
@@ -22,7 +23,7 @@ Route::inertia('/', 'Home')->name('home');
 Route::inertia('/trophee', 'Trophee')->name('trophee');
 Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
-Route::inertia('/eligibilite', 'Eligibilite')->name('eligibilite');
+Route::get('/eligibilite', [EligibiliteController::class, 'index'])->name('eligibilite');
 Route::inertia('/certification', 'Certification')->name('certification');
 
 // Tracking KPI : endpoints publics « fire-and-forget » appelés depuis le front (pour register evetns)

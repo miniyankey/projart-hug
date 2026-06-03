@@ -19,6 +19,11 @@ const props = defineProps({
         type: String,
         default: null,
     },
+    // Masque le footer (ex. jeu plein écran qui intercepte le scroll)
+    hideFooter: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const isCobrand = computed(() => props.company !== null);
@@ -92,6 +97,6 @@ const brandVars = computed(() => {
             <slot />
         </main>
 
-        <Footer />
+        <Footer v-if="!hideFooter" />
     </div>
 </template>
