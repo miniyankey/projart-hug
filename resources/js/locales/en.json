@@ -304,13 +304,16 @@
     "eligibilite": {
         "title": "Can you donate?",
         "intro": "Find out in a few questions whether you're eligible to give blood.",
-        "reminder": {
+"reminder": {
             "title": "Not eligible yet?",
             "intro": "Leave us your email address: we'll let you know as soon as you can give blood again.",
             "email": "Email address",
             "email_placeholder": "you@example.ch",
             "submit": "Notify me"
-        }
+        },
+        "mascotte_speech": "Come play to find out if you're eligible!",
+        "mascotte_cta": "Play!",
+        "mascotte_close": "Close"
     },
     "cobrand": {
         "intro": "Your company “{company}” is organising a blood drive in partnership with the Geneva University Hospitals.",
@@ -445,7 +448,7 @@
             "suspended": "Editions suspended from 2011 to 2025"
         },
         "prix_honneur": {
-            "title": "The honour awards",
+            "title": "The Bloodies",
             "subtitle": "Beyond the podium, the CTS jury rewards the most remarkable commitments each year.",
             "grand_prix": {
                 "name": "Grand Prix",

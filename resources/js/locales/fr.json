@@ -304,13 +304,16 @@
     "eligibilite": {
         "title": "Pouvez-vous donner ?",
         "intro": "Découvrez en quelques questions si vous êtes éligible au don du sang.",
-        "reminder": {
+"reminder": {
             "title": "Pas encore éligible ?",
             "intro": "Laissez-nous votre adresse e-mail : nous vous préviendrons dès que vous pourrez à nouveau donner votre sang.",
             "email": "Adresse e-mail",
             "email_placeholder": "vous@exemple.ch",
             "submit": "Me prévenir"
-        }
+        },
+        "mascotte_speech": "Viens jouer pour voir si tu es éligible !",
+        "mascotte_cta": "Jouer !",
+        "mascotte_close": "Fermer"
     },
     "cobrand": {
         "intro": "Ton entreprise « {company} » organise une collecte de sang en partenariat avec les Hôpitaux Universitaires de Genève.",
@@ -477,7 +480,7 @@
             "suspended": "Éditions suspendues de 2011 à 2025"
         },
         "prix_honneur": {
-            "title": "Les prix d'honneur",
+            "title": "Les Bloodies",
             "subtitle": "Au-delà du podium, le jury CTS récompense chaque année les engagements les plus remarquables.",
             "grand_prix": {
                 "name": "Grand Prix",
