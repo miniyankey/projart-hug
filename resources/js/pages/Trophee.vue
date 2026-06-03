@@ -423,8 +423,8 @@ onUnmounted(() => {
                             class="flex items-center justify-center lg:justify-end"
                         >
                             <div
-                                class="relative overflow-hidden rounded-3xl"
-                                style="width: 380px; height: 520px"
+                                class="relative w-full max-w-[380px] overflow-hidden rounded-3xl"
+                                style="aspect-ratio: 380/520"
                             >
                                 <!-- Halo -->
                                 <div
@@ -465,7 +465,7 @@ onUnmounted(() => {
                 class="py-32"
             >
                 <div
-                    class="anim-vainqueurs mx-auto max-w-7xl bg-white px-20 py-12 shadow-[8px_8px_0px_0px_#3d8080]"
+                    class="anim-vainqueurs mx-auto max-w-7xl bg-white px-4 py-8 shadow-[8px_8px_0px_0px_#3d8080] sm:px-12 sm:py-12 lg:px-20"
                 >
                     <div class="mb-12 text-center">
                         <h2
@@ -480,10 +480,10 @@ onUnmounted(() => {
 
                     <div class="flex items-center gap-6">
                         <button
-                            :disabled="!hasPrev"
+                            :disabled="!hasNext"
                             class="flex h-12 w-12 shrink-0 items-center justify-center rounded-none border-4 border-teal-600 bg-white text-black shadow-[4px_4px_0px_0px_#3d8080] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#3d8080] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-30"
                             :aria-label="t('trophee.vainqueurs.prev')"
-                            @click="prev"
+                            @click="next"
                         >
                             <ChevronLeft :size="20" class="text-black" />
                         </button>
@@ -568,10 +568,10 @@ onUnmounted(() => {
                         </div>
 
                         <button
-                            :disabled="!hasNext"
+                            :disabled="!hasPrev"
                             class="flex h-12 w-12 shrink-0 items-center justify-center rounded-none border-4 border-teal-600 bg-white text-black shadow-[4px_4px_0px_0px_#3d8080] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#3d8080] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-30"
                             :aria-label="t('trophee.vainqueurs.next')"
-                            @click="next"
+                            @click="prev"
                         >
                             <ChevronRight :size="20" class="text-black" />
                         </button>
@@ -579,15 +579,15 @@ onUnmounted(() => {
 
                     <div class="mt-8 flex justify-center gap-2">
                         <button
-                            v-for="(ed, i) in editions"
+                            v-for="(ed, i) in [...editions].reverse()"
                             :key="ed.year"
                             class="h-2.5 transition-all"
                             :class="
-                                i === currentIndex
+                                editions.length - 1 - i === currentIndex
                                     ? 'w-6 bg-teal-600'
                                     : 'w-2.5 bg-teal-200'
                             "
-                            @click="currentIndex = i"
+                            @click="currentIndex = editions.length - 1 - i"
                         />
                     </div>
                 </div>
@@ -614,12 +614,12 @@ onUnmounted(() => {
                         <div
                             v-for="id in prizes"
                             :key="id"
-                            class="anim-prix-card flex items-center gap-6 bg-white p-8 shadow-[6px_6px_0px_0px_#3d8080]"
+                            class="anim-prix-card flex items-center gap-4 bg-white p-5 shadow-[6px_6px_0px_0px_#3d8080] sm:gap-6 sm:p-8"
                         >
                             <img
                                 :src="prizeConfigs[id].badge"
                                 :alt="t(`trophee.prix_honneur.${id}.name`)"
-                                class="h-44 w-44 shrink-0 object-contain"
+                                class="h-24 w-24 shrink-0 object-contain sm:h-44 sm:w-44"
                             />
                             <div>
                                 <div
@@ -666,10 +666,12 @@ onUnmounted(() => {
                     <div class="relative">
                         <!-- Ligne horizontale -->
                         <div
-                            class="absolute top-6 right-0 left-0 h-1 bg-gray-900"
+                            class="absolute top-6 right-0 left-0 hidden h-1 bg-gray-900 md:block"
                         ></div>
 
-                        <div class="grid grid-cols-3 gap-8">
+                        <div
+                            class="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8"
+                        >
                             <div
                                 v-for="(m, i) in historyMilestones"
                                 :key="m.year"
