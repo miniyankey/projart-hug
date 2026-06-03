@@ -1,6 +1,6 @@
 <script setup>
 import { gsap } from 'gsap';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import GameCheckpoint from './GameCheckpoint.vue';
 import GameDecorations from './GameDecorations.vue';
 import GamePath from './GamePath.vue';
@@ -16,7 +16,14 @@ import {
 
 const props = defineProps({
     questionCount: { type: Number, required: true },
+    // Nombre de checkpoints déjà franchis (question répondue). Pochy ne peut
+    // pas scroller au-delà du prochain checkpoint non encore franchi.
+    clearedCount: { type: Number, default: 0 },
+    // Statut par checkpoint : 'locked' | 'eligible' | 'ineligible'
+    statuses: { type: Array, default: () => [] },
 });
+
+const emit = defineEmits(['reach', 'select']);
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const PATH_W = 32; // dirt road stroke width
@@ -58,12 +65,50 @@ const decos = computed(() =>
     ),
 );
 
+// ─── Checkpoint stop logic ────────────────────────────────────────────────────
+// Pochy may scroll only up to the next un-cleared checkpoint. Once all
+// checkpoints are answered, the end zone (totalLen) becomes reachable.
+const cap = computed(() => {
+    const list = cps.value;
+
+    if (props.clearedCount >= list.length) {
+        return totalLen.value;
+    }
+
+    return list[props.clearedCount].progress;
+});
+
+// Emit `reach` once when Pochy arrives at the current target checkpoint.
+const stopReached = ref(false);
+
+watch(progress, (val) => {
+    if (props.clearedCount >= cps.value.length) {
+        return;
+    }
+
+    if (!stopReached.value && val >= cap.value - 0.5) {
+        stopReached.value = true;
+        emit('reach', props.clearedCount);
+    } else if (stopReached.value && val < cap.value - 40) {
+        // Scrolled back up → autorise un nouveau déclenchement (ex. après « Retour »)
+        stopReached.value = false;
+    }
+});
+
+// A new checkpoint was cleared → allow scrolling to the next one
+watch(
+    () => props.clearedCount,
+    () => {
+        stopReached.value = false;
+    },
+);
+
 // ─── Scroll — slower multiplier so each checkpoint takes more wheel effort ────
 function onWheel(e) {
     e.preventDefault();
     targetPrg.value = Math.max(
         0,
-        Math.min(totalLen.value, targetPrg.value + e.deltaY * 0.55),
+        Math.min(cap.value, targetPrg.value + e.deltaY * 0.55),
     );
     gsap.killTweensOf(progress);
     gsap.to(progress, {
@@ -83,7 +128,7 @@ function onTouchMove(e) {
     lastTouchY = e.touches[0].clientY;
     targetPrg.value = Math.max(
         0,
-        Math.min(totalLen.value, targetPrg.value + d * 1.1),
+        Math.min(cap.value, targetPrg.value + d * 1.1),
     );
     gsap.killTweensOf(progress);
     gsap.to(progress, {
@@ -210,6 +255,9 @@ onUnmounted(() => {
                     :key="cp.index"
                     :x="cp.x"
                     :y="cp.y"
+                    variant="checkpoint"
+                    :status="statuses[cp.index] || 'locked'"
+                    @select="emit('select', cp.index)"
                 />
                 <GameCheckpoint :x="endPt.x" :y="endPt.y" variant="end" />
             </svg>

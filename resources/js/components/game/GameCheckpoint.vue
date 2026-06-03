@@ -1,55 +1,82 @@
 <script setup>
-// Layer 4 — a single pixel-art octagon marker on the path.
-// Variants: 'start' (brand ▶), 'locked' (grey ?), 'end' (gold ★ + flag).
+// Layer 4 — octogone pixel art sur le chemin.
+// Variantes : 'start' (▶ brand), 'checkpoint' (? coloré selon le statut),
+// 'end' (★ doré + drapeau).
+// Statut d'un checkpoint : 'locked' (gris), 'eligible' (brand), 'ineligible' (noir).
+// Un checkpoint répondu (statut ≠ locked) est cliquable → émet `select`.
 import { computed } from 'vue';
 import { octPts } from '@/lib/gameMap';
 
 const props = defineProps({
     x: { type: Number, required: true },
     y: { type: Number, required: true },
-    variant: { type: String, default: 'locked' },
+    variant: { type: String, default: 'checkpoint' },
+    status: { type: String, default: 'locked' },
 });
+
+const emit = defineEmits(['select']);
 
 const R = 28; // base octagon radius
 const CUT = 11; // base chamfer
 
-const VARIANTS = {
-    start: {
-        big: true,
+// Palette des checkpoints selon le statut
+const STATUS = {
+    locked: { fill: '#7a7a8c', highlight: '#aaaabe', iconFill: '#33334a' },
+    eligible: {
         fill: 'var(--brand,#7c3aed)',
         highlight: '#b090ff',
-        icon: '▶',
         iconFill: '#fff',
-        iconSize: 18,
     },
-    locked: {
-        big: false,
-        fill: '#7a7a8c',
-        highlight: '#aaaabe',
-        icon: '?',
-        iconFill: '#33334a',
-        iconSize: 15,
-        pixelFont: true,
-    },
-    end: {
-        big: true,
-        fill: '#e8b800',
-        highlight: '#ffe060',
-        icon: '★',
-        iconFill: '#333',
-        iconSize: 18,
-        flag: true,
-    },
+    ineligible: { fill: '#111', highlight: '#555', iconFill: '#fff' },
 };
 
-const cfg = computed(() => VARIANTS[props.variant] || VARIANTS.locked);
+const cfg = computed(() => {
+    if (props.variant === 'start') {
+        return {
+            big: true,
+            fill: 'var(--brand,#7c3aed)',
+            highlight: '#b090ff',
+            icon: '▶',
+            iconFill: '#fff',
+            iconSize: 18,
+        };
+    }
+
+    if (props.variant === 'end') {
+        return {
+            big: true,
+            fill: '#e8b800',
+            highlight: '#ffe060',
+            icon: '★',
+            iconFill: '#333',
+            iconSize: 18,
+            flag: true,
+        };
+    }
+
+    // checkpoint « question »
+    const s = STATUS[props.status] || STATUS.locked;
+
+    return {
+        big: false,
+        fill: s.fill,
+        highlight: s.highlight,
+        icon: '?',
+        iconFill: s.iconFill,
+        iconSize: 15,
+        pixelFont: true,
+    };
+});
+
+const clickable = computed(
+    () => props.variant === 'checkpoint' && props.status !== 'locked',
+);
 
 const r = computed(() => (cfg.value.big ? R + 6 : R));
 const cut = computed(() => (cfg.value.big ? CUT + 2 : CUT));
 const innerR = computed(() => (cfg.value.big ? R + 3 : R - 3));
 const innerCut = computed(() => (cfg.value.big ? CUT : CUT - 2));
 
-// Top highlight stripe geometry differs between big (start/end) and locked
 const highlight = computed(() =>
     cfg.value.big
         ? { x: props.x - R - 1, w: R * 2 - 4 }
@@ -64,7 +91,6 @@ const fillPts = computed(() =>
     octPts(props.x, props.y, innerR.value, innerCut.value),
 );
 
-// Flag (end variant only)
 const flagPole = computed(() => ({ x: props.x - 2, y: props.y - R - 36 }));
 const flagPts = computed(() => {
     const fx = props.x + 2;
@@ -72,10 +98,16 @@ const flagPts = computed(() => {
 
     return `${fx},${top} ${fx + 20},${top + 8} ${fx},${top + 16}`;
 });
+
+function onClick() {
+    if (clickable.value) {
+        emit('select');
+    }
+}
 </script>
 
 <template>
-    <g>
+    <g :class="{ 'cp--clickable': clickable }" @click="onClick">
         <polygon :points="shadowPts" fill="#00000055" />
         <polygon :points="borderPts" fill="#111" />
         <polygon :points="fillPts" :fill="cfg.fill" />
@@ -123,3 +155,9 @@ const flagPts = computed(() => {
         </text>
     </g>
 </template>
+
+<style scoped>
+.cp--clickable {
+    cursor: pointer;
+}
+</style>
