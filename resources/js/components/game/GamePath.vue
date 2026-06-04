@@ -1,6 +1,6 @@
 <script setup>
-// Layer 2 — the H/V dirt road, drawn as 4 stacked polylines (shadow → surface
-// → centre lane → gravel dashes). Receives the pre-built points string.
+// Layer 2 — le trottoir/rue urbain, dessiné en 4 polylines superposées
+// (ombre → surface béton → bande centrale → joints de dalles).
 defineProps({
     points: { type: String, required: true },
     width: { type: Number, default: 32 },
@@ -9,43 +9,43 @@ defineProps({
 
 <template>
     <g>
-        <!-- Shadow -->
+        <!-- Ombre portée -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#3a2008"
+            stroke="#111111"
             :stroke-width="width + 10"
             stroke-linejoin="miter"
             stroke-linecap="square"
         />
-        <!-- Dirt surface -->
+        <!-- Surface béton / trottoir -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#a06820"
+            stroke="#868686"
             :stroke-width="width"
             stroke-linejoin="miter"
             stroke-linecap="square"
         />
-        <!-- Lighter centre lane -->
+        <!-- Bande centrale plus claire -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#cc9040"
+            stroke="#a0a0a0"
             :stroke-width="width - 8"
             stroke-linejoin="miter"
             stroke-linecap="square"
         />
-        <!-- Gravel dashes -->
+        <!-- Joints de dalles (tirets blancs semi-transparents) -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#dca858"
-            :stroke-width="4"
+            stroke="#ffffffaa"
+            :stroke-width="2"
             stroke-linejoin="miter"
             stroke-linecap="square"
-            stroke-dasharray="14 12"
-            opacity="0.65"
+            stroke-dasharray="16 14"
+            opacity="0.45"
         />
     </g>
 </template>
