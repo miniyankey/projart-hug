@@ -24,6 +24,7 @@ Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
     ->middleware('throttle:5,1')
     ->name('newsletter.subscribe');
+Route::inertia('/newsletter/unsubscribe', 'NewsletterUnsubscribe')->name('newsletter.unsubscribe.page');
 Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])
     ->middleware('throttle:5,1')
     ->name('newsletter.unsubscribe');
