@@ -28,6 +28,7 @@ const answers = ref({});
 const clearedCount = ref(0); // checkpoints franchis (= frontière de progression)
 const activeIndex = ref(null); // question actuellement ouverte (ou null)
 const resultView = ref(null); // vue de résultat affichée (ou null)
+const resultPochy = ref('0'); // variante Pochy de l'écran de résultat courant
 // Statut de chaque checkpoint : 'locked' | 'eligible' | 'ineligible'
 const statuses = ref(questions.value.map(() => 'locked'));
 
@@ -78,6 +79,13 @@ function onAnswer(choiceIds) {
     statuses.value[activeIndex.value] = result.eligible
         ? 'eligible'
         : 'ineligible';
+
+    // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
+    if (!result.eligible) {
+        resultPochy.value = result.days < 0 ? '0-sad' : '0-time';
+    } else {
+        resultPochy.value = question.pochy ?? '0';
+    }
 
     if (result.view) {
         resultView.value = result.view;
@@ -168,6 +176,7 @@ onUnmounted(() => {
                     :question-count="questions.length"
                     :cleared-count="clearedCount"
                     :statuses="statuses"
+                    :pochy="questions[Math.min(clearedCount, questions.length - 1)]?.pochy ?? '0'"
                     class="flex-1"
                     @reach="onReach"
                     @select="onSelectCheckpoint"
@@ -195,6 +204,7 @@ onUnmounted(() => {
                     :pre-selected="answers[activeQuestion.id] ?? []"
                     :answered="clearedCount"
                     :total="questions.length"
+                    :icon="activeQuestion.icon"
                     class="game-layer"
                     @answer="onAnswer"
                     @back="onBack"
@@ -214,6 +224,8 @@ onUnmounted(() => {
                     :theme="activeQuestion?.titre ?? ''"
                     :answered="clearedCount"
                     :total="questions.length"
+                    :icon="activeQuestion?.icon ?? null"
+                    :pochy="resultPochy"
                     class="game-layer"
                     @ok="onResultOk"
                     @back="onResultBack"
