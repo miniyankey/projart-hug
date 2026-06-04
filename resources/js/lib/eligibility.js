@@ -8,6 +8,10 @@
 // Détermine l'éligibilité d'une réponse et le choix « le plus défavorable ».
 // - à vie (ineligibility_days < 0) prime sur tout ;
 // - sinon, la plus longue durée l'emporte.
+// La `view` est indépendante de la durée : dès qu'un choix sélectionné porte une
+// vue spécifique, c'est elle qui prime (peu importe quel choix donne la pire
+// durée). En choix multiple, ça évite qu'un choix « plus long » sans vue masque
+// la vue d'un autre choix coché (ex. vaccin « inconnu » vs « vivant atténué »).
 export function computeResult(question, choiceIds) {
     const selected = question.choices.filter((c) => choiceIds.includes(c.id));
     const ineligible = selected.filter((c) => !c.eligible);
@@ -31,10 +35,12 @@ export function computeResult(question, choiceIds) {
         return ad >= bd ? a : b;
     });
 
+    const withView = ineligible.find((c) => c.view);
+
     return {
         eligible: false,
         days: worst.ineligibility_days,
-        view: worst.view,
+        view: withView?.view ?? null,
     };
 }
 
