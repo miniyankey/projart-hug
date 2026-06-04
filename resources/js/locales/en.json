@@ -46,7 +46,10 @@
         "winner_deleted": "Winner deleted.",
         "submission_deleted": "Submission deleted.",
         "form_submission_sent": "Your request has been sent successfully.",
-        "admin_created": "Administrator account created successfully."
+        "admin_created": "Administrator account created successfully.",
+        "reminder_scheduled": "All set! We'll email you as soon as you can donate again.",
+        "reminder_already_eligible": "Good news: you are already eligible, no reminder needed!",
+        "reminder_lifetime": "Based on your answers, donating is unfortunately not possible for you. No reminder will be sent."
     },
     "admin": {
         "nav": {
@@ -301,6 +304,13 @@
     "eligibilite": {
         "title": "Can you donate?",
         "intro": "Find out in a few questions whether you're eligible to give blood.",
+        "reminder": {
+            "title": "Not eligible yet?",
+            "intro": "Leave us your email address: we'll let you know as soon as you can give blood again.",
+            "email": "Email address",
+            "email_placeholder": "you@example.ch",
+            "submit": "Notify me"
+        },
         "mascotte_speech": "Come play to find out if you're eligible!",
         "mascotte_cta": "Play!",
         "mascotte_close": "Close"

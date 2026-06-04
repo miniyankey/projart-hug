@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CollectCreatedMail;
 use App\Models\Collect;
 use App\Models\Company;
 use App\Models\Place;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -42,6 +44,11 @@ class CollectController extends Controller
         $collect = Collect::create($this->resolveCollectAttributes($this->validateCollect($request)));
         $this->enforceSingleActiveCollect($collect);
 
+        // Une collecte active expose immédiatement le lien co-brandé : on en informe le contact.
+        if ($collect->is_active) {
+            $this->notifyCompanyContact($collect);
+        }
+
         return redirect()->route('admin.collectes.index')
             ->with('success', 'flash.collect_created');
     }
@@ -63,11 +70,32 @@ class CollectController extends Controller
      */
     public function update(Request $request, Collect $collecte): RedirectResponse
     {
+        $wasActive = $collecte->is_active;
+
         $collecte->update($this->resolveCollectAttributes($this->validateCollect($request)));
         $this->enforceSingleActiveCollect($collecte);
 
+        // On notifie uniquement lors d'un passage inactive -> active, pas à chaque édition.
+        if (! $wasActive && $collecte->is_active) {
+            $this->notifyCompanyContact($collecte);
+        }
+
         return redirect()->route('admin.collectes.index')
             ->with('success', 'flash.collect_updated');
+    }
+
+    /**
+     * Envoie au contact de l'entreprise le lien co-brandé de la collecte.
+     */
+    private function notifyCompanyContact(Collect $collect): void
+    {
+        $collect->loadMissing(['company', 'place']);
+
+        if (! $collect->company?->email_contact) {
+            return;
+        }
+
+        Mail::to($collect->company->email_contact)->queue(new CollectCreatedMail($collect));
     }
 
     /**
