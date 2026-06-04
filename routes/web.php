@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\KpiController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
 use App\Http\Controllers\EligibiliteController;
+use App\Http\Controllers\EligibilityReminderController;
 use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\Kpi\CollectEventController;
 use App\Http\Controllers\Kpi\ContactFormConversionController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\NewsletterController;
 use App\Models\Collect;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -18,12 +21,24 @@ use Inertia\Inertia;
 // Langue, pour changer
 Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update');
 
+// Newsletter
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
+    ->middleware('throttle:5,1')
+    ->name('newsletter.subscribe');
+Route::inertia('/newsletter/unsubscribe', 'NewsletterUnsubscribe')->name('newsletter.unsubscribe.page');
+Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])
+    ->middleware('throttle:5,1')
+    ->name('newsletter.unsubscribe');
+
 // Pages publiques
 Route::inertia('/', 'Home')->name('home');
 Route::inertia('/trophee', 'Trophee')->name('trophee');
 Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
 Route::get('/eligibilite', [EligibiliteController::class, 'index'])->name('eligibilite');
+Route::post('/eligibilite/rappel', [EligibilityReminderController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('eligibilite.rappel');
 Route::inertia('/certification', 'Certification')->name('certification');
 
 // Tracking KPI : endpoints publics « fire-and-forget » appelés depuis le front (pour register evetns)
@@ -45,7 +60,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
                 'labelled' => Company::where('is_labelled', true)->count(),
                 'active_collects' => Collect::where('is_active', true)->count(),
             ],
-            'activeCollects' => Collect::with(['company:id,name,slug,token,color,logo', 'place:id,city'])
+            'activeCollects' => Collect::with(['company:id,name,slug,color,logo', 'place:id,city'])
                 ->where('is_active', true)
                 ->orderBy('day')
                 ->get()
@@ -53,8 +68,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
                     'id' => $collect->id,
                     'day' => $collect->day?->format('Y-m-d'),
                     'company' => $collect->company?->name,
-                    'slug' => $collect->company?->slug,
-                    'token' => $collect->company?->token,
+                    'company_slug' => $collect->company?->slug,
+                    'collect_slug' => $collect->slug,
                     'color' => $collect->company?->color,
                     'logo_url' => $collect->company?->logo_url,
                     'city' => $collect->place?->city,
@@ -87,8 +102,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     });
 
     Route::prefix('/kpi')->name('kpi.')->group(function () {
-        Route::inertia('/', 'Admin/Kpi/Index')->name('index');
-        Route::get('/{token}', fn () => Inertia::render('Admin/Kpi/Show'))->name('show');
+        Route::get('/', [KpiController::class, 'index'])->name('index');
+        Route::get('/{company:token}', [KpiController::class, 'show'])->name('show');
     });
 
     Route::get('/register', [AdminAuthController::class, 'showRegister'])->name('register');
@@ -101,8 +116,9 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('log
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-// Pages co-brandées : l'entreprise est résolue via {brandName} (son slug).
-Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
+// Pages co-brandées : l'entreprise est résolue via {brandName} (son slug) et la
+// collecte via {collect} (son slug propre). Un lien unique par collecte.
+Route::prefix('/{brandName}/{collect}')->name('cobrand.')->group(function () {
     Route::get('/collecte', [CobrandController::class, 'collecte'])->name('collecte');
     Route::get('/jeu', [CobrandController::class, 'jeu'])->name('jeu');
     Route::get('/don-du-sang', [CobrandController::class, 'donSang'])->name('don-sang');

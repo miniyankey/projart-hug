@@ -16,7 +16,8 @@ import { computeResult, overallVerdict } from '@/lib/eligibility';
 
 const props = defineProps({
     company: Object,
-    token: String,
+    // Slug de la collecte (mode co-brandé) ; null en mode public.
+    collectSlug: { type: String, default: null },
     // Présent uniquement en mode co-brandé (collecte active) ; null en mode
     // public → aucun tracking KPI (pour le moment à voir dans le futur)
     collect_id: { type: Number, default: null },
@@ -215,7 +216,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :token="token" hide-footer>
+    <PublicLayout :company="company" :collect-slug="collectSlug" hide-footer>
         <Head :title="t('eligibilite.title')" />
 
         <div ref="containerRef" class="game-container">
