@@ -1,4 +1,18 @@
 {
+    "newsletter": {
+        "title": "Stay informed",
+        "subtitle": "Receive news from the Blood Transfusion Centre and be notified of upcoming blood drives.",
+        "email_label": "Email address",
+        "email_placeholder": "your{'@'}email.com",
+        "submit": "Subscribe",
+        "success": "You have been successfully subscribed to the newsletter.",
+        "error": "An error occurred, please try again later.",
+        "unsubscribe_title": "Unsubscribe",
+        "unsubscribe_subtitle": "No longer want to receive our news? Enter your email address below.",
+        "unsubscribe_submit": "Unsubscribe",
+        "unsubscribe_success": "You have been successfully unsubscribed from the newsletter.",
+        "unsubscribe_error": "An error occurred while unsubscribing, please try again later."
+    },
     "common": {
         "languages": {
             "fr": "French",
