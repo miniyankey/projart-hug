@@ -103,7 +103,9 @@ onBeforeUnmount(() => removeListener?.());
                 />
             </Link>
 
-            <div class="hidden flex-1 items-center justify-center gap-8 md:flex lg:gap-12">
+            <div
+                class="hidden flex-1 items-center justify-center gap-8 md:flex lg:gap-12"
+            >
                 <Link
                     v-for="link in links"
                     :key="link.href"
