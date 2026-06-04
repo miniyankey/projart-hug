@@ -83,5 +83,5 @@ export function useEligibilityQuiz() {
         };
     }
 
-    return { questions, ineligibleView };
+    return { questions, ineligibleView, formatDuration };
 }

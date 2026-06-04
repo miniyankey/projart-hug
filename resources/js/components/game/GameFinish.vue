@@ -7,6 +7,7 @@ import { useI18n } from 'vue-i18n';
 import GamePochy from './GamePochy.vue';
 import GameProgressBar from './GameProgressBar.vue';
 import GameSpeechBubble from './GameSpeechBubble.vue';
+import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
 import { Button } from '@/components/ui/button';
 
 const props = defineProps({
@@ -20,6 +21,7 @@ const props = defineProps({
 defineEmits(['back']);
 
 const { t } = useI18n();
+const { formatDuration } = useEligibilityQuiz();
 
 const isEligible = computed(() => props.verdict.status === 'eligible');
 
@@ -41,24 +43,9 @@ const appointmentUrl = computed(
         'https://www.hug.ch/don-du-sang/rendez-vous-ligne',
 );
 
+// Durée formatée, ou null pour « aucune » / « à vie » (days < 0).
 function formatDays(days) {
-    if (days === null || days < 0) {
-        return null;
-    }
-
-    if (days >= 365) {
-        return t('eligibilite.duration.year', Math.round(days / 365));
-    }
-
-    if (days >= 30) {
-        return t('eligibilite.duration.month', Math.round(days / 30));
-    }
-
-    if (days >= 7) {
-        return t('eligibilite.duration.week', Math.round(days / 7));
-    }
-
-    return t('eligibilite.duration.day', days);
+    return days === null || days < 0 ? null : formatDuration(days);
 }
 </script>
 

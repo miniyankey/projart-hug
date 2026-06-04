@@ -46,7 +46,7 @@ const statuses = ref(questions.value.map(() => 'locked'));
 
 watch(activeIndex, (idx) => {
     if (idx !== null) {
-        // On la carte, on n'utilise que le niveau de remplissage (ex. "20-travel" → "20")
+        // Sur la carte, on n'utilise que le niveau de remplissage (ex. "20-travel" → "20")
         const pochy = questions.value[idx]?.pochy ?? '0';
         mapPochy.value = pochy.split('-')[0];
     }
@@ -55,6 +55,9 @@ watch(activeIndex, (idx) => {
 const activeQuestion = computed(() =>
     activeIndex.value !== null ? questions.value[activeIndex.value] : null,
 );
+
+// Numéro de l'étape en cours (1-based), cohérent entre question et résultat.
+const currentStep = computed(() => (activeIndex.value ?? 0) + 1);
 
 function onPlay() {
     phase.value = 'loading';
@@ -252,7 +255,7 @@ onUnmounted(() => {
                     :key="activeQuestion.id"
                     :question="activeQuestion"
                     :pre-selected="answers[activeQuestion.id] ?? []"
-                    :answered="clearedCount + 1"
+                    :answered="currentStep"
                     :total="questions.length"
                     :icon="activeQuestion.icon"
                     class="game-layer"
@@ -272,7 +275,7 @@ onUnmounted(() => {
                     v-if="resultView"
                     :view="resultView"
                     :theme="activeQuestion?.titre ?? ''"
-                    :answered="clearedCount"
+                    :answered="currentStep"
                     :total="questions.length"
                     :icon="activeQuestion?.icon ?? null"
                     :pochy="resultPochy"

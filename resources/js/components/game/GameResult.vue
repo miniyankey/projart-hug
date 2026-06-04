@@ -7,7 +7,7 @@ import GameSpeechBubble from './GameSpeechBubble.vue';
 import { Button } from '@/components/ui/button';
 
 defineProps({
-    // Vue : { message, descr?, text?, button_text?, button_url? }
+    // Vue : { message, descr?, text?, button_text?, button_url?, integration_url? }
     view: { type: Object, required: true },
     theme: { type: String, default: '' },
     answered: { type: Number, default: 0 },
@@ -61,6 +61,15 @@ const { t } = useI18n();
                 >
                     {{ view.button_text || t('eligibilite.ui.learn_more') }}
                 </Button>
+
+                <!-- Outil intégré (ex. Travel Checker) -->
+                <iframe
+                    v-if="view.integration_url"
+                    :src="view.integration_url"
+                    :title="theme"
+                    class="h-[min(60vh,460px)] w-full border-[3px] border-black"
+                    loading="lazy"
+                />
             </div>
         </template>
 

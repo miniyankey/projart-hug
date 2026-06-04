@@ -8,6 +8,6 @@ defineProps({
     <img
         :src="`/img/pochy/pochy-${variant}.png`"
         alt="Pochy"
-        style="image-rendering: pixelated"
+        class="[image-rendering:pixelated]"
     />
 </template>
