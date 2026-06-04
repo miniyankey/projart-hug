@@ -13,6 +13,7 @@ defineProps({
     answered: { type: Number, default: 0 },
     total: { type: Number, default: 0 },
     icon: { type: String, default: null },
+    pochy: { type: String, default: '0' },
 });
 
 defineEmits(['ok', 'back']);
@@ -21,7 +22,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <GameScene :theme="theme" :answered="answered" :total="total" :icon="icon">
+    <GameScene :theme="theme" :answered="answered" :total="total" :icon="icon" :pochy="pochy">
         <template #bubble>
             <GameSpeechBubble>
                 {{ view.message }}

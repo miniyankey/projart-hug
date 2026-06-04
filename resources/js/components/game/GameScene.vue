@@ -3,6 +3,7 @@
 // barre de progression, thématique + compteur, Pochy + icône, et 3 slots
 // (#bubble = bulle de Pochy, #content = zone centrale, #footer = pied).
 import { ref, watch } from 'vue';
+import GamePochy from './GamePochy.vue';
 import GameProgressBar from './GameProgressBar.vue';
 
 const props = defineProps({
@@ -10,6 +11,7 @@ const props = defineProps({
     answered: { type: Number, default: 0 },
     total: { type: Number, default: 0 },
     icon: { type: String, default: null },
+    pochy: { type: String, default: '0' },
 });
 
 const iconError = ref(false);
@@ -51,11 +53,7 @@ watch(
                         ?
                     </div>
 
-                    <img
-                        src="/img/mascotte.png"
-                        alt="Pochy"
-                        class="scene__pochy"
-                    />
+                    <GamePochy :variant="pochy" class="scene__pochy" />
                 </div>
 
                 <div class="scene__right">

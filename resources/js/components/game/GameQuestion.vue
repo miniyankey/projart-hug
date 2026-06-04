@@ -62,6 +62,7 @@ function validate() {
         :answered="answered"
         :total="total"
         :icon="icon"
+        :pochy="question.pochy ?? '0'"
     >
         <template #bubble>
             <GameSpeechBubble>{{ question.question }}</GameSpeechBubble>

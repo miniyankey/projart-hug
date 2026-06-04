@@ -4,6 +4,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import GameCheckpoint from './GameCheckpoint.vue';
 import GameDecorations from './GameDecorations.vue';
 import GamePath from './GamePath.vue';
+import GamePochy from './GamePochy.vue';
 import GameScrollHint from './GameScrollHint.vue';
 import {
     buildDecos,
@@ -21,6 +22,8 @@ const props = defineProps({
     clearedCount: { type: Number, default: 0 },
     // Statut par checkpoint : 'locked' | 'eligible' | 'ineligible'
     statuses: { type: Array, default: () => [] },
+    // Variante de la mascotte (suffixe du fichier /img/pochy/pochy-<variant>.png)
+    pochy: { type: String, default: '0' },
 });
 
 const emit = defineEmits(['reach', 'select']);
@@ -310,7 +313,7 @@ onUnmounted(() => {
              POCHY — pinned dead-centre, never moves, world moves around it
         ═══════════════════════════════════════════════════════════════ -->
         <div class="pochy-anchor">
-            <img src="/img/mascotte.png" alt="Pochy" class="pochy-sprite" />
+            <GamePochy :variant="pochy" class="pochy-sprite" />
             <div class="pochy-shadow" />
         </div>
 

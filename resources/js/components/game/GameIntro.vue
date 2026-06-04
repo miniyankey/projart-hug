@@ -1,5 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
+import GamePochy from './GamePochy.vue';
 import { Button } from '@/components/ui/button';
 
 defineProps({
@@ -39,10 +40,9 @@ const { t } = useI18n();
         <!-- Pochy sur sa plateforme -->
         <div class="flex flex-1 items-center justify-center">
             <div class="relative flex flex-col items-center">
-                <img
-                    src="/img/mascotte.png"
-                    alt="Pochy"
-                    class="relative z-10 w-[clamp(180px,30vh,300px)] [image-rendering:pixelated] drop-shadow-[0_14px_22px_rgba(0,0,0,0.3)]"
+                <GamePochy
+                    variant="0"
+                    class="relative z-10 w-[clamp(180px,30vh,300px)] drop-shadow-[0_14px_22px_rgba(0,0,0,0.3)]"
                 />
                 <!-- Zone arrondie sous Pochy : ses pieds reposent dessus -->
                 <div
