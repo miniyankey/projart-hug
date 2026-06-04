@@ -44,6 +44,7 @@ const clearedCount = ref(0); // checkpoints franchis (= frontière de progressio
 const activeIndex = ref(null); // question actuellement ouverte (ou null)
 const resultView = ref(null); // vue de résultat affichée (ou null)
 const resultPochy = ref('0'); // variante Pochy de l'écran de résultat courant
+const resultDays = ref(0); // jours d'inéligibilité temporaire du résultat (0 sinon)
 // Pochy de la carte : change quand la question s'ouvre (overlay couvre la carte
 // → transition invisible), pas quand clearedCount change (carte visible).
 const mapPochy = ref(questions.value[0]?.pochy ?? '0');
@@ -99,34 +100,35 @@ function finishStep() {
     activeIndex.value = null;
 }
 
-// ─── Tracking KPI (fire & forget, mode co-brandé uniquement) ──────────────────
-// rend l'envoi idempotent (re-réponse via « Changer ma réponse » incluse).
-function resultLabel(result) {
-    if (result.eligible) {
-        return 'eligible';
-    }
-
-    return result.days < 0 ? 'ineligible_lifetime' : 'ineligible';
-}
-
-function trackStep(result) {
-    if (!props.collect_id) {
-        return;
-    }
-
+// ─── Tracking KPI (fire & forget) ─────────────────────────────────────────────
+// Aligné sur l'agrégation du dashboard (KpiController) : un seul `result` par
+// session, porté par l'étape complétée (= verdict global), `null` ailleurs. Les
+// étapes intermédiaires alimentent le drop-off (sessions par étape). L'envoi est
+// idempotent (updateOrCreate côté serveur), donc « Changer ma réponse » est sûr.
+// En mode public, collect_id est null → session rattachée au funnel global.
+function trackStep() {
     const step = activeIndex.value + 1; // étapes 1-indexées côté KPI
+    const isFinal = step === questions.value.length;
+
+    // Sur l'étape finale uniquement : verdict global, replié sur les deux valeurs
+    // comptées par le dashboard (eligible / ineligible).
+    let result = null;
+
+    if (isFinal) {
+        const verdict = overallVerdict(questions.value, answers.value);
+        result = verdict.status === 'eligible' ? 'eligible' : 'ineligible';
+    }
 
     trackEligibiliteStep(props.collect_id, step, {
-        result: resultLabel(result),
-        completed: step === questions.value.length,
+        result,
+        completed: isFinal,
     });
 }
 
-// Clic sur le CTA d'inscription en fin de parcours (conversion don de sang)
+// Clic sur le CTA d'inscription en fin de parcours (conversion don de sang).
+// Source 'jeu' pour matcher l'agrégation du dashboard (KpiController).
 function onAppointment() {
-    if (props.collect_id) {
-        trackAppointmentClick(props.collect_id, 'game-end-cta');
-    }
+    trackAppointmentClick(props.collect_id, 'jeu');
 }
 
 // Validation d'une réponse → enregistrement, statut du checkpoint, puis :
@@ -146,7 +148,11 @@ function onAnswer(choiceIds) {
         ? 'eligible'
         : 'ineligible';
 
-    trackStep(result);
+    trackStep();
+
+    // Jours d'inéligibilité temporaire (> 0) → déclenche le formulaire de rappel
+    // dans GameResult ; 0 pour éligible ou inéligibilité à vie (days < 0).
+    resultDays.value = !result.eligible && result.days > 0 ? result.days : 0;
 
     // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
     if (!result.eligible) {
@@ -314,6 +320,8 @@ onUnmounted(() => {
                     :total="questions.length"
                     :icon="activeQuestion?.icon ?? null"
                     :pochy="resultPochy"
+                    :reminder-days="resultDays"
+                    :collect-id="collect_id"
                     class="game-layer"
                     @ok="onResultOk"
                     @back="onResultBack"
