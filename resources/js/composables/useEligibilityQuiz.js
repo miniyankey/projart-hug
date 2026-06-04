@@ -17,8 +17,9 @@ export function useEligibilityQuiz() {
         return {
             message: t(`${base}.message`),
             text: maybe(`${base}.text`),
-            button_text: maybe(`${base}.button_text`),
+            button_text: maybe(`${base}.cta`),
             button_url: QUIZ_VIEWS[viewKey]?.buttonUrl ?? null,
+            integration_url: QUIZ_VIEWS[viewKey]?.integrationUrl ?? null,
         };
     }
 
@@ -37,8 +38,8 @@ export function useEligibilityQuiz() {
                 id: c.key,
                 eligible: c.eligible,
                 ineligibility_days: c.days,
-                text: t(`${base}.choices.${c.key}`),
-                descr: maybe(`${base}.choices_descr.${c.key}`),
+                text: t(`${base}.choices.${c.key}.response`),
+                descr: maybe(`${base}.choices.${c.key}.descr`),
                 view: c.view ? buildView(c.view) : null,
             })),
         };

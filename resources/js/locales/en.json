@@ -282,16 +282,17 @@
         "quiz": {
             "views": {
                 "medication": {
-                    "message": "Your ineligibility depends on the medication you've taken.",
-                    "text": "You can contact the CTS for more information about your eligibility to donate."
+                    "message": "Your eligibility depends on the medication you've taken.",
+                    "text": "Contact the CTS for more information about your eligibility to donate.",
+                    "cta": "Contact the CTS"
                 },
                 "travel": {
-                    "message": "Your ineligibility depends on the countries you've visited.",
-                    "text": "Check the Travel Checker to find out how long you must wait before donating. The maximum is 6 months, the time for any pathogens to become detectable."
+                    "message": "Your eligibility depends on the countries you've visited.",
+                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months — the time needed for any pathogens to become detectable."
                 },
                 "vaccine": {
-                    "message": "If you don't know which type of vaccine you received, go to the Check Vaccination tool and fill in your vaccine details. You'll then know whether you're eligible.",
-                    "button_text": "Check Vaccination"
+                    "message": "If you don't know which type of vaccine you received, use the Check Vaccination tool and fill in your vaccine details to find out whether you're eligible.",
+                    "cta": "Check my vaccine"
                 }
             },
             "lifetime": {
@@ -299,104 +300,130 @@
                 "question": "Tick all the situations that apply or have applied to you.",
                 "why": "Some people cannot give blood because it would be risky for them or for others.",
                 "choices": {
-                    "hiv": "HIV/AIDS",
-                    "diabetes": "Diabetes",
-                    "injection_drugs": "Injected drug use",
-                    "heart": "Heart conditions",
-                    "blood_diseases": "Blood diseases",
-                    "hepatitis": "Hepatitis B and C",
-                    "none": "None of these situations"
+                    "hiv": { "response": "HIV/AIDS" },
+                    "diabetes": { "response": "Diabetes" },
+                    "injection_drugs": { "response": "Injected drug use" },
+                    "heart": { "response": "Heart conditions" },
+                    "blood_diseases": { "response": "Blood diseases" },
+                    "hepatitis": { "response": "Hepatitis B and C" }
                 }
             },
             "health": {
                 "titre": "Health",
                 "question": "Are you generally in good health, with no cold or fever symptoms?",
-                "why": "We don't take risks! We prefer people with mild symptoms to recover before donating.",
+                "why": "Better safe than sorry! We prefer people with mild symptoms to recover fully before donating.",
                 "choices": {
-                    "yes": "Yes",
-                    "no": "No"
+                    "yes": { "response": "Yes" },
+                    "no": { "response": "No" }
                 }
             },
             "medication": {
                 "titre": "Medication",
                 "question": "Have you taken any medication in the last 4 weeks?",
-                "why": "Some medications make blood donation unsafe, risking harm to the recipient or the donor.",
+                "why": "Some medications can make blood donation unsafe, risking harm to the recipient or the donor.",
                 "choices": {
-                    "yes": "Yes",
-                    "no": "No"
+                    "yes": { "response": "Yes" },
+                    "no": { "response": "No" }
                 }
             },
             "travel": {
                 "titre": "Travel",
-                "question": "Which regions of the world have you travelled to in the last 6 months?",
-                "why": "In some regions, a pathogen can travel back to Switzerland with you and only become detectable 6 months later!",
+                "question": "If you've travelled in the last 6 months, where did you go?",
+                "why": "In some parts of the world, pathogens can travel back with you and only become detectable up to 6 months later!",
                 "choices": {
-                    "europe": "Europe",
-                    "other": "Other regions of the world",
-                    "none": "None"
+                    "europe": { "response": "Europe" },
+                    "other": { "response": "Other regions of the world" }
                 }
             },
             "partner": {
                 "titre": "Partner",
                 "question": "Have you had several sexual partners in the last 12 months, or changed partner in the last 4 months?",
-                "why": "It's personal, but it matters to minimise the risk of transmitting an STI to the recipient.",
+                "why": "It's personal, but important for minimising the risk of transmitting an STI to the recipient.",
                 "choices": {
-                    "yes": "Yes",
-                    "no": "No"
+                    "yes": { "response": "Yes" },
+                    "no": { "response": "No" }
                 }
             },
             "hospitalization": {
                 "titre": "Hospitalisation",
-                "question": "Have you been hospitalised recently?",
-                "why": "If someone is recovering from major surgery or childbirth, they need time to recover.",
+                "question": "What is the most serious hospitalisation you've had recently?",
+                "why": "Someone recovering from major surgery or childbirth needs time to recover before donating.",
                 "choices": {
-                    "none": "No (no hospitalisation in the last 12 months)",
-                    "old": "Yes, ER/consultation more than 4 weeks ago",
-                    "recent": "Yes, ER/consultation less than 4 weeks ago",
-                    "admission": "Yes, hospitalised with admission"
+                    "none": {
+                        "response": "No hospitalisation in the last 12 months"
+                    },
+                    "old": {
+                        "response": "A&E / consultation more than 4 weeks ago"
+                    },
+                    "recent": {
+                        "response": "A&E / consultation less than 4 weeks ago"
+                    },
+                    "admission": {
+                        "response": "Hospital admission in the last year"
+                    }
                 }
             },
             "dentist": {
                 "titre": "Dentist",
-                "question": "Have you had dental treatment in the last 14 days?",
+                "question": "What is the most intensive dental treatment you've had recently?",
                 "why": "These treatments cause small lesions through which bacteria or viruses can enter and contaminate the blood.",
                 "choices": {
-                    "no": "No",
-                    "scaling": "Yes (a scaling)",
-                    "extraction": "Yes (a tooth extraction without complications)",
-                    "complications": "Yes (with complications, e.g. antibiotics)"
+                    "no": { "response": "No treatment" },
+                    "scaling": { "response": "Scaling less than 48 hours ago" },
+                    "extraction": {
+                        "response": "Extraction less than a week ago"
+                    },
+                    "complications": {
+                        "response": "Extraction with complications less than two weeks ago"
+                    }
                 }
             },
             "tattoo": {
                 "titre": "Tattoo",
-                "question": "Which styles did you add to your character in the last 4 months?",
-                "why": "These can cause small wounds, which open the door to bacteria and viruses.",
+                "question": "Select the styles you've added in the last 4 months",
+                "why": "These can cause small wounds that open the door to bacteria and viruses.",
                 "choices": {
-                    "tattoo": "A tattoo",
-                    "piercing": "A piercing",
-                    "acupuncture": "None, but I had acupuncture",
-                    "none": "None, you're perfect as you are"
+                    "tattoo": { "response": "A tattoo" },
+                    "piercing": { "response": "A piercing" },
+                    "acupuncture": { "response": "None, but I had acupuncture" }
                 }
             },
             "tick": {
                 "titre": "Tick bite",
                 "question": "Did you come back from an outdoor walk with a little companion in the last 4 weeks?",
-                "why": "Ticks, like mosquitoes, carry diseases (such as Lyme) transmitted through their bacteria. Check your whole body when you get home from a walk in nature.",
+                "why": "Ticks, like mosquitoes, carry diseases (such as Lyme disease) transmitted through their bacteria. Check your whole body after a walk in nature.",
                 "choices": {
-                    "tick": "Yes, a tick",
-                    "other_companion": "Yes, another companion",
-                    "alone": "No, I was alone"
+                    "tick": {
+                        "response": "Yes, a tick",
+                        "descr": "Tough luck."
+                    },
+                    "other_companion": {
+                        "response": "Yes, another companion",
+                        "descr": "Your dog, friend, or partner"
+                    },
+                    "alone": {
+                        "response": "No, I was alone",
+                        "descr": "Phew!"
+                    }
                 }
             },
             "vaccine": {
                 "titre": "Recent vaccine",
-                "question": "Have you been vaccinated recently?",
-                "why": "Depending on the vaccine type, a waiting period may be needed to avoid transmitting a live attenuated virus, or simply to make sure you have no side effects. In most cases, vaccination doesn't prevent donation.",
+                "question": "Tick any vaccines you've received recently.",
+                "why": "Depending on the vaccine type, a waiting period may be required to avoid transmitting a live attenuated virus, or simply to ensure you have no side effects. In most cases, vaccination doesn't prevent donation.",
                 "choices": {
-                    "none": "No (no recent vaccine)",
-                    "live": "Yes (live attenuated vaccine: MMR, chickenpox, yellow fever…) less than 4 months ago",
-                    "inactivated": "Yes (inactivated/mRNA vaccine: flu, COVID, hepatitis, tetanus…) less than 48 h ago",
-                    "unknown": "Yes, less than 4 months ago (but I don't know which one)"
+                    "live": {
+                        "response": "Live attenuated vaccine less than 4 months ago",
+                        "descr": "MMR, chickenpox, yellow fever…"
+                    },
+                    "inactivated": {
+                        "response": "Inactivated/mRNA vaccine less than 48 h ago",
+                        "descr": "Flu, COVID, hepatitis, tetanus…"
+                    },
+                    "unknown": {
+                        "response": "I don't know the type but it was less than 4 months ago",
+                        "descr": "Surprise!"
+                    }
                 }
             }
         }
