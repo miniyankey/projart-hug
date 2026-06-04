@@ -60,7 +60,7 @@ onBeforeUnmount(() => removeListener?.());
 <template>
     <header class="sticky top-0 z-50 border-b border-gray-200 bg-white">
         <nav
-            class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:gap-8 md:px-6 md:py-4"
+            class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 md:gap-10 md:px-6 md:py-4 lg:px-8"
         >
             <!-- Mode co-brandé : logo HUG × logo entreprise -->
             <div
@@ -103,13 +103,13 @@ onBeforeUnmount(() => removeListener?.());
                 />
             </Link>
 
-            <div class="hidden items-center gap-10 md:flex">
+            <div class="hidden flex-1 items-center justify-center gap-8 md:flex lg:gap-12">
                 <Link
                     v-for="link in links"
                     :key="link.href"
                     :href="link.href"
                     :class="[
-                        'border-b-2 pb-1 text-sm transition-colors hover:text-[var(--brand)]',
+                        'border-b-2 pb-1 text-sm whitespace-nowrap transition-colors hover:text-[var(--brand)]',
                         isActive(link.href)
                             ? 'border-[var(--brand)] font-semibold text-[var(--brand)]'
                             : 'border-transparent text-gray-800',
@@ -119,7 +119,7 @@ onBeforeUnmount(() => removeListener?.());
                 </Link>
             </div>
 
-            <div class="hidden items-center gap-6 md:flex">
+            <div class="hidden items-center gap-4 md:flex lg:gap-6">
                 <Button as-child variant="cta" size="cta">
                     <Link :href="cta.href">{{ t(cta.label) }}</Link>
                 </Button>
