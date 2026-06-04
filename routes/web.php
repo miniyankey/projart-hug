@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\KpiController;
+use App\Http\Controllers\Admin\WinnerController as AdminWinnerController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
 use App\Http\Controllers\EligibilityReminderController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\Kpi\CollectEventController;
 use App\Http\Controllers\Kpi\ContactFormConversionController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\WinnerController;
 use App\Models\Collect;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -21,7 +23,7 @@ Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update
 
 // Pages publiques
 Route::inertia('/', 'Home')->name('home');
-Route::inertia('/trophee', 'Trophee')->name('trophee');
+Route::get('/trophee', [WinnerController::class, 'index'])->name('trophee');
 Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
 Route::inertia('/eligibilite', 'Eligibilite')->name('eligibilite');
@@ -67,9 +69,12 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     })->name('index');
 
     Route::prefix('/vainqueurs')->name('vainqueurs.')->group(function () {
-        Route::inertia('/', 'Admin/Vainqueurs/Index')->name('index');
-        Route::inertia('/create', 'Admin/Vainqueurs/Create')->name('create');
-        Route::get('/{vainqueur}/edit', fn () => Inertia::render('Admin/Vainqueurs/Edit'))->name('edit');
+        Route::get('/', [AdminWinnerController::class, 'index'])->name('index');
+        Route::get('/create', [AdminWinnerController::class, 'create'])->name('create');
+        Route::post('/', [AdminWinnerController::class, 'store'])->name('store');
+        Route::get('/{vainqueur}/edit', [AdminWinnerController::class, 'edit'])->name('edit');
+        Route::put('/{vainqueur}', [AdminWinnerController::class, 'update'])->name('update');
+        Route::delete('/{vainqueur}', [AdminWinnerController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('/entreprises')->name('entreprises.')->group(function () {
