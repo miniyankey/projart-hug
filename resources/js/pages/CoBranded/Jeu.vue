@@ -216,6 +216,7 @@ onUnmounted(() => {
                     :question-count="questions.length"
                     :cleared-count="clearedCount"
                     :statuses="statuses"
+                    :icons="questions.map((q) => q.icon)"
                     :pochy="mapPochy"
                     class="flex-1"
                     @reach="onReach"

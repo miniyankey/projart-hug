@@ -22,9 +22,15 @@ const props = defineProps({
     clearedCount: { type: Number, default: 0 },
     // Statut par checkpoint : 'locked' | 'eligible' | 'ineligible'
     statuses: { type: Array, default: () => [] },
+    // URL de l'icône thématique par checkpoint (index = question)
+    icons: { type: Array, default: () => [] },
     // Variante de la mascotte (suffixe du fichier /img/pochy/pochy-<variant>.png)
     pochy: { type: String, default: '0' },
 });
+
+// Icônes de début et de fin de parcours
+const START_ICON = '/img/game/deco/start-flag.svg';
+const END_ICON = '/img/game/deco/grand-hospital.svg';
 
 const emit = defineEmits(['reach', 'select', 'ready', 'finish']);
 
@@ -350,6 +356,48 @@ onUnmounted(() => {
                     @select="onCheckpointSelect(cp.index)"
                 />
                 <GameCheckpoint :x="endPt.x" :y="endPt.y" variant="end" />
+
+                <!-- Layer 5 : icônes thématiques au-dessus des checkpoints -->
+                <image
+                    :href="START_ICON"
+                    :x="startPt.x - 32"
+                    :y="startPt.y - 104"
+                    width="64"
+                    height="64"
+                />
+                <template v-for="cp in cps" :key="`ic-${cp.index}`">
+                    <g v-if="icons[cp.index]">
+                        <!-- Panneau pixel (cadre noir + fond clair) -->
+                        <rect
+                            :x="cp.x - 27"
+                            :y="cp.y - 83"
+                            width="54"
+                            height="54"
+                            fill="#1a1a1a"
+                        />
+                        <rect
+                            :x="cp.x - 25"
+                            :y="cp.y - 81"
+                            width="50"
+                            height="50"
+                            fill="#fdfdfd"
+                        />
+                        <image
+                            :href="icons[cp.index]"
+                            :x="cp.x - 24"
+                            :y="cp.y - 80"
+                            width="48"
+                            height="48"
+                        />
+                    </g>
+                </template>
+                <image
+                    :href="END_ICON"
+                    :x="endPt.x - 40"
+                    :y="endPt.y - 106"
+                    width="80"
+                    height="66"
+                />
             </svg>
         </div>
 
