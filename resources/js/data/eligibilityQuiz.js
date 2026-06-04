@@ -13,8 +13,13 @@
 // vit aussi dans les locales (eligibilite.quiz.views.<key>).
 
 export const QUIZ_VIEWS = {
-    medication: {},
-    travel: {},
+    medication: {
+        buttonUrl: 'mailto:accueil.donneurs@hug.ch',
+    },
+    travel: {
+        integrationUrl:
+            'https://integrations.spenderservice.ch/fr/travel_check/irb/',
+    },
     vaccine: {
         buttonUrl: 'https://www.blutspende.ch/fr/dates-de-collecte-de-sang',
     },
@@ -33,7 +38,6 @@ export const QUIZ = [
             { key: 'heart', eligible: false, days: -1 },
             { key: 'blood_diseases', eligible: false, days: -1 },
             { key: 'hepatitis', eligible: false, days: -1 },
-            { key: 'none', eligible: true, days: null },
         ],
     },
     {
@@ -58,13 +62,12 @@ export const QUIZ = [
     },
     {
         key: 'travel',
-        type: 'unique',
+        type: 'multiple',
         pochy: '20-travel',
         icon: 'plane',
         choices: [
             { key: 'europe', eligible: true, days: null },
             { key: 'other', eligible: false, days: 180, view: 'travel' },
-            { key: 'none', eligible: true, days: null },
         ],
     },
     {
@@ -114,23 +117,21 @@ export const QUIZ = [
     },
     {
         key: 'tattoo',
-        type: 'unique',
+        type: 'multiple',
         pochy: '80-tattooed',
         icon: 'tattoo',
         choices: [
             { key: 'tattoo', eligible: false, days: 120 },
             { key: 'piercing', eligible: false, days: 120 },
             { key: 'acupuncture', eligible: false, days: 120 },
-            { key: 'none', eligible: true, days: null },
         ],
     },
     {
         key: 'vaccine',
-        type: 'unique',
+        type: 'multiple',
         pochy: '90',
         icon: 'syringe',
         choices: [
-            { key: 'none', eligible: true, days: null },
             { key: 'live', eligible: false, days: 28 },
             { key: 'inactivated', eligible: false, days: 2 },
             { key: 'unknown', eligible: false, days: null, view: 'vaccine' },

@@ -283,7 +283,8 @@
             "views": {
                 "medication": {
                     "message": "Ton inéligibilité dépend des médicaments que tu as consommés.",
-                    "text": "Tu peux faire appel au CTS pour avoir plus d'informations sur ton éligibilité au don."
+                    "text": "Tu peux faire appel au CTS pour avoir plus d'informations sur ton éligibilité au don.",
+                    "cta": "Contacter le CTS"
                 },
                 "travel": {
                     "message": "Ton inéligibilité dépend des pays que tu as visités.",
@@ -291,7 +292,7 @@
                 },
                 "vaccine": {
                     "message": "Si tu ne sais pas quel type de vaccin tu as reçu, rends-toi sur le Check Vaccination et remplis les informations de ton vaccin. Tu sauras alors si tu es éligible ou non.",
-                    "button_text": "Check Vaccination"
+                    "cta": "Vérifier son vaccin"
                 }
             },
             "lifetime": {
@@ -299,13 +300,12 @@
                 "question": "Coche toutes les situations qui te concernent ou t'ont concerné.",
                 "why": "Certaines personnes ne peuvent pas donner leur sang car cela serait risqué pour elles ou pour les autres.",
                 "choices": {
-                    "hiv": "VIH/SIDA",
-                    "diabetes": "Diabète",
-                    "injection_drugs": "Drogue par injection",
-                    "heart": "Troubles cardiaques",
-                    "blood_diseases": "Maladies sanguines",
-                    "hepatitis": "Hépatite B et C",
-                    "none": "Aucune de ces situations"
+                    "hiv": { "response": "VIH/SIDA" },
+                    "diabetes": { "response": "Diabète" },
+                    "injection_drugs": { "response": "Drogue par injection" },
+                    "heart": { "response": "Troubles cardiaques" },
+                    "blood_diseases": { "response": "Maladies sanguines" },
+                    "hepatitis": { "response": "Hépatite B et C" }
                 }
             },
             "health": {
@@ -313,8 +313,8 @@
                 "question": "Es-tu plutôt en bonne santé, et exempt de tout symptôme de rhume ou de fièvre ?",
                 "why": "On ne prend pas de risque ! On préfère que les personnes ayant de légers symptômes se remettent avant de donner.",
                 "choices": {
-                    "yes": "Oui",
-                    "no": "Non"
+                    "yes": { "response": "Oui" },
+                    "no": { "response": "Non" }
                 }
             },
             "medication": {
@@ -322,18 +322,17 @@
                 "question": "As-tu pris des médicaments durant les 4 dernières semaines ?",
                 "why": "Certains médicaments ne permettent pas un don de sang sans risquer d'affecter le receveur ou le donneur.",
                 "choices": {
-                    "yes": "Oui",
-                    "no": "Non"
+                    "yes": { "response": "Oui" },
+                    "no": { "response": "Non" }
                 }
             },
             "travel": {
                 "titre": "Voyage",
-                "question": "Dans quelles régions du monde as-tu voyagé les 6 derniers mois ?",
+                "question": "Si tu as voyagé lors des 6 derniers mois, par où es-tu passé ?",
                 "why": "Dans certaines régions du monde, un agent pathogène peut rentrer en Suisse avec toi et n'être détectable que 6 mois plus tard !",
                 "choices": {
-                    "europe": "Europe",
-                    "other": "Autres régions du monde",
-                    "none": "Aucune"
+                    "europe": { "response": "Europe" },
+                    "other": { "response": "Autres régions du monde" }
                 }
             },
             "partner": {
@@ -341,41 +340,56 @@
                 "question": "As-tu eu plusieurs partenaires sexuel·les au cours des 12 derniers mois, ou changé de partenaire dans les 4 derniers mois ?",
                 "why": "J'entre dans ton intimité, mais c'est important pour minimiser les risques de transmission d'IST au receveur.",
                 "choices": {
-                    "yes": "Oui",
-                    "no": "Non"
+                    "yes": { "response": "Oui" },
+                    "no": { "response": "Non" }
                 }
             },
             "hospitalization": {
                 "titre": "Hospitalisation",
-                "question": "As-tu été hospitalisé·e récemment ?",
+                "question": "Quelle est la pire hospitalisation que tu as eue récemment ?",
                 "why": "Si la personne se remet d'une grosse opération ou d'un accouchement, elle a besoin de temps pour récupérer.",
                 "choices": {
-                    "none": "Non (aucune hospitalisation dans les 12 derniers mois)",
-                    "old": "Oui, urgences/consultation il y a plus de 4 semaines",
-                    "recent": "Oui, urgences/consultation il y a moins de 4 semaines",
-                    "admission": "Oui, hospitalisation avec admission"
+                    "none": {
+                        "response": "Aucune hospitalisation dans les 12 derniers mois"
+                    },
+                    "old": {
+                        "response": "Urgences/consultation il y a plus de 4 semaines"
+                    },
+                    "recent": {
+                        "response": "Urgences/consultation il y a moins de 4 semaines"
+                    },
+                    "admission": {
+                        "response": "Hospitalisation avec admission il y a moins d'un an"
+                    }
                 }
             },
             "dentist": {
                 "titre": "Dentiste",
-                "question": "As-tu eu un traitement dentaire au cours des 14 derniers jours ?",
+                "question": "Quel traitement dentaire le plus intense as-tu eu récemment ?",
                 "why": "Ces traitements provoquent de petites lésions par lesquelles des bactéries ou virus peuvent s'infiltrer et contaminer le sang.",
                 "choices": {
-                    "no": "Non",
-                    "scaling": "Oui (un détartrage)",
-                    "extraction": "Oui (une extraction dentaire sans complication)",
-                    "complications": "Oui (avec complications, type antibiotique)"
+                    "no": { "response": "Pas de traitement" },
+                    "scaling": {
+                        "response": "Détartrage il y a moins de 48 heures"
+                    },
+                    "extraction": {
+                        "response": "Extraction il y a moins d'une semaine"
+                    },
+                    "complications": {
+                        "response": "Extraction avec complication il y a moins de deux semaines"
+                    }
                 }
             },
             "tattoo": {
                 "titre": "Tatouage",
-                "question": "Quels styles as-tu ajoutés à ton personnage durant les 4 derniers mois ?",
+                "question": "Sélectionne les styles que tu t'es ajoutés ces 4 derniers mois",
                 "why": "Ces gestes peuvent causer de petites blessures, qui ouvrent la porte aux bactéries et virus.",
                 "choices": {
-                    "tattoo": "Un tatouage",
-                    "piercing": "Un piercing",
-                    "acupuncture": "Aucun, mais j'ai fait de l'acupuncture",
-                    "none": "Aucun, tu es parfait comme tu es"
+                    "tattoo": { "response": "Un tatouage" },
+                    "piercing": { "response": "Un piercing" },
+                    "acupuncture": {
+                        "response": "Aucun, mais j'ai fait de l'acupuncture"
+                    }
                 }
             },
             "tick": {
@@ -383,20 +397,37 @@
                 "question": "Es-tu revenu·e d'une balade en extérieur avec un petit compagnon au cours des 4 dernières semaines ?",
                 "why": "Les tiques, comme les moustiques, sont porteuses de maladies (Lyme…) qui se transmettent par leurs bactéries. Vérifie bien tout ton corps en rentrant d'une sortie dans la nature.",
                 "choices": {
-                    "tick": "Oui, une tique",
-                    "other_companion": "Oui, un autre compagnon",
-                    "alone": "Non, j'étais seul·e"
+                    "tick": {
+                        "response": "Oui, une tique",
+                        "descr": "C'est pas cool."
+                    },
+                    "other_companion": {
+                        "response": "Oui, un autre compagnon",
+                        "descr": "Mon chien, mon copain ou ma copine"
+                    },
+                    "alone": {
+                        "response": "Non, j'étais seul·e",
+                        "descr": "Ouf !"
+                    }
                 }
             },
             "vaccine": {
                 "titre": "Vaccin récent",
-                "question": "As-tu reçu un vaccin récemment ?",
+                "question": "Coche les vaccins que tu as eus récemment.",
                 "why": "Selon le type de vaccin, un délai peut être nécessaire pour éviter de transmettre un virus vivant atténué, ou simplement s'assurer que tu ne ressens aucun effet secondaire. Dans la plupart des cas, la vaccination n'empêche pas le don.",
                 "choices": {
-                    "none": "Non (aucun vaccin récent)",
-                    "live": "Oui (vaccin vivant atténué : ROR, varicelle, fièvre jaune…) il y a moins de 4 mois",
-                    "inactivated": "Oui (vaccin inactivé/ARNm : grippe, COVID, hépatite, tétanos…) il y a moins de 48 h",
-                    "unknown": "Oui, il y a moins de 4 mois (mais je ne sais pas lequel)"
+                    "live": {
+                        "response": "Vaccin vivant atténué il y a moins de 4 mois",
+                        "descr": "ROR, varicelle, fièvre jaune…"
+                    },
+                    "inactivated": {
+                        "response": "Vaccin inactivé/ARNm il y a moins de 48 h",
+                        "descr": "grippe, COVID, hépatite, tétanos…"
+                    },
+                    "unknown": {
+                        "response": "Je ne connais pas le type mais c'était il y a moins de 4 mois",
+                        "descr": "Surprise !"
+                    }
                 }
             }
         }
