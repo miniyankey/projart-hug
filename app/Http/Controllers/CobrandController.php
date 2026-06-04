@@ -36,6 +36,7 @@ class CobrandController extends Controller
         return Inertia::render('CoBranded/Jeu', [
             'token' => $token,
             'company' => $this->companyData($company),
+            'collect_id' => $collect->id,
             'link_appointment' => $collect->link_appointment,
         ]);
     }

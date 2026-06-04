@@ -10,17 +10,22 @@ import GameProgressBar from '@/components/game/GameProgressBar.vue';
 import GameQuestion from '@/components/game/GameQuestion.vue';
 import GameResult from '@/components/game/GameResult.vue';
 import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
+import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { computeResult, overallVerdict } from '@/lib/eligibility';
 
 const props = defineProps({
     company: Object,
     token: String,
+    // Présent uniquement en mode co-brandé (collecte active) ; null en mode
+    // public → aucun tracking KPI (pour le moment à voir dans le futur)
+    collect_id: { type: Number, default: null },
     link_appointment: { type: String, default: null },
 });
 
 const { t } = useI18n();
 const { questions, ineligibleView } = useEligibilityQuiz();
+const { trackEligibiliteStep, trackAppointmentClick } = useTracking();
 
 // 'intro' | 'map' | 'finished'. Les écrans question/résultat sont
 // des overlays pilotés par activeIndex / resultView, pas par `phase`.
@@ -93,6 +98,36 @@ function finishStep() {
     activeIndex.value = null;
 }
 
+// ─── Tracking KPI (fire & forget, mode co-brandé uniquement) ──────────────────
+// rend l'envoi idempotent (re-réponse via « Changer ma réponse » incluse).
+function resultLabel(result) {
+    if (result.eligible) {
+        return 'eligible';
+    }
+
+    return result.days < 0 ? 'ineligible_lifetime' : 'ineligible';
+}
+
+function trackStep(result) {
+    if (!props.collect_id) {
+        return;
+    }
+
+    const step = activeIndex.value + 1; // étapes 1-indexées côté KPI
+
+    trackEligibiliteStep(props.collect_id, step, {
+        result: resultLabel(result),
+        completed: step === questions.value.length,
+    });
+}
+
+// Clic sur le CTA d'inscription en fin de parcours (conversion don de sang)
+function onAppointment() {
+    if (props.collect_id) {
+        trackAppointmentClick(props.collect_id, 'game-end-cta');
+    }
+}
+
 // Validation d'une réponse → enregistrement, statut du checkpoint, puis :
 // vue dédiée du choix › vue générique d'inéligibilité › explication (why) › suite.
 function onAnswer(choiceIds) {
@@ -109,6 +144,8 @@ function onAnswer(choiceIds) {
     statuses.value[activeIndex.value] = result.eligible
         ? 'eligible'
         : 'ineligible';
+
+    trackStep(result);
 
     // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
     if (!result.eligible) {
@@ -293,6 +330,7 @@ onUnmounted(() => {
                     :total="questions.length"
                     :link-appointment="props.link_appointment"
                     class="game-layer"
+                    @appointment="onAppointment"
                     @back="phase = 'map'"
                 />
             </Transition>
