@@ -2,8 +2,10 @@
 // Le texte est dans les locales sous `eligibilite.quiz.*` et résolu par
 // le composable useEligibilityQuiz().
 //
-// Chaque question : { key, type, choices: [{ key, eligible, days, view? }] }
+// Chaque question : { key, type, pochy, icon, choices: [{ key, eligible, days, view? }] }
 //   - type  : 'unique' | 'multiple'
+//   - pochy : variante de la mascotte (suffixe après "pochy-", sans ".png")
+//   - icon  : clé d'icône thématique (chemin /img/game/icons/<icon>.svg)
 //   - days  : durée d'inéligibilité en jours (-1 = à vie, null = aucune)
 //   - view  : clé d'une vue d'explication (eligibilite.quiz.views.<key>), optionnel
 //
@@ -22,6 +24,8 @@ export const QUIZ = [
     {
         key: 'lifetime',
         type: 'multiple',
+        pochy: '0',
+        icon: 'heart',
         choices: [
             { key: 'hiv', eligible: false, days: -1 },
             { key: 'diabetes', eligible: false, days: -1 },
@@ -35,6 +39,8 @@ export const QUIZ = [
     {
         key: 'health',
         type: 'unique',
+        pochy: '10',
+        icon: 'health',
         choices: [
             { key: 'yes', eligible: true, days: null },
             { key: 'no', eligible: false, days: 14 },
@@ -43,6 +49,8 @@ export const QUIZ = [
     {
         key: 'medication',
         type: 'unique',
+        pochy: '20',
+        icon: 'pill',
         choices: [
             { key: 'yes', eligible: false, days: 28, view: 'medication' },
             { key: 'no', eligible: true, days: null },
@@ -51,6 +59,8 @@ export const QUIZ = [
     {
         key: 'travel',
         type: 'unique',
+        pochy: '20-travel',
+        icon: 'plane',
         choices: [
             { key: 'europe', eligible: true, days: null },
             { key: 'other', eligible: false, days: 180, view: 'travel' },
@@ -60,6 +70,8 @@ export const QUIZ = [
     {
         key: 'partner',
         type: 'unique',
+        pochy: '30',
+        icon: 'partner',
         choices: [
             { key: 'yes', eligible: false, days: 120 },
             { key: 'no', eligible: true, days: null },
@@ -68,6 +80,8 @@ export const QUIZ = [
     {
         key: 'hospitalization',
         type: 'unique',
+        pochy: '40',
+        icon: 'hospital',
         choices: [
             { key: 'none', eligible: true, days: null },
             { key: 'old', eligible: true, days: null },
@@ -78,6 +92,8 @@ export const QUIZ = [
     {
         key: 'dentist',
         type: 'unique',
+        pochy: '50-teeth',
+        icon: 'tooth',
         choices: [
             { key: 'no', eligible: true, days: null },
             { key: 'scaling', eligible: false, days: 1 },
@@ -86,8 +102,21 @@ export const QUIZ = [
         ],
     },
     {
+        key: 'tick',
+        type: 'unique',
+        pochy: '60-adventurer',
+        icon: 'tick',
+        choices: [
+            { key: 'tick', eligible: false, days: 28 },
+            { key: 'other_companion', eligible: true, days: null },
+            { key: 'alone', eligible: true, days: null },
+        ],
+    },
+    {
         key: 'tattoo',
         type: 'unique',
+        pochy: '80-tattooed',
+        icon: 'tattoo',
         choices: [
             { key: 'tattoo', eligible: false, days: 120 },
             { key: 'piercing', eligible: false, days: 120 },
@@ -96,17 +125,10 @@ export const QUIZ = [
         ],
     },
     {
-        key: 'tick',
-        type: 'unique',
-        choices: [
-            { key: 'tick', eligible: false, days: 28 },
-            { key: 'other_companion', eligible: true, days: null },
-            { key: 'alone', eligible: true, days: null },
-        ],
-    },
-    {
         key: 'vaccine',
         type: 'unique',
+        pochy: '90',
+        icon: 'syringe',
         choices: [
             { key: 'none', eligible: true, days: null },
             { key: 'live', eligible: false, days: 28 },

@@ -28,6 +28,8 @@ export function useEligibilityQuiz() {
         return {
             id: q.key,
             type: q.type,
+            pochy: q.pochy,
+            icon: q.icon ? `/img/game/icons/${q.icon}.svg` : null,
             titre: t(`${base}.titre`),
             question: t(`${base}.question`),
             why_question: maybe(`${base}.why`),
