@@ -81,74 +81,8 @@ export function buildMap(count, vw, vh, rng) {
     };
 }
 
-// ─── Corner data ──────────────────────────────────────────────────────────────
-// For each bend, stores the cumulative progress at the corner, the corner point,
-// and the two bezier control points. The blend radius is clamped to half the
-// shorter adjacent segment so neighbouring corners never overlap.
-export function computeCorners(segs, blend) {
-    const out = [];
-    let acc = 0;
-
-    for (let i = 0; i < segs.length - 1; i++) {
-        const s = segs[i];
-        const nx = segs[i + 1];
-
-        acc += s.length;
-
-        const b = Math.min(blend, s.length / 2, nx.length / 2);
-        const dx1 = s.x2 !== s.x1 ? Math.sign(s.x2 - s.x1) : 0;
-        const dy1 = s.y2 !== s.y1 ? Math.sign(s.y2 - s.y1) : 0;
-        const dx2 = nx.x2 !== nx.x1 ? Math.sign(nx.x2 - nx.x1) : 0;
-        const dy2 = nx.y2 !== nx.y1 ? Math.sign(nx.y2 - nx.y1) : 0;
-
-        out.push({
-            prog: acc,
-            b,
-            px: s.x2,
-            py: s.y2,
-            P0x: s.x2 - dx1 * b,
-            P0y: s.y2 - dy1 * b,
-            P3x: s.x2 + dx2 * b,
-            P3y: s.y2 + dy2 * b,
-        });
-    }
-
-    return out;
-}
-
-// ─── Smooth arc-length position ───────────────────────────────────────────────
-// Outside a corner: linear interpolation along the H/V segment.
-// Inside ±b of a corner: smoothstep-reparametrised quadratic bezier for an
-// ease-in-out turn.
-export function smoothPos(segs, corners, prog) {
-    let best = null;
-    let bestDist = Infinity;
-
-    for (const c of corners) {
-        const d = Math.abs(prog - c.prog);
-
-        if (d < c.b && d < bestDist) {
-            bestDist = d;
-            best = c;
-        }
-    }
-
-    if (best) {
-        const d = prog - best.prog;
-        const t = (d + best.b) / (2 * best.b);
-        const st = t * t * (3 - 2 * t);
-        const mt = 1 - st;
-
-        return {
-            x: Math.round(
-                mt * mt * best.P0x + 2 * mt * st * best.px + st * st * best.P3x,
-            ),
-            y: Math.round(
-                mt * mt * best.P0y + 2 * mt * st * best.py + st * st * best.P3y,
-            ),
-        };
-    }
-
+// ─── Arc-length position (linear interpolation along H/V segments) ────────────
+export function smoothPos(segs, prog) {
     let rem = prog;
 
     for (const s of segs) {

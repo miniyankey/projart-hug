@@ -7,7 +7,6 @@ import GamePath from './GamePath.vue';
 import {
     buildDecos,
     buildMap,
-    computeCorners,
     generateGrassTile,
     mkRng,
     polyPts,
@@ -27,7 +26,6 @@ const emit = defineEmits(['reach', 'select']);
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const PATH_W = 32; // dirt road stroke width
-const CORNER_BLEND = 100; // px — bezier rounding radius at H/V corners
 
 // ─── State ───────────────────────────────────────────────────────────────────
 const rootRef = ref(null);
@@ -49,10 +47,7 @@ let resizeObserver = null;
 let resizeRaf = 0;
 
 // ─── Computed ────────────────────────────────────────────────────────────────
-const cornerData = computed(() => computeCorners(segments.value, CORNER_BLEND));
-const curPos = computed(() =>
-    smoothPos(segments.value, cornerData.value, progress.value),
-);
+const curPos = computed(() => smoothPos(segments.value, progress.value));
 const mapTX = computed(() => Math.round(viewW.value / 2 - curPos.value.x));
 const mapTY = computed(() => Math.round(viewH.value / 2 - curPos.value.y));
 const polyPtsStr = computed(() => polyPts(segments.value)); // built once, used by 4 polylines
