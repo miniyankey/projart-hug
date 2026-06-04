@@ -29,13 +29,14 @@ class CobrandController extends Controller
     {
         $company = $this->resolveCompany($brandName, $token);
         // Le jeu n'est accessible que si une collecte est active (sinon 404).
-        $this->resolveActiveCollect($company);
+        $collect = $this->resolveActiveCollect($company);
 
         // Le quiz est défini côté front (data/eligibilityQuiz.js + locales),
         // aucune donnée de question n'est envoyée par le serveur.
         return Inertia::render('CoBranded/Jeu', [
             'token' => $token,
             'company' => $this->companyData($company),
+            'link_appointment' => $collect->link_appointment,
         ]);
     }
 

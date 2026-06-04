@@ -250,6 +250,22 @@
             "week": "{count} semaine | {count} semaines",
             "day": "{count} jour | {count} jours"
         },
+        "finish": {
+            "eligible": {
+                "message": "Tu es éligible au don de sang !",
+                "text": "Bravo ! Tu peux donner ton sang et sauver jusqu'à 3 vies.",
+                "cta": "Prendre rendez-vous"
+            },
+            "temporary": {
+                "message": "Tu pourras donner dans {duration}.",
+                "text": "Ces étapes t'empêchent temporairement de donner. Reviens dans le délai indiqué."
+            },
+            "lifetime": {
+                "message": "Tu n'es malheureusement pas éligible au don de sang.",
+                "text": "Certaines situations rendent le don impossible de façon permanente. Merci pour ta démarche !",
+                "label": "À vie"
+            }
+        },
         "ineligible": {
             "lifetime": {
                 "message": "Tu n'es malheureusement pas éligible au don de sang.",

@@ -250,6 +250,22 @@
             "week": "{count} week | {count} weeks",
             "day": "{count} day | {count} days"
         },
+        "finish": {
+            "eligible": {
+                "message": "You're eligible to donate blood!",
+                "text": "Well done! You can give blood and save up to 3 lives.",
+                "cta": "Book an appointment"
+            },
+            "temporary": {
+                "message": "You'll be able to donate in {duration}.",
+                "text": "These steps temporarily prevent you from donating. Come back after the indicated period."
+            },
+            "lifetime": {
+                "message": "Unfortunately you're not eligible to give blood.",
+                "text": "Some situations make donation permanently impossible. Thank you for taking the step!",
+                "label": "Lifetime"
+            }
+        },
         "ineligible": {
             "lifetime": {
                 "message": "Unfortunately, you're not eligible to give blood.",

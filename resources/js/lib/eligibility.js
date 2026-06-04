@@ -1,6 +1,9 @@
 // Logique d'éligibilité du jeu (pure, sans dépendance Vue ni i18n → testable).
 // Le formatage des durées et les vues génériques (textes) sont gérés par le
 // composable useEligibilityQuiz() car ils dépendent des traductions.
+//
+// overallVerdict() prend les questions assemblées (avec texte traduit) et les
+// réponses de la session, et retourne le verdict global de fin de parcours.
 
 // Détermine l'éligibilité d'une réponse et le choix « le plus défavorable ».
 // - à vie (ineligibility_days < 0) prime sur tout ;
@@ -33,4 +36,39 @@ export function computeResult(question, choiceIds) {
         days: worst.ineligibility_days,
         view: worst.view,
     };
+}
+
+// Verdict global à la fin du parcours.
+// Retourne { status, days, steps } où :
+//   status : 'eligible' | 'temporary' | 'lifetime'
+//   days   : durée la plus longue des inéligibilités temporaires (null sinon)
+//   steps  : liste des étapes inéligibles { questionKey, titre, days }
+export function overallVerdict(questions, answers) {
+    const steps = [];
+
+    for (const q of questions) {
+        const choiceIds = answers[q.id];
+
+        if (!choiceIds || choiceIds.length === 0) {
+            continue;
+        }
+
+        const result = computeResult(q, choiceIds);
+
+        if (!result.eligible) {
+            steps.push({ questionKey: q.id, titre: q.titre, days: result.days });
+        }
+    }
+
+    if (steps.some((s) => s.days < 0)) {
+        return { status: 'lifetime', days: null, steps };
+    }
+
+    if (steps.length > 0) {
+        const maxDays = Math.max(...steps.filter((s) => s.days !== null).map((s) => s.days));
+
+        return { status: 'temporary', days: maxDays, steps };
+    }
+
+    return { status: 'eligible', days: null, steps: [] };
 }
