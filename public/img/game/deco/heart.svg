@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- Contour foncé -->
+  <g fill="#7a1530">
+    <rect x="6"  y="7"  width="8"  height="2"/>
+    <rect x="18" y="7"  width="8"  height="2"/>
+    <rect x="4"  y="9"  width="24" height="2"/>
+    <rect x="4"  y="11" width="24" height="3"/>
+    <rect x="6"  y="14" width="20" height="2"/>
+    <rect x="8"  y="16" width="16" height="2"/>
+    <rect x="10" y="18" width="12" height="2"/>
+    <rect x="12" y="20" width="8"  height="2"/>
+    <rect x="14" y="22" width="4"  height="2"/>
+  </g>
+  <!-- Rouge intérieur -->
+  <g fill="#e23b4e">
+    <rect x="7"  y="9"  width="6"  height="2"/>
+    <rect x="19" y="9"  width="6"  height="2"/>
+    <rect x="6"  y="11" width="20" height="3"/>
+    <rect x="8"  y="14" width="16" height="2"/>
+    <rect x="10" y="16" width="12" height="2"/>
+    <rect x="12" y="18" width="8"  height="2"/>
+    <rect x="14" y="20" width="4"  height="2"/>
+  </g>
+  <!-- Reflet clair -->
+  <g fill="#ff8fa0">
+    <rect x="8"  y="9"  width="3" height="2"/>
+    <rect x="7"  y="11" width="2" height="3"/>
+  </g>
+  <!-- Ligne d'électrocardiogramme (santé) en blanc -->
+  <g fill="#ffffff">
+    <rect x="7"  y="14" width="4" height="1"/>
+    <rect x="11" y="13" width="1" height="2"/>
+    <rect x="12" y="10" width="1" height="5"/>
+    <rect x="13" y="14" width="1" height="1"/>
+    <rect x="14" y="14" width="1" height="3"/>
+    <rect x="15" y="14" width="1" height="1"/>
+    <rect x="16" y="13" width="1" height="2"/>
+    <rect x="17" y="14" width="8" height="1"/>
+  </g>
+</svg>
