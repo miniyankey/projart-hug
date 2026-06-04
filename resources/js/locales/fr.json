@@ -492,7 +492,8 @@
             "title": "Pas encore éligible ?",
             "intro": "Laissez-nous votre adresse e-mail : nous vous préviendrons dès que vous pourrez à nouveau donner votre sang.",
             "email": "Adresse e-mail",
-            "email_placeholder": "vous@exemple.ch",
+            "email_placeholder": "vous{'@'}exemple.ch",
+            "newsletter": "Je souhaite aussi recevoir la newsletter du don du sang.",
             "submit": "Me prévenir"
         },
         "mascotte_speech": "Viens jouer pour voir si tu es éligible !",

@@ -4,15 +4,17 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { store } from '@/actions/App/Http/Controllers/EligibilityReminderController';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const props = defineProps({
     collectId: {
         type: Number,
         default: null,
     },
-    choiceIds: {
-        type: Array,
-        default: () => [],
+    // Jours d'inéligibilité calculés côté front (lib/eligibility.js).
+    days: {
+        type: Number,
+        default: 0,
     },
 });
 
@@ -25,7 +27,8 @@ const resultKey = ref(null);
 const form = useForm({
     email: '',
     collect_id: props.collectId,
-    choice_ids: props.choiceIds,
+    days: props.days,
+    newsletter: false,
 });
 
 function submit() {
@@ -84,12 +87,19 @@ function submit() {
                     {{ form.errors.email }}
                 </p>
                 <p
-                    v-if="form.errors.choice_ids"
+                    v-if="form.errors.days"
                     class="font-mono text-xs text-red-700"
                 >
-                    {{ form.errors.choice_ids }}
+                    {{ form.errors.days }}
                 </p>
             </div>
+
+            <label
+                class="flex cursor-pointer items-start gap-3 text-sm text-gray-600"
+            >
+                <Checkbox v-model="form.newsletter" class="mt-0.5 shrink-0" />
+                {{ t('eligibilite.reminder.newsletter') }}
+            </label>
 
             <Button
                 type="submit"
