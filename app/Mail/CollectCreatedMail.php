@@ -59,7 +59,7 @@ class CollectCreatedMail extends Mailable implements ShouldQueue
                     : null,
                 'cobrandUrl' => route('cobrand.collecte', [
                     'brandName' => $company->slug,
-                    'token' => $company->token,
+                    'collect' => $this->collect->slug,
                 ]),
                 'dateLine' => $this->buildDateLine(),
                 'placeLine' => $this->buildPlaceLine(),

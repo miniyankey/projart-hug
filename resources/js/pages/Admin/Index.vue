@@ -25,8 +25,10 @@ defineProps({
 });
 
 function cobrandUrl(collect) {
-    return cobrandCollecte({ brandName: collect.slug, token: collect.token })
-        .url;
+    return cobrandCollecte({
+        brandName: collect.company_slug,
+        collect: collect.collect_slug,
+    }).url;
 }
 </script>
 

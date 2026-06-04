@@ -15,7 +15,7 @@ const props = defineProps({
         type: Object,
         default: null,
     },
-    token: {
+    collectSlug: {
         type: String,
         default: null,
     },
@@ -25,7 +25,7 @@ const isCobrand = computed(() => props.company !== null);
 
 const routeParams = computed(() => ({
     brandName: props.company?.slug,
-    token: props.token,
+    collect: props.collectSlug,
 }));
 
 const links = computed(() =>
