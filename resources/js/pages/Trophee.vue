@@ -8,20 +8,29 @@ import PodiumCard from '@/components/cards/PodiumCard.vue';
 import SpeechBubble from '@/components/cards/SpeechBubble.vue';
 import MascottePopup from '@/components/MascottePopup.vue';
 import { Button } from '@/components/ui/button';
-import { editions } from '@/data/trophee-editions.js';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
+
+// Éditions du Trophée fournies par le back-end (podium top 3 par année) :
+const props = defineProps({
+    editions: {
+        type: Array,
+        default: () => [],
+    },
+});
+
+const editions = computed(() => props.editions);
 
 function scrollTo(target) {
     gsap.to(window, { scrollTo: target, duration: 1, ease: 'power2.inOut' });
 }
 
 const currentIndex = ref(0);
-const currentEdition = computed(() => editions[currentIndex.value]);
+const currentEdition = computed(() => editions.value[currentIndex.value]);
 const hasPrev = computed(() => currentIndex.value > 0);
-const hasNext = computed(() => currentIndex.value < editions.length - 1);
+const hasNext = computed(() => currentIndex.value < editions.value.length - 1);
 
 function prev() {
     if (hasPrev.value) {
@@ -34,8 +43,16 @@ function next() {
     }
 }
 
+// Vainqueur d'un rang donné pour l'édition courante (null si absent)
+function winnerAt(rank) {
+    return currentEdition.value?.winners.find((w) => w.rank === rank) ?? null;
+}
+
 const isSuspended = computed(
-    () => currentEdition.value.year > 2010 && currentEdition.value.year < 2026,
+    () =>
+        currentEdition.value &&
+        currentEdition.value.year > 2010 &&
+        currentEdition.value.year < 2026,
 );
 
 const historyMilestones = [
@@ -479,7 +496,7 @@ onUnmounted(() => {
                         </p>
                     </div>
 
-                    <div class="flex items-center gap-6">
+                    <div v-if="currentEdition" class="flex items-center gap-6">
                         <button
                             :disabled="!hasNext"
                             class="flex h-12 w-12 shrink-0 items-center justify-center rounded-none border-4 border-teal-600 bg-white text-black shadow-[4px_4px_0px_0px_#3d8080] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#3d8080] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-30"
@@ -506,62 +523,29 @@ onUnmounted(() => {
                                 class="flex w-full items-end justify-center gap-3"
                             >
                                 <PodiumCard
+                                    v-if="winnerAt(2)"
                                     :rank="2"
-                                    :logo-src="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 2,
-                                        ).logo
-                                    "
-                                    :logo-alt="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 2,
-                                        ).name
-                                    "
-                                    :category="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 2,
-                                        ).name
-                                    "
+                                    :logo-src="winnerAt(2).logo"
+                                    :logo-alt="winnerAt(2).name"
+                                    :category="winnerAt(2).name"
                                     description=""
                                     class="anim-podium-2 hidden w-40 lg:flex"
                                 />
                                 <PodiumCard
+                                    v-if="winnerAt(1)"
                                     :rank="1"
-                                    :logo-src="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 1,
-                                        ).logo
-                                    "
-                                    :logo-alt="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 1,
-                                        ).name
-                                    "
-                                    :category="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 1,
-                                        ).name
-                                    "
+                                    :logo-src="winnerAt(1).logo"
+                                    :logo-alt="winnerAt(1).name"
+                                    :category="winnerAt(1).name"
                                     description=""
                                     class="anim-podium-1 w-44"
                                 />
                                 <PodiumCard
+                                    v-if="winnerAt(3)"
                                     :rank="3"
-                                    :logo-src="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 3,
-                                        ).logo
-                                    "
-                                    :logo-alt="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 3,
-                                        ).name
-                                    "
-                                    :category="
-                                        currentEdition.winners.find(
-                                            (w) => w.rank === 3,
-                                        ).name
-                                    "
+                                    :logo-src="winnerAt(3).logo"
+                                    :logo-alt="winnerAt(3).name"
+                                    :category="winnerAt(3).name"
                                     description=""
                                     class="anim-podium-3 hidden w-40 lg:flex"
                                 />
@@ -578,7 +562,14 @@ onUnmounted(() => {
                         </button>
                     </div>
 
-                    <div class="mt-8 flex justify-center gap-2">
+                    <p v-else class="py-12 text-center text-gray-500 italic">
+                        {{ t('trophee.vainqueurs.empty') }}
+                    </p>
+
+                    <div
+                        v-if="editions.length > 1"
+                        class="mt-8 flex justify-center gap-2"
+                    >
                         <button
                             v-for="(ed, i) in [...editions].reverse()"
                             :key="ed.year"
