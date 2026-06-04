@@ -7,7 +7,7 @@ const { t } = useI18n();
 
 defineProps({
     company: Object,
-    token: String,
+    collectSlug: String,
     // préparation du quiz, à terme à récupérer pour les KPIS
     collectId: Number,
     questions: Array,
@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-    <PublicLayout :company="company" :token="token">
+    <PublicLayout :company="company" :collect-slug="collectSlug">
         <Head :title="t('eligibilite.title')" />
         <div class="mx-auto max-w-7xl px-6 py-16">
             <h1 class="text-3xl font-semibold text-gray-900">

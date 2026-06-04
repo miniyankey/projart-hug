@@ -16,12 +16,12 @@ const { t } = useI18n();
 
 const props = defineProps({
     company: Object,
-    token: String,
+    collectSlug: String,
 });
 
 const routeParams = computed(() => ({
     brandName: props.company?.slug,
-    token: props.token,
+    collect: props.collectSlug,
 }));
 
 const steps = [
@@ -190,7 +190,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :token="token">
+    <PublicLayout :company="company" :collect-slug="collectSlug">
         <Head :title="t('nav.don_sang_info')" />
 
         <div ref="root">

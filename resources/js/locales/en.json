@@ -151,6 +151,7 @@
             "col_place": "Location",
             "col_date": "Date",
             "col_status": "Status",
+            "col_link": "Co-branded link",
             "col_actions": "Actions",
             "status_active": "Active",
             "status_inactive": "Inactive",

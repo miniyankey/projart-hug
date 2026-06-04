@@ -49,7 +49,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
                 'labelled' => Company::where('is_labelled', true)->count(),
                 'active_collects' => Collect::where('is_active', true)->count(),
             ],
-            'activeCollects' => Collect::with(['company:id,name,slug,token,color,logo', 'place:id,city'])
+            'activeCollects' => Collect::with(['company:id,name,slug,color,logo', 'place:id,city'])
                 ->where('is_active', true)
                 ->orderBy('day')
                 ->get()
@@ -57,8 +57,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
                     'id' => $collect->id,
                     'day' => $collect->day?->format('Y-m-d'),
                     'company' => $collect->company?->name,
-                    'slug' => $collect->company?->slug,
-                    'token' => $collect->company?->token,
+                    'company_slug' => $collect->company?->slug,
+                    'collect_slug' => $collect->slug,
                     'color' => $collect->company?->color,
                     'logo_url' => $collect->company?->logo_url,
                     'city' => $collect->place?->city,
@@ -105,8 +105,9 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('log
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-// Pages co-brandées : l'entreprise est résolue via {brandName} (son slug).
-Route::prefix('/{brandName}/{token}')->name('cobrand.')->group(function () {
+// Pages co-brandées : l'entreprise est résolue via {brandName} (son slug) et la
+// collecte via {collect} (son slug propre). Un lien unique par collecte.
+Route::prefix('/{brandName}/{collect}')->name('cobrand.')->group(function () {
     Route::get('/collecte', [CobrandController::class, 'collecte'])->name('collecte');
     Route::get('/jeu', [CobrandController::class, 'jeu'])->name('jeu');
     Route::get('/don-du-sang', [CobrandController::class, 'donSang'])->name('don-sang');

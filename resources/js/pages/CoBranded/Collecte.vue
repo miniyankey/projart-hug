@@ -22,7 +22,7 @@ const { trackAppointmentClick, trackCollecteView } = useTracking();
 
 const props = defineProps({
     company: Object,
-    token: String,
+    collectSlug: String,
     collect: Object,
 });
 
@@ -36,7 +36,7 @@ onMounted(() => {
 
 const routeParams = computed(() => ({
     brandName: props.company?.slug,
-    token: props.token,
+    collect: props.collectSlug,
 }));
 
 const horaires = computed(() => {
@@ -68,7 +68,7 @@ const mapUrl = computed(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :token="token">
+    <PublicLayout :company="company" :collect-slug="collectSlug">
         <Head :title="t('nav.collecte_info')" />
 
         <!-- Hero co-brandé -->
