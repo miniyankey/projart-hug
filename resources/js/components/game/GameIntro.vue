@@ -1,5 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
+import { Button } from '@/components/ui/button';
 
 defineProps({
     questionCount: Number,
@@ -51,12 +52,13 @@ const { t } = useI18n();
         </div>
 
         <!-- CTA — blanc sur fond coloré pour rester lisible -->
-        <button
-            class="mx-auto cursor-pointer border-[3px] border-black bg-white px-12 py-3.5 font-pixel text-[clamp(0.85rem,1.6vw,1.1rem)] tracking-wider text-[var(--brand,#7c3aed)] shadow-[6px_6px_0_#000] transition-[transform,box-shadow] duration-[80ms] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0_#000] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none"
+        <Button
+            variant="pixel_white"
+            class="mx-auto font-pixel text-[clamp(0.85rem,1.6vw,1.1rem)] tracking-wider px-12 py-3.5"
             @click="emit('play')"
         >
             {{ t('eligibilite.ui.play') }}
-        </button>
+        </Button>
     </div>
 </template>
 

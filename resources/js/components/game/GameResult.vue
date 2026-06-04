@@ -2,6 +2,7 @@
 // Écran de résultat après validation, basé sur la « view » du choix.
 // Bulle : message + descr de la view. Contenu : texte + CTA éventuel.
 import { useI18n } from 'vue-i18n';
+import { Button } from '@/components/ui/button';
 import GameScene from './GameScene.vue';
 import GameSpeechBubble from './GameSpeechBubble.vue';
 
@@ -40,27 +41,27 @@ const { t } = useI18n();
                     {{ view.text }}
                 </p>
 
-                <!-- CTA stylé en bouton primaire (autonome : ce lien est imbriqué,
-                     donc hors de portée du :slotted de GameScene) -->
-                <a
+                <Button
                     v-if="view.button_url"
-                    class="self-start border-[3px] border-black bg-[var(--brand,#7c3aed)] px-8 py-[0.8rem] text-base text-white no-underline shadow-[5px_5px_0_#000] transition-[transform,box-shadow] duration-[80ms] active:translate-x-[5px] active:translate-y-[5px] active:shadow-none"
+                    variant="pixel_violet"
+                    as="a"
+                    class="self-start"
                     :href="view.button_url"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     {{ view.button_text || t('eligibilite.ui.learn_more') }}
-                </a>
+                </Button>
             </div>
         </template>
 
         <template #footer>
-            <button type="button" class="game-back" @click="$emit('back')">
+            <Button variant="link" @click="$emit('back')">
                 {{ t('eligibilite.ui.back') }}
-            </button>
-            <button type="button" class="game-cta" @click="$emit('ok')">
+            </Button>
+            <Button variant="pixel_violet" @click="$emit('ok')">
                 {{ t('eligibilite.ui.ok') }}
-            </button>
+            </Button>
         </template>
     </GameScene>
 </template>

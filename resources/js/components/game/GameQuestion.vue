@@ -2,6 +2,7 @@
 // Vue plein écran d'une question (utilise la coquille GameScene).
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { Button } from '@/components/ui/button';
 import GameChoice from './GameChoice.vue';
 import GameScene from './GameScene.vue';
 import GameSpeechBubble from './GameSpeechBubble.vue';
@@ -81,19 +82,18 @@ function validate() {
         </template>
 
         <template #footer>
-            <button type="button" class="game-back" @click="emit('back')">
+            <Button variant="link" @click="emit('back')">
                 {{ t('eligibilite.ui.back') }}
-            </button>
+            </Button>
             <!-- Pas de bouton de validation pour les questions à choix unique -->
-            <button
+            <Button
                 v-if="isMultiple"
-                type="button"
-                class="game-cta"
+                variant="pixel_violet"
                 :disabled="!canValidate"
                 @click="validate"
             >
                 {{ t('eligibilite.ui.validate') }}
-            </button>
+            </Button>
         </template>
     </GameScene>
 </template>

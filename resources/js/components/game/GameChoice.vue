@@ -1,10 +1,6 @@
 <script setup>
-// Bouton de réponse néo-brutaliste.
-// - Défaut : fond blanc, bordure couleur de marque, ombre portée dure.
-// - Pressé (active) ou sélectionné : fond couleur de marque, texte blanc, à plat.
-// - `multiple` : ajoute une case à cocher (coche affichée quand sélectionné).
-// La couleur apparaît dès l'enfoncement du clic (variantes active:) et reste à
-// la sélection (classes conditionnelles).
+import { Button } from '@/components/ui/button';
+
 defineProps({
     label: { type: String, required: true },
     descr: { type: String, default: null },
@@ -16,14 +12,9 @@ defineEmits(['toggle']);
 </script>
 
 <template>
-    <button
-        type="button"
-        class="group inline-flex cursor-pointer items-center gap-[0.85rem] border-[3px] border-[var(--brand,#7c3aed)] px-[1.1rem] py-[0.85rem] text-left transition-[transform,box-shadow] duration-[60ms] active:bg-[var(--brand,#7c3aed)] active:text-white active:shadow-none"
-        :class="
-            selected
-                ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none'
-                : 'bg-white text-[#111] shadow-[6px_6px_0_var(--brand-shadow,#4c1d95)]'
-        "
+    <Button
+        variant="quiz"
+        :class="selected ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none' : ''"
         :aria-pressed="selected"
         @click="$emit('toggle')"
     >
@@ -55,5 +46,5 @@ defineEmits(['toggle']);
                 {{ descr }}
             </span>
         </span>
-    </button>
+    </Button>
 </template>

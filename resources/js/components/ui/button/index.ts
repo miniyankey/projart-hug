@@ -29,6 +29,8 @@ export const buttonVariants = cva(
           "bg-yellow-300 text-gray-900 rounded-none shadow-[4px_4px_0px_0px_#a16207] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#a16207] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         cta:
           "rounded-none bg-[var(--brand)] text-white shadow-[4px_4px_0_0_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
+        quiz:
+          "group h-auto items-start justify-start whitespace-normal rounded-none border-[3px] border-[var(--brand,#7c3aed)] bg-white text-[#111] shadow-[6px_6px_0_var(--brand-shadow,#4c1d95)] gap-[0.85rem] px-[1.1rem] py-[0.85rem] transition-[transform,box-shadow] duration-[60ms] active:bg-[var(--brand,#7c3aed)] active:text-white active:shadow-none cursor-pointer",
       },
       size: {
         "default": "h-9 px-4 py-2 has-[>svg]:px-3",

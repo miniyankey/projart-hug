@@ -187,43 +187,4 @@ watch(
     margin-top: 1rem;
 }
 
-/* Boutons de pied, stylés ici pour question et résultat (slot #footer).
-   .game-back = lien secondaire ; .game-cta = bouton primaire néo-brutaliste. */
-:slotted(.game-back) {
-    padding: 0.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--brand, #7c3aed);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-:slotted(.game-back:hover) {
-    text-decoration: underline;
-}
-
-:slotted(.game-cta) {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    color: white;
-    background: var(--brand, #7c3aed);
-    border: 3px solid black;
-    box-shadow: 5px 5px 0 black;
-    cursor: pointer;
-    transition:
-        transform 80ms ease,
-        box-shadow 80ms ease;
-}
-
-:slotted(.game-cta:disabled) {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-:slotted(.game-cta:not(:disabled):active) {
-    transform: translate(5px, 5px);
-    box-shadow: 0 0 0 black;
-}
 </style>
