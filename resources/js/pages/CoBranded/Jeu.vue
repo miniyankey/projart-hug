@@ -46,7 +46,9 @@ const statuses = ref(questions.value.map(() => 'locked'));
 
 watch(activeIndex, (idx) => {
     if (idx !== null) {
-        mapPochy.value = questions.value[idx]?.pochy ?? '0';
+        // On la carte, on n'utilise que le niveau de remplissage (ex. "20-travel" → "20")
+        const pochy = questions.value[idx]?.pochy ?? '0';
+        mapPochy.value = pochy.split('-')[0];
     }
 });
 

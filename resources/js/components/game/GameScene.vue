@@ -1,7 +1,8 @@
 <script setup>
-// Coquille plein écran partagée par la question et le résultat :
-// barre de progression, thématique + compteur, Pochy + icône, et 3 slots
-// (#bubble = bulle de Pochy, #content = zone centrale, #footer = pied).
+// Coquille plein écran partagée par la question et le résultat.
+// Slots : #bubble (bulle de Pochy), #content (zone centrale), #footer (pied).
+// Layout mobile : vertical (personnage → bulle → contenu → pied).
+// Layout desktop (md+) : horizontal (colonne personnage | colonne contenu).
 import { ref, watch } from 'vue';
 import GamePochy from './GamePochy.vue';
 import GameProgressBar from './GameProgressBar.vue';
@@ -25,163 +26,78 @@ watch(
 </script>
 
 <template>
-    <div class="scene">
+    <div class="absolute inset-0 z-50 flex flex-col bg-white">
         <GameProgressBar :value="answered" :total="total" />
 
-        <div class="scene__content">
-            <!-- Thématique + compteur -->
-            <div class="scene__top">
-                <p class="scene__theme">{{ theme }}</p>
-                <p class="scene__counter">{{ answered }}/{{ total }}</p>
-            </div>
+        <!-- Header : thématique + compteur -->
+        <div class="flex shrink-0 items-baseline justify-between gap-4 px-4 pt-3 sm:px-6 md:px-10">
+            <p class="m-0 text-[clamp(0.75rem,1.3vw,1rem)] font-semibold uppercase tracking-wider text-gray-500">
+                {{ theme }}
+            </p>
+            <p class="m-0 whitespace-nowrap text-[clamp(0.8rem,1.4vw,1.1rem)] text-gray-400">
+                {{ answered }}/{{ total }}
+            </p>
+        </div>
 
-            <!-- Corps : personnage à gauche, bulle + contenu à droite -->
-            <div class="scene__main">
-                <div class="scene__character">
+        <!-- Corps principal (scrollable) -->
+        <div class="flex flex-1 min-h-0 overflow-y-auto">
+            <div
+                class="flex w-full flex-col gap-4 p-4 sm:p-5
+                       md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:p-[clamp(1.5rem,4vw,4rem)]"
+            >
+                <!-- Zone personnage
+                     Mobile : rangée horizontale compacte (icône à gauche, Pochy à droite).
+                     Desktop (md+) : bloc relatif avec positionnement absolu pour l'overlap. -->
+                <div
+                    class="flex shrink-0 flex-row items-end gap-3
+                           md:relative md:block md:self-center
+                           md:h-[clamp(220px,28vw,400px)] md:w-[clamp(160px,20vw,280px)]"
+                >
+                    <!-- Icône thématique -->
                     <img
                         v-if="icon && !iconError"
                         :src="icon"
                         alt=""
-                        class="scene__icon"
+                        class="h-14 w-14 shrink-0 [image-rendering:pixelated]
+                               md:absolute md:left-0 md:top-0 md:h-auto md:w-[60%]"
                         @error="iconError = true"
                     />
                     <div
                         v-else
-                        class="scene__icon scene__icon--fallback"
+                        class="flex h-14 w-14 shrink-0 items-center justify-center
+                               border-4 border-gray-800 bg-gray-100 font-pixel
+                               text-xl text-gray-400 shadow-[4px_4px_0_rgba(0,0,0,0.7)]
+                               md:absolute md:left-0 md:top-0 md:aspect-square md:h-auto md:w-[60%]"
                         aria-hidden="true"
                     >
                         ?
                     </div>
 
-                    <GamePochy :variant="pochy" class="scene__pochy" />
+                    <!-- Pochy -->
+                    <GamePochy
+                        :variant="pochy"
+                        class="h-20 w-20 shrink-0 [image-rendering:pixelated]
+                               drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)]
+                               md:absolute md:bottom-0 md:left-[14%] md:z-[2] md:h-auto md:w-[64%]
+                               md:drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
+                    />
                 </div>
 
-                <div class="scene__right">
+                <!-- Colonne contenu : bulle + contenu -->
+                <div class="flex min-w-0 flex-1 flex-col gap-4">
                     <slot name="bubble" />
-                    <div class="scene__panel">
-                        <slot name="content" />
-                    </div>
+                    <slot name="content" />
                 </div>
             </div>
+        </div>
 
-            <!-- Pied -->
-            <div class="scene__footer">
-                <slot name="footer" />
-            </div>
+        <!-- Pied (toujours collé en bas) -->
+        <div
+            class="flex shrink-0 items-center justify-between gap-3
+                   border-t border-gray-100 bg-white
+                   px-4 py-3 sm:px-6 md:px-10"
+        >
+            <slot name="footer" />
         </div>
     </div>
 </template>
-
-<style scoped>
-.scene {
-    position: absolute;
-    inset: 0;
-    z-index: 50; /* au-dessus de Pochy de la carte (pochy-anchor z-index 20) */
-    display: flex;
-    flex-direction: column;
-    background: white;
-}
-
-.scene__content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem clamp(1.5rem, 4vw, 4rem) 2rem;
-    min-height: 0;
-}
-
-/* ── Thématique + compteur ─────────────────────────────────────── */
-.scene__top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.scene__theme {
-    margin: 0;
-    font-size: clamp(0.8rem, 1.4vw, 1.1rem);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #6b7280;
-}
-
-.scene__counter {
-    margin: 0;
-    font-size: clamp(0.9rem, 1.5vw, 1.25rem);
-    color: #9ca3af;
-    white-space: nowrap;
-}
-
-/* ── Corps ──────────────────────────────────────────────────────── */
-.scene__main {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: clamp(1rem, 4vw, 3rem);
-    min-height: 0;
-}
-
-.scene__character {
-    position: relative;
-    flex-shrink: 0;
-    width: clamp(200px, 26vw, 380px);
-    height: clamp(240px, 32vw, 440px);
-    align-self: center;
-}
-
-.scene__icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 62%;
-    image-rendering: pixelated;
-}
-
-.scene__icon--fallback {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1;
-    background: #f3f4f6;
-    border: 4px solid #111;
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.85);
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    color: #9ca3af;
-}
-
-.scene__pochy {
-    position: absolute;
-    left: 16%;
-    bottom: 0;
-    width: 66%;
-    image-rendering: pixelated;
-    z-index: 2;
-    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
-}
-
-.scene__right {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 4vh, 3rem);
-    min-height: 0;
-}
-
-.scene__panel {
-    min-height: 0;
-    overflow-y: auto;
-}
-
-/* ── Pied ───────────────────────────────────────────────────────── */
-.scene__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-</style>

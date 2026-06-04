@@ -31,13 +31,13 @@ const STATUS = {
         fill: '#22c55e',
         highlight: '#86efac',
         iconFill: '#fff',
-        icon: '✓',
+        icon: 'O',
     },
     ineligible: {
         fill: '#ef4444',
         highlight: '#fca5a5',
         iconFill: '#fff',
-        icon: '✗',
+        icon: 'X',
     },
 };
 
