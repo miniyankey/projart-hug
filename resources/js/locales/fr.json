@@ -240,7 +240,9 @@
             "back": "Retour",
             "validate": "Valider la sélection",
             "ok": "OK",
-            "learn_more": "En savoir plus"
+            "learn_more": "En savoir plus",
+            "scroll_hint": "Scrolle pour avancer",
+            "loading": "Chargement…"
         },
         "duration": {
             "year": "{count} an | {count} ans",

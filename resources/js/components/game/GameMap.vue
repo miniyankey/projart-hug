@@ -4,6 +4,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import GameCheckpoint from './GameCheckpoint.vue';
 import GameDecorations from './GameDecorations.vue';
 import GamePath from './GamePath.vue';
+import GameScrollHint from './GameScrollHint.vue';
 import {
     buildDecos,
     buildMap,
@@ -41,10 +42,20 @@ const totalLen = ref(0);
 const progress = ref(0);
 const targetPrg = ref(0);
 const grassTile = ref(''); // data-URL generated at mount via Canvas
+const hasMoved = ref(false);
 
 let lastTouchY = 0;
 let resizeObserver = null;
 let resizeRaf = 0;
+let inactivityTimer = null;
+
+function markMoved() {
+    hasMoved.value = true;
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        hasMoved.value = false;
+    }, 4000);
+}
 
 // ─── Computed ────────────────────────────────────────────────────────────────
 const curPos = computed(() => smoothPos(segments.value, progress.value));
@@ -111,6 +122,7 @@ function onWheel(e) {
         duration: 0.6,
         ease: 'power3.out',
     });
+    markMoved();
 }
 
 function onTouchStart(e) {
@@ -131,6 +143,39 @@ function onTouchMove(e) {
         duration: 0.3,
         ease: 'power2.out',
     });
+    markMoved();
+}
+
+function onKeyDown(e) {
+    const STEP = 120;
+    let delta = 0;
+
+    if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+        delta = STEP;
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        delta = -STEP;
+    } else {
+        return;
+    }
+
+    e.preventDefault();
+    targetPrg.value = Math.max(0, Math.min(cap.value, targetPrg.value + delta));
+    gsap.killTweensOf(progress);
+    gsap.to(progress, { value: targetPrg.value, duration: 0.6, ease: 'power3.out' });
+    markMoved();
+}
+
+// Clic sur un checkpoint : si c'est le prochain à franchir, anime Pochy jusqu'à
+// lui ; sinon retransmet l'événement (checkpoint déjà répondu → réouvre question).
+function onCheckpointSelect(index) {
+    if (index === props.clearedCount) {
+        targetPrg.value = cap.value;
+        gsap.killTweensOf(progress);
+        gsap.to(progress, { value: cap.value, duration: 1.2, ease: 'power2.inOut' });
+        markMoved();
+    } else {
+        emit('select', index);
+    }
 }
 
 // ─── Rebuild ──────────────────────────────────────────────────────────────────
@@ -186,6 +231,7 @@ onMounted(() => {
     el.addEventListener('wheel', onWheel, { passive: false });
     el.addEventListener('touchstart', onTouchStart, { passive: true });
     el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('keydown', onKeyDown);
 
     // Recompute on zoom / window resize so Pochy stays centred on the path
     resizeObserver = new ResizeObserver(() => {
@@ -197,6 +243,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     cancelAnimationFrame(resizeRaf);
+    clearTimeout(inactivityTimer);
     gsap.killTweensOf(progress);
 
     if (resizeObserver) {
@@ -213,11 +260,12 @@ onUnmounted(() => {
     el.removeEventListener('wheel', onWheel);
     el.removeEventListener('touchstart', onTouchStart);
     el.removeEventListener('touchmove', onTouchMove);
+    el.removeEventListener('keydown', onKeyDown);
 });
 </script>
 
 <template>
-    <div ref="rootRef" class="map-root">
+    <div ref="rootRef" class="map-root" tabindex="0">
         <!-- ══════════════════════════════════════════════════════════════
              MOVING WORLD — translates so that curPos stays under Pochy
         ═══════════════════════════════════════════════════════════════ -->
@@ -252,7 +300,7 @@ onUnmounted(() => {
                     :y="cp.y"
                     variant="checkpoint"
                     :status="statuses[cp.index] || 'locked'"
-                    @select="emit('select', cp.index)"
+                    @select="onCheckpointSelect(cp.index)"
                 />
                 <GameCheckpoint :x="endPt.x" :y="endPt.y" variant="end" />
             </svg>
@@ -265,6 +313,18 @@ onUnmounted(() => {
             <img src="/img/mascotte.png" alt="Pochy" class="pochy-sprite" />
             <div class="pochy-shadow" />
         </div>
+
+        <!-- Indice de scroll — visible tant que l'utilisateur n'a pas bougé -->
+        <Transition
+            enter-from-class="opacity-0"
+            enter-active-class="transition-opacity duration-300"
+            leave-to-class="opacity-0"
+            leave-active-class="transition-opacity duration-200"
+        >
+            <div v-if="!hasMoved" class="scroll-hint-anchor">
+                <GameScrollHint />
+            </div>
+        </Transition>
     </div>
 </template>
 
@@ -313,5 +373,15 @@ onUnmounted(() => {
         transparent 72%
     );
     border-radius: 50%;
+}
+
+/* Indice scroll — centré horizontalement, juste sous Pochy */
+.scroll-hint-anchor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 12px);
+    pointer-events: none;
+    z-index: 21;
 }
 </style>

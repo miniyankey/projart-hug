@@ -240,7 +240,9 @@
             "back": "Back",
             "validate": "Confirm selection",
             "ok": "OK",
-            "learn_more": "Learn more"
+            "learn_more": "Learn more",
+            "scroll_hint": "Scroll to move forward",
+            "loading": "Loading…"
         },
         "duration": {
             "year": "{count} year | {count} years",
