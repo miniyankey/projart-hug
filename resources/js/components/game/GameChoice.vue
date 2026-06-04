@@ -14,7 +14,9 @@ defineEmits(['toggle']);
 <template>
     <Button
         variant="quiz"
-        :class="selected ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none' : ''"
+        :class="
+            selected ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none' : ''
+        "
         :aria-pressed="selected"
         @click="$emit('toggle')"
     >
@@ -22,7 +24,9 @@ defineEmits(['toggle']);
         <span
             v-if="multiple"
             class="flex h-[1.9rem] w-[1.9rem] shrink-0 items-center justify-center border-[3px] group-active:border-current"
-            :class="selected ? 'border-current' : 'border-[var(--brand,#7c3aed)]'"
+            :class="
+                selected ? 'border-current' : 'border-[var(--brand,#7c3aed)]'
+            "
             aria-hidden="true"
         >
             <svg v-if="selected" class="h-full w-full" viewBox="0 0 24 24">
@@ -38,7 +42,9 @@ defineEmits(['toggle']);
         </span>
 
         <span class="flex min-w-0 flex-col gap-[0.15rem]">
-            <span class="text-[1.05rem] font-semibold leading-[1.3]">{{ label }}</span>
+            <span class="text-[1.05rem] leading-[1.3] font-semibold">{{
+                label
+            }}</span>
             <span
                 v-if="descr"
                 class="text-[0.95rem] leading-[1.3] opacity-[0.85]"

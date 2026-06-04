@@ -56,7 +56,11 @@ export function overallVerdict(questions, answers) {
         const result = computeResult(q, choiceIds);
 
         if (!result.eligible) {
-            steps.push({ questionKey: q.id, titre: q.titre, days: result.days });
+            steps.push({
+                questionKey: q.id,
+                titre: q.titre,
+                days: result.days,
+            });
         }
     }
 
@@ -65,7 +69,9 @@ export function overallVerdict(questions, answers) {
     }
 
     if (steps.length > 0) {
-        const maxDays = Math.max(...steps.filter((s) => s.days !== null).map((s) => s.days));
+        const maxDays = Math.max(
+            ...steps.filter((s) => s.days !== null).map((s) => s.days),
+        );
 
         return { status: 'temporary', days: maxDays, steps };
     }

@@ -30,7 +30,9 @@ const { t } = useI18n();
                 <span>{{ t('eligibilite.ui.badge_duration') }}</span>
                 <span class="text-neutral-400">•</span>
                 <span>{{
-                    t('eligibilite.ui.badge_questions', { count: questionCount })
+                    t('eligibilite.ui.badge_questions', {
+                        count: questionCount,
+                    })
                 }}</span>
                 <span class="text-neutral-400">•</span>
                 <span>{{ t('eligibilite.ui.badge_no_commitment') }}</span>
@@ -54,7 +56,7 @@ const { t } = useI18n();
         <!-- CTA — blanc sur fond coloré pour rester lisible -->
         <Button
             variant="pixel_white"
-            class="mx-auto font-pixel text-[clamp(0.85rem,1.6vw,1.1rem)] tracking-wider px-12 py-3.5"
+            class="mx-auto px-12 py-3.5 font-pixel text-[clamp(0.85rem,1.6vw,1.1rem)] tracking-wider"
             @click="emit('play')"
         >
             {{ t('eligibilite.ui.play') }}

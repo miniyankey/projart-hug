@@ -6,8 +6,18 @@ const { t } = useI18n();
 
 <template>
     <div class="scroll-hint" aria-hidden="true">
-        <span class="scroll-hint__text">{{ t('eligibilite.ui.scroll_hint') }}</span>
-        <svg class="scroll-hint__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <span class="scroll-hint__text">{{
+            t('eligibilite.ui.scroll_hint')
+        }}</span>
+        <svg
+            class="scroll-hint__arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
             <polyline points="6 9 12 15 18 9" />
         </svg>
     </div>
@@ -40,12 +50,23 @@ const { t } = useI18n();
 }
 
 @keyframes hint-bounce {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(6px); }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(6px);
+    }
 }
 
 @keyframes hint-fade-in {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 </style>

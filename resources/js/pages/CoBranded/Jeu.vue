@@ -186,7 +186,10 @@ onUnmounted(() => {
             </Transition>
 
             <!-- Phase chargement + carte (GameMap monté dès le loading pour émettre ready) -->
-            <div v-if="phase === 'loading' || phase === 'map'" class="game-layer flex flex-col">
+            <div
+                v-if="phase === 'loading' || phase === 'map'"
+                class="game-layer flex flex-col"
+            >
                 <GameProgressBar
                     :value="clearedCount"
                     :total="questions.length"
@@ -196,7 +199,10 @@ onUnmounted(() => {
                     :question-count="questions.length"
                     :cleared-count="clearedCount"
                     :statuses="statuses"
-                    :pochy="questions[Math.min(clearedCount, questions.length - 1)]?.pochy ?? '0'"
+                    :pochy="
+                        questions[Math.min(clearedCount, questions.length - 1)]
+                            ?.pochy ?? '0'
+                    "
                     class="flex-1"
                     @reach="onReach"
                     @select="onSelectCheckpoint"

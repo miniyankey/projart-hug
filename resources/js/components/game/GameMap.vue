@@ -164,7 +164,11 @@ function onKeyDown(e) {
     e.preventDefault();
     targetPrg.value = Math.max(0, Math.min(cap.value, targetPrg.value + delta));
     gsap.killTweensOf(progress);
-    gsap.to(progress, { value: targetPrg.value, duration: 0.6, ease: 'power3.out' });
+    gsap.to(progress, {
+        value: targetPrg.value,
+        duration: 0.6,
+        ease: 'power3.out',
+    });
     markMoved();
 }
 
@@ -174,7 +178,11 @@ function onCheckpointSelect(index) {
     if (index === props.clearedCount) {
         targetPrg.value = cap.value;
         gsap.killTweensOf(progress);
-        gsap.to(progress, { value: cap.value, duration: 1.2, ease: 'power2.inOut' });
+        gsap.to(progress, {
+            value: cap.value,
+            duration: 1.2,
+            ease: 'power2.inOut',
+        });
         markMoved();
     } else {
         emit('select', index);

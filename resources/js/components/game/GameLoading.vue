@@ -61,12 +61,20 @@ const { t } = useI18n();
 }
 
 @keyframes pochy-bounce {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-12px); }
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-12px);
+    }
 }
 
 @keyframes bar-fill {
-    from { width: 20%; }
-    to   { width: 90%; }
+    from {
+        width: 20%;
+    }
+    to {
+        width: 90%;
+    }
 }
 </style>

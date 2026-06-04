@@ -2,9 +2,9 @@
 // Écran de résultat après validation, basé sur la « view » du choix.
 // Bulle : message + descr de la view. Contenu : texte + CTA éventuel.
 import { useI18n } from 'vue-i18n';
-import { Button } from '@/components/ui/button';
 import GameScene from './GameScene.vue';
 import GameSpeechBubble from './GameSpeechBubble.vue';
+import { Button } from '@/components/ui/button';
 
 defineProps({
     // Vue : { message, descr?, text?, button_text?, button_url? }
@@ -22,13 +22,21 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <GameScene :theme="theme" :answered="answered" :total="total" :icon="icon" :pochy="pochy">
+    <GameScene
+        :theme="theme"
+        :answered="answered"
+        :total="total"
+        :icon="icon"
+        :pochy="pochy"
+    >
         <template #bubble>
             <GameSpeechBubble>
                 {{ view.message }}
                 <template v-if="view.descr">
                     <br />
-                    <span class="text-[0.8em] opacity-[0.85]">{{ view.descr }}</span>
+                    <span class="text-[0.8em] opacity-[0.85]">{{
+                        view.descr
+                    }}</span>
                 </template>
             </GameSpeechBubble>
         </template>

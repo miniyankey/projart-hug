@@ -22,20 +22,40 @@ const { t } = useI18n();
 const isEligible = computed(() => props.verdict.status === 'eligible');
 
 const pochy = computed(() => {
-    if (props.verdict.status === 'lifetime') return '0-sad';
-    if (props.verdict.status === 'temporary') return '0-time';
+    if (props.verdict.status === 'lifetime') {
+        return '0-sad';
+    }
+
+    if (props.verdict.status === 'temporary') {
+        return '0-time';
+    }
+
     return '100-hand-in-air';
 });
 
 const appointmentUrl = computed(
-    () => props.linkAppointment || 'https://www.hug.ch/don-du-sang/rendez-vous-ligne',
+    () =>
+        props.linkAppointment ||
+        'https://www.hug.ch/don-du-sang/rendez-vous-ligne',
 );
 
 function formatDays(days) {
-    if (days === null || days < 0) return null;
-    if (days >= 365) return t('eligibilite.duration.year', Math.round(days / 365));
-    if (days >= 30) return t('eligibilite.duration.month', Math.round(days / 30));
-    if (days >= 7) return t('eligibilite.duration.week', Math.round(days / 7));
+    if (days === null || days < 0) {
+        return null;
+    }
+
+    if (days >= 365) {
+        return t('eligibilite.duration.year', Math.round(days / 365));
+    }
+
+    if (days >= 30) {
+        return t('eligibilite.duration.month', Math.round(days / 30));
+    }
+
+    if (days >= 7) {
+        return t('eligibilite.duration.week', Math.round(days / 7));
+    }
+
     return t('eligibilite.duration.day', days);
 }
 </script>
@@ -51,18 +71,23 @@ function formatDays(days) {
 
             <div class="finish__right">
                 <GameSpeechBubble>
-                    {{ isEligible
-                        ? t('eligibilite.finish.eligible.message')
-                        : verdict.status === 'lifetime'
-                            ? t('eligibilite.finish.lifetime.message')
-                            : t('eligibilite.finish.temporary.message', { duration: formatDays(verdict.days) })
+                    {{
+                        isEligible
+                            ? t('eligibilite.finish.eligible.message')
+                            : verdict.status === 'lifetime'
+                              ? t('eligibilite.finish.lifetime.message')
+                              : t('eligibilite.finish.temporary.message', {
+                                    duration: formatDays(verdict.days),
+                                })
                     }}
                 </GameSpeechBubble>
 
                 <div class="finish__panel">
                     <!-- Éligible -->
                     <template v-if="isEligible">
-                        <p class="finish__text">{{ t('eligibilite.finish.eligible.text') }}</p>
+                        <p class="finish__text">
+                            {{ t('eligibilite.finish.eligible.text') }}
+                        </p>
                         <Button
                             variant="pixel_violet"
                             as="a"
@@ -77,24 +102,36 @@ function formatDays(days) {
                     <!-- Inéligible -->
                     <template v-else>
                         <p class="finish__text">
-                            {{ verdict.status === 'lifetime'
-                                ? t('eligibilite.finish.lifetime.text')
-                                : t('eligibilite.finish.temporary.text')
+                            {{
+                                verdict.status === 'lifetime'
+                                    ? t('eligibilite.finish.lifetime.text')
+                                    : t('eligibilite.finish.temporary.text')
                             }}
                         </p>
 
                         <!-- Récap des étapes inéligibles -->
-                        <ul v-if="verdict.steps.length > 0" class="finish__steps">
+                        <ul
+                            v-if="verdict.steps.length > 0"
+                            class="finish__steps"
+                        >
                             <li
                                 v-for="step in verdict.steps"
                                 :key="step.questionKey"
                                 class="finish__step"
                             >
-                                <span class="finish__step-title">{{ step.titre }}</span>
-                                <span v-if="step.days && step.days > 0" class="finish__step-days">
+                                <span class="finish__step-title">{{
+                                    step.titre
+                                }}</span>
+                                <span
+                                    v-if="step.days && step.days > 0"
+                                    class="finish__step-days"
+                                >
                                     {{ formatDays(step.days) }}
                                 </span>
-                                <span v-else-if="step.days < 0" class="finish__step-days finish__step-days--lifetime">
+                                <span
+                                    v-else-if="step.days < 0"
+                                    class="finish__step-days finish__step-days--lifetime"
+                                >
                                     {{ t('eligibilite.finish.lifetime.label') }}
                                 </span>
                             </li>

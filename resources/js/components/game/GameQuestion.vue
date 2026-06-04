@@ -2,10 +2,10 @@
 // Vue plein écran d'une question (utilise la coquille GameScene).
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Button } from '@/components/ui/button';
 import GameChoice from './GameChoice.vue';
 import GameScene from './GameScene.vue';
 import GameSpeechBubble from './GameSpeechBubble.vue';
+import { Button } from '@/components/ui/button';
 
 const { t } = useI18n();
 
