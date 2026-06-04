@@ -1,4 +1,18 @@
 {
+    "newsletter": {
+        "title": "Restez informé",
+        "subtitle": "Recevez les actualités du Centre de Transfusion Sanguine et soyez alerté lors des prochaines collectes.",
+        "email_label": "Adresse e-mail",
+        "email_placeholder": "votre{'@'}email.com",
+        "submit": "S'inscrire",
+        "success": "Votre inscription à la newsletter a bien été enregistrée.",
+        "error": "Une erreur est survenue, veuillez réessayer plus tard.",
+        "unsubscribe_title": "Se désinscrire",
+        "unsubscribe_subtitle": "Vous souhaitez ne plus recevoir nos actualités ? Saisissez votre adresse e-mail ci-dessous.",
+        "unsubscribe_submit": "Se désinscrire",
+        "unsubscribe_success": "Vous avez bien été désinscrit de la newsletter.",
+        "unsubscribe_error": "Une erreur est survenue lors de la désinscription, veuillez réessayer plus tard."
+    },
     "common": {
         "languages": {
             "fr": "Français",
