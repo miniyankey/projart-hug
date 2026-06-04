@@ -10,6 +10,7 @@ use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\Kpi\CollectEventController;
 use App\Http\Controllers\Kpi\ContactFormConversionController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\NewsletterController;
 use App\Models\Collect;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -18,6 +19,15 @@ use Inertia\Inertia;
 
 // Langue, pour changer
 Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update');
+
+// Newsletter
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
+    ->middleware('throttle:5,1')
+    ->name('newsletter.subscribe');
+Route::inertia('/newsletter/unsubscribe', 'NewsletterUnsubscribe')->name('newsletter.unsubscribe.page');
+Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])
+    ->middleware('throttle:5,1')
+    ->name('newsletter.unsubscribe');
 
 // Pages publiques
 Route::inertia('/', 'Home')->name('home');
