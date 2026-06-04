@@ -17,6 +17,8 @@ const props = defineProps({
     linkAppointment: { type: String, default: null },
 });
 
+defineEmits(['back']);
+
 const { t } = useI18n();
 
 const isEligible = computed(() => props.verdict.status === 'eligible');
@@ -61,15 +63,29 @@ function formatDays(days) {
 </script>
 
 <template>
-    <div class="finish">
+    <div class="absolute inset-0 z-50 flex flex-col bg-white">
         <GameProgressBar :value="total" :total="total" />
 
-        <div class="finish__content">
-            <div class="finish__character">
-                <GamePochy :variant="pochy" class="finish__pochy" />
+        <!-- Corps -->
+        <div
+            class="flex min-h-0 flex-1 items-center gap-[clamp(1rem,4vw,3rem)]"
+            :style="{ padding: '1.5rem clamp(1.5rem, 4vw, 4rem) 2rem' }"
+        >
+            <!-- Personnage -->
+            <div
+                class="flex shrink-0 items-end justify-center"
+                style="width: clamp(160px, 22vw, 320px)"
+            >
+                <GamePochy
+                    :variant="pochy"
+                    class="w-full drop-shadow-[0_10px_18px_rgba(0,0,0,0.3)] [image-rendering:pixelated]"
+                />
             </div>
 
-            <div class="finish__right">
+            <!-- Contenu -->
+            <div
+                class="flex min-w-0 flex-1 flex-col gap-[clamp(1.5rem,4vh,3rem)]"
+            >
                 <GameSpeechBubble>
                     {{
                         isEligible
@@ -82,15 +98,18 @@ function formatDays(days) {
                     }}
                 </GameSpeechBubble>
 
-                <div class="finish__panel">
+                <div class="flex min-h-0 flex-col gap-5 overflow-y-auto">
                     <!-- Éligible -->
                     <template v-if="isEligible">
-                        <p class="finish__text">
+                        <p
+                            class="m-0 text-[1.05rem] leading-relaxed text-gray-900"
+                        >
                             {{ t('eligibilite.finish.eligible.text') }}
                         </p>
                         <Button
                             variant="pixel_violet"
                             as="a"
+                            class="self-start"
                             :href="appointmentUrl"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -101,7 +120,9 @@ function formatDays(days) {
 
                     <!-- Inéligible -->
                     <template v-else>
-                        <p class="finish__text">
+                        <p
+                            class="m-0 text-[1.05rem] leading-relaxed text-gray-900"
+                        >
                             {{
                                 verdict.status === 'lifetime'
                                     ? t('eligibilite.finish.lifetime.text')
@@ -112,25 +133,25 @@ function formatDays(days) {
                         <!-- Récap des étapes inéligibles -->
                         <ul
                             v-if="verdict.steps.length > 0"
-                            class="finish__steps"
+                            class="m-0 flex list-none flex-col gap-2 p-0"
                         >
                             <li
                                 v-for="step in verdict.steps"
                                 :key="step.questionKey"
-                                class="finish__step"
+                                class="flex items-baseline justify-between gap-4 border-2 border-l-4 border-gray-200 border-l-red-500 px-[0.9rem] py-[0.6rem]"
                             >
-                                <span class="finish__step-title">{{
-                                    step.titre
-                                }}</span>
+                                <span class="text-[0.95rem] font-semibold">
+                                    {{ step.titre }}
+                                </span>
                                 <span
                                     v-if="step.days && step.days > 0"
-                                    class="finish__step-days"
+                                    class="text-[0.85rem] whitespace-nowrap text-red-500"
                                 >
                                     {{ formatDays(step.days) }}
                                 </span>
                                 <span
                                     v-else-if="step.days < 0"
-                                    class="finish__step-days finish__step-days--lifetime"
+                                    class="text-[0.85rem] font-bold whitespace-nowrap text-red-500"
                                 >
                                     {{ t('eligibilite.finish.lifetime.label') }}
                                 </span>
@@ -140,95 +161,15 @@ function formatDays(days) {
                 </div>
             </div>
         </div>
+
+        <!-- Pied -->
+        <div
+            class="flex justify-start border-t border-gray-200"
+            :style="{ padding: '0.75rem clamp(1.5rem, 4vw, 4rem)' }"
+        >
+            <Button variant="link" @click="$emit('back')">
+                {{ t('eligibilite.finish.back_to_game') }}
+            </Button>
+        </div>
     </div>
 </template>
-
-<style scoped>
-.finish {
-    position: absolute;
-    inset: 0;
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    background: white;
-}
-
-.finish__content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: clamp(1rem, 4vw, 3rem);
-    padding: 1.5rem clamp(1.5rem, 4vw, 4rem) 2rem;
-    min-height: 0;
-}
-
-.finish__character {
-    flex-shrink: 0;
-    width: clamp(160px, 22vw, 320px);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.finish__pochy {
-    width: 100%;
-    image-rendering: pixelated;
-    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3));
-}
-
-.finish__right {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 4vh, 3rem);
-}
-
-.finish__panel {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    overflow-y: auto;
-}
-
-.finish__text {
-    margin: 0;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: #1f2937;
-}
-
-.finish__steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.finish__step {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.6rem 0.9rem;
-    border: 2px solid #e5e7eb;
-    border-left: 4px solid #ef4444;
-}
-
-.finish__step-title {
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.finish__step-days {
-    font-size: 0.85rem;
-    color: #ef4444;
-    white-space: nowrap;
-}
-
-.finish__step-days--lifetime {
-    font-weight: 700;
-}
-</style>

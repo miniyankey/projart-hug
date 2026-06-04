@@ -26,7 +26,7 @@ const props = defineProps({
     pochy: { type: String, default: '0' },
 });
 
-const emit = defineEmits(['reach', 'select', 'ready']);
+const emit = defineEmits(['reach', 'select', 'ready', 'finish']);
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const PATH_W = 32; // dirt road stroke width
@@ -88,10 +88,20 @@ const cap = computed(() => {
 });
 
 // Emit `reach` once when Pochy arrives at the current target checkpoint.
+// Emit `finish` once when Pochy reaches the very end (after all questions answered).
 const stopReached = ref(false);
+const endReached = ref(false);
 
 watch(progress, (val) => {
     if (props.clearedCount >= cps.value.length) {
+        // All checkpoints answered — detect arrival at the end of the path
+        if (!endReached.value && val >= totalLen.value - 0.5) {
+            endReached.value = true;
+            emit('finish');
+        } else if (endReached.value && val < totalLen.value - 100) {
+            endReached.value = false;
+        }
+
         return;
     }
 
@@ -228,6 +238,23 @@ function rebuild() {
     targetPrg.value = progress.value;
 }
 
+// ─── Deco preloading ──────────────────────────────────────────────────────────
+const DECO_NAMES = ['bush', 'flower', 'mushroom', 'oak', 'pine', 'rock'];
+
+function preloadDecos() {
+    return Promise.all(
+        DECO_NAMES.map(
+            (name) =>
+                new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = resolve;
+                    img.onerror = resolve; // ne pas bloquer si un asset est absent
+                    img.src = `/img/game/deco/${name}.svg`;
+                }),
+        ),
+    );
+}
+
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
 const LOADING_MIN_MS = 600;
 
@@ -242,9 +269,11 @@ onMounted(() => {
     grassTile.value = generateGrassTile();
     rebuild();
 
-    const elapsed = Date.now() - t0;
-    const delay = Math.max(0, LOADING_MIN_MS - elapsed);
-    setTimeout(() => emit('ready'), delay);
+    preloadDecos().then(() => {
+        const elapsed = Date.now() - t0;
+        const delay = Math.max(0, LOADING_MIN_MS - elapsed);
+        setTimeout(() => emit('ready'), delay);
+    });
 
     el.addEventListener('wheel', onWheel, { passive: false });
     el.addEventListener('touchstart', onTouchStart, { passive: true });
@@ -369,21 +398,21 @@ onUnmounted(() => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -100%);
-    width: 96px;
+    width: 128px;
     pointer-events: none;
     z-index: 20;
 }
 
 .pochy-sprite {
     display: block;
-    width: 96px;
-    height: 96px;
+    width: 128px;
+    height: 128px;
     image-rendering: pixelated;
 }
 
 .pochy-shadow {
-    width: 64px;
-    height: 14px;
+    width: 84px;
+    height: 16px;
     margin: -4px auto 0;
     background: radial-gradient(
         ellipse at center,

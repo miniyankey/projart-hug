@@ -5,12 +5,18 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <div class="scroll-hint" aria-hidden="true">
-        <span class="scroll-hint__text">{{
-            t('eligibilite.ui.scroll_hint')
-        }}</span>
+    <div
+        class="pointer-events-none flex [animation:hint-fade-in_0.4s_ease_both] flex-col items-center gap-1 text-white [text-shadow:1px_1px_3px_rgba(0,0,0,0.6)]"
+        aria-hidden="true"
+    >
+        <span
+            class="font-pixel tracking-[0.03em] whitespace-nowrap"
+            style="font-size: clamp(0.5rem, 1.2vw, 0.65rem)"
+        >
+            {{ t('eligibilite.ui.scroll_hint') }}
+        </span>
         <svg
-            class="scroll-hint__arrow"
+            class="h-7 w-7 [animation:hint-bounce_1s_ease-in-out_infinite] [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.4))]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -24,31 +30,6 @@ const { t } = useI18n();
 </template>
 
 <style scoped>
-.scroll-hint {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-    pointer-events: none;
-    animation: hint-fade-in 0.4s ease both;
-}
-
-.scroll-hint__text {
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(0.5rem, 1.2vw, 0.65rem);
-    letter-spacing: 0.03em;
-    white-space: nowrap;
-}
-
-.scroll-hint__arrow {
-    width: 28px;
-    height: 28px;
-    animation: hint-bounce 1s ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
-}
-
 @keyframes hint-bounce {
     0%,
     100% {

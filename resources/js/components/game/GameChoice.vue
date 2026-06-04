@@ -14,6 +14,7 @@ defineEmits(['toggle']);
 <template>
     <Button
         variant="quiz"
+        size="quiz"
         :class="
             selected ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none' : ''
         "

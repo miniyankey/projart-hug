@@ -264,7 +264,8 @@
                 "message": "Tu n'es malheureusement pas éligible au don de sang.",
                 "text": "Certaines situations rendent le don impossible de façon permanente. Merci pour ta démarche !",
                 "label": "À vie"
-            }
+            },
+            "back_to_game": "Revenir au parcours"
         },
         "ineligible": {
             "lifetime": {

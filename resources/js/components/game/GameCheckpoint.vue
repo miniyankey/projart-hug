@@ -21,13 +21,24 @@ const CUT = 11; // base chamfer
 
 // Palette des checkpoints selon le statut
 const STATUS = {
-    locked: { fill: '#7a7a8c', highlight: '#aaaabe', iconFill: '#33334a' },
-    eligible: {
-        fill: 'var(--brand,#7c3aed)',
-        highlight: '#b090ff',
-        iconFill: '#fff',
+    locked: {
+        fill: '#7a7a8c',
+        highlight: '#aaaabe',
+        iconFill: '#33334a',
+        icon: '?',
     },
-    ineligible: { fill: '#111', highlight: '#555', iconFill: '#fff' },
+    eligible: {
+        fill: '#22c55e',
+        highlight: '#86efac',
+        iconFill: '#fff',
+        icon: '✓',
+    },
+    ineligible: {
+        fill: '#ef4444',
+        highlight: '#fca5a5',
+        iconFill: '#fff',
+        icon: '✗',
+    },
 };
 
 const cfg = computed(() => {
@@ -61,7 +72,7 @@ const cfg = computed(() => {
         big: false,
         fill: s.fill,
         highlight: s.highlight,
-        icon: '?',
+        icon: s.icon,
         iconFill: s.iconFill,
         iconSize: 15,
         pixelFont: true,

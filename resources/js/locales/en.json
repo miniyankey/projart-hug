@@ -264,7 +264,8 @@
                 "message": "Unfortunately you're not eligible to give blood.",
                 "text": "Some situations make donation permanently impossible. Thank you for taking the step!",
                 "label": "Lifetime"
-            }
+            },
+            "back_to_game": "Back to the journey"
         },
         "ineligible": {
             "lifetime": {

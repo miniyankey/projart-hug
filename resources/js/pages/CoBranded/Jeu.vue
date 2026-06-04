@@ -1,6 +1,6 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import GameFinish from '@/components/game/GameFinish.vue';
 import GameIntro from '@/components/game/GameIntro.vue';
@@ -38,8 +38,17 @@ const clearedCount = ref(0); // checkpoints franchis (= frontière de progressio
 const activeIndex = ref(null); // question actuellement ouverte (ou null)
 const resultView = ref(null); // vue de résultat affichée (ou null)
 const resultPochy = ref('0'); // variante Pochy de l'écran de résultat courant
+// Pochy de la carte : change quand la question s'ouvre (overlay couvre la carte
+// → transition invisible), pas quand clearedCount change (carte visible).
+const mapPochy = ref(questions.value[0]?.pochy ?? '0');
 // Statut de chaque checkpoint : 'locked' | 'eligible' | 'ineligible'
 const statuses = ref(questions.value.map(() => 'locked'));
+
+watch(activeIndex, (idx) => {
+    if (idx !== null) {
+        mapPochy.value = questions.value[idx]?.pochy ?? '0';
+    }
+});
 
 const activeQuestion = computed(() =>
     activeIndex.value !== null ? questions.value[activeIndex.value] : null,
@@ -53,6 +62,10 @@ function onMapReady() {
     if (phase.value === 'loading') {
         phase.value = 'map';
     }
+}
+
+function onMapFinish() {
+    phase.value = 'finished';
 }
 
 // Pochy atteint un checkpoint → on affiche sa question
@@ -76,11 +89,6 @@ function finishStep() {
 
     resultView.value = null;
     activeIndex.value = null;
-
-    // Toutes les questions répondues → écran de fin
-    if (clearedCount.value >= questions.value.length) {
-        phase.value = 'finished';
-    }
 }
 
 // Validation d'une réponse → enregistrement, statut du checkpoint, puis :
@@ -185,9 +193,13 @@ onUnmounted(() => {
                 />
             </Transition>
 
-            <!-- Phase chargement + carte (GameMap monté dès le loading pour émettre ready) -->
+            <!-- Carte montée dès le loading et conservée jusqu'à la fin pour conserver l'état -->
             <div
-                v-if="phase === 'loading' || phase === 'map'"
+                v-if="
+                    phase === 'loading' ||
+                    phase === 'map' ||
+                    phase === 'finished'
+                "
                 class="game-layer flex flex-col"
             >
                 <GameProgressBar
@@ -199,14 +211,12 @@ onUnmounted(() => {
                     :question-count="questions.length"
                     :cleared-count="clearedCount"
                     :statuses="statuses"
-                    :pochy="
-                        questions[Math.min(clearedCount, questions.length - 1)]
-                            ?.pochy ?? '0'
-                    "
+                    :pochy="mapPochy"
                     class="flex-1"
                     @reach="onReach"
                     @select="onSelectCheckpoint"
                     @ready="onMapReady"
+                    @finish="onMapFinish"
                 />
             </div>
 
@@ -215,7 +225,10 @@ onUnmounted(() => {
                 leave-to-class="opacity-0"
                 leave-active-class="transition-opacity duration-300"
             >
-                <GameLoading v-if="phase === 'loading'" class="game-layer" />
+                <GameLoading
+                    v-if="phase === 'loading'"
+                    class="game-layer z-30"
+                />
             </Transition>
 
             <!-- Fond blanc persistant : évite d'apercevoir la carte pendant le
@@ -278,6 +291,7 @@ onUnmounted(() => {
                     :total="questions.length"
                     :link-appointment="props.link_appointment"
                     class="game-layer"
+                    @back="phase = 'map'"
                 />
             </Transition>
         </div>
