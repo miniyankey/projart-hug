@@ -12,7 +12,7 @@ class TropheeSeeder extends Seeder
     public function run(): void
     {
 
-        //on reprend ce qui était codé en dur avant
+        // on reprend ce qui était codé en dur avant
         $winners = $this->seedWinnerCompanies();
 
         $editions = [
