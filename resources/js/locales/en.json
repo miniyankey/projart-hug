@@ -57,6 +57,7 @@
             "collectes": "Drives",
             "kpi": "Statistics & KPIs",
             "entreprises": "Companies",
+            "vainqueurs": "Winners",
             "back_to_site": "Back to site",
             "logout": "Sign out",
             "open_menu": "Open menu",
@@ -281,10 +282,38 @@
         "vainqueurs": {
             "index_title": "Winners - Administration",
             "title": "Winners",
+            "subtitle": "Manage the Generosity Trophy podium (top 3 per year) shown on the public page.",
+            "new": "Add a winner",
+            "col_year": "Edition",
+            "col_rank": "Rank",
+            "col_company": "Company",
+            "col_actions": "Actions",
+            "empty": "No winners yet.",
+            "edit": "Edit",
+            "delete": "Delete",
+            "delete_title": "Delete winner",
+            "delete_description": "Do you really want to remove “{name}” from the {year} podium ({rank})? This action is irreversible.",
             "create_title": "Add a winner - Administration",
             "create_heading": "Add a winner",
+            "create_subtitle": "Add a company to an edition's podium and set its rank.",
             "edit_title": "Edit a winner - Administration",
-            "edit_heading": "Edit a winner"
+            "edit_heading": "Edit a winner",
+            "edit_subtitle": "Update the company, year or rank of this winner.",
+            "form": {
+                "section_podium": "Podium",
+                "section_details": "Details",
+                "year_of": "Edition year",
+                "year_of_placeholder": "e.g. 2026",
+                "rank": "Rank",
+                "rank_placeholder": "Select a rank",
+                "company": "Company",
+                "company_placeholder": "Select a company",
+                "description": "Description (optional)",
+                "description_placeholder": "A few words about this distinction…",
+                "submit_create": "Add to podium",
+                "submit_edit": "Save changes",
+                "cancel": "Cancel"
+            }
         }
     },
     "nav": {
@@ -446,7 +475,8 @@
             "edition": "Edition",
             "prev": "Previous edition",
             "next": "Next edition",
-            "suspended": "Editions suspended from 2011 to 2025"
+            "suspended": "Editions suspended from 2011 to 2025",
+            "empty": "The winners list will be revealed soon."
         },
         "prix_honneur": {
             "title": "The Bloodies",

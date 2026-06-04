@@ -57,6 +57,7 @@
             "collectes": "Collectes",
             "kpi": "Statistiques & KPIs",
             "entreprises": "Entreprises",
+            "vainqueurs": "Vainqueurs",
             "back_to_site": "Retour au site",
             "logout": "Se déconnecter",
             "open_menu": "Ouvrir le menu",
@@ -281,10 +282,38 @@
         "vainqueurs": {
             "index_title": "Vainqueurs - Administration",
             "title": "Vainqueurs",
+            "subtitle": "Gérez le podium du Trophée de la générosité (top 3 par année) affiché sur la page publique.",
+            "new": "Ajouter un vainqueur",
+            "col_year": "Édition",
+            "col_rank": "Rang",
+            "col_company": "Entreprise",
+            "col_actions": "Actions",
+            "empty": "Aucun vainqueur pour le moment.",
+            "edit": "Modifier",
+            "delete": "Supprimer",
+            "delete_title": "Supprimer le vainqueur",
+            "delete_description": "Voulez-vous vraiment retirer « {name} » du podium {year} ({rank}) ? Cette action est irréversible.",
             "create_title": "Ajouter un vainqueur - Administration",
             "create_heading": "Ajouter un vainqueur",
+            "create_subtitle": "Ajoutez une entreprise au podium d'une édition en précisant son rang.",
             "edit_title": "Modifier un vainqueur - Administration",
-            "edit_heading": "Modifier un vainqueur"
+            "edit_heading": "Modifier un vainqueur",
+            "edit_subtitle": "Mettez à jour l'entreprise, l'année ou le rang de ce vainqueur.",
+            "form": {
+                "section_podium": "Podium",
+                "section_details": "Détails",
+                "year_of": "Année de l'édition",
+                "year_of_placeholder": "Ex : 2026",
+                "rank": "Rang",
+                "rank_placeholder": "Sélectionnez un rang",
+                "company": "Entreprise",
+                "company_placeholder": "Sélectionnez une entreprise",
+                "description": "Description (optionnel)",
+                "description_placeholder": "Quelques mots sur cette distinction…",
+                "submit_create": "Ajouter au podium",
+                "submit_edit": "Enregistrer les modifications",
+                "cancel": "Annuler"
+            }
         }
     },
     "nav": {
@@ -478,7 +507,8 @@
             "edition": "Édition",
             "prev": "Édition précédente",
             "next": "Édition suivante",
-            "suspended": "Éditions suspendues de 2011 à 2025"
+            "suspended": "Éditions suspendues de 2011 à 2025",
+            "empty": "Le palmarès sera bientôt dévoilé."
         },
         "prix_honneur": {
             "title": "Les Bloodies",
