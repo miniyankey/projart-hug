@@ -4,6 +4,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import GameFinish from '@/components/game/GameFinish.vue';
 import GameIntro from '@/components/game/GameIntro.vue';
+import GameLoading from '@/components/game/GameLoading.vue';
 import GameMap from '@/components/game/GameMap.vue';
 import GameProgressBar from '@/components/game/GameProgressBar.vue';
 import GameQuestion from '@/components/game/GameQuestion.vue';
@@ -45,7 +46,13 @@ const activeQuestion = computed(() =>
 );
 
 function onPlay() {
-    phase.value = 'map';
+    phase.value = 'loading';
+}
+
+function onMapReady() {
+    if (phase.value === 'loading') {
+        phase.value = 'map';
+    }
 }
 
 // Pochy atteint un checkpoint → on affiche sa question
@@ -178,8 +185,8 @@ onUnmounted(() => {
                 />
             </Transition>
 
-            <!-- Phase carte -->
-            <div v-if="phase !== 'intro'" class="game-layer flex flex-col">
+            <!-- Phase chargement + carte (GameMap monté dès le loading pour émettre ready) -->
+            <div v-if="phase === 'loading' || phase === 'map'" class="game-layer flex flex-col">
                 <GameProgressBar
                     :value="clearedCount"
                     :total="questions.length"
@@ -193,8 +200,17 @@ onUnmounted(() => {
                     class="flex-1"
                     @reach="onReach"
                     @select="onSelectCheckpoint"
+                    @ready="onMapReady"
                 />
             </div>
+
+            <!-- Overlay de chargement (par-dessus la carte pendant l'initialisation) -->
+            <Transition
+                leave-to-class="opacity-0"
+                leave-active-class="transition-opacity duration-300"
+            >
+                <GameLoading v-if="phase === 'loading'" class="game-layer" />
+            </Transition>
 
             <!-- Fond blanc persistant : évite d'apercevoir la carte pendant le
                  fondu croisé question ⇄ résultat -->

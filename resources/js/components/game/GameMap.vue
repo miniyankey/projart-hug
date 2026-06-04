@@ -26,7 +26,7 @@ const props = defineProps({
     pochy: { type: String, default: '0' },
 });
 
-const emit = defineEmits(['reach', 'select']);
+const emit = defineEmits(['reach', 'select', 'ready']);
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const PATH_W = 32; // dirt road stroke width
@@ -221,6 +221,8 @@ function rebuild() {
 }
 
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
+const LOADING_MIN_MS = 600;
+
 onMounted(() => {
     const el = rootRef.value;
 
@@ -228,8 +230,13 @@ onMounted(() => {
         return;
     }
 
+    const t0 = Date.now();
     grassTile.value = generateGrassTile();
     rebuild();
+
+    const elapsed = Date.now() - t0;
+    const delay = Math.max(0, LOADING_MIN_MS - elapsed);
+    setTimeout(() => emit('ready'), delay);
 
     el.addEventListener('wheel', onWheel, { passive: false });
     el.addEventListener('touchstart', onTouchStart, { passive: true });
