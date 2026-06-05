@@ -15,13 +15,15 @@ defineProps({
     total: { type: Number, default: 0 },
     icon: { type: String, default: null },
     pochy: { type: String, default: '0' },
-    // Inéligibilité temporaire : jours d'attente (> 0) → affiche le formulaire de
-    // rappel. 0 pour éligible ou inéligibilité à vie (pas de rappel possible).
+    // Inéligibilité temporaire : jours d'attente (> 0) → formulaire de rappel.
     reminderDays: { type: Number, default: 0 },
+    // Inéligibilité à vie → proposition de don financier (même composant).
+    donation: { type: Boolean, default: false },
     collectId: { type: Number, default: null },
 });
 
-defineEmits(['ok', 'back']);
+// handled : rappel envoyé OU lien de don cliqué → le jeu ne sollicite plus ensuite.
+defineEmits(['ok', 'back', 'handled']);
 
 const { t } = useI18n();
 </script>
@@ -67,10 +69,13 @@ const { t } = useI18n();
                     {{ view.button_text || t('eligibilite.ui.learn_more') }}
                 </Button>
 
-                <EligibilityabbiefurtReminderForm
-                    v-if="reminderDays > 0"
+                <EligibilityReminderForm
+                    v-if="donation || reminderDays > 0"
+                    :mode="donation ? 'donation' : 'reminder'"
                     :days="reminderDays"
                     :collect-id="collectId"
+                    @submitted="$emit('handled')"
+                    @donated="$emit('handled')"
                 />
             </div>
         </template>

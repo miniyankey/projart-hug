@@ -44,7 +44,10 @@ const clearedCount = ref(0); // checkpoints franchis (= frontière de progressio
 const activeIndex = ref(null); // question actuellement ouverte (ou null)
 const resultView = ref(null); // vue de résultat affichée (ou null)
 const resultPochy = ref('0'); // variante Pochy de l'écran de résultat courant
-const resultDays = ref(0); // jours d'inéligibilité temporaire du résultat (0 sinon)
+const resultDays = ref(0); // jours de rappel à proposer sur le résultat (max, 0 sinon)
+const resultDonation = ref(false); // proposer le don (inéligibilité à vie) sur le résultat
+// Le joueur a déjà soumis un rappel OU cliqué sur le don → on ne le sollicite plus.
+const reminderHandled = ref(false);
 // Pochy de la carte : change quand la question s'ouvre (overlay couvre la carte
 // → transition invisible), pas quand clearedCount change (carte visible).
 const mapPochy = ref(questions.value[0]?.pochy ?? '0');
@@ -150,9 +153,19 @@ function onAnswer(choiceIds) {
 
     trackStep();
 
-    // Jours d'inéligibilité temporaire (> 0) → déclenche le formulaire de rappel
-    // dans GameResult ; 0 pour éligible ou inéligibilité à vie (days < 0).
-    resultDays.value = !result.eligible && result.days > 0 ? result.days : 0;
+    // Sollicitation rappel/don sur le panneau de résultat. Pilotée par le verdict
+    // GLOBAL (toutes les réponses), pas seulement la question courante :
+    //  - inéligible à vie un jour → toujours le don (jamais le rappel) ;
+    //  - sinon, inéligibilité temporaire → rappel avec la plus grande durée ;
+    //  - déjà sollicité (rappel envoyé ou don cliqué) ou réponse éligible → rien.
+    const overall = overallVerdict(questions.value, answers.value);
+    const solicit = !reminderHandled.value && !result.eligible;
+
+    resultDonation.value = solicit && overall.status === 'lifetime';
+    resultDays.value =
+        solicit && overall.status === 'temporary' && overall.days > 0
+            ? overall.days
+            : 0;
 
     // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
     if (!result.eligible) {
@@ -321,10 +334,12 @@ onUnmounted(() => {
                     :icon="activeQuestion?.icon ?? null"
                     :pochy="resultPochy"
                     :reminder-days="resultDays"
+                    :donation="resultDonation"
                     :collect-id="collect_id"
                     class="game-layer"
                     @ok="onResultOk"
                     @back="onResultBack"
+                    @handled="reminderHandled = true"
                 />
             </Transition>
 

@@ -496,6 +496,11 @@
             "newsletter": "Je souhaite aussi recevoir la newsletter du don du sang.",
             "submit": "Me prévenir"
         },
+        "donation": {
+            "title": "Soutiens autrement",
+            "intro": "Même sans pouvoir donner ton sang, tu peux aider les HUG en faisant un don financier.",
+            "cta": "Faire un don"
+        },
         "mascotte_speech": "Viens jouer pour voir si tu es éligible !",
         "mascotte_cta": "Jouer !",
         "mascotte_close": "Fermer"

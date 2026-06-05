@@ -327,6 +327,11 @@
             "newsletter": "I'd also like to receive the blood donation newsletter.",
             "submit": "Notify me"
         },
+        "donation": {
+            "title": "Support us differently",
+            "intro": "Even if you can't give blood, you can still help the HUG by making a financial donation.",
+            "cta": "Make a donation"
+        },
         "mascotte_speech": "Come play to find out if you're eligible!",
         "mascotte_cta": "Play!",
         "mascotte_close": "Close",
