@@ -56,14 +56,11 @@ const hasMoved = ref(false);
 let lastTouchY = 0;
 let resizeObserver = null;
 let resizeRaf = 0;
-let inactivityTimer = null;
 
+// L'indice « Scrolle pour avancer » n'apparaît qu'au lancement : dès le premier
+// déplacement, il disparaît définitivement (pas de réapparition à l'inactivité).
 function markMoved() {
     hasMoved.value = true;
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => {
-        hasMoved.value = false;
-    }, 4000);
 }
 
 // ─── Computed ────────────────────────────────────────────────────────────────
@@ -296,7 +293,6 @@ onMounted(() => {
 
 onUnmounted(() => {
     cancelAnimationFrame(resizeRaf);
-    clearTimeout(inactivityTimer);
     gsap.killTweensOf(progress);
 
     if (resizeObserver) {
@@ -365,32 +361,16 @@ onUnmounted(() => {
                     width="64"
                     height="64"
                 />
-                <template v-for="cp in cps" :key="`ic-${cp.index}`">
-                    <g v-if="icons[cp.index]">
-                        <!-- Panneau pixel (cadre noir + fond clair) -->
-                        <rect
-                            :x="cp.x - 27"
-                            :y="cp.y - 83"
-                            width="54"
-                            height="54"
-                            fill="#1a1a1a"
-                        />
-                        <rect
-                            :x="cp.x - 25"
-                            :y="cp.y - 81"
-                            width="50"
-                            height="50"
-                            fill="#fdfdfd"
-                        />
-                        <image
-                            :href="icons[cp.index]"
-                            :x="cp.x - 24"
-                            :y="cp.y - 80"
-                            width="48"
-                            height="48"
-                        />
-                    </g>
-                </template>
+                <image
+                    v-for="cp in cps"
+                    v-show="icons[cp.index]"
+                    :key="`ic-${cp.index}`"
+                    :href="icons[cp.index]"
+                    :x="cp.x - 36"
+                    :y="cp.y - 110"
+                    width="72"
+                    height="72"
+                />
                 <image
                     :href="END_ICON"
                     :x="endPt.x - 40"
