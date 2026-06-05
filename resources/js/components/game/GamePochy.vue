@@ -6,7 +6,7 @@ defineProps({
 
 <template>
     <img
-        :src="`/img/pochy/pochy-${variant}.png`"
+        :src="`/img/pochy/pochy-${variant}.webp`"
         alt="Pochy"
         class="[image-rendering:pixelated]"
     />

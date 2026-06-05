@@ -24,7 +24,7 @@ const props = defineProps({
     statuses: { type: Array, default: () => [] },
     // URL de l'icône thématique par checkpoint (index = question)
     icons: { type: Array, default: () => [] },
-    // Variante de la mascotte (suffixe du fichier /img/pochy/pochy-<variant>.png)
+    // Variante de la mascotte (suffixe du fichier /img/pochy/pochy-<variant>.webp)
     pochy: { type: String, default: '0' },
 });
 
