@@ -15,9 +15,10 @@ defineEmits(['toggle']);
     <Button
         variant="quiz"
         size="quiz"
-        :class="
-            selected ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none' : ''
-        "
+        :class="[
+            selected ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none' : '',
+            descr ? '' : 'items-center',
+        ]"
         :aria-pressed="selected"
         @click="$emit('toggle')"
     >
