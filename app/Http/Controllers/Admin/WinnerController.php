@@ -19,7 +19,10 @@ class WinnerController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Vainqueurs/Index', [
-            'trophees' => Trophee::with('company')->orderBy('year_of', 'desc')->get(),
+            'trophees' => Trophee::with('company')
+                ->orderByDesc('year_of')
+                ->orderBy('rank')
+                ->get(),
         ]);
     }
 
@@ -40,18 +43,18 @@ class WinnerController extends Controller
     {
         $request->validate([
             'company_id' => ['required', 'exists:companies,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'year_of' => [
+            'year_of' => ['required', 'integer', 'min:2008', 'max:'.now()->year],
+            'rank' => [
                 'required',
                 'integer',
-                'min:2000',
-                'max:'.now()->year,
-                Rule::unique('trophees')->where('company_id', $request->company_id),
+                'min:1',
+                'max:3',
+                Rule::unique('trophees')->where('year_of', $request->year_of),
             ],
             'description' => ['nullable', 'string'],
         ]);
 
-        Trophee::create($request->validated());
+        Trophee::create($request->only('company_id', 'year_of', 'rank', 'description'));
 
         return redirect()->route('admin.vainqueurs.index')
             ->with('success', 'flash.winner_created');
@@ -75,18 +78,18 @@ class WinnerController extends Controller
     {
         $request->validate([
             'company_id' => ['required', 'exists:companies,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'year_of' => [
+            'year_of' => ['required', 'integer', 'min:2008', 'max:'.now()->year],
+            'rank' => [
                 'required',
                 'integer',
-                'min:2000',
-                'max:'.now()->year,
-                Rule::unique('trophees')->where('company_id', $request->company_id)->ignore($vainqueur->id),
+                'min:1',
+                'max:3',
+                Rule::unique('trophees')->where('year_of', $request->year_of)->ignore($vainqueur->id),
             ],
             'description' => ['nullable', 'string'],
         ]);
 
-        $vainqueur->update($request->validated());
+        $vainqueur->update($request->only('company_id', 'year_of', 'rank', 'description'));
 
         return redirect()->route('admin.vainqueurs.index')
             ->with('success', 'flash.winner_updated');

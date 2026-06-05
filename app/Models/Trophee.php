@@ -11,8 +11,8 @@ class Trophee extends Model
      */
     protected $fillable = [
         'company_id',
-        'name',
         'year_of',
+        'rank',
         'description',
     ];
 
@@ -23,6 +23,7 @@ class Trophee extends Model
     {
         return [
             'year_of' => 'integer',
+            'rank' => 'integer',
         ];
     }
 

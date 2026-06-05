@@ -7,6 +7,7 @@ import {
     LogOut,
     Menu,
     Syringe,
+    Trophy,
     X,
 } from 'lucide-vue-next';
 import { computed, ref, watch } from 'vue';
@@ -19,6 +20,7 @@ import { index as adminIndex } from '@/routes/admin';
 import { index as collectesIndex } from '@/routes/admin/collectes';
 import { index as entreprisesIndex } from '@/routes/admin/entreprises';
 import { index as kpiIndex } from '@/routes/admin/kpi';
+import { index as vainqueursIndex } from '@/routes/admin/vainqueurs';
 
 const props = defineProps({
     title: {
@@ -63,6 +65,13 @@ const navItems = computed(() => [
         icon: Syringe,
         href: collectesIndex.url(),
         match: 'Admin/Collectes',
+    },
+    {
+        key: 'vainqueurs',
+        label: t('admin.nav.vainqueurs'),
+        icon: Trophy,
+        href: vainqueursIndex.url(),
+        match: 'Admin/Vainqueurs',
     },
     {
         key: 'kpi',

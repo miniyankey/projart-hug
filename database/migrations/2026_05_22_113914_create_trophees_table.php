@@ -11,12 +11,13 @@ return new class extends Migration
         Schema::create('trophees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
             $table->unsignedSmallInteger('year_of');
+            $table->unsignedTinyInteger('rank');
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->unique(['company_id', 'year_of']);
+            // Un seul vainqueur par rang (1/2/3) et par année.
+            $table->unique(['year_of', 'rank']);
             $table->index('year_of');
         });
     }

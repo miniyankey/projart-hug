@@ -13,13 +13,24 @@ class WinnerController extends Controller
      */
     public function index(): Response
     {
-        $trophees = Trophee::with('company')
-            ->orderBy('year_of', 'desc')
+        // Regroupe les trophées par édition (année) et expose chaque podium
+        $editions = Trophee::with('company')
+            ->orderByDesc('year_of')
+            ->orderBy('rank')
             ->get()
-            ->groupBy('year_of');
+            ->groupBy('year_of')
+            ->map(fn ($trophees, $year) => [
+                'year' => (int) $year,
+                'winners' => $trophees->map(fn (Trophee $trophee) => [
+                    'rank' => $trophee->rank,
+                    'logo' => $trophee->company->logo_url,
+                    'name' => $trophee->company->name,
+                ])->values(),
+            ])
+            ->values();
 
         return Inertia::render('Trophee', [
-            'trophees' => $trophees,
+            'editions' => $editions,
         ]);
     }
 }
