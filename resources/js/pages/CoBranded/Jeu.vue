@@ -48,6 +48,11 @@ const resultDays = ref(0); // jours de rappel à proposer sur le résultat (max,
 const resultDonation = ref(false); // proposer le don (inéligibilité à vie) sur le résultat
 // Le joueur a déjà soumis un rappel OU cliqué sur le don → on ne le sollicite plus.
 const reminderHandled = ref(false);
+// Chaque sollicitation (rappel temporaire / don à vie) n'est proposée qu'UNE fois
+// sur le parcours. On retient la question déclencheuse pour autoriser la
+// réaffichage si le joueur revient modifier cette même réponse, pas ailleurs.
+const reminderOfferedAt = ref(null);
+const donationOfferedAt = ref(null);
 // Pochy de la carte : change quand la question s'ouvre (overlay couvre la carte
 // → transition invisible), pas quand clearedCount change (carte visible).
 const mapPochy = ref(questions.value[0]?.pochy ?? '0');
@@ -181,13 +186,37 @@ function onAnswer(choiceIds) {
     //  - sinon, inéligibilité temporaire → rappel avec la plus grande durée ;
     //  - déjà sollicité (rappel envoyé ou don cliqué) ou réponse éligible → rien.
     const overall = overallVerdict(questions.value, answers.value);
-    const solicit = !reminderHandled.value && !result.eligible;
 
-    resultDonation.value = solicit && overall.status === 'lifetime';
-    resultDays.value =
-        solicit && overall.status === 'temporary' && overall.days > 0
-            ? overall.days
-            : 0;
+    // On ne sollicite que si la réponse courante est inéligible et que le joueur
+    // n'a pas déjà donné suite (rappel envoyé ou clic sur le don).
+    const canSolicit = !reminderHandled.value && !result.eligible;
+
+    // À vie → don financier, jamais de rappel. Temporaire → rappel.
+    const wantsDonation = canSolicit && overall.status === 'lifetime';
+    const wantsReminder =
+        canSolicit && overall.status === 'temporary' && overall.days > 0;
+
+    // « 1 seule fois » : on n'affiche que si jamais proposé, ou si on est de
+    // retour sur la question qui l'avait déclenché (« Changer ma réponse »).
+    const showDonation =
+        wantsDonation &&
+        (donationOfferedAt.value === null ||
+            donationOfferedAt.value === question.id);
+    const showReminder =
+        wantsReminder &&
+        (reminderOfferedAt.value === null ||
+            reminderOfferedAt.value === question.id);
+
+    if (showDonation) {
+        donationOfferedAt.value = question.id;
+    }
+
+    if (showReminder) {
+        reminderOfferedAt.value = question.id;
+    }
+
+    resultDonation.value = showDonation;
+    resultDays.value = showReminder ? overall.days : 0;
 
     // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
     if (!result.eligible) {

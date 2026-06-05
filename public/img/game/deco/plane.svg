@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre au sol (avion en l'air) -->
+  <rect x="-6" y="40" width="15" height="2" fill="#00000018"/>
+  <!-- Traînée de condensation -->
+  <g fill="#ffffff" opacity="0.55">
+    <rect x="-18" y="-17" width="6" height="2"/>
+    <rect x="-25" y="-16" width="5" height="2"/>
+    <rect x="-31" y="-15" width="4" height="2"/>
+  </g>
+  <!-- Empennage (queue rouge suisse) -->
+  <rect x="-13" y="-27" width="4" height="8" fill="#d8392b"/>
+  <rect x="-13" y="-20" width="5" height="3" fill="#c0c8d0"/>
+  <!-- Fuselage (en montée) -->
+  <rect x="-11" y="-20" width="23" height="6" fill="#eef2f6"/>
+  <rect x="-11" y="-20" width="23" height="2" fill="#ffffff"/>
+  <rect x="11" y="-22" width="6" height="5" fill="#cdd6df"/>
+  <!-- Cockpit -->
+  <rect x="7" y="-19" width="4" height="3" fill="#6fb0e0"/>
+  <!-- Ailes -->
+  <rect x="-3" y="-13" width="7" height="9" fill="#9fb2c4"/>
+  <rect x="-1" y="-27" width="6" height="8" fill="#bcc7d2"/>
+  <!-- Hublots -->
+  <g fill="#6fb0e0">
+    <rect x="-7" y="-19" width="1" height="1"/>
+    <rect x="-4" y="-19" width="1" height="1"/>
+    <rect x="-1" y="-19" width="1" height="1"/>
+    <rect x="2" y="-19" width="1" height="1"/>
+  </g>
+</svg>
