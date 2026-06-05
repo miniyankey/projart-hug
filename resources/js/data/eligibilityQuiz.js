@@ -67,8 +67,8 @@ export const QUIZ = [
         pochy: '20-travel',
         icon: 'airplane',
         choices: [
-            { key: 'europe', eligible: true, days: null },
             { key: 'other', eligible: false, days: 180, view: 'travel' },
+            { key: 'europe', eligible: true, days: null },
             { key: 'none', eligible: true, days: null },
         ],
     },
@@ -88,10 +88,10 @@ export const QUIZ = [
         pochy: '40',
         icon: 'hospital',
         choices: [
+            { key: 'admission', eligible: false, days: 365 },
+            { key: 'recent', eligible: false, days: 28 },
             { key: 'none', eligible: true, days: null },
             { key: 'old', eligible: true, days: null },
-            { key: 'recent', eligible: false, days: 28 },
-            { key: 'admission', eligible: false, days: 365 },
         ],
     },
     {
@@ -100,10 +100,10 @@ export const QUIZ = [
         pochy: '50-teeth',
         icon: 'tooth-mask',
         choices: [
-            { key: 'no', eligible: true, days: null },
-            { key: 'scaling', eligible: false, days: 1 },
-            { key: 'extraction', eligible: false, days: 7 },
             { key: 'complications', eligible: false, days: 14 },
+            { key: 'extraction', eligible: false, days: 7 },
+            { key: 'scaling', eligible: false, days: 1 },
+            { key: 'no', eligible: true, days: null },
         ],
     },
     {
