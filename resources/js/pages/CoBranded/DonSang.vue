@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LabelStepCard from '@/components/cards/LabelStepCard.vue';
+import MascottePopup from '@/components/MascottePopup.vue';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import {
@@ -15,12 +16,12 @@ const { t } = useI18n();
 
 const props = defineProps({
     company: Object,
-    token: String,
+    collectSlug: String,
 });
 
 const routeParams = computed(() => ({
     brandName: props.company?.slug,
-    token: props.token,
+    collect: props.collectSlug,
 }));
 
 const steps = [
@@ -189,7 +190,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :token="token">
+    <PublicLayout :company="company" :collect-slug="collectSlug">
         <Head :title="t('nav.don_sang_info')" />
 
         <div ref="root">
@@ -314,5 +315,6 @@ onUnmounted(() => {
                 </div>
             </section>
         </div>
+        <MascottePopup :href="cobrandJeu.url(routeParams)" />
     </PublicLayout>
 </template>

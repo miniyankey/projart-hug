@@ -10,71 +10,63 @@ use Inertia\Response;
 
 class CobrandController extends Controller
 {
-    public function collecte(string $brandName, string $token): Response
+    public function collecte(string $brandName, string $collect): Response
     {
-        $company = $this->resolveCompany($brandName, $token);
-
-        // Le lien co-brandé est stable, mais la page collecte n'est accessible
-        // que si une collecte est active pour l'entreprise (sinon 404).
-        $collect = $this->resolveActiveCollect($company);
+        $company = $this->resolveCompany($brandName);
+        $collect = $this->resolveCollect($company, $collect);
 
         return Inertia::render('CoBranded/Collecte', [
-            'token' => $token,
+            'collectSlug' => $collect->slug,
             'company' => $this->companyData($company),
             'collect' => $this->collectData($collect),
         ]);
     }
 
-    public function jeu(string $brandName, string $token): Response
+    public function jeu(string $brandName, string $collect): Response
     {
-        $company = $this->resolveCompany($brandName, $token);
-        // Le jeu n'est accessible que si une collecte est active (sinon 404).
-        $collect = $this->resolveActiveCollect($company);
+        $company = $this->resolveCompany($brandName);
+        $collect = $this->resolveCollect($company, $collect);
 
         // Le quiz est défini côté front (data/eligibilityQuiz.js + locales),
         // aucune donnée de question n'est envoyée par le serveur.
         return Inertia::render('CoBranded/Jeu', [
-            'token' => $token,
+            'collectSlug' => $collect->slug,
             'company' => $this->companyData($company),
+            'collect_id' => $collect->id,
             'link_appointment' => $collect->link_appointment,
         ]);
     }
 
-    public function donSang(string $brandName, string $token): Response
+    public function donSang(string $brandName, string $collect): Response
     {
-        $company = $this->resolveCompany($brandName, $token);
-        $this->resolveActiveCollect($company);
+        $company = $this->resolveCompany($brandName);
+        $collect = $this->resolveCollect($company, $collect);
 
         return Inertia::render('CoBranded/DonSang', [
-            'token' => $token,
+            'collectSlug' => $collect->slug,
             'company' => $this->companyData($company),
         ]);
     }
 
     /**
-     * Résout l'entreprise par son slug et son token permanent.
+     * Résout l'entreprise par son slug.
      */
-    private function resolveCompany(string $brandName, string $token): Company
+    private function resolveCompany(string $brandName): Company
     {
-        return Company::where('slug', $brandName)
-            ->where('token', $token)
-            ->firstOrFail();
+        return Company::where('slug', $brandName)->firstOrFail();
     }
 
     /**
-     * Résout la collecte visible de l'entreprise, sinon 404.
+     * Résout la collecte de l'entreprise par son slug, sinon 404.
      *
-     * Fenêtre de visibilité : une collecte est accessible dès qu'elle est
-     * prévue (date future) et le reste jusqu'à 7 jours après le jour J.
-     * On retient la plus imminente (date la plus proche encore dans sa fenêtre).
+     * Une collecte désactivée (is_active = false) n'est pas accessible publiquement.
      */
-    private function resolveActiveCollect(Company $company): Collect
+    private function resolveCollect(Company $company, string $collectSlug): Collect
     {
         return $company->collects()
             ->with('place:id,name,address,locality,city,room')
+            ->where('slug', $collectSlug)
             ->where('is_active', true)
-            ->whereDate('day', '>=', now()->subWeek()->toDateString())
-            ->orderBy('day')
             ->firstOrFail();
     }
 

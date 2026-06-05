@@ -10,17 +10,23 @@ import GameProgressBar from '@/components/game/GameProgressBar.vue';
 import GameQuestion from '@/components/game/GameQuestion.vue';
 import GameResult from '@/components/game/GameResult.vue';
 import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
+import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { computeResult, overallVerdict } from '@/lib/eligibility';
 
 const props = defineProps({
     company: Object,
-    token: String,
+    // Slug de la collecte (mode co-brandé) ; null en mode public.
+    collectSlug: { type: String, default: null },
+    // Présent uniquement en mode co-brandé (collecte active) ; null en mode
+    // public → aucun tracking KPI (pour le moment à voir dans le futur)
+    collect_id: { type: Number, default: null },
     link_appointment: { type: String, default: null },
 });
 
 const { t } = useI18n();
 const { questions, ineligibleView } = useEligibilityQuiz();
+const { trackEligibiliteStep, trackAppointmentClick } = useTracking();
 
 // 'intro' | 'map' | 'finished'. Les écrans question/résultat sont
 // des overlays pilotés par activeIndex / resultView, pas par `phase`.
@@ -38,6 +44,10 @@ const clearedCount = ref(0); // checkpoints franchis (= frontière de progressio
 const activeIndex = ref(null); // question actuellement ouverte (ou null)
 const resultView = ref(null); // vue de résultat affichée (ou null)
 const resultPochy = ref('0'); // variante Pochy de l'écran de résultat courant
+const resultDays = ref(0); // jours de rappel à proposer sur le résultat (max, 0 sinon)
+const resultDonation = ref(false); // proposer le don (inéligibilité à vie) sur le résultat
+// Le joueur a déjà soumis un rappel OU cliqué sur le don → on ne le sollicite plus.
+const reminderHandled = ref(false);
 // Pochy de la carte : change quand la question s'ouvre (overlay couvre la carte
 // → transition invisible), pas quand clearedCount change (carte visible).
 const mapPochy = ref(questions.value[0]?.pochy ?? '0');
@@ -96,6 +106,37 @@ function finishStep() {
     activeIndex.value = null;
 }
 
+// ─── Tracking KPI (fire & forget) ─────────────────────────────────────────────
+// Aligné sur l'agrégation du dashboard (KpiController) : un seul `result` par
+// session, porté par l'étape complétée (= verdict global), `null` ailleurs. Les
+// étapes intermédiaires alimentent le drop-off (sessions par étape). L'envoi est
+// idempotent (updateOrCreate côté serveur), donc « Changer ma réponse » est sûr.
+// En mode public, collect_id est null → session rattachée au funnel global.
+function trackStep() {
+    const step = activeIndex.value + 1; // étapes 1-indexées côté KPI
+    const isFinal = step === questions.value.length;
+
+    // Sur l'étape finale uniquement : verdict global, replié sur les deux valeurs
+    // comptées par le dashboard (eligible / ineligible).
+    let result = null;
+
+    if (isFinal) {
+        const verdict = overallVerdict(questions.value, answers.value);
+        result = verdict.status === 'eligible' ? 'eligible' : 'ineligible';
+    }
+
+    trackEligibiliteStep(props.collect_id, step, {
+        result,
+        completed: isFinal,
+    });
+}
+
+// Clic sur le CTA d'inscription en fin de parcours (conversion don de sang).
+// Source 'jeu' pour matcher l'agrégation du dashboard (KpiController).
+function onAppointment() {
+    trackAppointmentClick(props.collect_id, 'jeu');
+}
+
 // Validation d'une réponse → enregistrement, statut du checkpoint, puis :
 // vue dédiée du choix › vue générique d'inéligibilité › explication (why) › suite.
 function onAnswer(choiceIds) {
@@ -112,6 +153,22 @@ function onAnswer(choiceIds) {
     statuses.value[activeIndex.value] = result.eligible
         ? 'eligible'
         : 'ineligible';
+
+    trackStep();
+
+    // Sollicitation rappel/don sur le panneau de résultat. Pilotée par le verdict
+    // GLOBAL (toutes les réponses), pas seulement la question courante :
+    //  - inéligible à vie un jour → toujours le don (jamais le rappel) ;
+    //  - sinon, inéligibilité temporaire → rappel avec la plus grande durée ;
+    //  - déjà sollicité (rappel envoyé ou don cliqué) ou réponse éligible → rien.
+    const overall = overallVerdict(questions.value, answers.value);
+    const solicit = !reminderHandled.value && !result.eligible;
+
+    resultDonation.value = solicit && overall.status === 'lifetime';
+    resultDays.value =
+        solicit && overall.status === 'temporary' && overall.days > 0
+            ? overall.days
+            : 0;
 
     // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
     if (!result.eligible) {
@@ -181,7 +238,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :token="token" hide-footer>
+    <PublicLayout :company="company" :collect-slug="collectSlug" hide-footer>
         <Head :title="t('eligibilite.title')" />
 
         <div ref="containerRef" class="game-container">
@@ -280,9 +337,13 @@ onUnmounted(() => {
                     :total="questions.length"
                     :icon="activeQuestion?.icon ?? null"
                     :pochy="resultPochy"
+                    :reminder-days="resultDays"
+                    :donation="resultDonation"
+                    :collect-id="collect_id"
                     class="game-layer"
                     @ok="onResultOk"
                     @back="onResultBack"
+                    @handled="reminderHandled = true"
                 />
             </Transition>
 
@@ -297,6 +358,7 @@ onUnmounted(() => {
                     :total="questions.length"
                     :link-appointment="props.link_appointment"
                     class="game-layer"
+                    @appointment="onAppointment"
                     @back="phase = 'map'"
                 />
             </Transition>

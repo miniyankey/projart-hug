@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Collect extends Model
 {
@@ -16,7 +17,34 @@ class Collect extends Model
 
                 $collect->token = $token;
             }
+
+            // Le token est désormais garanti : on peut composer le slug d'URL.
+            $collect->slug = $collect->generateSlug();
         });
+
+        // Si la date ou le lieu changent, l'URL lisible doit suivre (le token reste stable).
+        static::updating(function (Collect $collect) {
+            if ($collect->isDirty(['day', 'place_id'])) {
+                $collect->slug = $collect->generateSlug();
+            }
+        });
+    }
+
+    /**
+     * Compose le slug d'URL de la collecte : « date - ville - token ».
+     * Le suffixe token garantit l'unicité (même jour + même ville) et la non-devinabilité.
+     */
+    public function generateSlug(): string
+    {
+        $city = Place::find($this->place_id)?->city
+            ?? Place::find($this->place_id)?->name
+            ?? '';
+
+        $day = $this->day instanceof \DateTimeInterface
+            ? $this->day->format('Y-m-d')
+            : (string) $this->day;
+
+        return Str::slug(trim($day.' '.$city)).'-'.$this->token;
     }
 
     /**
@@ -30,6 +58,7 @@ class Collect extends Model
         'end_time',
         'link_appointment',
         'token',
+        'slug',
         'is_active',
     ];
 

@@ -18,7 +18,7 @@ const props = defineProps({
     linkAppointment: { type: String, default: null },
 });
 
-defineEmits(['back']);
+defineEmits(['back', 'appointment']);
 
 const { t } = useI18n();
 const { formatDuration } = useEligibilityQuiz();
@@ -185,6 +185,7 @@ async function share() {
                             :href="appointmentUrl"
                             target="_blank"
                             rel="noopener noreferrer"
+                            @click="$emit('appointment')"
                         >
                             {{ t('eligibilite.finish.eligible.cta') }}
                         </Button>

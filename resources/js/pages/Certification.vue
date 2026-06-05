@@ -7,6 +7,7 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LabelStepCard from '@/components/cards/LabelStepCard.vue';
 import PixelFeatureCard from '@/components/cards/PixelFeatureCard.vue';
+import MascottePopup from '@/components/MascottePopup.vue';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
@@ -453,5 +454,6 @@ onUnmounted(() => {
                 </div>
             </section>
         </div>
+        <MascottePopup :href="routes.eligibilite.url()" />
     </PublicLayout>
 </template>
