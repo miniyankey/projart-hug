@@ -237,7 +237,13 @@ class KpiController extends Controller
      */
     private function leadTimeStats(?array $collectIds = null): array
     {
-        $delay = 'DATEDIFF(c.day, DATE(ec.created_at))';
+        // Délai en jours, exprimé de façon portable selon le driver de base de
+        // données (MariaDB en prod, SQLite possible en dev local).
+        $delay = match (DB::connection()->getDriverName()) {
+            'sqlite' => 'CAST(julianday(c.day) - julianday(DATE(ec.created_at)) AS INTEGER)',
+            'pgsql' => '(c.day::date - DATE(ec.created_at))',
+            default => 'DATEDIFF(c.day, DATE(ec.created_at))',
+        };
 
         $row = DB::table('events_conversions as ec')
             ->join('collects as c', 'c.id', '=', 'ec.collect_id')
