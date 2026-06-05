@@ -91,7 +91,7 @@ function validate() {
             <!-- Actions : Retour à côté de Valider (choix multiples seulement,
                  affiché dès qu'un choix est sélectionné). Les choix uniques
                  valident directement au clic. -->
-            <div class="mt-2 flex items-center gap-3">
+            <div class="mt-7 flex items-center gap-3">
                 <Button
                     variant="link"
                     class="h-auto px-4 py-3 text-[1.05rem]"

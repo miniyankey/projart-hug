@@ -79,7 +79,7 @@ watch(
                 </div>
 
                 <!-- Colonne contenu : 2/3 sur desktop (boutons d'action inclus) -->
-                <div class="flex min-w-0 flex-col gap-4 md:basis-2/3">
+                <div class="flex min-w-0 flex-col gap-7 md:basis-2/3">
                     <slot name="bubble" />
                     <slot name="content" />
                 </div>

@@ -49,7 +49,7 @@ const { t } = useI18n();
         </template>
 
         <template #content>
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-7">
                 <p
                     v-if="view.text"
                     class="m-0 text-[1.05rem] leading-normal text-neutral-900"
@@ -88,7 +88,7 @@ const { t } = useI18n();
                 />
 
                 <!-- Actions : Retour à côté de OK -->
-                <div class="mt-2 flex items-center gap-3">
+                <div class="mt-7 flex items-center gap-3">
                     <Button
                         variant="link"
                         class="h-auto px-4 py-3 text-[1.05rem]"
