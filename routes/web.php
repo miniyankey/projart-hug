@@ -13,6 +13,7 @@ use App\Http\Controllers\Kpi\CollectEventController;
 use App\Http\Controllers\Kpi\ContactFormConversionController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\WinnerController;
 use App\Models\Collect;
 use App\Models\Company;
 use Illuminate\Http\Request;
