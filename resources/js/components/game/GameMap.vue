@@ -55,16 +55,28 @@ const targetPrg = ref(0);
 const groundTile = ref(''); // data-URL generated at mount via Canvas
 const asphaltTile = ref(''); // data-URL pour le goudron des quartiers
 const hasMoved = ref(false);
+const moving = ref(false); // Pochy se déplace → animation de marche
 
 let lastTouchY = 0;
 let resizeObserver = null;
 let resizeRaf = 0;
+let moveTimer = null;
 
 // L'indice « Scrolle pour avancer » n'apparaît qu'au lancement : dès le premier
 // déplacement, il disparaît définitivement (pas de réapparition à l'inactivité).
 function markMoved() {
     hasMoved.value = true;
 }
+
+// Pochy « marche » tant que sa position change ; on coupe l'animation après une
+// courte inactivité (le mouvement est terminé).
+watch(progress, () => {
+    moving.value = true;
+    clearTimeout(moveTimer);
+    moveTimer = setTimeout(() => {
+        moving.value = false;
+    }, 140);
+});
 
 // ─── Computed ────────────────────────────────────────────────────────────────
 const curPos = computed(() => smoothPos(segments.value, progress.value));
@@ -361,6 +373,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     cancelAnimationFrame(resizeRaf);
+    clearTimeout(moveTimer);
     gsap.killTweensOf(progress);
 
     if (resizeObserver) {
@@ -604,8 +617,12 @@ onUnmounted(() => {
              POCHY — pinned dead-centre, never moves, world moves around it
         ═══════════════════════════════════════════════════════════════ -->
         <div class="pochy-anchor">
-            <GamePochy :variant="pochy" class="pochy-sprite" />
-            <div class="pochy-shadow" />
+            <GamePochy
+                :variant="pochy"
+                class="pochy-sprite"
+                :class="{ 'pochy-walk': moving }"
+            />
+            <div class="pochy-shadow" :class="{ 'pochy-shadow--walk': moving }" />
         </div>
 
         <!-- Indice de scroll — visible tant que l'utilisateur n'a pas bougé -->
@@ -655,6 +672,28 @@ onUnmounted(() => {
     width: 128px;
     height: 128px;
     image-rendering: pixelated;
+    transform-origin: bottom center;
+}
+
+/* Sautillement de marche : bond + léger écrasement à l'atterrissage. */
+.pochy-walk {
+    animation: pochy-hop 0.5s ease-in-out infinite;
+}
+
+@keyframes pochy-hop {
+    0%,
+    100% {
+        transform: translateY(0) scale(1, 1);
+    }
+    25% {
+        transform: translateY(-10px) scale(0.97, 1.05);
+    }
+    55% {
+        transform: translateY(0) scale(1.05, 0.95);
+    }
+    75% {
+        transform: translateY(-3px) scale(1, 1);
+    }
 }
 
 .pochy-shadow {
@@ -667,6 +706,28 @@ onUnmounted(() => {
         transparent 72%
     );
     border-radius: 50%;
+    transform-origin: center;
+}
+
+/* L'ombre se rétrécit quand Pochy saute, grandit à l'atterrissage. */
+.pochy-shadow--walk {
+    animation: pochy-shadow-hop 0.5s ease-in-out infinite;
+}
+
+@keyframes pochy-shadow-hop {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    25% {
+        transform: scale(0.7);
+        opacity: 0.6;
+    }
+    55% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 }
 
 /* Indice scroll — centré horizontalement, juste sous Pochy */
