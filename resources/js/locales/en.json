@@ -497,7 +497,9 @@
                 "choices": {
                     "tattoo": { "response": "A tattoo" },
                     "piercing": { "response": "A piercing" },
-                    "acupuncture": { "response": "None, but I had acupuncture" },
+                    "acupuncture": {
+                        "response": "None, but I had acupuncture"
+                    },
                     "none": { "response": "None, I'm perfect as I am 😎" }
                 }
             },

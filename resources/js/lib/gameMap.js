@@ -542,11 +542,7 @@ function fillDistricts(districts, segs, seed, avoid, rails) {
                 const jy = Math.round(y + (rng() - 0.5) * 26);
                 const r = rng();
                 const type =
-                    r < 0.5
-                        ? 'building-a'
-                        : r < 0.82
-                          ? 'building-b'
-                          : 'house';
+                    r < 0.5 ? 'building-a' : r < 0.82 ? 'building-b' : 'house';
 
                 if (
                     buildingHitsPath(jx, jy, SCALE[type], segs, 34) ||

@@ -37,7 +37,9 @@ const pochy = computed(() => {
     return '100-hand-in-air';
 });
 
-const title = computed(() => t(`eligibilite.finish.${props.verdict.status}.title`));
+const title = computed(() =>
+    t(`eligibilite.finish.${props.verdict.status}.title`),
+);
 
 const message = computed(() => {
     if (isEligible.value) {
@@ -54,7 +56,9 @@ const message = computed(() => {
 });
 
 const text = computed(() =>
-    t(`eligibilite.finish.${isEligible.value ? 'eligible' : props.verdict.status}.text`),
+    t(
+        `eligibilite.finish.${isEligible.value ? 'eligible' : props.verdict.status}.text`,
+    ),
 );
 
 const appointmentUrl = computed(

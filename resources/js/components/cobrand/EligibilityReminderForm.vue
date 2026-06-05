@@ -103,11 +103,7 @@ function submit() {
                 {{ t(resultKey) }}
             </p>
 
-            <form
-                v-else
-                class="flex flex-col gap-4"
-                @submit.prevent="submit"
-            >
+            <form v-else class="flex flex-col gap-4" @submit.prevent="submit">
                 <div class="flex flex-col gap-2">
                     <label
                         for="reminder_email"
@@ -121,7 +117,9 @@ function submit() {
                         type="email"
                         autocomplete="email"
                         class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[var(--brand)]"
-                        :placeholder="t('eligibilite.reminder.email_placeholder')"
+                        :placeholder="
+                            t('eligibilite.reminder.email_placeholder')
+                        "
                     />
                     <p
                         v-if="form.errors.email"

@@ -423,11 +423,7 @@ onUnmounted(() => {
                         height="32"
                         patternUnits="userSpaceOnUse"
                     >
-                        <image
-                            :href="asphaltTile"
-                            width="32"
-                            height="32"
-                        />
+                        <image :href="asphaltTile" width="32" height="32" />
                     </pattern>
                 </defs>
 
@@ -451,7 +447,9 @@ onUnmounted(() => {
                                 :width="z.w"
                                 :height="z.h"
                                 :fill="
-                                    asphaltTile ? 'url(#asphalt-tile)' : '#7c7e83'
+                                    asphaltTile
+                                        ? 'url(#asphalt-tile)'
+                                        : '#7c7e83'
                                 "
                             />
                             <!-- Liseré de trottoir clair -->
@@ -482,7 +480,9 @@ onUnmounted(() => {
                                 width="32"
                                 :height="z.h"
                                 :fill="
-                                    asphaltTile ? 'url(#asphalt-tile)' : '#9a948c'
+                                    asphaltTile
+                                        ? 'url(#asphalt-tile)'
+                                        : '#9a948c'
                                 "
                                 opacity="0.35"
                             />
@@ -622,7 +622,10 @@ onUnmounted(() => {
                 class="pochy-sprite"
                 :class="{ 'pochy-walk': moving }"
             />
-            <div class="pochy-shadow" :class="{ 'pochy-shadow--walk': moving }" />
+            <div
+                class="pochy-shadow"
+                :class="{ 'pochy-shadow--walk': moving }"
+            />
         </div>
 
         <!-- Indice de scroll — visible tant que l'utilisateur n'a pas bougé -->
