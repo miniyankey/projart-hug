@@ -5,7 +5,7 @@
 // Chaque question : { key, type, pochy, icon, choices: [{ key, eligible, days, view? }] }
 //   - type  : 'unique' | 'multiple'
 //   - pochy : variante de la mascotte (suffixe après "pochy-", sans ".png")
-//   - icon  : clé d'icône thématique (chemin /img/game/icons/<icon>.svg)
+//   - icon  : clé d'icône thématique (chemin /img/game/deco/<icon>.svg)
 //   - days  : durée d'inéligibilité en jours (-1 = à vie, null = aucune)
 //   - view  : clé d'une vue d'explication (eligibilite.quiz.views.<key>), optionnel
 //
@@ -13,8 +13,13 @@
 // vit aussi dans les locales (eligibilite.quiz.views.<key>).
 
 export const QUIZ_VIEWS = {
-    medication: {},
-    travel: {},
+    medication: {
+        buttonUrl: 'mailto:accueil.donneurs@hug.ch',
+    },
+    travel: {
+        integrationUrl:
+            'https://integrations.spenderservice.ch/fr/travel_check/irb/',
+    },
     vaccine: {
         buttonUrl: 'https://www.blutspende.ch/fr/dates-de-collecte-de-sang',
     },
@@ -25,7 +30,7 @@ export const QUIZ = [
         key: 'lifetime',
         type: 'multiple',
         pochy: '0',
-        icon: 'heart',
+        icon: 'question-mark',
         choices: [
             { key: 'hiv', eligible: false, days: -1 },
             { key: 'diabetes', eligible: false, days: -1 },
@@ -33,14 +38,13 @@ export const QUIZ = [
             { key: 'heart', eligible: false, days: -1 },
             { key: 'blood_diseases', eligible: false, days: -1 },
             { key: 'hepatitis', eligible: false, days: -1 },
-            { key: 'none', eligible: true, days: null },
         ],
     },
     {
         key: 'health',
         type: 'unique',
         pochy: '10',
-        icon: 'health',
+        icon: 'heart',
         choices: [
             { key: 'yes', eligible: true, days: null },
             { key: 'no', eligible: false, days: 14 },
@@ -50,7 +54,7 @@ export const QUIZ = [
         key: 'medication',
         type: 'unique',
         pochy: '20',
-        icon: 'pill',
+        icon: 'pharmacy',
         choices: [
             { key: 'yes', eligible: false, days: 28, view: 'medication' },
             { key: 'no', eligible: true, days: null },
@@ -58,20 +62,19 @@ export const QUIZ = [
     },
     {
         key: 'travel',
-        type: 'unique',
+        type: 'multiple',
         pochy: '20-travel',
-        icon: 'plane',
+        icon: 'airplane',
         choices: [
             { key: 'europe', eligible: true, days: null },
             { key: 'other', eligible: false, days: 180, view: 'travel' },
-            { key: 'none', eligible: true, days: null },
         ],
     },
     {
         key: 'partner',
         type: 'unique',
         pochy: '30',
-        icon: 'partner',
+        icon: 'fruits',
         choices: [
             { key: 'yes', eligible: false, days: 120 },
             { key: 'no', eligible: true, days: null },
@@ -93,7 +96,7 @@ export const QUIZ = [
         key: 'dentist',
         type: 'unique',
         pochy: '50-teeth',
-        icon: 'tooth',
+        icon: 'tooth-mask',
         choices: [
             { key: 'no', eligible: true, days: null },
             { key: 'scaling', eligible: false, days: 1 },
@@ -105,7 +108,7 @@ export const QUIZ = [
         key: 'tick',
         type: 'unique',
         pochy: '60-adventurer',
-        icon: 'tick',
+        icon: 'tick-trees',
         choices: [
             { key: 'tick', eligible: false, days: 28 },
             { key: 'other_companion', eligible: true, days: null },
@@ -114,23 +117,21 @@ export const QUIZ = [
     },
     {
         key: 'tattoo',
-        type: 'unique',
+        type: 'multiple',
         pochy: '80-tattooed',
         icon: 'tattoo',
         choices: [
             { key: 'tattoo', eligible: false, days: 120 },
             { key: 'piercing', eligible: false, days: 120 },
             { key: 'acupuncture', eligible: false, days: 120 },
-            { key: 'none', eligible: true, days: null },
         ],
     },
     {
         key: 'vaccine',
-        type: 'unique',
+        type: 'multiple',
         pochy: '90',
         icon: 'syringe',
         choices: [
-            { key: 'none', eligible: true, days: null },
             { key: 'live', eligible: false, days: 28 },
             { key: 'inactivated', eligible: false, days: 2 },
             { key: 'unknown', eligible: false, days: null, view: 'vaccine' },

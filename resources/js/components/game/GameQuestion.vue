@@ -47,12 +47,8 @@ function toggle(choiceId) {
     emit('answer', [choiceId]);
 }
 
-const canValidate = computed(() => selected.value.length > 0);
-
 function validate() {
-    if (canValidate.value) {
-        emit('answer', [...selected.value]);
-    }
+    emit('answer', [...selected.value]);
 }
 </script>
 
@@ -87,12 +83,7 @@ function validate() {
                 {{ t('eligibilite.ui.back') }}
             </Button>
             <!-- Pas de bouton de validation pour les questions à choix unique -->
-            <Button
-                v-if="isMultiple"
-                variant="pixel_violet"
-                :disabled="!canValidate"
-                @click="validate"
-            >
+            <Button v-if="isMultiple" variant="pixel_violet" @click="validate">
                 {{ t('eligibilite.ui.validate') }}
             </Button>
         </template>

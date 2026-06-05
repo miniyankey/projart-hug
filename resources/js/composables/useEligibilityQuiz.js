@@ -17,8 +17,9 @@ export function useEligibilityQuiz() {
         return {
             message: t(`${base}.message`),
             text: maybe(`${base}.text`),
-            button_text: maybe(`${base}.button_text`),
+            button_text: maybe(`${base}.cta`),
             button_url: QUIZ_VIEWS[viewKey]?.buttonUrl ?? null,
+            integration_url: QUIZ_VIEWS[viewKey]?.integrationUrl ?? null,
         };
     }
 
@@ -29,7 +30,7 @@ export function useEligibilityQuiz() {
             id: q.key,
             type: q.type,
             pochy: q.pochy,
-            icon: q.icon ? `/img/game/icons/${q.icon}.svg` : null,
+            icon: q.icon ? `/img/game/deco/${q.icon}.svg` : null,
             titre: t(`${base}.titre`),
             question: t(`${base}.question`),
             why_question: maybe(`${base}.why`),
@@ -37,8 +38,8 @@ export function useEligibilityQuiz() {
                 id: c.key,
                 eligible: c.eligible,
                 ineligibility_days: c.days,
-                text: t(`${base}.choices.${c.key}`),
-                descr: maybe(`${base}.choices_descr.${c.key}`),
+                text: t(`${base}.choices.${c.key}.response`),
+                descr: maybe(`${base}.choices.${c.key}.descr`),
                 view: c.view ? buildView(c.view) : null,
             })),
         };
@@ -82,5 +83,5 @@ export function useEligibilityQuiz() {
         };
     }
 
-    return { questions, ineligibleView };
+    return { questions, ineligibleView, formatDuration };
 }

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- Enseigne sur le toit -->
+  <rect x="11" y="2" width="10" height="7" fill="#ffffff"/>
+  <rect x="11" y="2" width="10" height="7" fill="none"/>
+  <rect x="11" y="2" width="10" height="1" fill="#cdd6df"/>
+  <g fill="#d8392b">
+    <rect x="15" y="3" width="2" height="5"/>
+    <rect x="13" y="4" width="6" height="2"/>
+  </g>
+
+  <!-- Corps du bâtiment -->
+  <rect x="3" y="9" width="26" height="22" fill="#9aa7b4"/>
+  <rect x="4" y="10" width="24" height="20" fill="#e8edf2"/>
+  <rect x="4" y="10" width="24" height="2" fill="#c3ccd6"/>
+  <rect x="4" y="10" width="24" height="1" fill="#f4f7fa"/>
+
+  <!-- Étages (lignes) -->
+  <g fill="#cdd6df">
+    <rect x="4" y="16" width="24" height="1"/>
+    <rect x="4" y="22" width="24" height="1"/>
+  </g>
+
+  <!-- Fenêtres (3 colonnes x 2 rangées) -->
+  <g fill="#2a4f70">
+    <rect x="6"  y="13" width="5" height="3"/>
+    <rect x="13" y="13" width="6" height="3"/>
+    <rect x="21" y="13" width="5" height="3"/>
+    <rect x="6"  y="18" width="5" height="3"/>
+    <rect x="21" y="18" width="5" height="3"/>
+  </g>
+  <g fill="#6fb0e0">
+    <rect x="6"  y="13" width="5" height="1"/>
+    <rect x="13" y="13" width="6" height="1"/>
+    <rect x="21" y="13" width="5" height="1"/>
+    <rect x="6"  y="18" width="5" height="1"/>
+    <rect x="21" y="18" width="5" height="1"/>
+  </g>
+
+  <!-- Croix rouge au-dessus de l'entrée -->
+  <g fill="#d8392b">
+    <rect x="15" y="18" width="2" height="3"/>
+    <rect x="14" y="19" width="4" height="1"/>
+  </g>
+
+  <!-- Entrée (porte vitrée + auvent) -->
+  <rect x="11" y="23" width="10" height="1" fill="#9aa7b4"/>
+  <rect x="12" y="24" width="8" height="7" fill="#2a4f70"/>
+  <rect x="13" y="25" width="6" height="5" fill="#6fb0e0"/>
+  <rect x="16" y="25" width="1" height="5" fill="#2a4f70"/>
+  <rect x="13" y="25" width="6" height="1" fill="#a9d3f0"/>
+</svg>

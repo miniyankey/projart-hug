@@ -44,11 +44,11 @@ const { t } = useI18n();
             <div class="relative flex flex-col items-center">
                 <GamePochy
                     variant="0"
-                    class="relative z-10 w-[clamp(180px,30vh,300px)] drop-shadow-[0_14px_22px_rgba(0,0,0,0.3)]"
+                    class="relative z-10 w-[clamp(240px,42vh,420px)] drop-shadow-[0_14px_22px_rgba(0,0,0,0.3)]"
                 />
                 <!-- Zone arrondie sous Pochy : ses pieds reposent dessus -->
                 <div
-                    class="-mt-[7%] h-[clamp(26px,5vh,50px)] w-[clamp(210px,34vh,340px)] rounded-[50%] border-4 border-white/90 bg-[var(--brand,#7c3aed)]"
+                    class="-mt-[7%] h-[clamp(32px,6vh,60px)] w-[clamp(270px,46vh,470px)] rounded-[50%] border-4 border-white/90 bg-[var(--brand,#7c3aed)]"
                 />
             </div>
         </div>
