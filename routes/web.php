@@ -23,7 +23,7 @@ Route::inertia('/', 'Home')->name('home');
 Route::inertia('/trophee', 'Trophee')->name('trophee');
 Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
-Route::get('/eligibilite', [EligibiliteController::class, 'index'])->name('eligibilite');
+Route::get('/jeu', [EligibiliteController::class, 'index'])->name('eligibilite');
 Route::inertia('/certification', 'Certification')->name('certification');
 
 // Tracking KPI : endpoints publics « fire-and-forget » appelés depuis le front (pour register evetns)
