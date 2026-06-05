@@ -38,6 +38,7 @@ export const QUIZ = [
             { key: 'heart', eligible: false, days: -1 },
             { key: 'blood_diseases', eligible: false, days: -1 },
             { key: 'hepatitis', eligible: false, days: -1 },
+            { key: 'none', eligible: true, days: null },
         ],
     },
     {
@@ -68,6 +69,7 @@ export const QUIZ = [
         choices: [
             { key: 'europe', eligible: true, days: null },
             { key: 'other', eligible: false, days: 180, view: 'travel' },
+            { key: 'none', eligible: true, days: null },
         ],
     },
     {
@@ -124,6 +126,7 @@ export const QUIZ = [
             { key: 'tattoo', eligible: false, days: 120 },
             { key: 'piercing', eligible: false, days: 120 },
             { key: 'acupuncture', eligible: false, days: 120 },
+            { key: 'none', eligible: true, days: null },
         ],
     },
     {
@@ -135,6 +138,7 @@ export const QUIZ = [
             { key: 'live', eligible: false, days: 28 },
             { key: 'inactivated', eligible: false, days: 2 },
             { key: 'unknown', eligible: false, days: null, view: 'vaccine' },
+            { key: 'none', eligible: true, days: null },
         ],
     },
 ];

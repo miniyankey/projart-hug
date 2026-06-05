@@ -305,7 +305,8 @@
                     "injection_drugs": { "response": "Drogue par injection" },
                     "heart": { "response": "Troubles cardiaques" },
                     "blood_diseases": { "response": "Maladies sanguines" },
-                    "hepatitis": { "response": "Hépatite B et C" }
+                    "hepatitis": { "response": "Hépatite B et C" },
+                    "none": { "response": "Aucune de ces situations" }
                 }
             },
             "health": {
@@ -332,7 +333,8 @@
                 "why": "Dans certaines régions du monde, un agent pathogène peut rentrer en Suisse avec toi et n'être détectable que 6 mois plus tard !",
                 "choices": {
                     "europe": { "response": "Europe" },
-                    "other": { "response": "Autres régions du monde" }
+                    "other": { "response": "Autres régions du monde" },
+                    "none": { "response": "Je n'ai pas voyagé" }
                 }
             },
             "partner": {
@@ -389,7 +391,8 @@
                     "piercing": { "response": "Un piercing" },
                     "acupuncture": {
                         "response": "Aucun, mais j'ai fait de l'acupuncture"
-                    }
+                    },
+                    "none": { "response": "Aucun, je suis parfait comme ça 😎" }
                 }
             },
             "tick": {
@@ -427,7 +430,8 @@
                     "unknown": {
                         "response": "Je ne connais pas le type mais c'était il y a moins de 4 mois",
                         "descr": "Surprise !"
-                    }
+                    },
+                    "none": { "response": "Aucun vaccin récent" }
                 }
             }
         }

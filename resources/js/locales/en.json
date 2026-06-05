@@ -305,7 +305,8 @@
                     "injection_drugs": { "response": "Injected drug use" },
                     "heart": { "response": "Heart conditions" },
                     "blood_diseases": { "response": "Blood diseases" },
-                    "hepatitis": { "response": "Hepatitis B and C" }
+                    "hepatitis": { "response": "Hepatitis B and C" },
+                    "none": { "response": "None of these situations" }
                 }
             },
             "health": {
@@ -332,7 +333,8 @@
                 "why": "In some parts of the world, pathogens can travel back with you and only become detectable up to 6 months later!",
                 "choices": {
                     "europe": { "response": "Europe" },
-                    "other": { "response": "Other regions of the world" }
+                    "other": { "response": "Other regions of the world" },
+                    "none": { "response": "I didn't travel" }
                 }
             },
             "partner": {
@@ -385,7 +387,8 @@
                 "choices": {
                     "tattoo": { "response": "A tattoo" },
                     "piercing": { "response": "A piercing" },
-                    "acupuncture": { "response": "None, but I had acupuncture" }
+                    "acupuncture": { "response": "None, but I had acupuncture" },
+                    "none": { "response": "None, I'm perfect as I am 😎" }
                 }
             },
             "tick": {
@@ -423,7 +426,8 @@
                     "unknown": {
                         "response": "I don't know the type but it was less than 4 months ago",
                         "descr": "Surprise!"
-                    }
+                    },
+                    "none": { "response": "No recent vaccine" }
                 }
             }
         }
