@@ -613,7 +613,39 @@
         }
     },
     "don_sang": {
-        "intro": "Everything you need to know about blood donation: requirements, what to expect and the impact of your gift."
+        "intro": "Everything you need to know about blood donation: requirements, what to expect and the impact of your gift.",
+        "hero": {
+            "eyebrow": "Blood donation",
+            "title": "Your gift saves lives.",
+            "subtitle": "By taking part in the drive organised by your company, a single donation can save up to 3 lives. Here is everything you need to know before getting started.",
+            "cta_eligible": "Am I eligible?",
+            "cta_collecte": "View the drive"
+        },
+        "impact": {
+            "stat1_value": "3",
+            "stat1_label": "lives saved by a single donation",
+            "stat2_value": "45 min",
+            "stat2_label": "that's all the time it takes",
+            "stat3_value": "500 mL",
+            "stat3_label": "of blood collected, no more"
+        },
+        "deroulement": {
+            "title": "How does it work?",
+            "subtitle": "Blood donation takes place in 4 simple steps, in a secure medical setting.",
+            "step1_title": "Registration",
+            "step1_desc": "Book an appointment via the drive link or simply show up on site.",
+            "step2_title": "Medical interview",
+            "step2_desc": "A doctor checks your eligibility to donate in complete confidentiality. Quick and caring.",
+            "step3_title": "The donation",
+            "step3_desc": "The collection takes about 10 minutes. You lie down and are supported throughout.",
+            "step4_title": "Refreshments",
+            "step4_desc": "A drink and a snack are offered. You leave feeling great a few minutes later."
+        },
+        "cta": {
+            "title": "Are you eligible?",
+            "subtitle": "A few questions are all it takes to find out. Take the test — it only takes a minute.",
+            "button": "Take the eligibility test"
+        }
     },
     "certification": {
         "title": "CTS CSR Label",

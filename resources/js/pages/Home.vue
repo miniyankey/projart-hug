@@ -2,7 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import StepCard from '@/components/cards/StepCard.vue';
 import NewsletterForm from '@/components/forms/NewsletterForm.vue';
@@ -17,12 +17,12 @@ import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const root = ref(null);
 let ctx;
 
-onMounted(() => {
+function buildAnimations() {
     if (!root.value) {
         return;
     }
@@ -217,6 +217,16 @@ onMounted(() => {
         });
         ScrollTrigger.refresh();
     }, root.value);
+}
+
+onMounted(buildAnimations);
+
+// Les titres animés sont écrits par GSAP (TextPlugin) avec t() évalué une
+// seule fois : ils ne sont pas réactifs. On reconstruit les animations au
+// changement de langue pour qu'ils se traduisent sans hard refresh.
+watch(locale, () => {
+    ctx?.revert();
+    buildAnimations();
 });
 
 onUnmounted(() => {

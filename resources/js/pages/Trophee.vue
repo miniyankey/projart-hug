@@ -2,7 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import PodiumCard from '@/components/cards/PodiumCard.vue';
 import SpeechBubble from '@/components/cards/SpeechBubble.vue';
@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 // Éditions du Trophée fournies par le back-end (podium top 3 par année) :
 const props = defineProps({
@@ -55,7 +55,8 @@ const isSuspended = computed(
         currentEdition.value.year < 2026,
 );
 
-const historyMilestones = [
+// computed pour rester réactif au changement de langue (tag passe par t()).
+const historyMilestones = computed(() => [
     {
         year: '2008',
         tag: t('trophee.histoire.tag_2008'),
@@ -74,7 +75,7 @@ const historyMilestones = [
         color: '#B5CEED',
         shadow: '#4A7AAD',
     },
-];
+]);
 
 const prizeConfigs = {
     grand_prix: { color: '#b8860b', badge: '/img/badge4.png' },
@@ -95,7 +96,7 @@ const statDisplayValues = ref(['0 %', '0+', '0+']);
 const root = ref(null);
 let ctx;
 
-onMounted(() => {
+function buildAnimations() {
     if (!root.value) {
         return;
     }
@@ -351,6 +352,16 @@ onMounted(() => {
             scrollTrigger: { trigger: '.anim-cta', start: 'top 85%' },
         });
     }, root.value);
+}
+
+onMounted(buildAnimations);
+
+// Les titres animés sont écrits par GSAP (TextPlugin) avec t() évalué une
+// seule fois : ils ne sont pas réactifs. On reconstruit les animations au
+// changement de langue pour qu'ils se traduisent sans hard refresh.
+watch(locale, () => {
+    ctx?.revert();
+    buildAnimations();
 });
 
 onUnmounted(() => {

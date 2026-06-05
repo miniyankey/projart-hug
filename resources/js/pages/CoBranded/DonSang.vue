@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LabelStepCard from '@/components/cards/LabelStepCard.vue';
 import MascottePopup from '@/components/MascottePopup.vue';
@@ -12,7 +12,7 @@ import {
     jeu as cobrandJeu,
 } from '@/routes/cobrand';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const props = defineProps({
     company: Object,
@@ -24,7 +24,8 @@ const routeParams = computed(() => ({
     collect: props.collectSlug,
 }));
 
-const steps = [
+// computed pour rester réactifs au changement de langue (contenu via t()).
+const steps = computed(() => [
     {
         n: 1,
         title: t('don_sang.deroulement.step1_title'),
@@ -45,13 +46,13 @@ const steps = [
         title: t('don_sang.deroulement.step4_title'),
         desc: t('don_sang.deroulement.step4_desc'),
     },
-];
+]);
 
-const statLabels = [
+const statLabels = computed(() => [
     t('don_sang.impact.stat1_label'),
     t('don_sang.impact.stat2_label'),
     t('don_sang.impact.stat3_label'),
-];
+]);
 
 const statConfigs = [
     { target: 3, suffix: '' },
@@ -64,7 +65,7 @@ const statDisplayValues = ref(['0', '0 min', '0 mL']);
 const root = ref(null);
 let ctx;
 
-onMounted(() => {
+function buildAnimations() {
     if (!root.value) {
         return;
     }
@@ -182,6 +183,16 @@ onMounted(() => {
             },
         });
     }, root.value);
+}
+
+onMounted(buildAnimations);
+
+// Les titres animés sont écrits par GSAP (TextPlugin) avec t() évalué une
+// seule fois : ils ne sont pas réactifs. On reconstruit les animations au
+// changement de langue pour qu'ils se traduisent sans hard refresh.
+watch(locale, () => {
+    ctx?.revert();
+    buildAnimations();
 });
 
 onUnmounted(() => {
