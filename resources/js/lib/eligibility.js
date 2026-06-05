@@ -62,9 +62,15 @@ export function overallVerdict(questions, answers) {
         const result = computeResult(q, choiceIds);
 
         if (!result.eligible) {
+            // Libellés des réponses inéligibles choisies par l'utilisateur
+            const answers = q.choices
+                .filter((c) => choiceIds.includes(c.id) && !c.eligible)
+                .map((c) => c.text);
+
             steps.push({
                 questionKey: q.id,
                 titre: q.titre,
+                answers,
                 days: result.days,
             });
         }

@@ -252,18 +252,27 @@
         },
         "finish": {
             "eligible": {
+                "title": "Éligible !",
                 "message": "Tu es éligible au don de sang !",
                 "text": "Bravo ! Tu peux donner ton sang et sauver jusqu'à 3 vies.",
                 "cta": "Prendre rendez-vous"
             },
             "temporary": {
+                "title": "Presque !",
                 "message": "Tu pourras donner dans {duration}.",
                 "text": "Ces étapes t'empêchent temporairement de donner. Reviens dans le délai indiqué."
             },
             "lifetime": {
+                "title": "Oh non…",
                 "message": "Tu n'es malheureusement pas éligible au don de sang.",
                 "text": "Certaines situations rendent le don impossible de façon permanente. Merci pour ta démarche !",
                 "label": "À vie"
+            },
+            "recap_title": "Récapitulatif",
+            "share": {
+                "cta": "Partager à mes collègues",
+                "text": "Saurais-tu donner ton sang ? Fais le test avec Pochy !",
+                "copied": "Lien copié !"
             },
             "back_to_game": "Revenir au parcours"
         },
