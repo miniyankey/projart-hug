@@ -54,12 +54,25 @@ const mapPochy = ref(questions.value[0]?.pochy ?? '0');
 // Statut de chaque checkpoint : 'locked' | 'eligible' | 'ineligible'
 const statuses = ref(questions.value.map(() => 'locked'));
 
+// Dès qu'une réponse rend inéligible, Pochy reste « vide » (0) sur la carte
+// jusqu'à la fin du parcours.
+const hasIneligible = computed(() => statuses.value.includes('ineligible'));
+
 watch(activeIndex, (idx) => {
-    if (idx !== null) {
-        // Sur la carte, on n'utilise que le niveau de remplissage (ex. "20-travel" → "20")
-        const pochy = questions.value[idx]?.pochy ?? '0';
-        mapPochy.value = pochy.split('-')[0];
+    if (idx === null) {
+        return;
     }
+
+    // Inéligible → Pochy vide ; sinon niveau de remplissage de l'étape
+    // (ex. "20-travel" → "20").
+    if (hasIneligible.value) {
+        mapPochy.value = '0';
+
+        return;
+    }
+
+    const pochy = questions.value[idx]?.pochy ?? '0';
+    mapPochy.value = pochy.split('-')[0];
 });
 
 const activeQuestion = computed(() =>
@@ -153,6 +166,12 @@ function onAnswer(choiceIds) {
     statuses.value[activeIndex.value] = result.eligible
         ? 'eligible'
         : 'ineligible';
+
+    // Une fois inéligible, Pochy se vide sur la carte (changement masqué par le
+    // panneau de résultat qui couvre la carte) et le reste jusqu'à la fin.
+    if (hasIneligible.value) {
+        mapPochy.value = '0';
+    }
 
     trackStep();
 
