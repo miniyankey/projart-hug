@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\KpiController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CobrandController;
+use App\Http\Controllers\EligibiliteController;
 use App\Http\Controllers\EligibilityReminderController;
 use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\Kpi\CollectEventController;
@@ -34,7 +35,7 @@ Route::inertia('/', 'Home')->name('home');
 Route::inertia('/trophee', 'Trophee')->name('trophee');
 Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
-Route::inertia('/eligibilite', 'Eligibilite')->name('eligibilite');
+Route::get('/jeu', [EligibiliteController::class, 'index'])->name('eligibilite');
 Route::post('/eligibilite/rappel', [EligibilityReminderController::class, 'store'])
     ->middleware('throttle:10,1')
     ->name('eligibilite.rappel');

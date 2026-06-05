@@ -323,12 +323,226 @@
             "title": "Not eligible yet?",
             "intro": "Leave us your email address: we'll let you know as soon as you can give blood again.",
             "email": "Email address",
-            "email_placeholder": "you@example.ch",
+            "email_placeholder": "you{'@'}example.ch",
+            "newsletter": "I'd also like to receive the blood donation newsletter.",
             "submit": "Notify me"
+        },
+        "donation": {
+            "title": "Support us differently",
+            "intro": "Even if you can't give blood, you can still help the HUG by making a financial donation.",
+            "cta": "Make a donation"
         },
         "mascotte_speech": "Come play to find out if you're eligible!",
         "mascotte_cta": "Play!",
-        "mascotte_close": "Close"
+        "mascotte_close": "Close",
+        "ui": {
+            "intro_title": "Can you give blood? Walk the path with Pochy to find out.",
+            "badge_duration": "2 min",
+            "badge_questions": "{count} questions",
+            "badge_no_commitment": "No commitment",
+            "play": "PLAY",
+            "back": "Back",
+            "validate": "Continue",
+            "ok": "OK",
+            "learn_more": "Learn more",
+            "scroll_hint": "Scroll to move forward",
+            "loading": "Loading…"
+        },
+        "duration": {
+            "year": "{count} year | {count} years",
+            "month": "{count} month | {count} months",
+            "week": "{count} week | {count} weeks",
+            "day": "{count} day | {count} days"
+        },
+        "finish": {
+            "eligible": {
+                "title": "Eligible!",
+                "message": "You're eligible to donate blood!",
+                "text": "Well done! You can give blood and save up to 3 lives.",
+                "cta": "Book an appointment"
+            },
+            "temporary": {
+                "title": "Almost!",
+                "message": "You'll be able to donate in {duration}.",
+                "text": "These steps temporarily prevent you from donating. Come back after the indicated period."
+            },
+            "lifetime": {
+                "title": "Oh no…",
+                "message": "Unfortunately you're not eligible to give blood.",
+                "text": "Some situations make donation permanently impossible. Thank you for taking the step!",
+                "label": "Lifetime"
+            },
+            "recap_title": "Summary",
+            "share": {
+                "cta": "Share with my colleagues",
+                "text": "Could you give blood? Take the test with Pochy!",
+                "copied": "Link copied!"
+            },
+            "back_to_game": "Back to the journey"
+        },
+        "ineligible": {
+            "lifetime": {
+                "message": "Unfortunately, you're not eligible to give blood.",
+                "descr": "This situation is permanent.",
+                "text": "Thanks for taking the step! Even if you can't give blood, you can support donation in other ways."
+            },
+            "temporary": {
+                "message": "You'll be able to give blood in {duration}.",
+                "descr": "Temporary ineligibility.",
+                "text": "Come back after this period to donate. In the meantime, you can keep playing."
+            }
+        },
+        "quiz": {
+            "views": {
+                "medication": {
+                    "message": "Your eligibility depends on the medication you've taken.",
+                    "text": "Contact the CTS for more information about your eligibility to donate.",
+                    "cta": "Contact the CTS"
+                },
+                "travel": {
+                    "message": "Your eligibility depends on the countries you've visited.",
+                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months — the time needed for any pathogens to become detectable."
+                },
+                "vaccine": {
+                    "message": "If you don't know which type of vaccine you received, use the Check Vaccination tool and fill in your vaccine details to find out whether you're eligible.",
+                    "cta": "Check my vaccine"
+                }
+            },
+            "lifetime": {
+                "titre": "Lifetime ineligibility",
+                "question": "Tick all the situations that apply or have applied to you.",
+                "why": "Some people cannot give blood because it would be risky for them or for others.",
+                "choices": {
+                    "hiv": { "response": "HIV/AIDS" },
+                    "diabetes": { "response": "Diabetes" },
+                    "injection_drugs": { "response": "Injected drug use" },
+                    "heart": { "response": "Heart conditions" },
+                    "blood_diseases": { "response": "Blood diseases" },
+                    "hepatitis": { "response": "Hepatitis B and C" },
+                    "none": { "response": "None of these situations" }
+                }
+            },
+            "health": {
+                "titre": "Health",
+                "question": "Are you generally in good health, with no cold or fever symptoms?",
+                "why": "Better safe than sorry! We prefer people with mild symptoms to recover fully before donating.",
+                "choices": {
+                    "yes": { "response": "Yes" },
+                    "no": { "response": "No" }
+                }
+            },
+            "medication": {
+                "titre": "Medication",
+                "question": "Have you taken any medication in the last 4 weeks?",
+                "why": "Some medications can make blood donation unsafe, risking harm to the recipient or the donor.",
+                "choices": {
+                    "yes": { "response": "Yes" },
+                    "no": { "response": "No" }
+                }
+            },
+            "travel": {
+                "titre": "Travel",
+                "question": "If you've travelled in the last 6 months, where did you go?",
+                "why": "In some parts of the world, pathogens can travel back with you and only become detectable up to 6 months later!",
+                "choices": {
+                    "europe": { "response": "Europe" },
+                    "other": { "response": "Other regions of the world" },
+                    "none": { "response": "I didn't travel" }
+                }
+            },
+            "partner": {
+                "titre": "Partner",
+                "question": "Have you had several sexual partners in the last 12 months, or changed partner in the last 4 months?",
+                "why": "It's personal, but important for minimising the risk of transmitting an STI to the recipient.",
+                "choices": {
+                    "yes": { "response": "Yes" },
+                    "no": { "response": "No" }
+                }
+            },
+            "hospitalization": {
+                "titre": "Hospitalisation",
+                "question": "What is the most serious hospitalisation you've had recently?",
+                "why": "Someone recovering from major surgery or childbirth needs time to recover before donating.",
+                "choices": {
+                    "none": {
+                        "response": "I haven't been hospitalised recently"
+                    },
+                    "recent": {
+                        "response": "A&E / consultation less than 4 weeks ago"
+                    },
+                    "admission": {
+                        "response": "Hospital admission in the last year"
+                    }
+                }
+            },
+            "dentist": {
+                "titre": "Dentist",
+                "question": "What is the most intensive dental treatment you've had recently?",
+                "why": "These treatments cause small lesions through which bacteria or viruses can enter and contaminate the blood.",
+                "choices": {
+                    "no": { "response": "No treatment" },
+                    "scaling": { "response": "Scaling less than 48 hours ago" },
+                    "extraction": {
+                        "response": "Extraction less than a week ago"
+                    },
+                    "complications": {
+                        "response": "Extraction with complications less than two weeks ago"
+                    }
+                }
+            },
+            "tattoo": {
+                "titre": "Tattoo",
+                "question": "Select the styles you've added in the last 4 months",
+                "why": "These can cause small wounds that open the door to bacteria and viruses.",
+                "choices": {
+                    "tattoo": { "response": "A tattoo" },
+                    "piercing": { "response": "A piercing" },
+                    "acupuncture": {
+                        "response": "None, but I had acupuncture"
+                    },
+                    "none": { "response": "None, I'm perfect as I am 😎" }
+                }
+            },
+            "tick": {
+                "titre": "Tick bite",
+                "question": "Did you come back from an outdoor walk with a little companion in the last 4 weeks?",
+                "why": "Ticks, like mosquitoes, carry diseases (such as Lyme disease) transmitted through their bacteria. Check your whole body after a walk in nature.",
+                "choices": {
+                    "tick": {
+                        "response": "Yes, a tick",
+                        "descr": "Tough luck."
+                    },
+                    "other_companion": {
+                        "response": "Yes, another companion",
+                        "descr": "Your dog, friend, or partner"
+                    },
+                    "alone": {
+                        "response": "No, I was alone",
+                        "descr": "Phew!"
+                    }
+                }
+            },
+            "vaccine": {
+                "titre": "Recent vaccine",
+                "question": "Tick any vaccines you've received recently.",
+                "why": "Depending on the vaccine type, a waiting period may be required to avoid transmitting a live attenuated virus, or simply to ensure you have no side effects. In most cases, vaccination doesn't prevent donation.",
+                "choices": {
+                    "live": {
+                        "response": "Live attenuated vaccine less than 4 months ago",
+                        "descr": "MMR, chickenpox, yellow fever…"
+                    },
+                    "inactivated": {
+                        "response": "Inactivated/mRNA vaccine less than 48 h ago",
+                        "descr": "Flu, COVID, hepatitis, tetanus…"
+                    },
+                    "unknown": {
+                        "response": "I don't know the type but it was less than 4 months ago",
+                        "descr": "Surprise!"
+                    },
+                    "none": { "response": "No recent vaccine" }
+                }
+            }
+        }
     },
     "cobrand": {
         "intro": "Your company “{company}” is organising a blood drive in partnership with the Geneva University Hospitals.",

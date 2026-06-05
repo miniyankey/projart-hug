@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 40" shape-rendering="crispEdges">
+  <!-- ░░ Hélicoptère en vol (haut-droite) ░░ -->
+  <rect x="34" y="2" width="13" height="1" fill="#2a2a2a"/>
+  <rect x="40" y="3" width="1"  height="1" fill="#2a2a2a"/>
+  <rect x="38" y="4" width="6"  height="4" fill="#c0392b"/>
+  <rect x="44" y="5" width="1"  height="2" fill="#c0392b"/>
+  <rect x="39" y="5" width="2"  height="2" fill="#bfe3f5"/>
+  <rect x="33" y="5" width="5"  height="1" fill="#922b1f"/>
+  <rect x="33" y="3" width="1"  height="3" fill="#c0392b"/>
+  <rect x="32" y="3" width="1"  height="3" fill="#2a2a2a"/>
+  <rect x="38" y="8" width="6"  height="1" fill="#555555"/>
+  <rect x="39" y="7" width="1"  height="1" fill="#555555"/>
+  <rect x="42" y="7" width="1"  height="1" fill="#555555"/>
+
+  <!-- ░░ Hélicoptère posé sur le toit (gauche) ░░ -->
+  <rect x="5"  y="16" width="11" height="1" fill="#1d1d1d"/>
+  <rect x="4"  y="9"  width="11" height="1" fill="#2a2a2a"/>
+  <rect x="9"  y="10" width="1"  height="1" fill="#2a2a2a"/>
+  <rect x="6"  y="11" width="6"  height="4" fill="#2f7d3a"/>
+  <rect x="7"  y="12" width="2"  height="2" fill="#bfe3f5"/>
+  <rect x="3"  y="12" width="3"  height="1" fill="#256630"/>
+  <rect x="2"  y="10" width="1"  height="3" fill="#2f7d3a"/>
+  <rect x="6"  y="15" width="7"  height="1" fill="#555555"/>
+  <rect x="7"  y="14" width="1"  height="1" fill="#555555"/>
+  <rect x="11" y="14" width="1"  height="1" fill="#555555"/>
+
+  <!-- ░░ Tour centrale ░░ -->
+  <rect x="24" y="3" width="1"  height="3" fill="#555555"/>
+  <rect x="24" y="2" width="1"  height="1" fill="#ff4444"/>
+  <rect x="17" y="6" width="14" height="12" fill="#8593a1"/>
+  <rect x="18" y="7" width="12" height="11" fill="#eaf0f6"/>
+  <rect x="17" y="6" width="14" height="1"  fill="#b9c4cf"/>
+  <!-- Plaque + croix rouge -->
+  <rect x="20" y="8" width="8" height="7" fill="#ffffff"/>
+  <rect x="20" y="8" width="8" height="1" fill="#cdd6df"/>
+  <g fill="#d8392b">
+    <rect x="23" y="9"  width="2" height="5"/>
+    <rect x="21" y="10" width="6" height="2"/>
+  </g>
+  <!-- Fenêtres de la tour -->
+  <g fill="#6fb0e0">
+    <rect x="19" y="16" width="3" height="2"/>
+    <rect x="26" y="16" width="3" height="2"/>
+  </g>
+
+  <!-- ░░ Bâtiment principal ░░ -->
+  <rect x="3" y="17" width="42" height="22" fill="#8593a1"/>
+  <rect x="4" y="18" width="40" height="20" fill="#dfe7ef"/>
+  <rect x="4" y="18" width="40" height="1"  fill="#f1f5f9"/>
+  <rect x="4" y="37" width="40" height="2"  fill="#c3ccd6"/>
+  <!-- Bandeaux d'étage -->
+  <g fill="#cdd6df">
+    <rect x="4" y="23" width="40" height="1"/>
+    <rect x="4" y="28" width="40" height="1"/>
+    <rect x="4" y="33" width="40" height="1"/>
+  </g>
+
+  <!-- Fenêtres (ailes gauche + droite + centre) -->
+  <g fill="#2a4f70">
+    <rect x="6"  y="20" width="4" height="2"/><rect x="12" y="20" width="4" height="2"/>
+    <rect x="6"  y="25" width="4" height="2"/><rect x="12" y="25" width="4" height="2"/>
+    <rect x="6"  y="30" width="4" height="2"/><rect x="12" y="30" width="4" height="2"/>
+    <rect x="33" y="20" width="4" height="2"/><rect x="39" y="20" width="4" height="2"/>
+    <rect x="33" y="25" width="4" height="2"/><rect x="39" y="25" width="4" height="2"/>
+    <rect x="33" y="30" width="4" height="2"/><rect x="39" y="30" width="4" height="2"/>
+    <rect x="19" y="20" width="4" height="2"/><rect x="25" y="20" width="4" height="2"/>
+    <rect x="19" y="25" width="4" height="2"/><rect x="25" y="25" width="4" height="2"/>
+  </g>
+  <g fill="#6fb0e0">
+    <rect x="6"  y="20" width="4" height="1"/><rect x="12" y="20" width="4" height="1"/>
+    <rect x="6"  y="25" width="4" height="1"/><rect x="12" y="25" width="4" height="1"/>
+    <rect x="6"  y="30" width="4" height="1"/><rect x="12" y="30" width="4" height="1"/>
+    <rect x="33" y="20" width="4" height="1"/><rect x="39" y="20" width="4" height="1"/>
+    <rect x="33" y="25" width="4" height="1"/><rect x="39" y="25" width="4" height="1"/>
+    <rect x="33" y="30" width="4" height="1"/><rect x="39" y="30" width="4" height="1"/>
+    <rect x="19" y="20" width="4" height="1"/><rect x="25" y="20" width="4" height="1"/>
+    <rect x="19" y="25" width="4" height="1"/><rect x="25" y="25" width="4" height="1"/>
+  </g>
+
+  <!-- Entrée principale -->
+  <rect x="19" y="30" width="11" height="2" fill="#b9c4cf"/>
+  <rect x="21" y="32" width="7"  height="7" fill="#2a4f70"/>
+  <rect x="22" y="33" width="5"  height="6" fill="#6fb0e0"/>
+  <rect x="24" y="33" width="1"  height="6" fill="#2a4f70"/>
+  <rect x="22" y="33" width="5"  height="1" fill="#a9d3f0"/>
+</svg>

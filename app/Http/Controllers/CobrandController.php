@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Collect;
 use App\Models\Company;
-use App\Models\GameQuestion;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -28,16 +27,13 @@ class CobrandController extends Controller
         $company = $this->resolveCompany($brandName);
         $collect = $this->resolveCollect($company, $collect);
 
-        $questions = GameQuestion::with(['choices.view'])
-            ->orderBy('order')
-            ->get();
-
+        // Le quiz est défini côté front (data/eligibilityQuiz.js + locales),
+        // aucune donnée de question n'est envoyée par le serveur.
         return Inertia::render('CoBranded/Jeu', [
             'collectSlug' => $collect->slug,
             'company' => $this->companyData($company),
-            // Identifie la collecte pour le tracking du funnel d'éligibilité
-            'collectId' => $collect->id,
-            'questions' => $questions,
+            'collect_id' => $collect->id,
+            'link_appointment' => $collect->link_appointment,
         ]);
     }
 

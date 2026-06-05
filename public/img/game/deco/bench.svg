@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre -->
+  <rect x="-22" y="43" width="46" height="2" fill="#00000022"/>
+  <!-- Pieds -->
+  <rect x="-16" y="30" width="4" height="14" fill="#3a3a40"/>
+  <rect x="12" y="30" width="4" height="14" fill="#3a3a40"/>
+  <!-- Assise -->
+  <rect x="-20" y="24" width="40" height="6" fill="#1a1a1a"/>
+  <rect x="-19" y="25" width="38" height="4" fill="#7a4e28"/>
+  <rect x="-19" y="25" width="38" height="1" fill="#9a6238"/>
+  <!-- Lattes dossier -->
+  <rect x="-20" y="6" width="40" height="5" fill="#1a1a1a"/>
+  <rect x="-19" y="7" width="38" height="3" fill="#7a4e28"/>
+  <rect x="-19" y="7" width="38" height="1" fill="#9a6238"/>
+  <!-- Montants -->
+  <rect x="-16" y="11" width="3" height="14" fill="#3a3a40"/>
+  <rect x="13" y="11" width="3" height="14" fill="#3a3a40"/>
+</svg>

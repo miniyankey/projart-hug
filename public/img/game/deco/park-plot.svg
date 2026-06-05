@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre -->
+  <rect x="-30" y="43" width="62" height="2" fill="#00000022"/>
+  <!-- Pelouse (l'oasis verte) -->
+  <rect x="-30" y="30" width="62" height="14" fill="#2e7d28"/>
+  <rect x="-28" y="28" width="58" height="4" fill="#3aaa30"/>
+  <rect x="-30" y="40" width="62" height="4" fill="#246a20"/>
+  <g fill="#48c038">
+    <rect x="-24" y="31" width="3" height="1"/><rect x="-8" y="33" width="3" height="1"/><rect x="14" y="32" width="3" height="1"/><rect x="24" y="35" width="3" height="1"/>
+  </g>
+  <!-- Petite allée pavée -->
+  <rect x="-3" y="30" width="8" height="14" fill="#8a8d92"/>
+  <rect x="-3" y="30" width="8" height="2" fill="#a8abb0"/>
+  <rect x="-3" y="36" width="8" height="1" fill="#6f7176"/>
+  <!-- Arbre feuillu (gauche) -->
+  <rect x="-21" y="6" width="5" height="22" fill="#7a4e28"/>
+  <rect x="-19" y="14" width="3" height="6" fill="#9a6238"/>
+  <rect x="-27" y="-6" width="18" height="14" fill="#267020"/>
+  <rect x="-25" y="-16" width="14" height="12" fill="#3aaa30"/>
+  <rect x="-21" y="-24" width="8" height="10" fill="#48c038"/>
+  <rect x="-23" y="-12" width="5" height="3" fill="#64dc4c" opacity="0.6"/>
+  <!-- Sapin (droite) -->
+  <rect x="13" y="12" width="4" height="16" fill="#5c3212"/>
+  <rect x="8" y="4" width="14" height="10" fill="#1e5a18"/>
+  <rect x="10" y="-4" width="10" height="9" fill="#2e7c28"/>
+  <rect x="12" y="-12" width="6" height="9" fill="#48aa3c"/>
+  <rect x="14" y="-16" width="2" height="5" fill="#58c048"/>
+  <!-- Banc de parc -->
+  <rect x="-6" y="20" width="14" height="3" fill="#1a1a1a"/>
+  <rect x="-5" y="21" width="12" height="2" fill="#7a4e28"/>
+  <rect x="-6" y="15" width="14" height="2" fill="#5a3a22"/>
+  <rect x="-5" y="23" width="2" height="6" fill="#3a3a40"/>
+  <rect x="4" y="23" width="2" height="6" fill="#3a3a40"/>
+  <!-- Fleurs -->
+  <rect x="-14" y="34" width="3" height="3" fill="#ffcc00"/>
+  <rect x="22" y="33" width="3" height="3" fill="#ff88cc"/>
+  <rect x="-1" y="26" width="2" height="2" fill="#ffffff"/>
+</svg>

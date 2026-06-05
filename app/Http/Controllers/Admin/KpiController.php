@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Collect;
 use App\Models\Company;
-use App\Models\GameQuestion;
 // lib pour manipulation des dates, utilisée notamment pour la timeline et le statut des collectes
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -115,7 +114,11 @@ class KpiController extends Controller
      */
     private function funnelStats(?array $collectIds = null): array
     {
-        $totalSteps = max(GameQuestion::count(), 1);
+        // Le quiz vit côté front (resources/js/data/eligibilityQuiz.js)
+        $totalSteps = max(
+            (int) DB::table('events_eligibilite_steps')->max('step'),
+            1,
+        );
 
         $steps = DB::table('events_eligibilite_steps')
             ->when($collectIds !== null, fn ($query) => $query->whereIn('collect_id', $collectIds))

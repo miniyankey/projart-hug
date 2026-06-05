@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <rect x="-16" y="43" width="34" height="2" fill="#00000022"/>
+  <!-- Structure bois -->
+  <rect x="-15" y="6" width="30" height="38" fill="#1a1a1a"/>
+  <rect x="-13" y="8" width="26" height="36" fill="#caa46a"/>
+  <rect x="-13" y="8" width="26" height="2" fill="#e0bd86"/>
+  <rect x="-13" y="8" width="2" height="36" fill="#b08a4c"/>
+  <!-- Ouverture / comptoir -->
+  <rect x="-11" y="14" width="22" height="14" fill="#2a2018"/>
+  <rect x="-11" y="26" width="22" height="3" fill="#8a6a3a"/>
+  <!-- Produits sur le comptoir -->
+  <rect x="-8" y="18" width="4" height="6" fill="#d8392b"/>
+  <rect x="-2" y="18" width="4" height="6" fill="#e8852a"/>
+  <rect x="4" y="18" width="4" height="6" fill="#2f9e57"/>
+  <!-- Auvent rayé -->
+  <rect x="-18" y="2" width="36" height="6" fill="#1a1a1a"/>
+  <g fill="#d63b34">
+    <rect x="-17" y="3" width="6" height="5"/><rect x="-5" y="3" width="6" height="5"/><rect x="7" y="3" width="6" height="5"/>
+  </g>
+  <g fill="#f5f5f5">
+    <rect x="-11" y="3" width="6" height="5"/><rect x="1" y="3" width="6" height="5"/><rect x="13" y="3" width="5" height="5"/>
+  </g>
+  <!-- Frange -->
+  <g fill="#d63b34">
+    <rect x="-16" y="8" width="3" height="2"/><rect x="-8" y="8" width="3" height="2"/><rect x="0" y="8" width="3" height="2"/><rect x="8" y="8" width="3" height="2"/><rect x="15" y="8" width="2" height="2"/>
+  </g>
+  <!-- Pieds -->
+  <rect x="-13" y="40" width="3" height="4" fill="#6b4a2a"/>
+  <rect x="10" y="40" width="3" height="4" fill="#6b4a2a"/>
+</svg>
