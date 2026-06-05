@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Award, Building2, Users } from 'lucide-vue-next';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LabelStepCard from '@/components/cards/LabelStepCard.vue';
 import PixelFeatureCard from '@/components/cards/PixelFeatureCard.vue';
@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 function scrollTo(target) {
     gsap.to(window, { scrollTo: target, duration: 1, ease: 'power2.inOut' });
@@ -22,7 +22,8 @@ const circleColors = ['#F5E07A', '#B2D4A8', '#B5CEED', '#D4A0A0'];
 const circleShadows = ['#C4A800', '#4E8A42', '#4A7AAD', '#A05050'];
 const sides = ['right', 'left', 'right', 'left'];
 
-const avantages = [
+// computed pour rester réactif au changement de langue (titre/desc via t()).
+const avantages = computed(() => [
     {
         icon: Building2,
         title: t('certification.avantages.item1_title'),
@@ -38,12 +39,12 @@ const avantages = [
         title: t('certification.avantages.item3_title'),
         description: t('certification.avantages.item3_desc'),
     },
-];
+]);
 
 const root = ref(null);
 let ctx;
 
-onMounted(() => {
+function buildAnimations() {
     if (!root.value) {
         return;
     }
@@ -250,6 +251,16 @@ onMounted(() => {
             },
         });
     }, root.value);
+}
+
+onMounted(buildAnimations);
+
+// Les titres animés sont écrits par GSAP (TextPlugin) avec t() évalué une
+// seule fois : ils ne sont pas réactifs. On reconstruit les animations au
+// changement de langue pour qu'ils se traduisent sans hard refresh.
+watch(locale, () => {
+    ctx?.revert();
+    buildAnimations();
 });
 
 onUnmounted(() => {
