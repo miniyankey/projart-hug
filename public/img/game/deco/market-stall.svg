@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre -->
+  <rect x="-26" y="43" width="54" height="2" fill="#00000022"/>
+  <!-- Poteaux -->
+  <rect x="-22" y="-8" width="3" height="52" fill="#6b4a2a"/>
+  <rect x="19" y="-8" width="3" height="52" fill="#6b4a2a"/>
+  <!-- Auvent rayé rouge/blanc -->
+  <rect x="-24" y="-14" width="48" height="8" fill="#1a1a1a"/>
+  <g fill="#d63b34">
+    <rect x="-23" y="-13" width="6" height="6"/>
+    <rect x="-11" y="-13" width="6" height="6"/>
+    <rect x="1" y="-13" width="6" height="6"/>
+    <rect x="13" y="-13" width="6" height="6"/>
+  </g>
+  <g fill="#f5f5f5">
+    <rect x="-17" y="-13" width="6" height="6"/>
+    <rect x="-5" y="-13" width="6" height="6"/>
+    <rect x="7" y="-13" width="6" height="6"/>
+  </g>
+  <!-- Frange dentelée -->
+  <g fill="#d63b34">
+    <rect x="-22" y="-6" width="3" height="2"/><rect x="-14" y="-6" width="3" height="2"/>
+    <rect x="-6" y="-6" width="3" height="2"/><rect x="2" y="-6" width="3" height="2"/>
+    <rect x="10" y="-6" width="3" height="2"/><rect x="18" y="-6" width="3" height="2"/>
+  </g>
+  <!-- Étal -->
+  <rect x="-24" y="20" width="48" height="24" fill="#1a1a1a"/>
+  <rect x="-23" y="21" width="46" height="22" fill="#8a5a32"/>
+  <rect x="-23" y="21" width="46" height="3" fill="#a6743f"/>
+  <!-- Cagettes -->
+  <rect x="-21" y="24" width="13" height="9" fill="#6b4a2a"/>
+  <rect x="-5" y="24" width="13" height="9" fill="#6b4a2a"/>
+  <rect x="11" y="24" width="11" height="9" fill="#6b4a2a"/>
+  <!-- Fruits : pommes rouges -->
+  <g fill="#d63b34">
+    <rect x="-19" y="22" width="4" height="4"/><rect x="-14" y="22" width="4" height="4"/>
+    <rect x="-19" y="26" width="4" height="3"/>
+  </g>
+  <!-- Oranges -->
+  <g fill="#e8852a">
+    <rect x="-3" y="22" width="4" height="4"/><rect x="2" y="22" width="4" height="4"/>
+    <rect x="-3" y="26" width="4" height="3"/>
+  </g>
+  <!-- Pommes vertes / citrons -->
+  <g fill="#7fb83a">
+    <rect x="13" y="22" width="4" height="4"/><rect x="18" y="22" width="3" height="4"/>
+  </g>
+  <rect x="13" y="26" width="4" height="3" fill="#e8d23a"/>
+  <!-- Reflets -->
+  <g fill="#ffffff" opacity="0.7">
+    <rect x="-18" y="22" width="1" height="1"/><rect x="-2" y="22" width="1" height="1"/><rect x="14" y="22" width="1" height="1"/>
+  </g>
+</svg>

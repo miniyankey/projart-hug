@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre au sol -->
+  <rect x="-22" y="43" width="46" height="2" fill="#00000022"/>
+  <!-- Corps brique -->
+  <rect x="-20" y="-30" width="40" height="74" fill="#1a1a1a"/>
+  <rect x="-18" y="-28" width="36" height="72" fill="#b5673a"/>
+  <rect x="-18" y="-28" width="36" height="3" fill="#caa074"/>
+  <!-- Joints de briques -->
+  <g fill="#9c5530">
+    <rect x="-18" y="-12" width="36" height="1"/>
+    <rect x="-18" y="6" width="36" height="1"/>
+    <rect x="-18" y="24" width="36" height="1"/>
+  </g>
+  <!-- Cadres de fenêtres -->
+  <g fill="#3a2a18">
+    <rect x="-13" y="-22" width="9" height="10"/>
+    <rect x="4" y="-22" width="9" height="10"/>
+    <rect x="-13" y="-4" width="9" height="10"/>
+    <rect x="4" y="-4" width="9" height="10"/>
+  </g>
+  <!-- Vitres allumées -->
+  <g fill="#ffd87a">
+    <rect x="-12" y="-21" width="7" height="8"/>
+    <rect x="5" y="-21" width="7" height="8"/>
+    <rect x="-12" y="-3" width="7" height="8"/>
+    <rect x="5" y="-3" width="7" height="8"/>
+  </g>
+  <g fill="#fff0c0">
+    <rect x="-12" y="-21" width="7" height="1"/>
+    <rect x="5" y="-21" width="7" height="1"/>
+    <rect x="-12" y="-3" width="7" height="1"/>
+    <rect x="5" y="-3" width="7" height="1"/>
+  </g>
+  <!-- Croisillons -->
+  <g fill="#3a2a18">
+    <rect x="-9" y="-21" width="1" height="8"/>
+    <rect x="8" y="-21" width="1" height="8"/>
+    <rect x="-9" y="-3" width="1" height="8"/>
+    <rect x="8" y="-3" width="1" height="8"/>
+  </g>
+  <!-- Porte -->
+  <rect x="-6" y="22" width="12" height="22" fill="#1a1a1a"/>
+  <rect x="-5" y="24" width="10" height="20" fill="#5a3a22"/>
+  <rect x="0" y="24" width="1" height="20" fill="#3a2414"/>
+  <rect x="-3" y="32" width="2" height="2" fill="#ffd87a"/>
+</svg>

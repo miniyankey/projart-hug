@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre -->
+  <rect x="-20" y="43" width="42" height="2" fill="#00000022"/>
+  <!-- Poteaux -->
+  <rect x="-16" y="6" width="4" height="38" fill="#5a3a22"/>
+  <rect x="-16" y="6" width="1" height="38" fill="#7a4e28"/>
+  <rect x="12" y="6" width="4" height="38" fill="#5a3a22"/>
+  <rect x="12" y="6" width="1" height="38" fill="#7a4e28"/>
+  <!-- Panneau -->
+  <rect x="-22" y="-24" width="44" height="34" fill="#1a1a1a"/>
+  <rect x="-20" y="-22" width="40" height="30" fill="#cdb892"/>
+  <rect x="-20" y="-22" width="40" height="2" fill="#e0cdab"/>
+  <!-- Toit -->
+  <rect x="-24" y="-28" width="48" height="5" fill="#7a4e28"/>
+  <rect x="-24" y="-28" width="48" height="2" fill="#9a6238"/>
+  <!-- Gros "?" -->
+  <g fill="#1a1a1a">
+    <rect x="-6" y="-19" width="9" height="3"/>
+    <rect x="2" y="-19" width="3" height="7"/>
+    <rect x="-2" y="-12" width="5" height="3"/>
+    <rect x="-2" y="-7" width="3" height="3"/>
+    <rect x="-2" y="-2" width="3" height="3"/>
+  </g>
+  <!-- Affiches colorées -->
+  <rect x="-17" y="-18" width="8" height="11" fill="#d63b34"/>
+  <rect x="-17" y="-18" width="8" height="2" fill="#ec5446"/>
+  <rect x="9" y="-9" width="8" height="13" fill="#2f9e57"/>
+  <rect x="9" y="-9" width="8" height="2" fill="#46bf72"/>
+  <rect x="-17" y="-4" width="7" height="6" fill="#1f8fd6"/>
+</svg>

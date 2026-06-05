@@ -9,7 +9,9 @@ import GameScrollHint from './GameScrollHint.vue';
 import {
     buildDecos,
     buildMap,
-    generateGrassTile,
+    buildZones,
+    generateAsphaltTile,
+    generateGroundTile,
     mkRng,
     polyPts,
     smoothPos,
@@ -50,7 +52,8 @@ const endPt = ref({ x: 0, y: 0 });
 const totalLen = ref(0);
 const progress = ref(0);
 const targetPrg = ref(0);
-const grassTile = ref(''); // data-URL generated at mount via Canvas
+const groundTile = ref(''); // data-URL generated at mount via Canvas
+const asphaltTile = ref(''); // data-URL pour le goudron des quartiers
 const hasMoved = ref(false);
 
 let lastTouchY = 0;
@@ -71,12 +74,23 @@ const curPos = computed(() => smoothPos(segments.value, progress.value));
 const mapTX = computed(() => Math.round(viewW.value / 2 - curPos.value.x));
 const mapTY = computed(() => Math.round(viewH.value / 2 - curPos.value.y));
 const polyPtsStr = computed(() => polyPts(segments.value)); // built once, used by 4 polylines
+const zones = computed(() =>
+    buildZones(
+        MAPW.value,
+        mapH.value,
+        segments.value,
+        props.questionCount + 77,
+    ),
+);
 const decos = computed(() =>
     buildDecos(
         segments.value,
         MAPW.value,
         mapH.value,
         props.questionCount + 77,
+        cps.value,
+        props.icons,
+        zones.value,
     ),
 );
 
@@ -245,7 +259,47 @@ function rebuild() {
 }
 
 // ─── Deco preloading ──────────────────────────────────────────────────────────
-const DECO_NAMES = ['bush', 'flower', 'mushroom', 'oak', 'pine', 'rock'];
+const DECO_NAMES = [
+    // Bâtiments / ville
+    'building-a',
+    'building-b',
+    'house',
+    'kiosk',
+    'market-stall',
+    // Clins d'œil thématiques
+    'noticeboard',
+    'fountain',
+    'pharmacy-shop',
+    'travel-shop',
+    'hospital-building',
+    'dentist-shop',
+    'park-plot',
+    'tattoo-shop',
+    'clinic',
+    // Végétation
+    'oak',
+    'pine',
+    'bush',
+    'flower',
+    'rock',
+    'mushroom',
+    // Lac Léman
+    'sailboat',
+    'jet-deau',
+    // Repères genevois (droite / nature)
+    'train-station',
+    'stadium',
+    'un-building',
+    'flag-swiss',
+    'flag-geneva',
+    // En vol
+    'plane',
+    'eagle',
+    // Animaux
+    'dog',
+    'cat',
+    'bird',
+];
 
 function preloadDecos() {
     return Promise.all(
@@ -272,7 +326,8 @@ onMounted(() => {
     }
 
     const t0 = Date.now();
-    grassTile.value = generateGrassTile();
+    groundTile.value = generateGroundTile();
+    asphaltTile.value = generateAsphaltTile();
     rebuild();
 
     preloadDecos().then(() => {
@@ -328,7 +383,7 @@ onUnmounted(() => {
                 width: MAPW + 'px',
                 height: mapH + 'px',
                 transform: `translate(${mapTX}px,${mapTY}px)`,
-                backgroundImage: grassTile ? `url(${grassTile})` : 'none',
+                backgroundImage: groundTile ? `url(${groundTile})` : 'none',
                 backgroundSize: '32px 32px',
             }"
         >
@@ -338,6 +393,155 @@ onUnmounted(() => {
                 xmlns="http://www.w3.org/2000/svg"
                 shape-rendering="crispEdges"
             >
+                <defs>
+                    <pattern
+                        v-if="asphaltTile"
+                        id="asphalt-tile"
+                        width="32"
+                        height="32"
+                        patternUnits="userSpaceOnUse"
+                    >
+                        <image
+                            :href="asphaltTile"
+                            width="32"
+                            height="32"
+                        />
+                    </pattern>
+                </defs>
+
+                <!-- Layer 1 : zones de sol (Léman + quartiers), derrière le chemin -->
+                <g>
+                    <template v-for="(z, zi) in zones" :key="`z-${zi}`">
+                        <!-- Quartier bétonné (goudron texturé) -->
+                        <template v-if="z.kind === 'district'">
+                            <!-- Bordure de terre (transition avec l'herbe) -->
+                            <rect
+                                :x="z.x - 5"
+                                :y="z.y - 5"
+                                :width="z.w + 10"
+                                :height="z.h + 10"
+                                fill="#7a5a32"
+                            />
+                            <!-- Goudron texturé -->
+                            <rect
+                                :x="z.x"
+                                :y="z.y"
+                                :width="z.w"
+                                :height="z.h"
+                                :fill="
+                                    asphaltTile ? 'url(#asphalt-tile)' : '#7c7e83'
+                                "
+                            />
+                            <!-- Liseré de trottoir clair -->
+                            <rect
+                                :x="z.x + 5"
+                                :y="z.y + 5"
+                                :width="z.w - 10"
+                                :height="z.h - 10"
+                                fill="none"
+                                stroke="#9a9ca1"
+                                stroke-width="3"
+                                opacity="0.6"
+                            />
+                        </template>
+                        <!-- Voie ferrée CFF -->
+                        <template v-else-if="z.kind === 'rail'">
+                            <!-- Ballast (gravier) -->
+                            <rect
+                                :x="z.cx - 16"
+                                :y="0"
+                                width="32"
+                                :height="z.h"
+                                fill="#9a948c"
+                            />
+                            <rect
+                                :x="z.cx - 16"
+                                :y="0"
+                                width="32"
+                                :height="z.h"
+                                :fill="
+                                    asphaltTile ? 'url(#asphalt-tile)' : '#9a948c'
+                                "
+                                opacity="0.35"
+                            />
+                            <!-- Traverses -->
+                            <rect
+                                v-for="ty in Math.floor(z.h / 24)"
+                                :key="`tie-${zi}-${ty}`"
+                                :x="z.cx - 13"
+                                :y="ty * 24 - 18"
+                                width="26"
+                                height="5"
+                                fill="#6b4a2a"
+                            />
+                            <!-- Rails acier -->
+                            <rect
+                                :x="z.cx - 8"
+                                :y="0"
+                                width="3"
+                                :height="z.h"
+                                fill="#4a4a4e"
+                            />
+                            <rect
+                                :x="z.cx + 5"
+                                :y="0"
+                                width="3"
+                                :height="z.h"
+                                fill="#4a4a4e"
+                            />
+                            <rect
+                                :x="z.cx - 8"
+                                :y="0"
+                                width="1"
+                                :height="z.h"
+                                fill="#7a7a80"
+                            />
+                            <rect
+                                :x="z.cx + 5"
+                                :y="0"
+                                width="1"
+                                :height="z.h"
+                                fill="#7a7a80"
+                            />
+                        </template>
+                        <!-- Le Léman (berge organique) -->
+                        <template v-else>
+                            <!-- Liseré de rive (terre/sable) -->
+                            <polyline
+                                :points="z.shore"
+                                fill="none"
+                                stroke="#7a5a32"
+                                stroke-width="11"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                            />
+                            <!-- Plan d'eau -->
+                            <polygon :points="z.points" fill="#2f93c4" />
+                            <!-- Bas-fond plus clair près de la rive -->
+                            <polyline
+                                :points="z.shore"
+                                fill="none"
+                                stroke="#5bb6e6"
+                                stroke-width="7"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                                opacity="0.6"
+                            />
+                            <!-- Reflets / ondulations -->
+                            <rect
+                                v-for="(t, ti) in z.ripples"
+                                :key="`zw-${zi}-${ti}`"
+                                :x="t.dx"
+                                :y="t.dy"
+                                width="7"
+                                height="2"
+                                fill="#7ec3e8"
+                                opacity="0.7"
+                            />
+                        </template>
+                    </template>
+                </g>
+
                 <!-- Layer 2 : path -->
                 <GamePath :points="polyPtsStr" :width="PATH_W" />
 
@@ -428,7 +632,7 @@ onUnmounted(() => {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: #4a7c45;
+    background: #6aae3f;
 }
 
 .map-inner {
@@ -436,8 +640,8 @@ onUnmounted(() => {
     top: 0;
     left: 0;
     will-change: transform;
-    image-rendering: pixelated; /* keeps grass tile crisp on hi-DPI screens */
-    background-color: #4a7c45; /* fallback before tile data-URL is ready */
+    image-rendering: pixelated; /* keeps ground tile crisp on hi-DPI screens */
+    background-color: #6aae3f; /* fallback before tile data-URL is ready */
 }
 
 /* Dead-centre, never moves — the world scrolls around Pochy */

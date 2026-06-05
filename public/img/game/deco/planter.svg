@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre -->
+  <rect x="-17" y="43" width="36" height="2" fill="#00000022"/>
+  <!-- Bac -->
+  <rect x="-16" y="30" width="32" height="14" fill="#1a1a1a"/>
+  <rect x="-15" y="31" width="30" height="12" fill="#8a8d92"/>
+  <rect x="-15" y="31" width="30" height="2" fill="#a8abb0"/>
+  <rect x="-15" y="40" width="30" height="3" fill="#5a5d62"/>
+  <!-- Terre -->
+  <rect x="-14" y="28" width="28" height="4" fill="#4a3a24"/>
+  <!-- Feuillage -->
+  <rect x="-14" y="18" width="28" height="12" fill="#267020"/>
+  <rect x="-12" y="12" width="24" height="8" fill="#3aaa30"/>
+  <rect x="-8" y="8" width="16" height="6" fill="#48c038"/>
+  <!-- Fleurs -->
+  <rect x="-10" y="12" width="4" height="4" fill="#ffcc00"/>
+  <rect x="-1" y="9" width="4" height="4" fill="#ff88cc"/>
+  <rect x="7" y="13" width="4" height="4" fill="#ff5544"/>
+  <rect x="2" y="16" width="3" height="3" fill="#ffffff"/>
+</svg>

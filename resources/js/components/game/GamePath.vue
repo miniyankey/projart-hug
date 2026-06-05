@@ -1,6 +1,7 @@
 <script setup>
-// Layer 2 — le trottoir/rue urbain, dessiné en 4 polylines superposées
-// (ombre → surface béton → bande centrale → joints de dalles).
+// Layer 2 — le sentier de terre/sable (style overworld), dessiné en polylines
+// superposées : bordure de terre → sable → centre plus clair → gravillons.
+// Bords arrondis (round) pour un tracé organique, pas un trottoir.
 defineProps({
     points: { type: String, required: true },
     width: { type: Number, default: 32 },
@@ -9,43 +10,52 @@ defineProps({
 
 <template>
     <g>
-        <!-- Ombre portée -->
+        <!-- Bordure de terre (rive du sentier) -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#111111"
+            stroke="#7a5a32"
             :stroke-width="width + 10"
-            stroke-linejoin="miter"
-            stroke-linecap="square"
+            stroke-linejoin="round"
+            stroke-linecap="round"
         />
-        <!-- Surface béton / trottoir -->
+        <!-- Terre plus sombre sous le sable -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#868686"
-            :stroke-width="width"
-            stroke-linejoin="miter"
-            stroke-linecap="square"
+            stroke="#a07b46"
+            :stroke-width="width + 2"
+            stroke-linejoin="round"
+            stroke-linecap="round"
         />
-        <!-- Bande centrale plus claire -->
+        <!-- Sable -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#a0a0a0"
-            :stroke-width="width - 8"
-            stroke-linejoin="miter"
-            stroke-linecap="square"
+            stroke="#e0c98c"
+            :stroke-width="width - 2"
+            stroke-linejoin="round"
+            stroke-linecap="round"
         />
-        <!-- Joints de dalles (tirets blancs semi-transparents) -->
+        <!-- Centre plus clair -->
         <polyline
             :points="points"
             fill="none"
-            stroke="#ffffffaa"
-            :stroke-width="2"
-            stroke-linejoin="miter"
-            stroke-linecap="square"
-            stroke-dasharray="16 14"
-            opacity="0.45"
+            stroke="#ecdca8"
+            :stroke-width="width - 14"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+        />
+        <!-- Gravillons (pointillé discret) -->
+        <polyline
+            :points="points"
+            fill="none"
+            stroke="#c8ad72"
+            :stroke-width="3"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-dasharray="3 22"
+            opacity="0.7"
         />
     </g>
 </template>
