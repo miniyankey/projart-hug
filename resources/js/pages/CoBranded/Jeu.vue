@@ -63,21 +63,28 @@ const statuses = ref(questions.value.map(() => 'locked'));
 // jusqu'à la fin du parcours.
 const hasIneligible = computed(() => statuses.value.includes('ineligible'));
 
+// Niveau de remplissage d'une étape (ex. "20-travel" → "20").
+function fillFor(index) {
+    return (questions.value[index]?.pochy ?? '0').split('-')[0];
+}
+
+// Étape la plus avancée atteinte (frontière) → niveau « maximal » de Pochy.
+const frontierIndex = computed(() =>
+    Math.min(clearedCount.value, questions.value.length - 1),
+);
+
+// Pochy de la carte : vide si inéligible, sinon le niveau maximal atteint. Si le
+// joueur corrige une réponse et redevient éligible, il « récupère » son sang.
+function refreshMapPochy() {
+    mapPochy.value = hasIneligible.value ? '0' : fillFor(frontierIndex.value);
+}
+
+// À l'ouverture d'une question, on réaligne Pochy (changement masqué par
+// l'overlay qui couvre la carte).
 watch(activeIndex, (idx) => {
-    if (idx === null) {
-        return;
+    if (idx !== null) {
+        refreshMapPochy();
     }
-
-    // Inéligible → Pochy vide ; sinon niveau de remplissage de l'étape
-    // (ex. "20-travel" → "20").
-    if (hasIneligible.value) {
-        mapPochy.value = '0';
-
-        return;
-    }
-
-    const pochy = questions.value[idx]?.pochy ?? '0';
-    mapPochy.value = pochy.split('-')[0];
 });
 
 const activeQuestion = computed(() =>
@@ -172,11 +179,11 @@ function onAnswer(choiceIds) {
         ? 'eligible'
         : 'ineligible';
 
-    // Une fois inéligible, Pochy se vide sur la carte (changement masqué par le
-    // panneau de résultat qui couvre la carte) et le reste jusqu'à la fin.
-    if (hasIneligible.value) {
-        mapPochy.value = '0';
-    }
+    // Pochy de la carte : vide si inéligible, sinon niveau maximal atteint. Si le
+    // joueur corrige une réponse et redevient éligible, il récupère son sang ;
+    // s'il devient inéligible, il se vide (changement masqué par le panneau de
+    // résultat qui couvre la carte).
+    refreshMapPochy();
 
     trackStep();
 
