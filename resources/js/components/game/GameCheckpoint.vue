@@ -79,9 +79,9 @@ const cfg = computed(() => {
     };
 });
 
-const clickable = computed(
-    () => props.variant === 'checkpoint' && props.status !== 'locked',
-);
+// Tous les checkpoints de question sont cliquables (même verrouillés) : cliquer
+// un checkpoint verrouillé fait avancer Pochy jusqu'à lui (jeu sans molette).
+const clickable = computed(() => props.variant === 'checkpoint');
 
 const r = computed(() => (cfg.value.big ? R + 6 : R));
 const cut = computed(() => (cfg.value.big ? CUT + 2 : CUT));

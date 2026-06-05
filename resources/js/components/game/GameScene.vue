@@ -45,10 +45,12 @@ watch(
             </p>
         </div>
 
-        <!-- Corps principal (scrollable), descendu de ~10vh pour mieux centrer -->
-        <div class="flex min-h-0 flex-1 overflow-y-auto">
+        <!-- Corps principal (scrollable), descendu de ~10vh pour mieux centrer.
+             Pas de `flex` ici : sinon l'enfant est étiré à la hauteur visible et
+             son padding-bas est « avalé » par le contenu qui déborde. -->
+        <div class="min-h-0 flex-1 overflow-y-auto">
             <div
-                class="flex w-full flex-col gap-4 px-4 pt-[10vh] pb-4 sm:px-5 sm:pb-5 md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:px-[clamp(1.5rem,4vw,4rem)] md:pt-[10vh] md:pb-[clamp(1.5rem,4vw,4rem)]"
+                class="flex w-full flex-col gap-4 px-4 pt-[10vh] pb-12 sm:px-5 sm:pb-12 md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:px-[clamp(1.5rem,4vw,4rem)] md:pt-[10vh] md:pb-[clamp(3rem,5vw,5rem)]"
             >
                 <!-- Zone personnage : 1/3 sur desktop ; icône + Pochy centrés.
                      Mobile : empilés et centrés, plus gros. -->

@@ -449,10 +449,7 @@
                 "why": "Si la personne se remet d'une grosse opération ou d'un accouchement, elle a besoin de temps pour récupérer.",
                 "choices": {
                     "none": {
-                        "response": "Aucune hospitalisation dans les 12 derniers mois"
-                    },
-                    "old": {
-                        "response": "Urgences/consultation il y a plus de 4 semaines"
+                        "response": "Je n'ai pas eu d'hospitalisation récemment"
                     },
                     "recent": {
                         "response": "Urgences/consultation il y a moins de 4 semaines"

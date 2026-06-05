@@ -7,8 +7,8 @@ import { useI18n } from 'vue-i18n';
 import GamePochy from './GamePochy.vue';
 import GameProgressBar from './GameProgressBar.vue';
 import GameSpeechBubble from './GameSpeechBubble.vue';
-import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
 import { Button } from '@/components/ui/button';
+import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
 
 const props = defineProps({
     // { status: 'eligible'|'temporary'|'lifetime', days, steps: [{ titre, answers, days }] }
@@ -123,12 +123,7 @@ async function share() {
                 <div class="flex min-w-0 flex-col gap-5 md:basis-2/3">
                     <!-- Titre pixel -->
                     <h2
-                        class="m-0 font-pixel text-[clamp(1.1rem,3vw,2rem)] leading-[1.4] uppercase [text-shadow:3px_3px_0_rgba(0,0,0,0.18)]"
-                        :class="
-                            isEligible
-                                ? 'text-[var(--brand,#7c3aed)]'
-                                : 'text-red-600'
-                        "
+                        class="m-0 font-pixel text-[clamp(1.1rem,3vw,2rem)] leading-[1.4] text-[var(--brand,#7c3aed)] uppercase [text-shadow:3px_3px_0_rgba(0,0,0,0.18)]"
                     >
                         {{ title }}
                     </h2>
@@ -161,7 +156,7 @@ async function share() {
                                     {{ step.titre }}
                                 </span>
                                 <span
-                                    class="shrink-0 border-2 border-black bg-red-500 px-2 py-1 text-[0.7rem] font-bold whitespace-nowrap text-white"
+                                    class="shrink-0 border-2 border-black bg-[var(--brand,#7c3aed)] px-2 py-1 text-[0.7rem] font-bold whitespace-nowrap text-white"
                                 >
                                     {{ stepDuration(step) }}
                                 </span>
@@ -191,7 +186,7 @@ async function share() {
                         </Button>
                         <Button
                             variant="pixel_white"
-                            class="h-auto border-[3px] border-black px-7 py-3 text-[1.05rem]"
+                            class="h-auto border-[3px] border-black px-7 py-3 text-[1.05rem] text-black"
                             @click="share"
                         >
                             {{

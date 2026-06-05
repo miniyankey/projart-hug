@@ -185,21 +185,34 @@ function onKeyDown(e) {
     markMoved();
 }
 
-// Clic sur un checkpoint : si c'est le prochain à franchir, anime Pochy jusqu'à
-// lui ; sinon retransmet l'événement (checkpoint déjà répondu → réouvre question).
+// Clic sur un checkpoint :
+// - déjà répondu (index < clearedCount) → réouvre sa question ;
+// - verrouillé (le prochain ou plus loin) → anime Pochy jusqu'au prochain
+//   checkpoint atteignable (cap), ce qui ouvre sa question à l'arrivée. Permet
+//   de jouer sans la molette.
 function onCheckpointSelect(index) {
-    if (index === props.clearedCount) {
-        targetPrg.value = cap.value;
-        gsap.killTweensOf(progress);
-        gsap.to(progress, {
-            value: cap.value,
-            duration: 1.2,
-            ease: 'power2.inOut',
-        });
-        markMoved();
-    } else {
+    if (index < props.clearedCount) {
         emit('select', index);
+
+        return;
     }
+
+    // Pochy est déjà arrivé sur le prochain checkpoint → (ré)ouvre directement sa
+    // question (sinon, comme progress = cap, l'animation ne déclencherait pas `reach`).
+    if (progress.value >= cap.value - 0.5) {
+        emit('reach', props.clearedCount);
+
+        return;
+    }
+
+    targetPrg.value = cap.value;
+    gsap.killTweensOf(progress);
+    gsap.to(progress, {
+        value: cap.value,
+        duration: 1.2,
+        ease: 'power2.inOut',
+    });
+    markMoved();
 }
 
 // ─── Rebuild ──────────────────────────────────────────────────────────────────
@@ -370,6 +383,8 @@ onUnmounted(() => {
                     :y="cp.y - 110"
                     width="72"
                     height="72"
+                    class="cursor-pointer"
+                    @click="onCheckpointSelect(cp.index)"
                 />
                 <image
                     :href="END_ICON"

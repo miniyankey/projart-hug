@@ -91,7 +91,6 @@ export const QUIZ = [
             { key: 'admission', eligible: false, days: 365 },
             { key: 'recent', eligible: false, days: 28 },
             { key: 'none', eligible: true, days: null },
-            { key: 'old', eligible: true, days: null },
         ],
     },
     {

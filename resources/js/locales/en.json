@@ -465,10 +465,7 @@
                 "why": "Someone recovering from major surgery or childbirth needs time to recover before donating.",
                 "choices": {
                     "none": {
-                        "response": "No hospitalisation in the last 12 months"
-                    },
-                    "old": {
-                        "response": "A&E / consultation more than 4 weeks ago"
+                        "response": "I haven't been hospitalised recently"
                     },
                     "recent": {
                         "response": "A&E / consultation less than 4 weeks ago"
