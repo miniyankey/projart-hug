@@ -29,69 +29,61 @@ watch(
     <div class="absolute inset-0 z-50 flex flex-col bg-white">
         <GameProgressBar :value="answered" :total="total" />
 
-        <!-- Header : thématique + compteur -->
+        <!-- Header : thématique + compteur (plus gros, plus d'air sous la barre) -->
         <div
-            class="flex shrink-0 items-baseline justify-between gap-4 px-4 pt-3 sm:px-6 md:px-10"
+            class="flex shrink-0 items-baseline justify-between gap-4 px-4 pt-6 sm:px-6 md:px-10 md:pt-8"
         >
             <p
-                class="m-0 text-[clamp(0.75rem,1.3vw,1rem)] font-semibold tracking-wider text-gray-500 uppercase"
+                class="m-0 text-[clamp(1rem,2.2vw,1.6rem)] font-bold tracking-wide text-gray-700 uppercase"
             >
                 {{ theme }}
             </p>
             <p
-                class="m-0 text-[clamp(0.8rem,1.4vw,1.1rem)] whitespace-nowrap text-gray-400"
+                class="m-0 text-[clamp(0.95rem,1.8vw,1.35rem)] font-semibold whitespace-nowrap text-gray-400"
             >
                 {{ answered }}/{{ total }}
             </p>
         </div>
 
-        <!-- Corps principal (scrollable) -->
+        <!-- Corps principal (scrollable), descendu de ~10vh pour mieux centrer -->
         <div class="flex min-h-0 flex-1 overflow-y-auto">
             <div
-                class="flex w-full flex-col gap-4 p-4 sm:p-5 md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:p-[clamp(1.5rem,4vw,4rem)]"
+                class="flex w-full flex-col gap-4 px-4 pt-[10vh] pb-4 sm:px-5 sm:pb-5 md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:px-[clamp(1.5rem,4vw,4rem)] md:pt-[10vh] md:pb-[clamp(1.5rem,4vw,4rem)]"
             >
-                <!-- Zone personnage
-                     Mobile : rangée horizontale compacte (icône à gauche, Pochy à droite).
-                     Desktop (md+) : bloc relatif avec positionnement absolu pour l'overlap. -->
+                <!-- Zone personnage : 1/3 sur desktop ; icône + Pochy centrés.
+                     Mobile : empilés et centrés, plus gros. -->
                 <div
-                    class="flex shrink-0 flex-row items-end gap-3 md:relative md:block md:h-[clamp(220px,28vw,400px)] md:w-[clamp(160px,20vw,280px)] md:self-center"
+                    class="flex shrink-0 flex-col items-center gap-3 md:relative md:block md:h-[clamp(260px,32vw,460px)] md:basis-1/3 md:self-center"
                 >
                     <!-- Icône thématique -->
                     <img
                         v-if="icon && !iconError"
                         :src="icon"
                         alt=""
-                        class="h-14 w-14 shrink-0 [image-rendering:pixelated] md:absolute md:top-0 md:left-0 md:h-auto md:w-[60%]"
+                        class="h-24 w-24 shrink-0 [image-rendering:pixelated] md:absolute md:top-0 md:left-1/2 md:h-auto md:w-[58%] md:-translate-x-1/2"
                         @error="iconError = true"
                     />
                     <div
                         v-else
-                        class="flex h-14 w-14 shrink-0 items-center justify-center border-4 border-gray-800 bg-gray-100 font-pixel text-xl text-gray-400 shadow-[4px_4px_0_rgba(0,0,0,0.7)] md:absolute md:top-0 md:left-0 md:aspect-square md:h-auto md:w-[60%]"
+                        class="flex h-24 w-24 shrink-0 items-center justify-center border-4 border-gray-800 bg-gray-100 font-pixel text-2xl text-gray-400 shadow-[4px_4px_0_rgba(0,0,0,0.7)] md:absolute md:top-0 md:left-1/2 md:aspect-square md:h-auto md:w-[58%] md:-translate-x-1/2"
                         aria-hidden="true"
                     >
                         ?
                     </div>
 
-                    <!-- Pochy -->
+                    <!-- Pochy (plus gros, centré) -->
                     <GamePochy
                         :variant="pochy"
-                        class="h-20 w-20 shrink-0 drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] [image-rendering:pixelated] md:absolute md:bottom-0 md:left-[14%] md:z-[2] md:h-auto md:w-[64%] md:drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
+                        class="h-32 w-32 shrink-0 drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] [image-rendering:pixelated] md:absolute md:bottom-0 md:left-1/2 md:z-[2] md:h-auto md:w-[80%] md:-translate-x-1/2 md:drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
                     />
                 </div>
 
-                <!-- Colonne contenu : bulle + contenu -->
-                <div class="flex min-w-0 flex-1 flex-col gap-4">
+                <!-- Colonne contenu : 2/3 sur desktop (boutons d'action inclus) -->
+                <div class="flex min-w-0 flex-col gap-4 md:basis-2/3">
                     <slot name="bubble" />
                     <slot name="content" />
                 </div>
             </div>
-        </div>
-
-        <!-- Pied (toujours collé en bas) -->
-        <div
-            class="flex shrink-0 items-center justify-between gap-3 border-t border-gray-100 bg-white px-4 py-3 sm:px-6 md:px-10"
-        >
-            <slot name="footer" />
         </div>
     </div>
 </template>

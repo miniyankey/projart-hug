@@ -29,14 +29,25 @@ watch(
     },
 );
 
+// Le choix « aucun » est exclusif : le cocher vide les autres, et cocher un
+// autre choix le retire.
+const NONE = 'none';
+
 function toggle(choiceId) {
     if (isMultiple.value) {
+        if (choiceId === NONE) {
+            selected.value = selected.value.includes(NONE) ? [] : [NONE];
+
+            return;
+        }
+
         const i = selected.value.indexOf(choiceId);
 
         if (i >= 0) {
             selected.value.splice(i, 1);
         } else {
             selected.value.push(choiceId);
+            selected.value = selected.value.filter((id) => id !== NONE);
         }
 
         return;
@@ -76,16 +87,27 @@ function validate() {
                     @toggle="toggle(choice.id)"
                 />
             </div>
-        </template>
 
-        <template #footer>
-            <Button variant="link" @click="emit('back')">
-                {{ t('eligibilite.ui.back') }}
-            </Button>
-            <!-- Pas de bouton de validation pour les questions à choix unique -->
-            <Button v-if="isMultiple" variant="pixel_violet" @click="validate">
-                {{ t('eligibilite.ui.validate') }}
-            </Button>
+            <!-- Actions : Retour à côté de Valider (choix multiples seulement,
+                 affiché dès qu'un choix est sélectionné). Les choix uniques
+                 valident directement au clic. -->
+            <div class="mt-2 flex items-center gap-3">
+                <Button
+                    variant="link"
+                    class="h-auto px-4 py-3 text-[1.05rem]"
+                    @click="emit('back')"
+                >
+                    {{ t('eligibilite.ui.back') }}
+                </Button>
+                <Button
+                    v-if="isMultiple && selected.length > 0"
+                    variant="pixel_violet"
+                    class="h-auto px-7 py-3 text-[1.05rem]"
+                    @click="validate"
+                >
+                    {{ t('eligibilite.ui.validate') }}
+                </Button>
+            </div>
         </template>
     </GameScene>
 </template>

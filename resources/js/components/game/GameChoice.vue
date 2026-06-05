@@ -42,13 +42,13 @@ defineEmits(['toggle']);
             </svg>
         </span>
 
-        <span class="flex min-w-0 flex-col gap-[0.15rem]">
-            <span class="text-[1.05rem] leading-[1.3] font-semibold">{{
+        <span class="flex min-w-0 flex-col gap-[0.15rem] text-left">
+            <span class="text-[0.95rem] leading-[1.3] font-semibold">{{
                 label
             }}</span>
             <span
                 v-if="descr"
-                class="text-[0.95rem] leading-[1.3] opacity-[0.85]"
+                class="text-left text-[0.85rem] leading-[1.3] opacity-[0.85]"
             >
                 {{ descr }}
             </span>

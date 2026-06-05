@@ -70,16 +70,25 @@ const { t } = useI18n();
                     class="h-[min(60vh,460px)] w-full border-[3px] border-black"
                     loading="lazy"
                 />
-            </div>
-        </template>
 
-        <template #footer>
-            <Button variant="link" @click="$emit('back')">
-                {{ t('eligibilite.ui.back') }}
-            </Button>
-            <Button variant="pixel_violet" @click="$emit('ok')">
-                {{ t('eligibilite.ui.ok') }}
-            </Button>
+                <!-- Actions : Retour à côté de OK -->
+                <div class="mt-2 flex items-center gap-3">
+                    <Button
+                        variant="link"
+                        class="h-auto px-4 py-3 text-[1.05rem]"
+                        @click="$emit('back')"
+                    >
+                        {{ t('eligibilite.ui.back') }}
+                    </Button>
+                    <Button
+                        variant="pixel_violet"
+                        class="h-auto px-7 py-3 text-[1.05rem]"
+                        @click="$emit('ok')"
+                    >
+                        {{ t('eligibilite.ui.ok') }}
+                    </Button>
+                </div>
+            </div>
         </template>
     </GameScene>
 </template>
