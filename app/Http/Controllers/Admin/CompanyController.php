@@ -98,6 +98,10 @@ class CompanyController extends Controller
             'labelled_at' => ['nullable', 'date', 'required_if:is_labelled,true'],
         ]);
 
+        // Le logo ne doit être modifié que si un nouveau fichier est réellement envoyé,
+        // sinon une simple édition (sans re-upload) écraserait le logo existant avec null
+        unset($validated['logo']);
+
         if ($request->hasFile('logo')) {
             if ($entreprise->logo) {
                 Storage::disk('public')->delete($entreprise->logo);

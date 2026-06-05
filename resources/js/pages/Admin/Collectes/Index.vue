@@ -2,6 +2,7 @@
 import { Link } from '@inertiajs/vue3';
 import { Pencil, Plus, Trash2 } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
+import CobrandLink from '@/components/admin/CobrandLink.vue';
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
@@ -77,6 +78,9 @@ function formatTimeRange(start, end) {
                         <th class="px-5 py-3 font-bold">
                             {{ t('admin.collectes.col_status') }}
                         </th>
+                        <th class="px-5 py-3 font-bold">
+                            {{ t('admin.collectes.col_link') }}
+                        </th>
                         <th class="px-5 py-3 text-right font-bold">
                             {{ t('admin.collectes.col_actions') }}
                         </th>
@@ -85,7 +89,7 @@ function formatTimeRange(start, end) {
                 <tbody>
                     <tr v-if="collects.length === 0">
                         <td
-                            colspan="5"
+                            colspan="6"
                             class="px-5 py-10 text-center text-gray-500"
                         >
                             {{ t('admin.collectes.empty') }}
@@ -150,6 +154,12 @@ function formatTimeRange(start, end) {
                             >
                                 {{ t('admin.collectes.status_inactive') }}
                             </span>
+                        </td>
+                        <td class="px-5 py-4">
+                            <CobrandLink
+                                :company-slug="collect.company?.slug"
+                                :collect-slug="collect.slug"
+                            />
                         </td>
                         <td class="px-5 py-4">
                             <div class="flex items-center justify-end gap-2">

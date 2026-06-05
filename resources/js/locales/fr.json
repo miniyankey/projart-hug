@@ -1,4 +1,18 @@
 {
+    "newsletter": {
+        "title": "Restez informé",
+        "subtitle": "Recevez les actualités du Centre de Transfusion Sanguine et soyez alerté lors des prochaines collectes.",
+        "email_label": "Adresse e-mail",
+        "email_placeholder": "votre{'@'}email.com",
+        "submit": "S'inscrire",
+        "success": "Votre inscription à la newsletter a bien été enregistrée.",
+        "error": "Une erreur est survenue, veuillez réessayer plus tard.",
+        "unsubscribe_title": "Se désinscrire",
+        "unsubscribe_subtitle": "Vous souhaitez ne plus recevoir nos actualités ? Saisissez votre adresse e-mail ci-dessous.",
+        "unsubscribe_submit": "Se désinscrire",
+        "unsubscribe_success": "Vous avez bien été désinscrit de la newsletter.",
+        "unsubscribe_error": "Une erreur est survenue lors de la désinscription, veuillez réessayer plus tard."
+    },
     "common": {
         "languages": {
             "fr": "Français",
@@ -46,7 +60,10 @@
         "winner_deleted": "Vainqueur supprimé.",
         "submission_deleted": "Demande supprimée.",
         "form_submission_sent": "Votre demande a bien été envoyée.",
-        "admin_created": "Compte administrateur créé avec succès."
+        "admin_created": "Compte administrateur créé avec succès.",
+        "reminder_scheduled": "C'est noté ! Nous vous écrirons dès que vous pourrez à nouveau donner.",
+        "reminder_already_eligible": "Bonne nouvelle : vous êtes déjà éligible, pas besoin de rappel !",
+        "reminder_lifetime": "D'après vos réponses, le don n'est malheureusement pas possible pour vous. Aucun rappel ne sera envoyé."
     },
     "admin": {
         "nav": {
@@ -148,6 +165,7 @@
             "col_place": "Lieu",
             "col_date": "Date",
             "col_status": "Statut",
+            "col_link": "Lien co-brandé",
             "col_actions": "Actions",
             "status_active": "En cours",
             "status_inactive": "Inactive",
@@ -199,10 +217,80 @@
             }
         },
         "kpi": {
-            "index_title": "KPI - Administration",
-            "title": "Métriques",
-            "show_title": "KPI collecte - Administration",
-            "show_heading": "Métriques de la collecte"
+            "index_title": "Statistiques & KPIs - Administration",
+            "title": "Statistiques & KPIs",
+            "subtitle": "Mesures réelles du site : parcours d'éligibilité, clics vers la prise de RDV et conversions du formulaire.",
+            "show_title": "KPIs entreprise - Administration",
+            "show_heading": "Statistiques de {name}",
+            "show_subtitle": "Métriques filtrées sur les collectes de cette entreprise.",
+            "back_to_index": "Retour aux statistiques",
+            "stat_companies": "Entreprises partenaires",
+            "stat_active_companies": "Entreprises actives",
+            "stat_labelled": "Entreprises labellisées",
+            "stat_active_collects": "Collectes en cours",
+            "stat_collects_total": "Collectes au total",
+            "honest_note": "Les taux sont rapportés aux sessions actives (visiteurs ayant déclenché au moins une action mesurée). Aucun don réel n'est mesuré : la prise de RDV est externe, seul le clic est capté.",
+            "funnel_title": "Funnel du jeu d'éligibilité",
+            "funnel_subtitle": "Sessions atteignant chaque étape du parcours.",
+            "funnel_step": "Étape {n}",
+            "funnel_sessions": "Sessions démarrées",
+            "funnel_completed": "Parcours complétés",
+            "funnel_completion_rate": "Taux de complétion",
+            "funnel_results_title": "Résultats du parcours",
+            "funnel_eligible": "Éligible",
+            "funnel_ineligible": "Inéligible",
+            "funnel_abandoned": "Non terminé",
+            "funnel_dropoff_label": "Plus forte chute",
+            "funnel_dropoff_value": "Étape {from} → {to} : -{lost} ({rate} %)",
+            "funnel_dropoff_empty": "Pas assez de données.",
+            "appointments_title": "Conversion prise de RDV",
+            "appointments_subtitle": "Clics vers le lien de prise de rendez-vous HUG.",
+            "appointments_sessions": "Sessions actives",
+            "appointments_clicks": "Clics vers la prise de RDV",
+            "appointments_rate": "Taux clic → RDV",
+            "appointments_game_share": "Part des clics RDV via le jeu",
+            "appointments_sources_title": "Source du clic RDV",
+            "source_collecte": "Page collecte",
+            "source_jeu": "Jeu d'éligibilité",
+            "lead_title": "Avance de réservation",
+            "lead_subtitle": "Délai entre le clic vers la prise de RDV et la date réelle de la collecte.",
+            "lead_average": "Avance moyenne",
+            "lead_average_unit": "{n} j",
+            "lead_axis": "Clics RDV",
+            "lead_bucket_0": "Jour J ou après",
+            "lead_bucket_1": "1-7 j",
+            "lead_bucket_2": "8-14 j",
+            "lead_bucket_3": "15-30 j",
+            "lead_bucket_4": "> 30 j",
+            "contact_title": "Formulaire de contact",
+            "contact_subtitle": "Du clic d'ouverture à l'envoi de la demande.",
+            "contact_clicks": "Ouvertures du formulaire",
+            "contact_sent": "Demandes envoyées",
+            "contact_rate": "Taux clic → envoi",
+            "contact_trophee": "Intérêt pour le Trophée",
+            "contact_trophee_rate": "Part Trophée des demandes",
+            "contact_by_type_title": "Type de demande envoyée",
+            "type_contact": "Contact",
+            "type_collect_request": "Demande de collecte",
+            "timeline_title": "Évolution sur 30 jours",
+            "timeline_subtitle": "Clics vers la prise de RDV et sessions de jeu démarrées par jour.",
+            "timeline_clicks": "Clics RDV",
+            "timeline_sessions": "Sessions de jeu",
+            "table_title": "Détail par entreprise",
+            "collect_table_title": "Détail par collecte",
+            "col_company": "Entreprise",
+            "col_date": "Date",
+            "col_place": "Lieu",
+            "col_sessions": "Sessions actives",
+            "col_clicks": "Clics RDV",
+            "col_rate": "Taux clic → RDV",
+            "col_actions": "Détail",
+            "status_active": "En cours",
+            "status_upcoming": "À venir",
+            "status_past": "Terminée",
+            "open": "Voir",
+            "table_empty": "Aucune donnée mesurée pour le moment.",
+            "no_data": "Pas encore de données mesurées."
         },
         "vainqueurs": {
             "index_title": "Vainqueurs - Administration",
@@ -430,7 +518,23 @@
                     }
                 }
             }
-        }
+        },
+        "reminder": {
+            "title": "Pas encore éligible ?",
+            "intro": "Laissez-nous votre adresse e-mail : nous vous préviendrons dès que vous pourrez à nouveau donner votre sang.",
+            "email": "Adresse e-mail",
+            "email_placeholder": "vous{'@'}exemple.ch",
+            "newsletter": "Je souhaite aussi recevoir la newsletter du don du sang.",
+            "submit": "Me prévenir"
+        },
+        "donation": {
+            "title": "Soutiens autrement",
+            "intro": "Même sans pouvoir donner ton sang, tu peux aider les HUG en faisant un don financier.",
+            "cta": "Faire un don"
+        },
+        "mascotte_speech": "Viens jouer pour voir si tu es éligible !",
+        "mascotte_cta": "Jouer !",
+        "mascotte_close": "Fermer"
     },
     "cobrand": {
         "intro": "Ton entreprise « {company} » organise une collecte de sang en partenariat avec les Hôpitaux Universitaires de Genève.",
@@ -597,7 +701,7 @@
             "suspended": "Éditions suspendues de 2011 à 2025"
         },
         "prix_honneur": {
-            "title": "Les prix d'honneur",
+            "title": "Les Bloodies",
             "subtitle": "Au-delà du podium, le jury CTS récompense chaque année les engagements les plus remarquables.",
             "grand_prix": {
                 "name": "Grand Prix",

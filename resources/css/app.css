@@ -1,6 +1,46 @@
 @import url('https://fonts.bunny.net/css2?family=press-start-2p&display=swap');
 @import 'tailwindcss';
 
+@font-face {
+    font-family: 'Univers';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/fonts/UniversLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Univers';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/UniversRegular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Univers';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/UniversBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Univers Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/UniversCnRg.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Univers Condensed';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/UniversCnBold.ttf') format('truetype');
+}
+
 @import 'tw-animate-css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -11,9 +51,10 @@
 @theme inline {
     --font-pixel: 'Press Start 2P', monospace;
     --font-sans:
-        Instrument Sans, ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+        Univers, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-univers-cn:
+        'Univers Condensed', ui-sans-serif, system-ui, sans-serif;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -85,9 +126,8 @@
     body,
     html {
         --font-sans:
-            'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-            'Noto Color Emoji';
+            Univers, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+            'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     }
 }
 

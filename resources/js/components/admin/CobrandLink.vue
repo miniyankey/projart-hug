@@ -4,14 +4,14 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { collecte } from '@/routes/cobrand';
 
-// Affiche le lien co-brandé stable d'une entreprise (slug + token) avec
-// un bouton de copie. Le lien reste 404 tant qu'aucune collecte n'est active.
+// Affiche le lien co-brandé d'une collecte (slug entreprise + slug collecte)
+// avec un bouton de copie. Le lien renvoie 404 si la collecte est désactivée.
 const props = defineProps({
-    slug: {
+    companySlug: {
         type: String,
         required: true,
     },
-    token: {
+    collectSlug: {
         type: String,
         required: true,
     },
@@ -21,7 +21,11 @@ const { t } = useI18n();
 const copied = ref(false);
 
 const path = computed(
-    () => collecte({ brandName: props.slug, token: props.token }).url,
+    () =>
+        collecte({
+            brandName: props.companySlug,
+            collect: props.collectSlug,
+        }).url,
 );
 const fullUrl = computed(() => window.location.origin + path.value);
 

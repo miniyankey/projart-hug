@@ -2,7 +2,6 @@
 import { Link } from '@inertiajs/vue3';
 import { Award, Pencil, Plus, Trash2 } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
-import CobrandLink from '@/components/admin/CobrandLink.vue';
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
@@ -57,9 +56,6 @@ const {
                             {{ t('admin.entreprises.col_contact') }}
                         </th>
                         <th class="px-5 py-3 font-bold">
-                            {{ t('admin.entreprises.col_link') }}
-                        </th>
-                        <th class="px-5 py-3 font-bold">
                             {{ t('admin.entreprises.col_label') }}
                         </th>
                         <th class="px-5 py-3 text-right font-bold">
@@ -70,7 +66,7 @@ const {
                 <tbody>
                     <tr v-if="companies.length === 0">
                         <td
-                            colspan="5"
+                            colspan="4"
                             class="px-5 py-10 text-center text-gray-500"
                         >
                             {{ t('admin.entreprises.empty') }}
@@ -103,12 +99,6 @@ const {
                             <div class="text-gray-500">
                                 {{ company.email_contact }}
                             </div>
-                        </td>
-                        <td class="px-5 py-4">
-                            <CobrandLink
-                                :slug="company.slug"
-                                :token="company.token"
-                            />
                         </td>
                         <td class="px-5 py-4">
                             <span

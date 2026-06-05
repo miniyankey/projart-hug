@@ -17,7 +17,7 @@ class CollectEventController extends Controller
     public function eligibiliteStep(Request $request): Response
     {
         $request->validate([
-            'collect_id' => ['required', 'exists:collects,id'],
+            'collect_id' => ['nullable', 'exists:collects,id'],
             'step' => ['required', 'integer', 'min:1'],
             'result' => ['nullable', 'string'],
             'completed' => ['boolean'],
@@ -44,7 +44,7 @@ class CollectEventController extends Controller
     public function appointmentClick(Request $request): Response
     {
         $request->validate([
-            'collect_id' => ['required', 'exists:collects,id'],
+            'collect_id' => ['nullable', 'exists:collects,id'],
             'source' => ['nullable', 'string'],
         ]);
 

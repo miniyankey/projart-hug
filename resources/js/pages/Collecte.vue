@@ -2,7 +2,9 @@
 import { Head } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import CollectForm from '@/components/forms/CollectForm.vue';
+import MascottePopup from '@/components/MascottePopup.vue';
 import PublicLayout from '@/layouts/PublicLayout.vue';
+import { eligibilite } from '@/routes';
 
 const { t } = useI18n();
 </script>
@@ -22,5 +24,6 @@ const { t } = useI18n();
                 <CollectForm />
             </div>
         </div>
+        <MascottePopup :href="eligibilite.url()" />
     </PublicLayout>
 </template>

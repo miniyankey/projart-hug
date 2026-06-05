@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import StepCard from '@/components/cards/StepCard.vue';
+import NewsletterForm from '@/components/forms/NewsletterForm.vue';
+import MascottePopup from '@/components/MascottePopup.vue';
 import {
     Accordion,
     AccordionContent,
@@ -457,6 +459,13 @@ onUnmounted(() => {
                     </Accordion>
                 </div>
             </section>
+            <!-- Section Newsletter -->
+            <section class="bg-white py-24">
+                <div class="mx-auto max-w-xl px-6">
+                    <NewsletterForm />
+                </div>
+            </section>
         </div>
+        <MascottePopup :href="routes.eligibilite.url()" />
     </PublicLayout>
 </template>
