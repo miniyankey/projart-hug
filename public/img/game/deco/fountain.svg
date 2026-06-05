@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Ombre -->
+  <rect x="-26" y="43" width="54" height="2" fill="#00000022"/>
+  <!-- Bassin (pierre) -->
+  <rect x="-26" y="26" width="52" height="18" fill="#1a1a1a"/>
+  <rect x="-24" y="27" width="48" height="16" fill="#9a9da3"/>
+  <rect x="-24" y="27" width="48" height="3" fill="#b6b9bf"/>
+  <rect x="-24" y="40" width="48" height="3" fill="#74777d"/>
+  <!-- Eau du bassin -->
+  <rect x="-22" y="24" width="44" height="5" fill="#3f9fd6"/>
+  <rect x="-22" y="24" width="44" height="2" fill="#62b8ea"/>
+  <g fill="#9ad4f4">
+    <rect x="-16" y="25" width="4" height="1"/><rect x="-2" y="25" width="5" height="1"/><rect x="12" y="25" width="4" height="1"/>
+  </g>
+  <!-- Pied central -->
+  <rect x="-5" y="6" width="10" height="20" fill="#1a1a1a"/>
+  <rect x="-4" y="6" width="8" height="20" fill="#b6b9bf"/>
+  <rect x="-4" y="6" width="3" height="20" fill="#cdd0d6"/>
+  <!-- Vasque haute -->
+  <rect x="-12" y="2" width="24" height="6" fill="#1a1a1a"/>
+  <rect x="-11" y="3" width="22" height="4" fill="#9a9da3"/>
+  <rect x="-11" y="3" width="22" height="2" fill="#b6b9bf"/>
+  <!-- Jet d'eau -->
+  <rect x="-1" y="-16" width="2" height="18" fill="#62b8ea"/>
+  <rect x="-1" y="-16" width="1" height="18" fill="#9ad4f4"/>
+  <!-- Retombées d'eau -->
+  <g fill="#62b8ea">
+    <rect x="-8" y="0" width="2" height="6"/><rect x="6" y="0" width="2" height="6"/>
+    <rect x="-5" y="-6" width="1" height="8"/><rect x="4" y="-6" width="1" height="8"/>
+  </g>
+  <!-- Gouttelettes -->
+  <g fill="#9ad4f4">
+    <rect x="-9" y="-9" width="1" height="1"/><rect x="8" y="-7" width="1" height="1"/><rect x="0" y="-19" width="1" height="1"/>
+  </g>
+</svg>

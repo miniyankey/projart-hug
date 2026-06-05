@@ -1,14 +1,29 @@
 <script setup>
 // Layer 3 — scenery filling the space between path segments.
-// Each item is { x, y, type }; the matching SVG file lives in
-// public/img/game/deco/<type>.svg and is placed via <image>.
-// All deco sprites share the same box (anchor 0,0 = the path-side point).
+// Each item is { x, y, type, landmark? }; the matching SVG file lives in
+// public/img/game/deco/<type>.svg (viewBox "-32 -44 64 92") and is placed via
+// <image>. Every sprite is anchored by its base-centre at (d.x, d.y + 48) so a
+// scaled-up landmark still stands on the same ground point as a normal prop.
 defineProps({
     items: { type: Array, required: true },
 });
 
-// Sprite box — must match the viewBox of the files in public/img/game/deco/
-const BOX = { x: -32, y: -44, w: 64, h: 92 };
+const BASE_W = 64;
+const BASE_H = 92;
+const BASE_OFFSET = 48; // viewBox bottom relative to the anchor (d.y)
+
+function box(d) {
+    const s = d.scale || 1;
+    const w = BASE_W * s;
+    const h = BASE_H * s;
+
+    return {
+        x: d.x - w / 2,
+        y: d.y + BASE_OFFSET - h,
+        w,
+        h,
+    };
+}
 </script>
 
 <template>
@@ -17,10 +32,10 @@ const BOX = { x: -32, y: -44, w: 64, h: 92 };
             v-for="(d, i) in items"
             :key="i"
             :href="`/img/game/deco/${d.type}.svg`"
-            :x="d.x + BOX.x"
-            :y="d.y + BOX.y"
-            :width="BOX.w"
-            :height="BOX.h"
+            :x="box(d).x"
+            :y="box(d).y"
+            :width="box(d).w"
+            :height="box(d).h"
         />
     </g>
 </template>

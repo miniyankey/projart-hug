@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -44 64 92" shape-rendering="crispEdges">
+  <!-- Reflet sur l'eau -->
+  <rect x="-15" y="41" width="32" height="2" fill="#9ad4f4" opacity="0.6"/>
+  <!-- Coque -->
+  <rect x="-15" y="30" width="30" height="8" fill="#7a3f1c"/>
+  <rect x="-15" y="30" width="30" height="2" fill="#9a5a30"/>
+  <rect x="-13" y="38" width="26" height="2" fill="#3a2010"/>
+  <!-- Mât -->
+  <rect x="-1" y="-8" width="2" height="38" fill="#caa074"/>
+  <!-- Grand-voile (triangle) -->
+  <rect x="-12" y="-4" width="3" height="32" fill="#f4f4f4"/>
+  <rect x="-9" y="2" width="3" height="26" fill="#f4f4f4"/>
+  <rect x="-6" y="8" width="3" height="20" fill="#f4f4f4"/>
+  <rect x="-3" y="14" width="3" height="14" fill="#f4f4f4"/>
+  <rect x="-12" y="-4" width="3" height="32" fill="#ffffff"/>
+  <rect x="-12" y="26" width="11" height="2" fill="#cdd6df"/>
+  <!-- Foc (petite voile avant) -->
+  <rect x="2" y="6" width="3" height="22" fill="#e8eef2"/>
+  <rect x="5" y="12" width="3" height="16" fill="#e8eef2"/>
+  <rect x="2" y="6" width="2" height="22" fill="#ffffff"/>
+  <!-- Fanion -->
+  <rect x="1" y="-9" width="5" height="2" fill="#d8392b"/>
+</svg>
