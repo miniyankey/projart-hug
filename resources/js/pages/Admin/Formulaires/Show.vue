@@ -116,6 +116,16 @@ function toggleHandled() {
                         <dt
                             class="text-xs font-bold tracking-wide text-gray-500 uppercase"
                         >
+                            {{ t('admin.formulaires.field_city') }}
+                        </dt>
+                        <dd class="mt-1 font-semibold text-gray-900">
+                            {{ submission.city }}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt
+                            class="text-xs font-bold tracking-wide text-gray-500 uppercase"
+                        >
                             {{ t('admin.formulaires.field_name') }}
                         </dt>
                         <dd class="mt-1 font-semibold text-gray-900">

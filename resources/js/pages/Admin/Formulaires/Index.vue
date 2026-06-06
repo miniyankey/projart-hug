@@ -96,6 +96,9 @@ const {
                             {{ t('admin.formulaires.col_company') }}
                         </th>
                         <th class="px-5 py-3 font-bold">
+                            {{ t('admin.formulaires.col_city') }}
+                        </th>
+                        <th class="px-5 py-3 font-bold">
                             {{ t('admin.formulaires.col_contact') }}
                         </th>
                         <th class="px-5 py-3 font-bold">
@@ -112,7 +115,7 @@ const {
                 <tbody>
                     <tr v-if="filteredSubmissions.length === 0">
                         <td
-                            colspan="5"
+                            colspan="6"
                             class="px-5 py-10 text-center text-gray-500"
                         >
                             {{ t('admin.formulaires.empty') }}
@@ -125,6 +128,9 @@ const {
                     >
                         <td class="px-5 py-4 font-bold text-gray-900">
                             {{ submission.company_name }}
+                        </td>
+                        <td class="px-5 py-4 text-gray-600">
+                            {{ submission.city }}
                         </td>
                         <td class="px-5 py-4">
                             <div class="font-semibold text-gray-900">

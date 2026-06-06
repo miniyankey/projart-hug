@@ -14,6 +14,7 @@ class FormSubmission extends Model
     protected $fillable = [
         'type',
         'company_name',
+        'city',
         'name',
         'contact_email',
         'message',
