@@ -60,30 +60,30 @@ onBeforeUnmount(() => removeListener?.());
 <template>
     <header class="sticky top-0 z-50 border-b border-gray-200 bg-white">
         <nav
-            class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 md:gap-10 md:px-6 md:py-4 lg:px-8"
+            class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 lg:gap-8 lg:px-6 lg:py-4 xl:px-8 xl:gap-10"
         >
             <!-- Mode co-brandé : logo HUG × logo entreprise -->
             <div
                 v-if="company"
-                class="flex shrink-0 items-center gap-3 md:gap-4"
+                class="flex shrink-0 items-center gap-2 lg:gap-3 xl:gap-4"
             >
                 <img
                     :src="hugLogo"
                     alt="Hôpitaux Universitaires Genève"
-                    class="h-8 w-auto md:h-12"
+                    class="h-8 w-auto lg:h-10 xl:h-12"
                 />
-                <span class="text-lg font-light text-gray-400 md:text-xl"
+                <span class="text-base font-light text-gray-400 lg:text-lg xl:text-xl"
                     >×</span
                 >
                 <img
                     v-if="company.logo"
                     :src="company.logo"
                     :alt="company.name"
-                    class="h-8 w-auto md:h-12"
+                    class="h-8 w-auto max-w-[80px] object-contain lg:h-10 lg:max-w-[100px] xl:h-12 xl:max-w-[130px]"
                 />
                 <span
                     v-else
-                    class="text-base font-semibold text-gray-900 md:text-lg"
+                    class="text-sm font-semibold text-gray-900 lg:text-base xl:text-lg"
                 >
                     {{ company.name }}
                 </span>
@@ -99,19 +99,19 @@ onBeforeUnmount(() => removeListener?.());
                 <img
                     :src="hugLogo"
                     alt="Hôpitaux Universitaires Genève"
-                    class="h-8 w-auto md:h-12"
+                    class="h-8 w-auto lg:h-10 xl:h-12"
                 />
             </Link>
 
             <div
-                class="hidden flex-1 items-center justify-center gap-8 md:flex lg:gap-12"
+                class="hidden flex-1 items-center justify-center gap-4 lg:flex xl:gap-8"
             >
                 <Link
                     v-for="link in links"
                     :key="link.href"
                     :href="link.href"
                     :class="[
-                        'border-b-2 pb-1 text-sm whitespace-nowrap transition-colors hover:text-[var(--brand)]',
+                        'border-b-2 pb-1 text-xs whitespace-nowrap transition-colors hover:text-[var(--brand)] xl:text-sm',
                         isActive(link.href)
                             ? 'border-[var(--brand)] font-semibold text-[var(--brand)]'
                             : 'border-transparent text-gray-800',
@@ -121,15 +121,15 @@ onBeforeUnmount(() => removeListener?.());
                 </Link>
             </div>
 
-            <div class="hidden items-center gap-4 md:flex lg:gap-6">
-                <Button as-child variant="cta" size="cta">
+            <div class="hidden items-center gap-2 lg:flex xl:gap-4">
+                <Button as-child variant="cta" size="cta" class="text-xs xl:text-sm lg:h-9 lg:px-4 xl:h-11 xl:px-6">
                     <Link :href="cta.href">{{ t(cta.label) }}</Link>
                 </Button>
                 <LanguageSwitcher />
                 <Link
                     v-if="company"
                     :href="normalSiteUrl"
-                    class="text-xs text-gray-500 transition-colors hover:text-[var(--brand)]"
+                    class="text-[0.65rem] text-gray-500 transition-colors hover:text-[var(--brand)] xl:text-xs"
                 >
                     {{ t('nav.main_site') }}
                 </Link>
@@ -137,7 +137,7 @@ onBeforeUnmount(() => removeListener?.());
 
             <button
                 type="button"
-                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center text-gray-800 md:hidden"
+                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center text-gray-800 lg:hidden"
                 :aria-label="open ? t('nav.menu_close') : t('nav.menu_open')"
                 :aria-expanded="open"
                 aria-controls="mobile-menu"
@@ -151,7 +151,7 @@ onBeforeUnmount(() => removeListener?.());
         <div
             v-if="open"
             id="mobile-menu"
-            class="border-t border-gray-200 bg-white md:hidden"
+            class="border-t border-gray-200 bg-white lg:hidden"
         >
             <div class="flex flex-col gap-1 px-4 py-4">
                 <Link
