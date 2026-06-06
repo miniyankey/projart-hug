@@ -8,8 +8,6 @@ import FormSection from '@/components/admin/FormSection.vue';
 import TimePicker from '@/components/forms/TimePicker.vue';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
 import {
     Popover,
     PopoverContent,
@@ -62,7 +60,6 @@ const form = useForm({
         : '',
     end_time: props.collect?.end_time ? props.collect.end_time.slice(0, 5) : '',
     link_appointment: props.collect?.link_appointment ?? '',
-    is_active: props.collect?.is_active ?? true,
     // Champs d'un nouveau lieu, saisis seulement quand place_id === 'new'.
     place: {
         name: '',
@@ -305,13 +302,6 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                     "
                     :error="form.errors.link_appointment"
                 />
-                <Label
-                    for="is_active"
-                    class="cursor-pointer items-center gap-3 font-semibold text-gray-900"
-                >
-                    <Checkbox id="is_active" v-model="form.is_active" />
-                    {{ t('admin.collectes.create.is_active') }}
-                </Label>
             </FormSection>
 
             <div class="flex items-center justify-end gap-3">
@@ -395,19 +385,6 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                                 form.link_appointment
                             }}</span>
                         </p>
-
-                        <span
-                            v-if="form.is_active"
-                            class="inline-flex items-center border-2 border-emerald-500 bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700"
-                        >
-                            {{ t('admin.collectes.status_active') }}
-                        </span>
-                        <span
-                            v-else
-                            class="inline-flex items-center border-2 border-gray-300 bg-gray-50 px-2.5 py-1 text-xs font-semibold text-gray-500"
-                        >
-                            {{ t('admin.collectes.status_inactive') }}
-                        </span>
                     </div>
                 </div>
 
