@@ -95,7 +95,7 @@ class CollectController extends Controller
             return;
         }
 
-        //création d'un mail pour informer le contact de l'entreprise que sa collecte est active et que le lien co-brandé est accessible
+        // création d'un mail pour informer le contact de l'entreprise que sa collecte est active et que le lien co-brandé est accessible
         Mail::to($collect->company->email_contact)->queue(new CollectCreatedMail($collect));
     }
 
