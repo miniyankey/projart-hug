@@ -240,9 +240,7 @@ onUnmounted(() => {
 
         <div ref="root">
             <!-- Hero -->
-            <section
-                class="bg-[url('/img/Bg.webp')] bg-cover bg-left py-24 sm:bg-center lg:py-36"
-            >
+            <section class="hero-section py-24 lg:py-36">
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="max-w-xl">
                         <h1
@@ -474,3 +472,17 @@ onUnmounted(() => {
         <MascottePopup :href="routes.eligibilite.url()" />
     </PublicLayout>
 </template>
+
+<style scoped>
+.hero-section {
+    background-image: url('/img/Bg.webp');
+    background-size: cover;
+    background-position: left center;
+}
+
+@media (min-width: 640px) {
+    .hero-section {
+        background-position: center;
+    }
+}
+</style>
