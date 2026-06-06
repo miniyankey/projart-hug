@@ -14,7 +14,7 @@ class CollectController extends Controller
      */
     public function show(Company $company, Collect $collect): Response
     {
-        abort_if(! $collect->is_active, 404);
+        abort_if(! $collect->isOngoing(), 404);
 
         $collect->load(['place', 'eligibiliteSteps']);
 

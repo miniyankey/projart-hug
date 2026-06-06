@@ -60,10 +60,10 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
             'stats' => [
                 'companies' => Company::count(),
                 'labelled' => Company::where('is_labelled', true)->count(),
-                'active_collects' => Collect::where('is_active', true)->count(),
+                'active_collects' => Collect::ongoing()->count(),
             ],
             'activeCollects' => Collect::with(['company:id,name,slug,color,logo', 'place:id,city'])
-                ->where('is_active', true)
+                ->ongoing()
                 ->orderBy('day')
                 ->get()
                 ->map(fn (Collect $collect) => [

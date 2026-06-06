@@ -5,6 +5,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LabelStepCard from '@/components/cards/LabelStepCard.vue';
 import MascottePopup from '@/components/MascottePopup.vue';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import {
@@ -209,11 +210,9 @@ onUnmounted(() => {
             <section class="bg-[var(--brand-tint)] py-24 lg:py-36">
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="mx-auto max-w-2xl text-center">
-                        <span
-                            class="anim-hero-eyebrow inline-block rounded-full bg-[var(--brand)] px-4 py-1.5 text-xs font-semibold tracking-wide text-white uppercase"
-                        >
+                        <Badge variant="pixel" class="anim-hero-eyebrow">
                             {{ t('don_sang.hero.eyebrow') }}
-                        </span>
+                        </Badge>
                         <h1
                             class="anim-hero-title mt-6 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
                         >
