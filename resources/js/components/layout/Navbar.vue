@@ -60,7 +60,7 @@ onBeforeUnmount(() => removeListener?.());
 <template>
     <header class="sticky top-0 z-50 border-b border-gray-200 bg-white">
         <nav
-            class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 lg:gap-8 lg:px-6 lg:py-4 xl:px-8 xl:gap-10"
+            class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 lg:gap-8 lg:px-6 lg:py-4 xl:gap-10 xl:px-8"
         >
             <!-- Mode co-brandé : logo HUG × logo entreprise -->
             <div
@@ -72,7 +72,8 @@ onBeforeUnmount(() => removeListener?.());
                     alt="Hôpitaux Universitaires Genève"
                     class="h-8 w-auto lg:h-10 xl:h-12"
                 />
-                <span class="text-base font-light text-gray-400 lg:text-lg xl:text-xl"
+                <span
+                    class="text-base font-light text-gray-400 lg:text-lg xl:text-xl"
                     >×</span
                 >
                 <img
@@ -122,7 +123,12 @@ onBeforeUnmount(() => removeListener?.());
             </div>
 
             <div class="hidden items-center gap-2 lg:flex xl:gap-4">
-                <Button as-child variant="cta" size="cta" class="text-xs xl:text-sm lg:h-9 lg:px-4 xl:h-11 xl:px-6">
+                <Button
+                    as-child
+                    variant="cta"
+                    size="cta"
+                    class="text-xs lg:h-9 lg:px-4 xl:h-11 xl:px-6 xl:text-sm"
+                >
                     <Link :href="cta.href">{{ t(cta.label) }}</Link>
                 </Button>
                 <LanguageSwitcher />
