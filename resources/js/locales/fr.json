@@ -356,7 +356,7 @@
             "play": "JOUER",
             "back": "Retour",
             "validate": "Continuer",
-            "ok": "OK",
+            "ok": "Continuer",
             "learn_more": "En savoir plus",
             "scroll_hint": "Scrolle pour avancer",
             "loading": "Chargement…"
@@ -391,7 +391,8 @@
                 "text": "Saurais-tu donner ton sang ? Fais le test avec Pochy !",
                 "copied": "Lien copié !"
             },
-            "back_to_game": "Revenir au parcours"
+            "back_to_game": "Revenir au parcours",
+            "back_to_site": "Retour au site"
         },
         "ineligible": {
             "lifetime": {

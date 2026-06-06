@@ -2,6 +2,7 @@
 // Écran de fin du jeu — affiché après la dernière question.
 // Éligible → message positif + CTA inscription.
 // Inéligible → verdict + récap pixel des étapes inéligibles (titre, réponse, durée).
+import { Link } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import GamePochy from './GamePochy.vue';
@@ -16,6 +17,8 @@ const props = defineProps({
     total: { type: Number, default: 0 },
     // Lien d'inscription (cobrand) ou null (→ lien HUG public)
     linkAppointment: { type: String, default: null },
+    // URL de retour vers le site (landing co-brandée ou accueil public)
+    siteUrl: { type: String, required: true },
 });
 
 defineEmits(['back', 'appointment']);
@@ -115,12 +118,59 @@ async function share() {
             <div
                 class="flex w-full flex-col gap-5 px-4 pt-[6vh] pb-8 sm:px-6 md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:px-10 md:pt-[8vh]"
             >
-                <!-- Pochy -->
-                <div class="flex shrink-0 justify-center md:basis-1/3">
+                <!-- Pochy + actions -->
+                <div
+                    class="flex shrink-0 flex-col items-center gap-6 md:basis-1/3"
+                >
                     <GamePochy
                         :variant="pochy"
                         class="w-40 drop-shadow-[0_10px_18px_rgba(0,0,0,0.3)] [image-rendering:pixelated] md:w-[80%]"
                     />
+
+                    <!-- Actions -->
+                    <div
+                        class="flex w-full flex-col items-stretch gap-3 px-2 md:max-w-xs"
+                    >
+                        <Button
+                            v-if="isEligible"
+                            variant="pixel_violet"
+                            as="a"
+                            class="h-auto px-7 py-3 text-[1.05rem]"
+                            :href="appointmentUrl"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            @click="$emit('appointment')"
+                        >
+                            {{ t('eligibilite.finish.eligible.cta') }}
+                        </Button>
+                        <Button
+                            variant="pixel_white"
+                            class="h-auto border-[3px] border-black px-7 py-3 text-[1.05rem] text-black"
+                            @click="share"
+                        >
+                            {{
+                                shareCopied
+                                    ? t('eligibilite.finish.share.copied')
+                                    : t('eligibilite.finish.share.cta')
+                            }}
+                        </Button>
+                        <Button
+                            as-child
+                            variant="pixel_white"
+                            class="h-auto border-[3px] border-black px-7 py-3 text-[1.05rem] text-black"
+                        >
+                            <Link :href="siteUrl">
+                                {{ t('eligibilite.finish.back_to_site') }}
+                            </Link>
+                        </Button>
+                        <Button
+                            variant="link"
+                            class="h-auto px-4 py-3 text-[1.05rem]"
+                            @click="$emit('back')"
+                        >
+                            {{ t('eligibilite.finish.back_to_game') }}
+                        </Button>
+                    </div>
                 </div>
 
                 <!-- Contenu -->
@@ -172,40 +222,6 @@ async function share() {
                                 {{ step.answers.join(', ') }}
                             </p>
                         </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="flex flex-wrap items-center gap-3 pt-1">
-                        <Button
-                            v-if="isEligible"
-                            variant="pixel_violet"
-                            as="a"
-                            class="h-auto px-7 py-3 text-[1.05rem]"
-                            :href="appointmentUrl"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            @click="$emit('appointment')"
-                        >
-                            {{ t('eligibilite.finish.eligible.cta') }}
-                        </Button>
-                        <Button
-                            variant="pixel_white"
-                            class="h-auto border-[3px] border-black px-7 py-3 text-[1.05rem] text-black"
-                            @click="share"
-                        >
-                            {{
-                                shareCopied
-                                    ? t('eligibilite.finish.share.copied')
-                                    : t('eligibilite.finish.share.cta')
-                            }}
-                        </Button>
-                        <Button
-                            variant="link"
-                            class="h-auto px-4 py-3 text-[1.05rem]"
-                            @click="$emit('back')"
-                        >
-                            {{ t('eligibilite.finish.back_to_game') }}
-                        </Button>
                     </div>
                 </div>
             </div>

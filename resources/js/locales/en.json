@@ -372,7 +372,7 @@
             "play": "PLAY",
             "back": "Back",
             "validate": "Continue",
-            "ok": "OK",
+            "ok": "Continue",
             "learn_more": "Learn more",
             "scroll_hint": "Scroll to move forward",
             "loading": "Loading…"
@@ -407,7 +407,8 @@
                 "text": "Could you give blood? Take the test with Pochy!",
                 "copied": "Link copied!"
             },
-            "back_to_game": "Back to the journey"
+            "back_to_game": "Back to the journey",
+            "back_to_site": "Back to the website"
         },
         "ineligible": {
             "lifetime": {
