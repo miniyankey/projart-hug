@@ -241,12 +241,7 @@ onUnmounted(() => {
         <div ref="root">
             <!-- Hero -->
             <section
-                class="py-24 lg:py-36"
-                style="
-                    background-image: url('/img/Bg.webp');
-                    background-size: cover;
-                    background-position: center;
-                "
+                class="bg-[url('/img/Bg.webp')] bg-cover bg-left py-24 sm:bg-center lg:py-36"
             >
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="max-w-xl">
