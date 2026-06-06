@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n';
 import CompanyBrandPreview from '@/components/admin/CompanyBrandPreview.vue';
 import FormField from '@/components/admin/FormField.vue';
 import FormSection from '@/components/admin/FormSection.vue';
+import SingleDatePicker from '@/components/forms/SingleDatePicker.vue';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -302,22 +303,13 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                     <Checkbox id="is_labelled" v-model="form.is_labelled" />
                     {{ t('admin.entreprises.create.is_labelled') }}
                 </Label>
-                <FormField
+                <SingleDatePicker
                     v-if="form.is_labelled"
                     v-model="form.labelled_at"
                     class="max-w-xs"
-                    type="date"
-                    :label="t('admin.entreprises.create.labelled_at')"
                     :error="form.errors.labelled_at"
                 />
             </FormSection>
-
-            <p
-                v-if="!isEdit"
-                class="border-l-4 border-[var(--brand)] bg-[var(--brand-tint)] px-4 py-3 text-sm text-gray-700"
-            >
-                {{ t('admin.entreprises.create.link_note') }}
-            </p>
 
             <div class="flex items-center justify-end gap-3">
                 <Button as-child variant="outline">
