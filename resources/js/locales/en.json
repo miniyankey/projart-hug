@@ -4,6 +4,7 @@
         "subtitle": "Receive news from the Blood Transfusion Centre and be notified of upcoming blood drives.",
         "email_label": "Email address",
         "email_placeholder": "your{'@'}email.com",
+        "consent_label": "I agree to receive the Blood Transfusion Centre newsletter by email.",
         "submit": "Subscribe",
         "success": "You have been successfully subscribed to the newsletter.",
         "error": "An error occurred, please try again later.",
