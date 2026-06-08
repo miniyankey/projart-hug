@@ -90,7 +90,7 @@ const mapUrl = computed(() => {
                             {{ t('cobrand.collecte.eyebrow') }}
                         </Badge>
                         <h1
-                            class="mt-6 text-3xl font-semibold text-gray-900 sm:text-4xl"
+                            class="mt-6 font-pixel text-[1.35rem] leading-loose text-gray-900"
                         >
                             {{ t('cobrand.collecte.title') }}
                         </h1>
@@ -242,7 +242,9 @@ const mapUrl = computed(() => {
             <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
                 <!-- Carte feature ludique -->
                 <div>
-                    <h2 class="mb-6 text-2xl font-semibold text-gray-900">
+                    <h2
+                        class="mb-6 font-pixel text-[1.1rem] leading-loose text-gray-900"
+                    >
                         {{ t('cobrand.collecte.eligible_section_title') }}
                     </h2>
                     <div
@@ -278,7 +280,9 @@ const mapUrl = computed(() => {
 
                 <!-- Accordéon infos utiles -->
                 <div>
-                    <h2 class="mb-6 text-2xl font-semibold text-gray-900">
+                    <h2
+                        class="mb-6 font-pixel text-[1.1rem] leading-loose text-gray-900"
+                    >
                         {{ t('cobrand.collecte.infos_title') }}
                     </h2>
                     <Accordion type="single" collapsible>

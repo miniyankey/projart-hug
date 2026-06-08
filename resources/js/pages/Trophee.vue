@@ -506,7 +506,7 @@ onUnmounted(() => {
                 >
                     <div class="mb-12 text-center">
                         <h2
-                            class="anim-vainqueurs-title text-2xl font-semibold text-gray-900"
+                            class="anim-vainqueurs-title font-pixel text-[1.1rem] leading-loose text-gray-900"
                         >
                             {{ t('trophee.vainqueurs.title') }}
                         </h2>

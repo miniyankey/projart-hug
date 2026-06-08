@@ -42,7 +42,7 @@ defineProps({
 
         <!-- Description -->
         <div class="mt-3 border-2 border-dashed border-[var(--brand)]/40 p-3">
-            <p class="font-pixel text-xs leading-loose text-gray-600 uppercase">
+            <p class="text-lg leading-relaxed text-gray-600">
                 {{ description }}
             </p>
         </div>

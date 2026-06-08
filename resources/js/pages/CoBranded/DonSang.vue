@@ -214,7 +214,7 @@ onUnmounted(() => {
                             {{ t('don_sang.hero.eyebrow') }}
                         </Badge>
                         <h1
-                            class="anim-hero-title mt-6 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
+                            class="anim-hero-title mt-6 font-pixel text-[1.35rem] leading-loose tracking-tight text-gray-900"
                         >
                             {{ t('don_sang.hero.title') }}
                         </h1>
@@ -246,7 +246,7 @@ onUnmounted(() => {
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="anim-deroulement-header mb-14 text-center">
                         <h2
-                            class="anim-deroulement-title text-3xl font-semibold text-gray-900"
+                            class="anim-deroulement-title font-pixel text-[1.2rem] leading-loose text-gray-900"
                         >
                             {{ t('don_sang.deroulement.title') }}
                         </h2>
@@ -304,7 +304,7 @@ onUnmounted(() => {
                             &gt; {{ t('don_sang.hero.eyebrow') }}
                         </span>
                         <h2
-                            class="anim-cta-title mt-4 text-3xl font-semibold text-gray-900"
+                            class="anim-cta-title mt-4 font-pixel text-[1.2rem] leading-loose text-gray-900"
                         >
                             {{ t('don_sang.cta.title') }}
                         </h2>
