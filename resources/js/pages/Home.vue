@@ -240,14 +240,7 @@ onUnmounted(() => {
 
         <div ref="root">
             <!-- Hero -->
-            <section
-                class="py-24 lg:py-36"
-                style="
-                    background-image: url('/img/Bg.webp');
-                    background-size: cover;
-                    background-position: center;
-                "
-            >
+            <section class="hero-section py-24 lg:py-36">
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="max-w-xl">
                         <h1
@@ -394,39 +387,39 @@ onUnmounted(() => {
                     </div>
 
                     <div
-                        class="grid grid-cols-2 gap-4 lg:flex lg:items-stretch lg:gap-2"
+                        class="grid grid-cols-2 gap-4 md:flex md:items-stretch md:gap-2"
                     >
                         <StepCard
                             :step="1"
                             :label="t('home.steps.step1')"
-                            class="anim-step-card w-full lg:w-52"
+                            class="anim-step-card w-full md:w-44 lg:w-52"
                         />
                         <span
-                            class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
+                            class="hidden shrink-0 self-center font-pixel text-lg text-white/50 md:inline"
                             >></span
                         >
                         <StepCard
                             :step="2"
                             :label="t('home.steps.step2')"
-                            class="anim-step-card w-full lg:w-52"
+                            class="anim-step-card w-full md:w-44 lg:w-52"
                         />
                         <span
-                            class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
+                            class="hidden shrink-0 self-center font-pixel text-lg text-white/50 md:inline"
                             >></span
                         >
                         <StepCard
                             :step="3"
                             :label="t('home.steps.step3')"
-                            class="anim-step-card w-full lg:w-52"
+                            class="anim-step-card w-full md:w-44 lg:w-52"
                         />
                         <span
-                            class="hidden shrink-0 self-center font-pixel text-xl text-white/50 lg:inline"
+                            class="hidden shrink-0 self-center font-pixel text-lg text-white/50 md:inline"
                             >></span
                         >
                         <StepCard
                             :step="4"
                             :label="t('home.steps.step4')"
-                            class="anim-step-card w-full lg:w-52"
+                            class="anim-step-card w-full md:w-44 lg:w-52"
                         />
                     </div>
 
@@ -479,3 +472,17 @@ onUnmounted(() => {
         <MascottePopup :href="routes.eligibilite.url()" />
     </PublicLayout>
 </template>
+
+<style scoped>
+.hero-section {
+    background-image: url('/img/Bg.webp');
+    background-size: cover;
+    background-position: left center;
+}
+
+@media (min-width: 640px) {
+    .hero-section {
+        background-position: center;
+    }
+}
+</style>

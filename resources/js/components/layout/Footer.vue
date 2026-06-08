@@ -37,15 +37,19 @@ const socials = [
 
 <template>
     <footer class="border-t border-gray-200 bg-white">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-            <div class="grid gap-8 py-10 sm:gap-12 sm:py-14 md:grid-cols-3">
-                <div>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div
+                class="grid gap-8 py-10 sm:gap-10 sm:py-14 md:grid-cols-2 lg:grid-cols-3"
+            >
+                <div class="md:col-span-2 lg:col-span-1">
                     <p
                         class="text-sm font-semibold tracking-wide text-gray-900 uppercase"
                     >
                         CTS - Trophée de la générosité
                     </p>
-                    <p class="mt-3 text-sm leading-relaxed text-gray-500">
+                    <p
+                        class="mt-3 max-w-md text-sm leading-relaxed text-gray-500"
+                    >
                         {{ t('footer.description') }}
                     </p>
                 </div>

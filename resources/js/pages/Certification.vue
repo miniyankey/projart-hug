@@ -377,15 +377,15 @@ onUnmounted(() => {
             <section class="anim-timeline-section py-32">
                 <div class="mx-auto max-w-5xl px-6">
                     <div class="relative">
-                        <!-- Ligne : gauche sur mobile, centrée sur desktop -->
+                        <!-- Ligne : gauche sur mobile/tablet, centrée sur desktop -->
                         <div
-                            class="anim-timeline-line absolute top-0 bottom-0 left-6 w-1 bg-violet-700 lg:left-1/2 lg:-translate-x-1/2"
+                            class="anim-timeline-line absolute top-0 bottom-0 left-6 w-1 bg-violet-700 md:left-8 lg:left-1/2 lg:-translate-x-1/2"
                         ></div>
 
                         <div
                             v-for="(side, i) in sides"
                             :key="i"
-                            class="relative mb-16 grid grid-cols-[48px_1fr] items-center gap-x-4 last:mb-0 lg:mb-24 lg:grid-cols-[1fr_60px_1fr] lg:gap-x-0"
+                            class="relative mb-16 grid grid-cols-[48px_1fr] items-center gap-x-4 last:mb-0 md:grid-cols-[64px_1fr] md:gap-x-6 lg:mb-24 lg:grid-cols-[1fr_60px_1fr] lg:gap-x-0"
                         >
                             <!-- Colonne gauche (desktop uniquement) -->
                             <div
@@ -420,7 +420,7 @@ onUnmounted(() => {
                             </div>
 
                             <!-- Colonne droite : steps droite sur desktop, tous les steps sur mobile -->
-                            <div class="anim-step-right pl-4 lg:pl-10">
+                            <div class="anim-step-right pl-4 md:pl-6 lg:pl-10">
                                 <LabelStepCard
                                     :step="i + 1"
                                     :title="
@@ -433,7 +433,7 @@ onUnmounted(() => {
                                             `certification.parcours.step${i + 1}_desc`,
                                         )
                                     "
-                                    class="w-full max-w-xs"
+                                    class="w-full max-w-xs md:max-w-sm"
                                     :class="
                                         side === 'left' ? 'block lg:hidden' : ''
                                     "

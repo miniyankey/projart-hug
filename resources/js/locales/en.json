@@ -23,6 +23,9 @@
         "time_picker": {
             "hours": "Hours",
             "minutes": "Minutes"
+        },
+        "date_picker": {
+            "placeholder": "Pick a date"
         }
     },
     "languageSwitcher": {

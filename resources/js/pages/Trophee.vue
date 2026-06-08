@@ -540,7 +540,7 @@ onUnmounted(() => {
                                     :logo-alt="winnerAt(2).name"
                                     :category="winnerAt(2).name"
                                     description=""
-                                    class="anim-podium-2 hidden w-40 lg:flex"
+                                    class="anim-podium-2 hidden w-36 md:flex md:w-40"
                                 />
                                 <PodiumCard
                                     v-if="winnerAt(1)"
@@ -549,7 +549,7 @@ onUnmounted(() => {
                                     :logo-alt="winnerAt(1).name"
                                     :category="winnerAt(1).name"
                                     description=""
-                                    class="anim-podium-1 w-44"
+                                    class="anim-podium-1 w-32 md:w-40 lg:w-44"
                                 />
                                 <PodiumCard
                                     v-if="winnerAt(3)"
@@ -558,7 +558,7 @@ onUnmounted(() => {
                                     :logo-alt="winnerAt(3).name"
                                     :category="winnerAt(3).name"
                                     description=""
-                                    class="anim-podium-3 hidden w-40 lg:flex"
+                                    class="anim-podium-3 hidden w-36 md:flex md:w-40"
                                 />
                             </div>
                         </div>
