@@ -59,6 +59,68 @@ const mapPochy = ref(questions.value[0]?.pochy ?? '0');
 // Statut de chaque checkpoint : 'locked' | 'eligible' | 'ineligible'
 const statuses = ref(questions.value.map(() => 'locked'));
 
+// ─── Persistance de l'état (sessionStorage) ──────────────────────────────────
+// Le jeu est « stateful » : changer de page (navigation) ou de langue
+// (rechargement) ne réinitialise pas la progression. L'état est lié à l'onglet
+// → fermer l'onglet repart de zéro, conformément à la spec. Clé par collecte
+// (ou « public ») pour ne pas mélanger plusieurs parcours.
+const STORAGE_KEY = `eligibilite:game:${props.collectSlug ?? 'public'}`;
+
+// Restauration synchrone (au setup) → le premier rendu reflète déjà l'état
+// sauvegardé, sans flash de l'écran d'intro.
+try {
+    const snapshot = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? 'null');
+
+    if (snapshot && snapshot.phase && snapshot.phase !== 'intro') {
+        // 'loading' est transitoire → on revient directement sur la carte.
+        phase.value = snapshot.phase === 'loading' ? 'map' : snapshot.phase;
+        answers.value = snapshot.answers ?? {};
+        clearedCount.value = snapshot.clearedCount ?? 0;
+        statuses.value = snapshot.statuses ?? statuses.value;
+        reminderHandled.value = snapshot.reminderHandled ?? false;
+        reminderOfferedAt.value = snapshot.reminderOfferedAt ?? null;
+        donationOfferedAt.value = snapshot.donationOfferedAt ?? null;
+        mapPochy.value = snapshot.mapPochy ?? mapPochy.value;
+    }
+} catch {
+    /* sessionStorage indisponible ou JSON corrompu → on repart de l'intro */
+}
+
+// Sauvegarde à chaque changement d'un état « durable ». Les overlays transitoires
+// (activeIndex/resultView…) ne sont pas persistés : on revient sur la carte.
+watch(
+    [
+        phase,
+        answers,
+        clearedCount,
+        statuses,
+        reminderHandled,
+        reminderOfferedAt,
+        donationOfferedAt,
+        mapPochy,
+    ],
+    () => {
+        try {
+            sessionStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify({
+                    phase: phase.value,
+                    answers: answers.value,
+                    clearedCount: clearedCount.value,
+                    statuses: statuses.value,
+                    reminderHandled: reminderHandled.value,
+                    reminderOfferedAt: reminderOfferedAt.value,
+                    donationOfferedAt: donationOfferedAt.value,
+                    mapPochy: mapPochy.value,
+                }),
+            );
+        } catch {
+            /* quota dépassé ou stockage indisponible → on ignore */
+        }
+    },
+    { deep: true },
+);
+
 // Dès qu'une réponse rend inéligible, Pochy reste « vide » (0) sur la carte
 // jusqu'à la fin du parcours.
 const hasIneligible = computed(() => statuses.value.includes('ineligible'));
