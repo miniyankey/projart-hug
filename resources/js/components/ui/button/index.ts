@@ -19,10 +19,6 @@ export const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
-        admin:
-          "border-2 border-gray-900 bg-[var(--brand)] text-white hover:bg-[var(--brand-hover)]",
-        admin_outline:
-          "border-2 border-gray-900 bg-white text-gray-900 hover:bg-gray-100",
         pixel_violet:
           "bg-[var(--brand)] text-white rounded-none shadow-[4px_4px_0px_0px_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_blue:

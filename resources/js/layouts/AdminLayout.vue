@@ -111,7 +111,12 @@ function submitLogout() {
         <header
             class="fixed inset-x-0 top-0 z-30 flex h-16 items-center justify-between border-b-2 border-gray-900 bg-white px-4 lg:hidden"
         >
-            <img :src="hugLogo" alt="HUG" class="h-8 w-auto" />
+            <Link
+                :href="adminIndex.url()"
+                :aria-label="t('admin.nav.overview')"
+            >
+                <img :src="hugLogo" alt="HUG" class="h-8 w-auto" />
+            </Link>
             <button
                 type="button"
                 class="flex size-10 items-center justify-center border-2 border-gray-900 bg-white text-gray-900 transition-colors hover:bg-gray-100"
@@ -139,7 +144,12 @@ function submitLogout() {
             <div
                 class="flex items-center justify-between border-b-2 border-gray-900 px-6 py-5"
             >
-                <img :src="hugLogo" alt="HUG" class="h-9 w-auto" />
+                <Link
+                    :href="adminIndex.url()"
+                    :aria-label="t('admin.nav.overview')"
+                >
+                    <img :src="hugLogo" alt="HUG" class="h-9 w-auto" />
+                </Link>
                 <button
                     type="button"
                     class="flex size-9 items-center justify-center text-gray-500 transition-colors hover:text-gray-900 lg:hidden"
