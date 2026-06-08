@@ -40,9 +40,10 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiters(): void
     {
-        RateLimiter::for('tracking', fn (Request $request) => Limit::perMinute(200)->by($request->ip()));
-        RateLimiter::for('newsletter', fn (Request $request) => Limit::perMinute(5)->by($request->ip()));
-        RateLimiter::for('reminder', fn (Request $request) => Limit::perMinute(10)->by($request->ip()));
+        RateLimiter::for('tracking', fn (Request $request) => Limit::perMinute(600)->by($request->ip()));
+        RateLimiter::for('newsletter', fn (Request $request) => Limit::perMinute(30)->by($request->ip()));
+        RateLimiter::for('reminder', fn (Request $request) => Limit::perMinute(30)->by($request->ip()));
+        // Volontairement serré : protection anti-bruteforce du login admin.
         RateLimiter::for('login', fn (Request $request) => Limit::perMinute(5)->by($request->ip()));
     }
 
