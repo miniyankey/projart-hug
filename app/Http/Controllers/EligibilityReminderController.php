@@ -7,6 +7,7 @@ use App\Services\BrevoService;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class EligibilityReminderController extends Controller
 {
@@ -35,7 +36,7 @@ class EligibilityReminderController extends Controller
 
         $locale = $this->resolveLocale($request);
 
-        EligibilityReminder::create([
+        $reminder = EligibilityReminder::create([
             'email' => $validated['email'],
             'locale' => $locale,
             'collect_id' => $validated['collect_id'] ?? null,
@@ -52,7 +53,33 @@ class EligibilityReminderController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'flash.reminder_scheduled');
+        return redirect()->back()->with([
+            'success' => 'flash.reminder_scheduled',
+            'reminder_id' => $reminder->id,
+        ]);
+    }
+
+    /**
+     * Met à jour la date d'éligibilité d'un rappel déjà enregistré.
+     *
+     * Appelé en cours de jeu quand une réponse ultérieure change la durée
+     * d'inéligibilité maximale : la date est recalculée pour que le visiteur
+     * soit prévenu au bon moment. Endpoint « fire-and-forget » (204).
+     */
+    public function update(Request $request, EligibilityReminder $reminder): Response
+    {
+        $validated = $request->validate([
+            'days' => ['required', 'integer', 'min:1', 'max:730'],
+        ]);
+
+        // Un rappel déjà envoyé ne doit plus bouger.
+        if ($reminder->sent_at === null) {
+            $reminder->update([
+                'eligible_at' => now()->addDays($validated['days'])->toDateString(),
+            ]);
+        }
+
+        return response()->noContent();
     }
 
     /**

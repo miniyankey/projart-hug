@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Button } from '@/components/ui/button';
+import { readXsrfToken } from '@/lib/http';
 import { subscribe, unsubscribe } from '@/routes/newsletter';
 
 const props = defineProps({
@@ -44,15 +45,6 @@ const submitLabel = computed(() => {
     }
 });
 
-function getCsrfToken() {
-    // Laravel place le token CSRF dans le cookie XSRF-TOKEN (lisible par JS, non HttpOnly)
-    const cookie = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('XSRF-TOKEN='));
-
-    return cookie ? decodeURIComponent(cookie.split('=')[1]) : '';
-}
-
 async function submit() {
     successMessage.value = '';
     errorMessage.value = '';
@@ -75,7 +67,7 @@ async function submit() {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                'X-XSRF-TOKEN': getCsrfToken(),
+                'X-XSRF-TOKEN': readXsrfToken() ?? '',
             },
             body: JSON.stringify({ email: email.value }),
         });

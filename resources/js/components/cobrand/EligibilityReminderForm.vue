@@ -51,7 +51,9 @@ function submit() {
         onSuccess: () => {
             resultKey.value = page.props.flash?.success ?? null;
             form.reset('email');
-            emit('submitted');
+            // L'id permet au jeu de mettre à jour la date si une réponse
+            // ultérieure allonge/raccourcit l'inéligibilité.
+            emit('submitted', page.props.flash?.reminder_id ?? null);
         },
     });
 }

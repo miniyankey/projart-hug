@@ -22,8 +22,9 @@ defineProps({
     collectId: { type: Number, default: null },
 });
 
-// handled : rappel envoyé OU lien de don cliqué → le jeu ne sollicite plus ensuite.
-defineEmits(['ok', 'back', 'handled']);
+// handled : lien de don cliqué → le jeu ne sollicite plus ensuite.
+// reminder-submitted : rappel enregistré (porte son id pour mise à jour ultérieure).
+defineEmits(['ok', 'back', 'handled', 'reminder-submitted']);
 
 const { t } = useI18n();
 </script>
@@ -74,7 +75,7 @@ const { t } = useI18n();
                     :mode="donation ? 'donation' : 'reminder'"
                     :days="reminderDays"
                     :collect-id="collectId"
-                    @submitted="$emit('handled')"
+                    @submitted="(id) => $emit('reminder-submitted', id)"
                     @donated="$emit('handled')"
                 />
 

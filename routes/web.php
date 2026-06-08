@@ -42,6 +42,9 @@ Route::get('/jeu', [EligibiliteController::class, 'index'])->name('eligibilite')
 Route::post('/eligibilite/rappel', [EligibilityReminderController::class, 'store'])
     ->middleware('throttle:10,1')
     ->name('eligibilite.rappel');
+Route::post('/eligibilite/rappel/{reminder}', [EligibilityReminderController::class, 'update'])
+    ->middleware('throttle:30,1')
+    ->name('eligibilite.rappel.update');
 Route::inertia('/certification', 'Certification')->name('certification');
 
 // Tracking KPI : endpoints publics « fire-and-forget » appelés depuis le front (pour register evetns)

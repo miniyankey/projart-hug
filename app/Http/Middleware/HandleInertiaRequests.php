@@ -54,6 +54,7 @@ class HandleInertiaRequests extends Middleware
             'locale' => $locale,
             'flash' => [
                 'success' => $request->session()->get('success'),
+                'reminder_id' => $request->session()->get('reminder_id'),
             ],
         ];
     }

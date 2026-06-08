@@ -9,30 +9,11 @@ import {
     sent as contactSent,
     trophee as contactTrophee,
 } from '@/actions/App/Http/Controllers/Kpi/ContactFormConversionController';
-
-// Le cookie XSRF-TOKEN posé par Laravel sert à passer la protection CSRF des
-// routes web : on le renvoie dans l'en-tête X-XSRF-TOKEN
-function readXsrfToken() {
-    const match = document.cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]+)/);
-
-    return match ? decodeURIComponent(match[1]) : null;
-}
+import { postJson } from '@/lib/http';
 
 // Envoie une requête de tracking à l'action spécifiée, avec les données fournies
 function track(action, payload = {}) {
-    const xsrfToken = readXsrfToken();
-
-    fetch(action.url(), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            ...(xsrfToken ? { 'X-XSRF-TOKEN': xsrfToken } : {}),
-        },
-        credentials: 'same-origin',
-        keepalive: true,
-        body: JSON.stringify(payload),
-    }).catch(() => {});
+    postJson(action.url(), payload);
 }
 
 /**

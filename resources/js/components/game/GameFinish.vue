@@ -19,6 +19,8 @@ const props = defineProps({
     linkAppointment: { type: String, default: null },
     // URL de retour vers le site (landing co-brandée ou accueil public)
     siteUrl: { type: String, required: true },
+    // Le joueur a laissé son e-mail pour être prévenu à la fin de son délai.
+    reminderScheduled: { type: Boolean, default: false },
 });
 
 defineEmits(['back', 'appointment']);
@@ -125,9 +127,9 @@ async function share() {
     <div class="absolute inset-0 z-50 flex flex-col bg-white">
         <GameProgressBar :value="total" :total="total" />
 
-        <div class="flex min-h-0 flex-1 overflow-y-auto">
+        <div class="min-h-0 flex-1 overflow-y-auto">
             <div
-                class="flex w-full flex-col gap-5 px-4 pt-[6vh] pb-8 sm:px-6 md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:px-10 md:pt-[8vh]"
+                class="flex w-full flex-col gap-5 px-4 pt-[6vh] pb-16 sm:px-6 md:flex-row md:items-start md:gap-[clamp(1rem,4vw,3rem)] md:px-10 md:pt-[8vh]"
             >
                 <!-- Pochy + actions -->
                 <div
@@ -197,6 +199,14 @@ async function share() {
 
                     <p class="m-0 text-[1rem] leading-relaxed text-neutral-800">
                         {{ text }}
+                    </p>
+
+                    <!-- Confirmation du rappel par e-mail (inéligibilité temporaire) -->
+                    <p
+                        v-if="reminderScheduled && verdict.status === 'temporary'"
+                        class="m-0 border-2 border-green-700 bg-green-50 px-4 py-3 font-mono text-sm text-green-800 shadow-[4px_4px_0_0_#15803d]"
+                    >
+                        {{ t('eligibilite.finish.reminder_scheduled') }}
                     </p>
 
                     <!-- Récap des étapes inéligibles (cartes pixel) -->
