@@ -11,6 +11,14 @@ import * as routes from '@/routes/index.ts';
 
 const { t } = useI18n();
 
+defineProps({
+    // En mode co-brandé : entreprise partenaire (déclenche l'affichage du
+    // lien de retour vers le site général HUG).
+    company: { type: Object, default: null },
+    // URL du site général HUG, affichée en mode co-brandé.
+    mainSiteUrl: { type: String, default: null },
+});
+
 const socials = [
     {
         name: 'Instagram',
@@ -107,8 +115,17 @@ const socials = [
                 </Card>
             </div>
 
-            <div class="border-t border-gray-100 py-6 text-sm text-gray-400">
-                {{ t('footer.copyright') }}
+            <div
+                class="flex flex-col gap-3 border-t border-gray-100 py-6 text-sm text-gray-400 sm:flex-row sm:items-center sm:justify-between"
+            >
+                <span>{{ t('footer.copyright') }}</span>
+                <Link
+                    v-if="company"
+                    :href="mainSiteUrl"
+                    class="text-gray-500 transition-colors hover:text-[var(--brand)]"
+                >
+                    {{ t('nav.main_site') }}
+                </Link>
             </div>
         </div>
     </footer>

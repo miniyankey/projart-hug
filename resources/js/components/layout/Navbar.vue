@@ -1,5 +1,6 @@
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3';
+import { gsap } from 'gsap';
 import { Menu, X } from 'lucide-vue-next';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -10,7 +11,7 @@ import { Button } from '@/components/ui/button';
 const { t } = useI18n();
 const page = usePage();
 
-defineProps({
+const props = defineProps({
     // Liens de navigation : [{ href, label }] où label est une clé i18n
     links: {
         type: Array,
@@ -32,10 +33,11 @@ defineProps({
         type: String,
         default: '#',
     },
-    // Lien vers le site normal (utilisé comme bouton "retour" en mode co-brandé).
-    normalSiteUrl: {
+    // Si défini (ex. "#rdv"), le CTA scrolle vers cette ancre de la page
+    // courante au lieu de déclencher une navigation.
+    ctaScrollTarget: {
         type: String,
-        default: '#',
+        default: null,
     },
 });
 
@@ -44,9 +46,29 @@ function isActive(href) {
 }
 
 const open = ref(false);
+const navRef = ref(null);
 
 function close() {
     open.value = false;
+}
+
+// CTA en mode "scroll" : on défile en douceur (GSAP) vers la cible de la page
+// courante (ex. bloc RDV) plutôt que de relancer une navigation Inertia.
+// offsetY = hauteur de la barre pour ne pas masquer la cible sous la nav sticky.
+function scrollToCta() {
+    close();
+
+    const target = document.querySelector(props.ctaScrollTarget);
+
+    if (!target) {
+        return;
+    }
+
+    gsap.to(window, {
+        duration: 0.8,
+        ease: 'power2.inOut',
+        scrollTo: { y: target, offsetY: navRef.value?.offsetHeight ?? 80 },
+    });
 }
 
 // On ferme le menu mobile dès qu'une navigation Inertia réussit.
@@ -60,6 +82,7 @@ onBeforeUnmount(() => removeListener?.());
 <template>
     <header class="sticky top-0 z-50 border-b border-gray-200 bg-white">
         <nav
+            ref="navRef"
             class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 lg:gap-8 lg:px-6 lg:py-4 xl:gap-10 xl:px-8"
         >
             <!-- Mode co-brandé : logo HUG × logo entreprise -->
@@ -126,19 +149,17 @@ onBeforeUnmount(() => removeListener?.());
                 <Button
                     as-child
                     variant="cta"
-                    size="cta"
-                    class="text-xs lg:h-9 lg:px-4 xl:h-11 xl:px-6 xl:text-sm"
+                    class="h-9 px-4 text-xs xl:text-sm"
                 >
-                    <Link :href="cta.href">{{ t(cta.label) }}</Link>
+                    <a
+                        v-if="ctaScrollTarget"
+                        :href="ctaScrollTarget"
+                        @click.prevent="scrollToCta"
+                        >{{ t(cta.label) }}</a
+                    >
+                    <Link v-else :href="cta.href">{{ t(cta.label) }}</Link>
                 </Button>
                 <LanguageSwitcher />
-                <Link
-                    v-if="company"
-                    :href="normalSiteUrl"
-                    class="text-[0.65rem] text-gray-500 transition-colors hover:text-[var(--brand)] xl:text-xs"
-                >
-                    {{ t('nav.main_site') }}
-                </Link>
             </div>
 
             <button
@@ -178,15 +199,14 @@ onBeforeUnmount(() => removeListener?.());
                     class="mt-4 flex flex-col gap-4 border-t border-gray-200 pt-4"
                 >
                     <Button as-child variant="cta" size="cta" class="w-fit">
-                        <Link :href="cta.href">{{ t(cta.label) }}</Link>
+                        <a
+                            v-if="ctaScrollTarget"
+                            :href="ctaScrollTarget"
+                            @click.prevent="scrollToCta"
+                            >{{ t(cta.label) }}</a
+                        >
+                        <Link v-else :href="cta.href">{{ t(cta.label) }}</Link>
                     </Button>
-                    <Link
-                        v-if="company"
-                        :href="normalSiteUrl"
-                        class="text-sm text-gray-500 transition-colors hover:text-[var(--brand)]"
-                    >
-                        {{ t('nav.main_site') }}
-                    </Link>
                     <LanguageSwitcher />
                 </div>
             </div>
