@@ -5,81 +5,58 @@ namespace Database\Seeders;
 use App\Models\Company;
 use App\Models\Trophee;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class TropheeSeeder extends Seeder
 {
+    /**
+     * Palmarès du Trophée de la générosité : un podium (1er, 2e, 3e) par édition,
+     * référencé par slug d'entreprise (toutes créées par CompanySeeder).
+     *
+     * @var array<int, list<string>>
+     */
+    private const EDITIONS = [
+        2026 => ['rolex-sa', 'migros', 'servette-fc'],
+        2010 => ['migros', 'rolex-sa', 'tpg'],
+        2009 => ['tpg', 'migros', 'servette-fc'],
+        2008 => ['rolex-sa', 'migros', 'tpg'],
+    ];
+
+    /**
+     * Quelques mises en avant éditoriales pour l'édition en cours (rang 1 à 3).
+     *
+     * @var array<int, string>
+     */
+    private const LATEST_DESCRIPTIONS = [
+        1 => 'Plus de 60 % des collaborateurs mobilisés sur deux collectes : un record d\'engagement sur le canton.',
+        2 => 'Une participation en forte hausse, portée par une campagne interne exemplaire.',
+        3 => 'Première participation au Trophée et déjà sur le podium.',
+    ];
+
     public function run(): void
     {
+        $companies = Company::whereIn('slug', array_unique(array_merge(...array_values(self::EDITIONS))))
+            ->get()
+            ->keyBy('slug');
 
-        // on reprend ce qui était codé en dur avant
-        $winners = $this->seedWinnerCompanies();
+        $latestYear = max(array_keys(self::EDITIONS));
 
-        $editions = [
-            2026 => ['rolex', 'migros', 'nestle'],
-            2010 => ['nestle', 'rolex', 'migros'],
-            2009 => ['migros', 'nestle', 'rolex'],
-            2008 => ['rolex', 'migros', 'nestle'],
-        ];
+        foreach (self::EDITIONS as $year => $podium) {
+            foreach ($podium as $position => $slug) {
+                $company = $companies->get($slug);
 
-        foreach ($editions as $year => $podium) {
-            foreach ($podium as $position => $handle) {
+                if ($company === null) {
+                    continue;
+                }
+
+                $rank = $position + 1;
+
                 Trophee::create([
-                    'company_id' => $winners[$handle]->id,
+                    'company_id' => $company->id,
                     'year_of' => $year,
-                    'rank' => $position + 1,
+                    'rank' => $rank,
+                    'description' => $year === $latestYear ? (self::LATEST_DESCRIPTIONS[$rank] ?? null) : null,
                 ]);
             }
         }
-    }
-
-    /**
-     * Garantit l'existence des entreprises lauréates avec leurs logos d'origine.
-     *
-     * @return array<string, Company>
-     */
-    private function seedWinnerCompanies(): array
-    {
-        // Copie les logos de marque (versionnés dans public/img) vers le disque
-        // public, comme le fait CompanySeeder pour ses propres logos.
-        foreach (['rolex.svg', 'migros.png', 'nestle.png'] as $logo) {
-            Storage::disk('public')->put(
-                "logos/{$logo}",
-                file_get_contents(public_path("img/{$logo}"))
-            );
-        }
-
-        // Rolex existe déjà (entreprise de démo co-brandée) : on lui attache son
-        // logo pour que le podium s'affiche à l'identique de l'ancienne version.
-        $rolex = Company::firstWhere('slug', 'rolex-sa');
-        $rolex?->update(['logo' => 'logos/rolex.svg']);
-
-        $migros = Company::firstOrCreate(
-            ['slug' => 'migros'],
-            [
-                'name' => 'Migros',
-                'token' => 'migros00',
-                'email_contact' => 'collecte@migros.ch',
-                'logo' => 'logos/migros.png',
-                'color' => '#FF6600',
-            ],
-        );
-
-        $nestle = Company::firstOrCreate(
-            ['slug' => 'nestle'],
-            [
-                'name' => 'Nestlé',
-                'token' => 'nestle00',
-                'email_contact' => 'collecte@nestle.ch',
-                'logo' => 'logos/nestle.png',
-                'color' => '#63B1E5',
-            ],
-        );
-
-        return [
-            'rolex' => $rolex,
-            'migros' => $migros,
-            'nestle' => $nestle,
-        ];
     }
 }
