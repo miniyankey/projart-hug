@@ -4,6 +4,7 @@
         "subtitle": "Recevez les actualités du Centre de Transfusion Sanguine et soyez alerté lors des prochaines collectes.",
         "email_label": "Adresse e-mail",
         "email_placeholder": "votre{'@'}email.com",
+        "consent_label": "J'accepte de recevoir la newsletter du Centre de Transfusion Sanguine par e-mail.",
         "submit": "S'inscrire",
         "success": "Votre inscription à la newsletter a bien été enregistrée.",
         "error": "Une erreur est survenue, veuillez réessayer plus tard.",

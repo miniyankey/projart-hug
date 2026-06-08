@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { readXsrfToken } from '@/lib/http';
 import { subscribe, unsubscribe } from '@/routes/newsletter';
 
@@ -16,6 +17,7 @@ const props = defineProps({
 const { t } = useI18n();
 
 const email = ref('');
+const consent = ref(false);
 const processing = ref(false);
 const successMessage = ref('');
 const errorMessage = ref('');
@@ -95,6 +97,7 @@ async function submit() {
         }
 
         email.value = '';
+        consent.value = false;
     } else if (response.status === 422) {
         // Erreur de validation Laravel : { errors: { email: ['...'] } }
         if (data.errors?.email) {
@@ -171,11 +174,19 @@ async function submit() {
                 </p>
             </div>
 
+            <label
+                v-if="mode === 'subscribe'"
+                class="flex cursor-pointer items-start gap-3 text-sm text-gray-600"
+            >
+                <Checkbox v-model="consent" class="mt-0.5 shrink-0" />
+                {{ t('newsletter.consent_label') }}
+            </label>
+
             <Button
                 type="submit"
                 variant="pixel_violet"
                 class="w-fit font-mono tracking-wide uppercase"
-                :disabled="processing"
+                :disabled="processing || (mode === 'subscribe' && !consent)"
             >
                 {{ submitLabel }}
             </Button>
