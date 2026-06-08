@@ -157,9 +157,7 @@ function onClick() {
             text-anchor="middle"
             text-rendering="optimizeLegibility"
             :font-size="cfg.iconSize"
-            :font-family="
-                cfg.pixelFont ? `'Jersey 15', monospace` : undefined
-            "
+            :font-family="cfg.pixelFont ? `'Jersey 15', monospace` : undefined"
             :fill="cfg.iconFill"
         >
             {{ cfg.icon }}
