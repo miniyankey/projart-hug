@@ -291,14 +291,22 @@ onUnmounted(() => {
                             <div
                                 class="anim-hero-ctas mt-8 flex flex-wrap gap-4"
                             >
-                                <Button as-child variant="pixel_violet" size="cta">
+                                <Button
+                                    as-child
+                                    variant="pixel_violet"
+                                    size="cta"
+                                >
                                     <Link :href="routes.collecte.url()">
                                         {{
                                             t('certification.hero.cta_primary')
                                         }}
                                     </Link>
                                 </Button>
-                                <Button as-child variant="pixel_blue" size="cta">
+                                <Button
+                                    as-child
+                                    variant="pixel_blue"
+                                    size="cta"
+                                >
                                     <a
                                         href="#avantages"
                                         @click.prevent="scrollTo('#avantages')"

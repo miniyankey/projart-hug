@@ -186,7 +186,10 @@ const mapUrl = computed(() => {
                         </dl>
 
                         <!-- CTA -->
-                        <div id="rdv" class="mt-8 flex scroll-mt-24 flex-wrap gap-4">
+                        <div
+                            id="rdv"
+                            class="mt-8 flex scroll-mt-24 flex-wrap gap-4"
+                        >
                             <Button as-child variant="pixel_violet" size="cta">
                                 <Link :href="cobrandJeu.url(routeParams)">
                                     {{ t('cobrand.collecte.cta_eligible') }}

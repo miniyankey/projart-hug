@@ -137,11 +137,7 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                     {{ t('admin.vainqueurs.form.cancel') }}
                 </Link>
             </Button>
-            <Button
-                type="submit"
-                variant="admin"
-                :disabled="form.processing"
-            >
+            <Button type="submit" variant="admin" :disabled="form.processing">
                 {{ submitLabel }}
             </Button>
         </div>
