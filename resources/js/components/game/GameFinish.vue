@@ -201,14 +201,21 @@ async function share() {
                         {{ text }}
                     </p>
 
-                    <!-- Confirmation du rappel par e-mail (inéligibilité temporaire) -->
+                    <!-- Confirmation du rappel par e-mail (inéligibilité temporaire) :
+                         durée RÉELLE = durée max finale du parcours (verdict.days). -->
                     <p
                         v-if="
-                            reminderScheduled && verdict.status === 'temporary'
+                            reminderScheduled &&
+                            verdict.status === 'temporary' &&
+                            verdict.days
                         "
                         class="m-0 border-2 border-green-700 bg-green-50 px-4 py-3 font-mono text-sm text-green-800 shadow-[4px_4px_0_0_#15803d]"
                     >
-                        {{ t('eligibilite.finish.reminder_scheduled') }}
+                        {{
+                            t('eligibilite.finish.reminder_scheduled', {
+                                duration: formatDuration(verdict.days),
+                            })
+                        }}
                     </p>
 
                     <!-- Récap des étapes inéligibles (cartes pixel) -->

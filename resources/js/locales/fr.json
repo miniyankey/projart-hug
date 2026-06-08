@@ -431,7 +431,7 @@
                 "label": "À vie"
             },
             "unknown_label": "À vérifier",
-            "reminder_scheduled": "C'est noté ! Nous t'enverrons un e-mail dès la fin de ton délai d'attente, pour que tu puisses venir donner ton sang.",
+            "reminder_scheduled": "C'est noté ! Nous t'enverrons un e-mail dans {duration}, à la fin de ton délai d'attente, pour que tu puisses venir donner ton sang.",
             "recap_title": "Récapitulatif",
             "share": {
                 "cta": "Partager à mes collègues",
