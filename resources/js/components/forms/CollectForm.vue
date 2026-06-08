@@ -41,6 +41,7 @@ const form = useForm({
     name: '',
     contact_email: '',
     company_name: props.company,
+    city: '',
     message: '',
     trophy_participation: false,
     preferred_dates: [],
@@ -94,6 +95,7 @@ function submit() {
             form.reset(
                 'name',
                 'contact_email',
+                'city',
                 'message',
                 'trophy_participation',
                 'preferred_dates',
@@ -230,6 +232,30 @@ function submit() {
                     class="font-mono text-xs text-red-700"
                 >
                     {{ form.errors.company_name }}
+                </p>
+            </div>
+
+            <!-- Ville -->
+            <div class="flex flex-col gap-2">
+                <label
+                    for="city"
+                    class="font-mono text-sm font-bold tracking-wide text-[#2D1B4E] uppercase"
+                >
+                    {{ t('collecte.form.city') }}
+                </label>
+                <input
+                    id="city"
+                    v-model="form.city"
+                    type="text"
+                    autocomplete="address-level2"
+                    class="h-11 w-full border-2 border-black bg-white px-3 font-mono text-sm text-black shadow-[4px_4px_0_0_#000] outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-[var(--brand)]"
+                    :placeholder="t('collecte.form.city_placeholder')"
+                />
+                <p
+                    v-if="form.errors.city"
+                    class="font-mono text-xs text-red-700"
+                >
+                    {{ form.errors.city }}
                 </p>
             </div>
 

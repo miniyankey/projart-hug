@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\FormSubmissionController as AdminFormSubmissionController;
 use App\Http\Controllers\Admin\KpiController;
 use App\Http\Controllers\Admin\WinnerController as AdminWinnerController;
 use App\Http\Controllers\AdminAuthController;
@@ -104,6 +105,13 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/{collecte}/edit', [CollectController::class, 'edit'])->name('edit');
         Route::put('/{collecte}', [CollectController::class, 'update'])->name('update');
         Route::delete('/{collecte}', [CollectController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('/formulaires')->name('formulaires.')->group(function () {
+        Route::get('/', [AdminFormSubmissionController::class, 'index'])->name('index');
+        Route::get('/{formulaire}', [AdminFormSubmissionController::class, 'show'])->name('show');
+        Route::patch('/{formulaire}/handled', [AdminFormSubmissionController::class, 'toggleHandled'])->name('handled');
+        Route::delete('/{formulaire}', [AdminFormSubmissionController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('/kpi')->name('kpi.')->group(function () {

@@ -2,6 +2,7 @@
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import {
     Building2,
+    Inbox,
     LayoutDashboard,
     LineChart,
     LogOut,
@@ -19,6 +20,7 @@ import { home } from '@/routes';
 import { index as adminIndex } from '@/routes/admin';
 import { index as collectesIndex } from '@/routes/admin/collectes';
 import { index as entreprisesIndex } from '@/routes/admin/entreprises';
+import { index as formulairesIndex } from '@/routes/admin/formulaires';
 import { index as kpiIndex } from '@/routes/admin/kpi';
 import { index as vainqueursIndex } from '@/routes/admin/vainqueurs';
 
@@ -65,6 +67,13 @@ const navItems = computed(() => [
         icon: Syringe,
         href: collectesIndex.url(),
         match: 'Admin/Collectes',
+    },
+    {
+        key: 'formulaires',
+        label: t('admin.nav.formulaires'),
+        icon: Inbox,
+        href: formulairesIndex.url(),
+        match: 'Admin/Formulaires',
     },
     {
         key: 'vainqueurs',

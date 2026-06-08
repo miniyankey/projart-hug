@@ -28,6 +28,7 @@ class FormSubmissionController extends Controller
         $validated = $request->validate([
             'type' => ['required', Rule::enum(FormSubmissionType::class)],
             'company_name' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'contact_email' => ['required', 'email', 'max:255'],
             'message' => ['required_if:type,'.FormSubmissionType::Contact->value, 'nullable', 'string', 'max:2000'],
