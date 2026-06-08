@@ -10,6 +10,7 @@ import GameProgressBar from '@/components/game/GameProgressBar.vue';
 import GameQuestion from '@/components/game/GameQuestion.vue';
 import GameResult from '@/components/game/GameResult.vue';
 import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
+import { useSessionPersistence } from '@/composables/useSessionPersistence';
 import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { computeResult, overallVerdict } from '@/lib/eligibility';
@@ -59,66 +60,101 @@ const mapPochy = ref(questions.value[0]?.pochy ?? '0');
 // Statut de chaque checkpoint : 'locked' | 'eligible' | 'ineligible'
 const statuses = ref(questions.value.map(() => 'locked'));
 
+// Construit le panneau de résultat d'une réponse, SANS effet de bord (pas de
+// tracking ni de sollicitation). Sert à onAnswer ET à la restauration de la vue
+// au retour. Retourne { pochy, view } ou null (réponse éligible sans explication
+// → aucun panneau, l'étape se termine directement).
+function buildResultPanel(question, choiceIds) {
+    const result = computeResult(question, choiceIds);
+    const pochy = result.eligible
+        ? (question.pochy ?? '0')
+        : result.days < 0
+          ? '0-sad'
+          : '0-time';
+
+    if (result.view) {
+        return { pochy, view: result.view };
+    }
+
+    if (!result.eligible) {
+        return { pochy, view: ineligibleView(result.days) };
+    }
+
+    if (question.why_question) {
+        return { pochy, view: { message: question.why_question } };
+    }
+
+    return null;
+}
+
 // ─── Persistance de l'état (sessionStorage) ──────────────────────────────────
-// Le jeu est « stateful » : changer de page (navigation) ou de langue
-// (rechargement) ne réinitialise pas la progression. L'état est lié à l'onglet
-// → fermer l'onglet repart de zéro, conformément à la spec. Clé par collecte
-// (ou « public ») pour ne pas mélanger plusieurs parcours.
+// Le jeu reste « stateful » à travers la navigation interne SPA : la progression,
+// la position de Pochy (gérée par GameMap, cf. storage-key) et la vue en cours
+// (question/résultat) sont restaurées au retour. Lié à l'onglet → fermé = reset.
+// Clé par collecte (ou « public ») pour ne pas mélanger plusieurs parcours.
 const STORAGE_KEY = `eligibilite:game:${props.collectSlug ?? 'public'}`;
+const { read: readSession, persist: persistSession } =
+    useSessionPersistence(STORAGE_KEY);
 
 // Restauration synchrone (au setup) → le premier rendu reflète déjà l'état
 // sauvegardé, sans flash de l'écran d'intro.
-try {
-    const snapshot = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? 'null');
+const saved = readSession();
 
-    if (snapshot && snapshot.phase && snapshot.phase !== 'intro') {
-        // 'loading' est transitoire → on revient directement sur la carte.
-        phase.value = snapshot.phase === 'loading' ? 'map' : snapshot.phase;
-        answers.value = snapshot.answers ?? {};
-        clearedCount.value = snapshot.clearedCount ?? 0;
-        statuses.value = snapshot.statuses ?? statuses.value;
-        reminderHandled.value = snapshot.reminderHandled ?? false;
-        reminderOfferedAt.value = snapshot.reminderOfferedAt ?? null;
-        donationOfferedAt.value = snapshot.donationOfferedAt ?? null;
-        mapPochy.value = snapshot.mapPochy ?? mapPochy.value;
+if (saved && saved.phase && saved.phase !== 'intro') {
+    // 'loading' est transitoire → on revient directement sur la carte.
+    phase.value = saved.phase === 'loading' ? 'map' : saved.phase;
+    answers.value = saved.answers ?? {};
+    clearedCount.value = saved.clearedCount ?? 0;
+    statuses.value = saved.statuses ?? statuses.value;
+    reminderHandled.value = saved.reminderHandled ?? false;
+    reminderOfferedAt.value = saved.reminderOfferedAt ?? null;
+    donationOfferedAt.value = saved.donationOfferedAt ?? null;
+    mapPochy.value = saved.mapPochy ?? mapPochy.value;
+
+    // Vue ouverte au moment de quitter (question, ou résultat reconstruit).
+    if (saved.activeIndex != null) {
+        activeIndex.value = saved.activeIndex;
+
+        if (saved.resultOpen) {
+            const q = questions.value[saved.activeIndex];
+            const panel = q
+                ? buildResultPanel(q, answers.value[q.id] ?? [])
+                : null;
+
+            if (panel) {
+                resultPochy.value = panel.pochy;
+                resultView.value = panel.view;
+            }
+        }
     }
-} catch {
-    /* sessionStorage indisponible ou JSON corrompu → on repart de l'intro */
 }
 
-// Sauvegarde à chaque changement d'un état « durable ». Les overlays transitoires
-// (activeIndex/resultView…) ne sont pas persistés : on revient sur la carte.
-watch(
+// Sauvegarde à chaque changement de l'état durable + la vue en cours.
+persistSession(
     [
         phase,
         answers,
         clearedCount,
         statuses,
+        activeIndex,
+        () => resultView.value !== null,
         reminderHandled,
         reminderOfferedAt,
         donationOfferedAt,
         mapPochy,
     ],
-    () => {
-        try {
-            sessionStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify({
-                    phase: phase.value,
-                    answers: answers.value,
-                    clearedCount: clearedCount.value,
-                    statuses: statuses.value,
-                    reminderHandled: reminderHandled.value,
-                    reminderOfferedAt: reminderOfferedAt.value,
-                    donationOfferedAt: donationOfferedAt.value,
-                    mapPochy: mapPochy.value,
-                }),
-            );
-        } catch {
-            /* quota dépassé ou stockage indisponible → on ignore */
-        }
-    },
-    { deep: true },
+    () => ({
+        phase: phase.value,
+        answers: answers.value,
+        clearedCount: clearedCount.value,
+        statuses: statuses.value,
+        activeIndex: activeIndex.value,
+        resultOpen: resultView.value !== null,
+        reminderHandled: reminderHandled.value,
+        reminderOfferedAt: reminderOfferedAt.value,
+        donationOfferedAt: donationOfferedAt.value,
+        mapPochy: mapPochy.value,
+    }),
 );
 
 // Dès qu'une réponse rend inéligible, Pochy reste « vide » (0) sur la carte
@@ -287,27 +323,12 @@ function onAnswer(choiceIds) {
     resultDonation.value = showDonation;
     resultDays.value = showReminder ? overall.days : 0;
 
-    // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
-    if (!result.eligible) {
-        resultPochy.value = result.days < 0 ? '0-sad' : '0-time';
-    } else {
-        resultPochy.value = question.pochy ?? '0';
-    }
+    // Vue de résultat (Pochy + panneau) ; null → étape terminée directement.
+    const panel = buildResultPanel(question, choiceIds);
 
-    if (result.view) {
-        resultView.value = result.view;
-
-        return;
-    }
-
-    if (!result.eligible) {
-        resultView.value = ineligibleView(result.days);
-
-        return;
-    }
-
-    if (question.why_question) {
-        resultView.value = { message: question.why_question };
+    if (panel) {
+        resultPochy.value = panel.pochy;
+        resultView.value = panel.view;
 
         return;
     }
@@ -392,6 +413,7 @@ onUnmounted(() => {
                     :statuses="statuses"
                     :icons="questions.map((q) => q.icon)"
                     :pochy="mapPochy"
+                    :storage-key="STORAGE_KEY"
                     class="flex-1"
                     @reach="onReach"
                     @select="onSelectCheckpoint"
