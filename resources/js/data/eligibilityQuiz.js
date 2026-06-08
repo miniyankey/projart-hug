@@ -17,8 +17,7 @@ export const QUIZ_VIEWS = {
         buttonUrl: 'mailto:accueil.donneurs@hug.ch',
     },
     travel: {
-        integrationUrl:
-            'https://integrations.spenderservice.ch/fr/travel_check/irb/',
+        buttonUrl: 'https://integrations.spenderservice.ch/fr/travel_check/irb/',
     },
     vaccine: {
         buttonUrl: 'https://www.blutspende.ch/fr/dates-de-collecte-de-sang',

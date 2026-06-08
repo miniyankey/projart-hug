@@ -436,6 +436,7 @@
             "temporary": {
                 "title": "Almost!",
                 "message": "You'll be able to donate in {duration}.",
+                "message_unknown": "You can't donate yet: check the exact waiting period before coming back.",
                 "text": "These steps temporarily prevent you from donating. Come back after the indicated period."
             },
             "lifetime": {
@@ -444,6 +445,7 @@
                 "text": "Some situations make donation permanently impossible. Thank you for taking the step!",
                 "label": "Lifetime"
             },
+            "unknown_label": "To check",
             "recap_title": "Summary",
             "share": {
                 "cta": "Share with my colleagues",
@@ -474,7 +476,8 @@
                 },
                 "travel": {
                     "message": "Your eligibility depends on the countries you've visited.",
-                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months - the time needed for any pathogens to become detectable."
+                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months - the time needed for any pathogens to become detectable.",
+                    "cta": "Open the Travel Checker"
                 },
                 "vaccine": {
                     "message": "If you don't know which type of vaccine you received, use the Check Vaccination tool and fill in your vaccine details to find out whether you're eligible.",

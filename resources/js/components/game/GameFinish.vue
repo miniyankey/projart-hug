@@ -53,6 +53,12 @@ const message = computed(() => {
         return t('eligibilite.finish.lifetime.message');
     }
 
+    // Durée globale indéterminée (ex. vaccin « je ne sais pas ») → message
+    // sans durée, qui invite à vérifier.
+    if (props.verdict.days === null) {
+        return t('eligibilite.finish.temporary.message_unknown');
+    }
+
     return t('eligibilite.finish.temporary.message', {
         duration: formatDuration(props.verdict.days),
     });
@@ -70,9 +76,14 @@ const appointmentUrl = computed(
         'https://www.hug.ch/don-du-sang/rendez-vous-ligne',
 );
 
-// Durée d'une étape : badge « à vie » si days < 0, sinon durée formatée.
+// Durée d'une étape : « à vie » si days < 0, « à vérifier » si durée
+// indéterminée (null), sinon durée formatée.
 function stepDuration(step) {
-    return step.days !== null && step.days < 0
+    if (step.days === null) {
+        return t('eligibilite.finish.unknown_label');
+    }
+
+    return step.days < 0
         ? t('eligibilite.finish.lifetime.label')
         : formatDuration(step.days);
 }

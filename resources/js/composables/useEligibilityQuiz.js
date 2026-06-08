@@ -19,7 +19,6 @@ export function useEligibilityQuiz() {
             text: maybe(`${base}.text`),
             button_text: maybe(`${base}.cta`),
             button_url: QUIZ_VIEWS[viewKey]?.buttonUrl ?? null,
-            integration_url: QUIZ_VIEWS[viewKey]?.integrationUrl ?? null,
         };
     }
 

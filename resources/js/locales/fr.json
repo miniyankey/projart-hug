@@ -420,6 +420,7 @@
             "temporary": {
                 "title": "Presque !",
                 "message": "Tu pourras donner dans {duration}.",
+                "message_unknown": "Tu ne peux pas encore donner : vérifie le délai exact avant de revenir.",
                 "text": "Ces étapes t'empêchent temporairement de donner. Reviens dans le délai indiqué."
             },
             "lifetime": {
@@ -428,6 +429,7 @@
                 "text": "Certaines situations rendent le don impossible de façon permanente. Merci pour ta démarche !",
                 "label": "À vie"
             },
+            "unknown_label": "À vérifier",
             "recap_title": "Récapitulatif",
             "share": {
                 "cta": "Partager à mes collègues",
@@ -458,7 +460,8 @@
                 },
                 "travel": {
                     "message": "Ton inéligibilité dépend des pays que tu as visités.",
-                    "text": "Regarde sur le Travel Checker pour connaître la durée d'attente avant de pouvoir donner. Le maximum est de 6 mois, le temps que les éventuels agents pathogènes deviennent détectables."
+                    "text": "Regarde sur le Travel Checker pour connaître la durée d'attente avant de pouvoir donner. Le maximum est de 6 mois, le temps que les éventuels agents pathogènes deviennent détectables.",
+                    "cta": "Ouvrir le Travel Checker"
                 },
                 "vaccine": {
                     "message": "Si tu ne sais pas quel type de vaccin tu as reçu, rends-toi sur le Check Vaccination et remplis les informations de ton vaccin. Tu sauras alors si tu es éligible ou non.",

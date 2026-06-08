@@ -81,11 +81,18 @@ export function overallVerdict(questions, answers) {
     }
 
     if (steps.length > 0) {
-        const maxDays = Math.max(
-            ...steps.filter((s) => s.days !== null).map((s) => s.days),
-        );
+        // Durées connues uniquement. Si aucune (ex. vaccin « je ne sais pas »,
+        // days null), la durée globale reste indéterminée (null) plutôt que
+        // -Infinity (Math.max() sur tableau vide).
+        const knownDays = steps
+            .filter((s) => s.days !== null)
+            .map((s) => s.days);
 
-        return { status: 'temporary', days: maxDays, steps };
+        return {
+            status: 'temporary',
+            days: knownDays.length > 0 ? Math.max(...knownDays) : null,
+            steps,
+        };
     }
 
     return { status: 'eligible', days: null, steps: [] };
