@@ -1,7 +1,6 @@
 <script setup>
 // Layer 4 — octogone pixel art sur le chemin.
-// Variantes : 'start' (▶ brand), 'checkpoint' (? coloré selon le statut),
-// 'end' (★ doré + drapeau).
+
 // Statut d'un checkpoint : 'locked' (gris), 'eligible' (brand), 'ineligible' (noir).
 // Un checkpoint répondu (statut ≠ locked) est cliquable → émet `select`.
 import { computed } from 'vue';
@@ -47,7 +46,7 @@ const cfg = computed(() => {
             big: true,
             fill: 'var(--brand,#7c3aed)',
             highlight: '#b090ff',
-            icon: '▶',
+            icon: '🏁',
             iconFill: '#fff',
             iconSize: 18,
         };
@@ -58,7 +57,7 @@ const cfg = computed(() => {
             big: true,
             fill: '#e8b800',
             highlight: '#ffe060',
-            icon: '★',
+            icon: '🏥',
             iconFill: '#333',
             iconSize: 18,
             flag: true,
