@@ -24,6 +24,12 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    // Optionnel : si défini (ex. "#rdv"), le CTA de la nav scrolle vers cette
+    // ancre de la page courante au lieu de naviguer.
+    ctaScrollTarget: {
+        type: String,
+        default: null,
+    },
 });
 
 const isCobrand = computed(() => props.company !== null);
@@ -90,13 +96,17 @@ const brandVars = computed(() => {
             :cta="cta"
             :company="company"
             :home-url="routes.home.url()"
-            :normal-site-url="routes.home.url()"
+            :cta-scroll-target="ctaScrollTarget"
         />
 
         <main class="flex-1">
             <slot />
         </main>
 
-        <Footer v-if="!hideFooter" />
+        <Footer
+            v-if="!hideFooter"
+            :company="company"
+            :main-site-url="routes.home.url()"
+        />
     </div>
 </template>

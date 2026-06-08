@@ -73,7 +73,11 @@ const mapUrl = computed(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :collect-slug="collectSlug">
+    <PublicLayout
+        :company="company"
+        :collect-slug="collectSlug"
+        cta-scroll-target="#rdv"
+    >
         <Head :title="t('nav.collecte_info')" />
 
         <!-- Hero co-brandé -->
@@ -182,7 +186,10 @@ const mapUrl = computed(() => {
                         </dl>
 
                         <!-- CTA -->
-                        <div class="mt-8 flex flex-wrap gap-4">
+                        <div
+                            id="rdv"
+                            class="mt-8 flex scroll-mt-24 flex-wrap gap-4"
+                        >
                             <Button as-child variant="pixel_violet" size="cta">
                                 <Link :href="cobrandJeu.url(routeParams)">
                                     {{ t('cobrand.collecte.cta_eligible') }}

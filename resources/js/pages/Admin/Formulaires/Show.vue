@@ -42,10 +42,7 @@ function toggleHandled() {
         </template>
 
         <template #actions>
-            <Button
-                as-child
-                class="border-2 border-gray-900 bg-white text-gray-900 hover:bg-gray-100"
-            >
+            <Button as-child variant="admin_outline">
                 <Link :href="index.url()">
                     <ArrowLeft class="size-4" />
                     {{ t('admin.formulaires.back') }}
@@ -82,13 +79,8 @@ function toggleHandled() {
                 </div>
                 <Button
                     type="button"
+                    :variant="isHandled ? 'admin_outline' : 'admin'"
                     :disabled="handledForm.processing"
-                    class="border-2 border-gray-900"
-                    :class="
-                        isHandled
-                            ? 'bg-white text-gray-900 hover:bg-gray-100'
-                            : 'bg-[var(--brand)] text-white hover:bg-[var(--brand-hover)]'
-                    "
                     @click="toggleHandled"
                 >
                     {{

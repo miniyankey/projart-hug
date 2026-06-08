@@ -2,6 +2,8 @@
 import { Link } from '@inertiajs/vue3';
 import { Pencil, Plus, Trash2 } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
+import AdminIconButton from '@/components/admin/AdminIconButton.vue';
+import AdminStatusBadge from '@/components/admin/AdminStatusBadge.vue';
 import CobrandLink from '@/components/admin/CobrandLink.vue';
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import { Button } from '@/components/ui/button';
@@ -49,10 +51,7 @@ function formatTimeRange(start, end) {
         <template #subtitle>{{ t('admin.collectes.subtitle') }}</template>
 
         <template #actions>
-            <Button
-                as-child
-                class="border-2 border-gray-900 bg-[var(--brand)] text-white hover:bg-[var(--brand-hover)]"
-            >
+            <Button as-child variant="admin">
                 <Link :href="create.url()">
                     <Plus class="size-4" />
                     {{ t('admin.collectes.new') }}
@@ -142,18 +141,15 @@ function formatTimeRange(start, end) {
                             </div>
                         </td>
                         <td class="px-5 py-4">
-                            <span
+                            <AdminStatusBadge
                                 v-if="collect.status === 'ongoing'"
-                                class="inline-flex items-center gap-1.5 border-2 border-emerald-500 bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700"
+                                tone="ongoing"
                             >
                                 {{ t('admin.collectes.status_ongoing') }}
-                            </span>
-                            <span
-                                v-else
-                                class="inline-flex items-center gap-1.5 border-2 border-gray-300 bg-gray-50 px-2.5 py-1 text-xs font-semibold text-gray-500"
-                            >
+                            </AdminStatusBadge>
+                            <AdminStatusBadge v-else tone="neutral">
                                 {{ t('admin.collectes.status_ended') }}
-                            </span>
+                            </AdminStatusBadge>
                         </td>
                         <td class="px-5 py-4">
                             <CobrandLink
@@ -163,21 +159,19 @@ function formatTimeRange(start, end) {
                         </td>
                         <td class="px-5 py-4">
                             <div class="flex items-center justify-end gap-2">
-                                <Link
+                                <AdminIconButton
                                     :href="edit(collect.id).url"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-gray-700 transition-colors hover:bg-gray-100"
                                     :title="t('admin.collectes.edit')"
                                 >
                                     <Pencil class="size-4" />
-                                </Link>
-                                <button
-                                    type="button"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-red-600 transition-colors hover:bg-red-50"
+                                </AdminIconButton>
+                                <AdminIconButton
+                                    destructive
                                     :title="t('admin.collectes.delete')"
                                     @click="askRemove(collect)"
                                 >
                                     <Trash2 class="size-4" />
-                                </button>
+                                </AdminIconButton>
                             </div>
                         </td>
                     </tr>

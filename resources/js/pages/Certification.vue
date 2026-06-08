@@ -291,14 +291,22 @@ onUnmounted(() => {
                             <div
                                 class="anim-hero-ctas mt-8 flex flex-wrap gap-4"
                             >
-                                <Button variant="pixel_violet">
+                                <Button
+                                    as-child
+                                    variant="pixel_violet"
+                                    size="cta"
+                                >
                                     <Link :href="routes.collecte.url()">
                                         {{
                                             t('certification.hero.cta_primary')
                                         }}
                                     </Link>
                                 </Button>
-                                <Button variant="pixel_blue">
+                                <Button
+                                    as-child
+                                    variant="pixel_blue"
+                                    size="cta"
+                                >
                                     <a
                                         href="#avantages"
                                         @click.prevent="scrollTo('#avantages')"
@@ -456,7 +464,7 @@ onUnmounted(() => {
                         {{ t('certification.cta.subtitle') }}
                     </p>
                     <div class="mt-10">
-                        <Button variant="pixel_violet">
+                        <Button as-child variant="pixel_violet" size="cta">
                             <Link :href="routes.collecte.url()">
                                 {{ t('certification.cta.button') }}
                             </Link>

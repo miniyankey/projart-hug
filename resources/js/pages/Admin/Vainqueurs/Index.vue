@@ -2,6 +2,8 @@
 import { Link } from '@inertiajs/vue3';
 import { Pencil, Plus, Trash2 } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
+import AdminIconButton from '@/components/admin/AdminIconButton.vue';
+import AdminStatusBadge from '@/components/admin/AdminStatusBadge.vue';
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
@@ -34,10 +36,7 @@ const {
         <template #subtitle>{{ t('admin.vainqueurs.subtitle') }}</template>
 
         <template #actions>
-            <Button
-                as-child
-                class="border-2 border-gray-900 bg-[var(--brand)] text-white hover:bg-[var(--brand-hover)]"
-            >
+            <Button as-child variant="admin">
                 <Link :href="create.url()">
                     <Plus class="size-4" />
                     {{ t('admin.vainqueurs.new') }}
@@ -83,11 +82,9 @@ const {
                             {{ trophee.year_of }}
                         </td>
                         <td class="px-5 py-4">
-                            <span
-                                class="inline-flex items-center border-2 border-gray-900 bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-700"
-                            >
+                            <AdminStatusBadge tone="rank">
                                 {{ rankLabels[trophee.rank] }}
-                            </span>
+                            </AdminStatusBadge>
                         </td>
                         <td class="px-5 py-4">
                             <div class="flex items-center gap-3">
@@ -103,21 +100,19 @@ const {
                         </td>
                         <td class="px-5 py-4">
                             <div class="flex items-center justify-end gap-2">
-                                <Link
+                                <AdminIconButton
                                     :href="edit(trophee.id).url"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-gray-700 transition-colors hover:bg-gray-100"
                                     :title="t('admin.vainqueurs.edit')"
                                 >
                                     <Pencil class="size-4" />
-                                </Link>
-                                <button
-                                    type="button"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-red-600 transition-colors hover:bg-red-50"
+                                </AdminIconButton>
+                                <AdminIconButton
+                                    destructive
                                     :title="t('admin.vainqueurs.delete')"
                                     @click="askRemove(trophee)"
                                 >
                                     <Trash2 class="size-4" />
-                                </button>
+                                </AdminIconButton>
                             </div>
                         </td>
                     </tr>
