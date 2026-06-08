@@ -21,6 +21,26 @@ return [
         'link_fallback' => 'If the button does not work, copy this link into your browser:',
     ],
 
+    // Internal notification to the team when a public form is submitted
+    'form_submission' => [
+        'subject_contact' => 'New contact message - :company',
+        'subject_collect' => 'New collection request - :company',
+        'eyebrow' => 'Form',
+        'heading_contact' => 'New contact message',
+        'heading_collect' => 'New collection organisation request',
+        'intro' => 'A form has just been submitted on the website. Here are the details:',
+        'field_company' => 'Company',
+        'field_city' => 'City',
+        'field_name' => 'Contact',
+        'field_email' => 'Email',
+        'field_message' => 'Message',
+        'field_dates' => 'Preferred dates',
+        'field_trophy' => 'Generosity Trophy',
+        'trophy_yes' => 'Wishes to take part',
+        'cta' => 'View in the dashboard',
+        'reply_hint' => 'Reply directly to this email to contact :email.',
+    ],
+
     // Reminder mail sent when a visitor becomes eligible to donate again
     'reminder' => [
         'subject' => 'Good news: you can donate blood again',
