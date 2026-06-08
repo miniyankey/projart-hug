@@ -514,7 +514,7 @@
             },
             "partner": {
                 "titre": "Partenaire",
-                "question": "As-tu eu plusieurs partenaires sexuel·les au cours des 12 derniers mois, ou changé de partenaire dans les 4 derniers mois ?",
+                "question": "As-tu eu plusieurs partenaires sexuel·les au cours des 12 derniers mois ou as-tu changé de partenaire dans les 4 derniers mois ?",
                 "why": "J'entre dans ton intimité, mais c'est important pour minimiser les risques de transmission d'IST au receveur.",
                 "choices": {
                     "yes": { "response": "Oui" },

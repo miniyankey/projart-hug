@@ -530,7 +530,7 @@
             },
             "partner": {
                 "titre": "Partner",
-                "question": "Have you had several sexual partners in the last 12 months, or changed partner in the last 4 months?",
+                "question": "Have you had several sexual partners in the last 12 months or have you changed partner in the last 4 months?",
                 "why": "It's personal, but important for minimising the risk of transmitting an STI to the recipient.",
                 "choices": {
                     "yes": { "response": "Yes" },
