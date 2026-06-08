@@ -271,7 +271,6 @@ const mapUrl = computed(() => {
                             class="mt-6"
                         >
                             <Link :href="cobrandJeu.url(routeParams)">
-                                &gt;
                                 {{ t('cobrand.collecte.eligible_card_cta') }}
                             </Link>
                         </Button>
