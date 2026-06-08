@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\FormSubmissionType;
+use App\Mail\NewFormSubmissionMail;
 use App\Models\FormSubmission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class FormSubmissionController extends Controller
@@ -37,7 +39,11 @@ class FormSubmissionController extends Controller
             'preferred_dates.*' => ['required', 'date', 'after:today'],
         ]);
 
-        FormSubmission::create($validated);
+        $submission = FormSubmission::create($validated);
+
+        // Notifier l'équipe Mission Donneur de la nouvelle soumission (en file d'attente,
+        // pour ne pas bloquer la réponse au visiteur si le SMTP est lent/indisponible).
+        Mail::to(config('mail.from.address'))->queue(new NewFormSubmissionMail($submission));
 
         return redirect()->back()
             ->with('success', 'flash.form_submission_sent');

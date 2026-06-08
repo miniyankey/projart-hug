@@ -21,6 +21,26 @@ return [
         'link_fallback' => 'Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :',
     ],
 
+    // Notification interne à l'équipe quand un formulaire public est soumis
+    'form_submission' => [
+        'subject_contact' => 'Nouveau message de contact - :company',
+        'subject_collect' => 'Nouvelle demande de collecte - :company',
+        'eyebrow' => 'Formulaire',
+        'heading_contact' => 'Nouveau message de contact',
+        'heading_collect' => 'Nouvelle demande d\'organisation de collecte',
+        'intro' => 'Un formulaire vient d\'être soumis sur le site. Voici les informations transmises :',
+        'field_company' => 'Entreprise',
+        'field_city' => 'Ville',
+        'field_name' => 'Contact',
+        'field_email' => 'E-mail',
+        'field_message' => 'Message',
+        'field_dates' => 'Dates souhaitées',
+        'field_trophy' => 'Trophée de la générosité',
+        'trophy_yes' => 'Souhaite participer',
+        'cta' => 'Voir dans le dashboard',
+        'reply_hint' => 'Répondez directement à ce mail pour contacter :email.',
+    ],
+
     // Mail de rappel quand un visiteur redevient éligible au don
     'reminder' => [
         'subject' => 'Bonne nouvelle : vous pouvez à nouveau donner votre sang',
