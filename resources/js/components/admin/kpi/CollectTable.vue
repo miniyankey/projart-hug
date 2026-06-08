@@ -18,18 +18,14 @@ defineProps({
 const { t } = useI18n();
 const { formatLongDate } = useDateFormatter();
 
-// Libellé + style du badge de statut (active / à venir / terminée).
+// Libellé + style du badge de statut (en cours / terminée).
 const statusMeta = {
-    active: {
-        label: 'admin.kpi.status_active',
+    ongoing: {
+        label: 'admin.kpi.status_ongoing',
         class: 'bg-green-50 text-green-900',
     },
-    upcoming: {
-        label: 'admin.kpi.status_upcoming',
-        class: 'bg-blue-50 text-blue-900',
-    },
-    past: {
-        label: 'admin.kpi.status_past',
+    ended: {
+        label: 'admin.kpi.status_ended',
         class: 'bg-gray-100 text-gray-500',
     },
 };

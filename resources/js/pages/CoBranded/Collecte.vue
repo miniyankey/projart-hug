@@ -10,6 +10,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useDateFormatter } from '@/composables/useDates';
 import { useTracking } from '@/composables/useTracking';
@@ -49,6 +50,10 @@ const horaires = computed(() => {
     return start || '-';
 });
 
+// Le jour J est passé (mais dans la semaine de grâce où le lien reste ouvert) :
+// la page affiche « collecte terminée » et masque l'inscription.
+const isPast = computed(() => Boolean(props.collect?.is_past));
+
 const place = computed(() => props.collect?.place ?? null);
 
 // Carte Google Maps géocodée sur l'adresse de la collecte
@@ -77,11 +82,9 @@ const mapUrl = computed(() => {
                 <div class="grid items-center gap-10 lg:grid-cols-2">
                     <!-- Colonne texte -->
                     <div>
-                        <span
-                            class="inline-block rounded-full bg-[var(--brand)] px-4 py-1.5 text-xs font-semibold tracking-wide text-white uppercase"
-                        >
+                        <Badge v-if="!isPast" variant="pixel">
                             {{ t('cobrand.collecte.eyebrow') }}
-                        </span>
+                        </Badge>
                         <h1
                             class="mt-6 text-3xl font-semibold text-gray-900 sm:text-4xl"
                         >
@@ -90,6 +93,27 @@ const mapUrl = computed(() => {
                         <p class="mt-4 max-w-lg leading-relaxed text-gray-700">
                             {{ t('cobrand.intro', { company: company.name }) }}
                         </p>
+
+                        <!-- Bandeau « collecte terminée » (semaine de grâce après le jour J) -->
+                        <div
+                            v-if="isPast"
+                            class="mt-8 border-[3px] border-black bg-[var(--brand)] p-6 text-white shadow-[8px_8px_0_0_var(--brand-shadow)]"
+                        >
+                            <p
+                                class="font-pixel text-base leading-snug sm:text-lg"
+                            >
+                                {{ t('cobrand.collecte.ended_title') }}
+                            </p>
+                            <p
+                                class="mt-4 text-sm leading-relaxed text-white/80"
+                            >
+                                {{
+                                    t('cobrand.collecte.ended_text', {
+                                        date: formatLongDate(collect?.day),
+                                    })
+                                }}
+                            </p>
+                        </div>
 
                         <!-- Encart date / horaires / lieu -->
                         <dl
@@ -165,7 +189,7 @@ const mapUrl = computed(() => {
                                 </Link>
                             </Button>
                             <Button
-                                v-if="collect?.link_appointment"
+                                v-if="collect?.link_appointment && !isPast"
                                 as-child
                                 variant="pixel_white"
                                 size="cta"

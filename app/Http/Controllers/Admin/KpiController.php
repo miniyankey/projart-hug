@@ -53,7 +53,7 @@ class KpiController extends Controller
                 'color' => $company->color,
                 'logo_url' => $company->logo_url,
                 'collects_total' => count($collectIds),
-                'collects_active' => $company->collects()->where('is_active', true)->count(),
+                'collects_active' => $company->collects()->ongoing()->count(),
             ],
             'funnel' => $this->funnelStats($collectIds),
             'appointments' => $this->appointmentStats($collectIds),
@@ -64,7 +64,7 @@ class KpiController extends Controller
     }
 
     /**
-     * Compteurs d'entreprises : total, labellisées, actives (≥ 1 collecte active).
+     * Compteurs d'entreprises : total, labellisées, actives (≥ 1 collecte en cours).
      *
      * @return array{total: int, labelled: int, active: int}
      */
@@ -74,7 +74,7 @@ class KpiController extends Controller
             'total' => Company::count(),
             'labelled' => Company::where('is_labelled', true)->count(),
             'active' => Company::whereHas('collects', function ($query) {
-                $query->where('is_active', true);
+                $query->ongoing();
             })->count(),
         ];
     }
@@ -84,14 +84,9 @@ class KpiController extends Controller
      */
     private function collectStats(): array
     {
-        $counts = DB::table('collects')
-            ->selectRaw('COUNT(*) as total')
-            ->selectRaw('SUM(CASE WHEN is_active = 1 THEN 1 ELSE 0 END) as active')
-            ->first();
-
         return [
-            'total' => (int) $counts->total,
-            'active' => (int) $counts->active,
+            'total' => Collect::count(),
+            'active' => Collect::ongoing()->count(),
         ];
     }
 
@@ -398,7 +393,7 @@ class KpiController extends Controller
      *     company: string|null,
      *     day: string|null,
      *     city: string|null,
-     *     status: 'active'|'upcoming'|'past',
+     *     status: 'ongoing'|'ended',
      *     sessions: int,
      *     clicks: int,
      *     rate: float
@@ -416,12 +411,10 @@ class KpiController extends Controller
             ->get()
             ->keyBy('collect_id');
 
-        $today = Carbon::today();
-
         $rows = Collect::with(['company:id,name', 'place:id,city'])
             ->when($collectIds !== null, fn ($query) => $query->whereIn('id', $collectIds))
             ->get()
-            ->map(function (Collect $collect) use ($events, $today) {
+            ->map(function (Collect $collect) use ($events) {
                 $row = $events->get($collect->id);
                 $sessions = (int) ($row->sessions ?? 0);
                 $clicks = (int) ($row->clicks ?? 0);
@@ -430,7 +423,7 @@ class KpiController extends Controller
                     'company' => $collect->company?->name,
                     'day' => $collect->day?->format('Y-m-d'),
                     'city' => $collect->place?->city,
-                    'status' => $this->collectStatus($collect, $today),
+                    'status' => $collect->status,
                     'sessions' => $sessions,
                     'clicks' => $clicks,
                     'rate' => $this->rate($clicks, $sessions),
@@ -438,38 +431,22 @@ class KpiController extends Controller
             })
             ->all();
 
-        // Tri par statut (en cours → à venir → terminée). Dans un groupe, les
-        // collectes à venir/en cours sont triées de la plus proche à la plus
-        // lointaine ; les terminées, de la plus récente à la plus ancienne.
-        $rank = ['active' => 0, 'upcoming' => 1, 'past' => 2];
+        // Tri par statut (en cours → terminée). Les collectes en cours sont
+        // triées de la plus proche à la plus lointaine ; les terminées, de la
+        // plus récente à la plus ancienne.
+        $rank = ['ongoing' => 0, 'ended' => 1];
 
         usort($rows, function (array $a, array $b) use ($rank): int {
             if ($rank[$a['status']] !== $rank[$b['status']]) {
                 return $rank[$a['status']] <=> $rank[$b['status']];
             }
 
-            return $a['status'] === 'past'
+            return $a['status'] === 'ended'
                 ? strcmp((string) $b['day'], (string) $a['day'])
                 : strcmp((string) $a['day'], (string) $b['day']);
         });
 
         return $rows;
-    }
-
-    /**
-     * Statut d'une collecte : active (mise en avant), à venir (date future non
-     * active) ou terminée (date passée). `is_active` est un flag métier (collecte
-     * promue), pas un indicateur « terminée », d'où la prise en compte de la date.
-     *
-     * @return 'active'|'upcoming'|'past'
-     */
-    private function collectStatus(Collect $collect, Carbon $today): string
-    {
-        if ($collect->is_active) {
-            return 'active';
-        }
-
-        return $collect->day && $collect->day->gte($today) ? 'upcoming' : 'past';
     }
 
     /**

@@ -59,14 +59,15 @@ class CobrandController extends Controller
     /**
      * Résout la collecte de l'entreprise par son slug, sinon 404.
      *
-     * Une collecte désactivée (is_active = false) n'est pas accessible publiquement.
+     * Une collecte terminée (plus d'une semaine après son jour J) n'est plus
+     * accessible publiquement : seul le scope `ongoing` est exposé.
      */
     private function resolveCollect(Company $company, string $collectSlug): Collect
     {
         return $company->collects()
+            ->ongoing()
             ->with('place:id,name,address,locality,city,room')
             ->where('slug', $collectSlug)
-            ->where('is_active', true)
             ->firstOrFail();
     }
 
@@ -74,6 +75,7 @@ class CobrandController extends Controller
     {
         return [
             'id' => $collect->id,
+            'is_past' => $collect->is_past,
             'day' => $collect->day?->format('Y-m-d'),
             'start_time' => $collect->start_time ? substr((string) $collect->start_time, 0, 5) : null,
             'end_time' => $collect->end_time ? substr((string) $collect->end_time, 0, 5) : null,

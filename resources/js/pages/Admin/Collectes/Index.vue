@@ -143,16 +143,16 @@ function formatTimeRange(start, end) {
                         </td>
                         <td class="px-5 py-4">
                             <span
-                                v-if="collect.is_active"
+                                v-if="collect.status === 'ongoing'"
                                 class="inline-flex items-center gap-1.5 border-2 border-emerald-500 bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700"
                             >
-                                {{ t('admin.collectes.status_active') }}
+                                {{ t('admin.collectes.status_ongoing') }}
                             </span>
                             <span
                                 v-else
                                 class="inline-flex items-center gap-1.5 border-2 border-gray-300 bg-gray-50 px-2.5 py-1 text-xs font-semibold text-gray-500"
                             >
-                                {{ t('admin.collectes.status_inactive') }}
+                                {{ t('admin.collectes.status_ended') }}
                             </span>
                         </td>
                         <td class="px-5 py-4">
