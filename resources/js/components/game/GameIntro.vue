@@ -1,8 +1,8 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import GamePochy from './GamePochy.vue';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 defineProps({
     questionCount: Number,

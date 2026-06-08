@@ -203,7 +203,9 @@ async function share() {
 
                     <!-- Confirmation du rappel par e-mail (inéligibilité temporaire) -->
                     <p
-                        v-if="reminderScheduled && verdict.status === 'temporary'"
+                        v-if="
+                            reminderScheduled && verdict.status === 'temporary'
+                        "
                         class="m-0 border-2 border-green-700 bg-green-50 px-4 py-3 font-mono text-sm text-green-800 shadow-[4px_4px_0_0_#15803d]"
                     >
                         {{ t('eligibilite.finish.reminder_scheduled') }}
