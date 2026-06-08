@@ -452,8 +452,8 @@
         "quiz": {
             "views": {
                 "medication": {
-                    "message": "Ton inéligibilité dépend des médicaments que tu as consommés.",
-                    "text": "Tu peux faire appel au CTS pour avoir plus d'informations sur ton éligibilité au don.",
+                    "message": "Bonne nouvelle : la plupart des médicaments n'empêchent pas le don.",
+                    "text": "Souvent, c'est la maladie traitée qui compte, pas le médicament lui-même. Certains traitements (antibiotiques, anti-inflammatoires...) imposent juste un délai. Signale tous tes traitements au médecin de prélèvement : c'est lui qui tranche.",
                     "cta": "Contacter le CTS"
                 },
                 "travel": {
@@ -490,8 +490,8 @@
             },
             "medication": {
                 "titre": "Médicaments",
-                "question": "As-tu pris des médicaments durant les 4 dernières semaines ?",
-                "why": "Certains médicaments ne permettent pas un don de sang sans risquer d'affecter le receveur ou le donneur.",
+                "question": "As-tu pris un traitement ou des médicaments au cours des 4 dernières semaines ?",
+                "why": "Ce n'est pas le médicament en lui-même qui pose problème, mais parfois la maladie pour laquelle il est pris. La plupart des traitements courants n'empêchent pas le don ; certains imposent simplement un délai.",
                 "choices": {
                     "yes": { "response": "Oui" },
                     "no": { "response": "Non" }

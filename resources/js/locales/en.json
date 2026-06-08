@@ -468,13 +468,13 @@
         "quiz": {
             "views": {
                 "medication": {
-                    "message": "Your eligibility depends on the medication you've taken.",
-                    "text": "Contact the CTS for more information about your eligibility to donate.",
+                    "message": "Good news: most medications don't prevent you from donating.",
+                    "text": "Often it's the underlying condition that matters, not the medication itself. Some treatments (antibiotics, anti-inflammatories...) just require a waiting period. Tell the collection doctor about all your treatments: they make the call.",
                     "cta": "Contact the CTS"
                 },
                 "travel": {
                     "message": "Your eligibility depends on the countries you've visited.",
-                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months — the time needed for any pathogens to become detectable."
+                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months - the time needed for any pathogens to become detectable."
                 },
                 "vaccine": {
                     "message": "If you don't know which type of vaccine you received, use the Check Vaccination tool and fill in your vaccine details to find out whether you're eligible.",
@@ -506,8 +506,8 @@
             },
             "medication": {
                 "titre": "Medication",
-                "question": "Have you taken any medication in the last 4 weeks?",
-                "why": "Some medications can make blood donation unsafe, risking harm to the recipient or the donor.",
+                "question": "Have you taken any treatment or medication in the last 4 weeks?",
+                "why": "It's not the medication itself that's the issue, but sometimes the condition it's prescribed for. Most everyday treatments don't prevent donation; some simply require a waiting period.",
                 "choices": {
                     "yes": { "response": "Yes" },
                     "no": { "response": "No" }
