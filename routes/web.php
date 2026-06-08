@@ -26,11 +26,11 @@ Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update
 
 // Newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
-    ->middleware('throttle:5,1')
+    ->middleware('throttle:newsletter')
     ->name('newsletter.subscribe');
 Route::inertia('/newsletter/unsubscribe', 'NewsletterUnsubscribe')->name('newsletter.unsubscribe.page');
 Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])
-    ->middleware('throttle:5,1')
+    ->middleware('throttle:newsletter')
     ->name('newsletter.unsubscribe');
 
 // Pages publiques
@@ -40,12 +40,12 @@ Route::inertia('/collecte', 'Collecte')->name('collecte');
 Route::post('/collecte', [FormSubmissionController::class, 'store'])->name('collecte.store');
 Route::get('/jeu', [EligibiliteController::class, 'index'])->name('eligibilite');
 Route::post('/eligibilite/rappel', [EligibilityReminderController::class, 'store'])
-    ->middleware('throttle:10,1')
+    ->middleware('throttle:reminder')
     ->name('eligibilite.rappel');
 Route::inertia('/certification', 'Certification')->name('certification');
 
 // Tracking KPI : endpoints publics « fire-and-forget » appelés depuis le front (pour register evetns)
-Route::prefix('/track')->name('track.')->middleware('throttle:60,1')->group(function () {
+Route::prefix('/track')->name('track.')->middleware('throttle:tracking')->group(function () {
     Route::post('/collecte-view', [CollectEventController::class, 'collecteView'])->name('collecte-view');
     Route::post('/eligibilite-step', [CollectEventController::class, 'eligibiliteStep'])->name('eligibilite-step');
     Route::post('/appointment-click', [CollectEventController::class, 'appointmentClick'])->name('appointment-click');
@@ -126,7 +126,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 // Routes de login et logout
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('login');
 // throttle pour limiter les tentatives de login à 5 par minute (cf bruteforce)
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:login');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 // Pages co-brandées : l'entreprise est résolue via {brandName} (son slug) et la
