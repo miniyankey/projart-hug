@@ -2,6 +2,8 @@
 import { Link } from '@inertiajs/vue3';
 import { Award, Pencil, Plus, Trash2 } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
+import AdminIconButton from '@/components/admin/AdminIconButton.vue';
+import AdminStatusBadge from '@/components/admin/AdminStatusBadge.vue';
 import CompanyAvatar from '@/components/admin/CompanyAvatar.vue';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
@@ -32,10 +34,7 @@ const {
         <template #subtitle>{{ t('admin.entreprises.subtitle') }}</template>
 
         <template #actions>
-            <Button
-                as-child
-                class="border-2 border-gray-900 bg-[var(--brand)] text-white hover:bg-[var(--brand-hover)]"
-            >
+            <Button as-child variant="admin">
                 <Link :href="create.url()">
                     <Plus class="size-4" />
                     {{ t('admin.entreprises.new') }}
@@ -101,37 +100,32 @@ const {
                             </div>
                         </td>
                         <td class="px-5 py-4">
-                            <span
+                            <AdminStatusBadge
                                 v-if="company.is_labelled"
-                                class="inline-flex items-center gap-1.5 border-2 border-amber-500 bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-700"
+                                tone="warning"
                             >
                                 <Award class="size-3.5" />
                                 {{ t('admin.entreprises.label_active') }}
-                            </span>
-                            <span
-                                v-else
-                                class="inline-flex items-center gap-1.5 border-2 border-gray-300 bg-gray-50 px-2.5 py-1 text-xs font-semibold text-gray-500"
-                            >
+                            </AdminStatusBadge>
+                            <AdminStatusBadge v-else tone="neutral">
                                 {{ t('admin.entreprises.label_inactive') }}
-                            </span>
+                            </AdminStatusBadge>
                         </td>
                         <td class="px-5 py-4">
                             <div class="flex items-center justify-end gap-2">
-                                <Link
+                                <AdminIconButton
                                     :href="edit(company.id).url"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-gray-700 transition-colors hover:bg-gray-100"
                                     :title="t('admin.entreprises.edit')"
                                 >
                                     <Pencil class="size-4" />
-                                </Link>
-                                <button
-                                    type="button"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-red-600 transition-colors hover:bg-red-50"
+                                </AdminIconButton>
+                                <AdminIconButton
+                                    destructive
                                     :title="t('admin.entreprises.delete')"
                                     @click="askRemove(company)"
                                 >
                                     <Trash2 class="size-4" />
-                                </button>
+                                </AdminIconButton>
                             </div>
                         </td>
                     </tr>

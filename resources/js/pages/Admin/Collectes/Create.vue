@@ -28,7 +28,7 @@ defineProps({
         }}</template>
 
         <template #actions>
-            <Button as-child variant="outline">
+            <Button as-child variant="admin_outline">
                 <Link :href="index.url()">
                     <ArrowLeft class="size-4" />
                     {{ t('admin.collectes.create.cancel') }}

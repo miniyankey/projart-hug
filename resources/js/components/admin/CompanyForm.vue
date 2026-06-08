@@ -256,7 +256,7 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                             <div class="flex items-center gap-2">
                                 <Button
                                     type="button"
-                                    variant="outline"
+                                    variant="admin_outline"
                                     @click="logoInput?.click()"
                                 >
                                     <Upload class="size-4" />
@@ -312,15 +312,15 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
             </FormSection>
 
             <div class="flex items-center justify-end gap-3">
-                <Button as-child variant="outline">
+                <Button as-child variant="admin_outline">
                     <Link :href="index.url()">
                         {{ t('admin.entreprises.create.cancel') }}
                     </Link>
                 </Button>
                 <Button
                     type="submit"
+                    variant="admin"
                     :disabled="form.processing"
-                    class="border-2 border-gray-900 bg-[var(--brand)] text-white hover:bg-[var(--brand-hover)]"
                 >
                     {{ submitLabel }}
                 </Button>

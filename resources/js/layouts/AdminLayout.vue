@@ -16,6 +16,7 @@ import { useI18n } from 'vue-i18n';
 import hugLogo from '@/../images/logos/hug.png';
 import { logout } from '@/actions/App/Http/Controllers/AdminAuthController';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher.vue';
+import { Button } from '@/components/ui/button';
 import { home } from '@/routes';
 import { index as adminIndex } from '@/routes/admin';
 import { index as collectesIndex } from '@/routes/admin/collectes';
@@ -167,12 +168,11 @@ function submitLogout() {
             </nav>
 
             <div class="flex flex-col gap-2 border-t-2 border-gray-900 p-3">
-                <Link
-                    :href="home.url()"
-                    class="flex items-center justify-center gap-2 border-2 border-gray-900 bg-white px-3 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-100"
-                >
-                    {{ t('admin.nav.back_to_site') }}
-                </Link>
+                <Button as-child variant="admin_outline" class="w-full">
+                    <Link :href="home.url()">
+                        {{ t('admin.nav.back_to_site') }}
+                    </Link>
+                </Button>
                 <form @submit.prevent="submitLogout">
                     <button
                         type="submit"

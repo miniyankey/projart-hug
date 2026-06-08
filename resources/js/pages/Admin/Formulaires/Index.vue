@@ -1,8 +1,9 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
 import { CheckCircle2, Clock, Eye, Trash2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import AdminIconButton from '@/components/admin/AdminIconButton.vue';
+import AdminStatusBadge from '@/components/admin/AdminStatusBadge.vue';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { useDateFormatter } from '@/composables/useDates';
 import { useDeleteConfirm } from '@/composables/useDeleteConfirm';
@@ -144,9 +145,9 @@ const {
                             {{ formatLongDate(submission.created_at) }}
                         </td>
                         <td class="px-5 py-4">
-                            <span
+                            <AdminStatusBadge
                                 v-if="submission.handled_at"
-                                class="inline-flex items-center gap-1.5 border-2 border-green-600 bg-green-50 px-2.5 py-1 text-xs font-bold text-green-700"
+                                tone="success"
                             >
                                 <CheckCircle2 class="size-3.5" />
                                 {{
@@ -154,32 +155,27 @@ const {
                                         name: submission.handler,
                                     })
                                 }}
-                            </span>
-                            <span
-                                v-else
-                                class="inline-flex items-center gap-1.5 border-2 border-gray-300 bg-gray-50 px-2.5 py-1 text-xs font-semibold text-gray-500"
-                            >
+                            </AdminStatusBadge>
+                            <AdminStatusBadge v-else tone="neutral">
                                 <Clock class="size-3.5" />
                                 {{ t('admin.formulaires.to_handle') }}
-                            </span>
+                            </AdminStatusBadge>
                         </td>
                         <td class="px-5 py-4">
                             <div class="flex items-center justify-end gap-2">
-                                <Link
+                                <AdminIconButton
                                     :href="show(submission.id).url"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-gray-700 transition-colors hover:bg-gray-100"
                                     :title="t('admin.formulaires.view')"
                                 >
                                     <Eye class="size-4" />
-                                </Link>
-                                <button
-                                    type="button"
-                                    class="flex size-8 items-center justify-center border-2 border-gray-900 bg-white text-red-600 transition-colors hover:bg-red-50"
+                                </AdminIconButton>
+                                <AdminIconButton
+                                    destructive
                                     :title="t('admin.formulaires.delete')"
                                     @click="askRemove(submission)"
                                 >
                                     <Trash2 class="size-4" />
-                                </button>
+                                </AdminIconButton>
                             </div>
                         </td>
                     </tr>

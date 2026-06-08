@@ -37,7 +37,7 @@ function cobrandUrl(collect) {
         <template #subtitle>{{ t('admin.overview.subtitle') }}</template>
 
         <template #actions>
-            <Button as-child variant="outline">
+            <Button as-child variant="admin_outline">
                 <Link :href="showRegister.url()">
                     {{ t('admin.overview.create_admin') }}
                 </Link>
