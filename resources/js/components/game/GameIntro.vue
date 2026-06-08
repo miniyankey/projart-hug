@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n';
 import GamePochy from './GamePochy.vue';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 defineProps({
     questionCount: Number,
@@ -24,18 +25,29 @@ const { t } = useI18n();
                 {{ t('eligibilite.ui.intro_title') }}
             </h1>
 
-            <div
-                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-neutral-800 shadow-[3px_3px_0_rgba(0,0,0,0.25)]"
-            >
-                <span>{{ t('eligibilite.ui.badge_duration') }}</span>
-                <span class="text-neutral-400">•</span>
-                <span>{{
-                    t('eligibilite.ui.badge_questions', {
-                        count: questionCount,
-                    })
-                }}</span>
-                <span class="text-neutral-400">•</span>
-                <span>{{ t('eligibilite.ui.badge_no_commitment') }}</span>
+            <div class="flex flex-wrap items-center gap-2">
+                <Badge
+                    variant="pixel"
+                    class="border-black bg-white text-[var(--brand,#7c3aed)] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.35)]"
+                >
+                    {{ t('eligibilite.ui.badge_duration') }}
+                </Badge>
+                <Badge
+                    variant="pixel"
+                    class="border-black bg-white text-[var(--brand,#7c3aed)] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.35)]"
+                >
+                    {{
+                        t('eligibilite.ui.badge_questions', {
+                            count: questionCount,
+                        })
+                    }}
+                </Badge>
+                <Badge
+                    variant="pixel"
+                    class="border-black bg-white text-[var(--brand,#7c3aed)] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.35)]"
+                >
+                    {{ t('eligibilite.ui.badge_no_commitment') }}
+                </Badge>
             </div>
         </div>
 
