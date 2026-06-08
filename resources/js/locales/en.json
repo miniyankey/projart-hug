@@ -417,6 +417,7 @@
             "back": "Back",
             "validate": "Continue",
             "ok": "Continue",
+            "continue": "Continue playing",
             "learn_more": "Learn more",
             "scroll_hint": "Scroll to move forward",
             "loading": "Loading…"
