@@ -36,12 +36,32 @@ class EligibilityReminderController extends Controller
 
         $locale = $this->resolveLocale($request);
 
-        $reminder = EligibilityReminder::create([
+        $newEligibleAt = now()->addDays($validated['days'])->startOfDay();
+
+        // Une seule demande par e-mail (contrainte unique) : un visiteur qui
+        // rejoue met à jour sa demande au lieu de créer un doublon.
+        $reminder = EligibilityReminder::firstOrNew([
             'email' => $validated['email'],
-            'locale' => $locale,
-            'collect_id' => $validated['collect_id'] ?? null,
-            'eligible_at' => now()->addDays($validated['days'])->toDateString(),
         ]);
+
+        // On garde TOUJOURS la date d'éligibilité la plus lointaine : si une
+        // demande non encore envoyée existe déjà avec un délai plus long, on la
+        // conserve (ne jamais prévenir la personne trop tôt). Un rappel déjà
+        // envoyé repart sur le nouveau délai.
+        $keepExisting = $reminder->exists
+            && $reminder->sent_at === null
+            && $reminder->eligible_at !== null
+            && $reminder->eligible_at->greaterThanOrEqualTo($newEligibleAt);
+
+        $reminder->locale = $locale;
+
+        if (! $keepExisting) {
+            $reminder->collect_id = $validated['collect_id'] ?? null;
+            $reminder->eligible_at = $newEligibleAt->toDateString();
+        }
+
+        $reminder->sent_at = null;
+        $reminder->save();
 
         // Inscription newsletter optionnelle : secondaire, ne doit jamais faire
         // échouer le rappel si Brevo est indisponible.
@@ -72,11 +92,20 @@ class EligibilityReminderController extends Controller
             'days' => ['required', 'integer', 'min:1', 'max:730'],
         ]);
 
-        // Un rappel déjà envoyé ne doit plus bouger.
+        // Un rappel déjà envoyé ne doit plus bouger. Sinon on ne recale la date
+        // que si le nouveau délai est PLUS LONG : on garde toujours la durée
+        // d'inéligibilité maximale, jamais une date plus proche.
         if ($reminder->sent_at === null) {
-            $reminder->update([
-                'eligible_at' => now()->addDays($validated['days'])->toDateString(),
-            ]);
+            $newEligibleAt = now()->addDays($validated['days'])->startOfDay();
+
+            if (
+                $reminder->eligible_at === null
+                || $newEligibleAt->greaterThan($reminder->eligible_at)
+            ) {
+                $reminder->update([
+                    'eligible_at' => $newEligibleAt->toDateString(),
+                ]);
+            }
         }
 
         return response()->noContent();
