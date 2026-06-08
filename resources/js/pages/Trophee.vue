@@ -392,12 +392,12 @@ onUnmounted(() => {
                             <div
                                 class="anim-hero-ctas mt-8 flex flex-wrap gap-4"
                             >
-                                <Button variant="pixel_violet">
+                                <Button as-child variant="pixel_violet" size="cta">
                                     <Link :href="routes.collecte.url()">
                                         {{ t('trophee.hero.cta_primary') }}
                                     </Link>
                                 </Button>
-                                <Button variant="pixel_white">
+                                <Button as-child variant="pixel_white" size="cta">
                                     <a
                                         href="#vainqueurs"
                                         @click.prevent="scrollTo('#vainqueurs')"
@@ -761,7 +761,7 @@ onUnmounted(() => {
                         {{ t('trophee.cta.subtitle') }}
                     </p>
                     <div class="mt-10">
-                        <Button as-child variant="pixel_yellow">
+                        <Button as-child variant="pixel_yellow" size="cta">
                             <Link :href="routes.collecte.url()">
                                 {{ t('trophee.cta.button') }}
                             </Link>

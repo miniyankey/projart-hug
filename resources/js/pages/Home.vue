@@ -259,13 +259,15 @@ onUnmounted(() => {
                             {{ t('home.hero.game_cta') }}
                         </p>
                         <div class="anim-hero-ctas mt-8 flex flex-wrap gap-4">
-                            <Button variant="pixel_violet">
+                            <Button as-child variant="pixel_violet" size="cta">
                                 <Link :href="routes.collecte.url()">
                                     {{ t('home.hero.cta_primary') }}
                                 </Link>
                             </Button>
                             <Button
+                                as-child
                                 variant="pixel_blue"
+                                size="cta"
                                 class="border border-blue-600 text-white"
                             >
                                 <Link :href="routes.eligibilite.url()">
@@ -424,7 +426,7 @@ onUnmounted(() => {
                     </div>
 
                     <div class="anim-steps-cta mt-12">
-                        <Button as-child variant="pixel_violet">
+                        <Button as-child variant="pixel_violet" size="cta">
                             <Link :href="routes.collecte.url()">
                                 {{ t('home.steps.cta') }}
                             </Link>
