@@ -7,7 +7,7 @@ import linkedinIcon from '@/../images/icons/linkedin.svg';
 import tiktokIcon from '@/../images/icons/tiktok.svg';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import * as routes from '@/routes/index.ts';
+import { index as adminIndex } from '@/routes/admin';
 
 const { t } = useI18n();
 
@@ -107,7 +107,7 @@ const socials = [
                             {{ t('footer.collaborateur.description') }}
                         </p>
                         <Button as-child variant="cta" size="cta" class="mt-4">
-                            <Link :href="routes.login.url()">
+                            <Link :href="adminIndex.url()">
                                 {{ t('footer.collaborateur.cta') }}
                             </Link>
                         </Button>
