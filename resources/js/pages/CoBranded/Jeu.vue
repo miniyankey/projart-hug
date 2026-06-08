@@ -13,6 +13,8 @@ import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
 import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { computeResult, overallVerdict } from '@/lib/eligibility';
+import { collecte as cobrandCollecte } from '@/routes/cobrand';
+import { home } from '@/routes/index.ts';
 
 const props = defineProps({
     company: Object,
@@ -31,6 +33,16 @@ const { trackEligibiliteStep, trackAppointmentClick } = useTracking();
 // 'intro' | 'map' | 'finished'. Les écrans question/résultat sont
 // des overlays pilotés par activeIndex / resultView, pas par `phase`.
 const phase = ref('intro');
+
+// Retour vers le site : landing co-brandée de l'entreprise, ou accueil public.
+const siteUrl = computed(() =>
+    props.company
+        ? cobrandCollecte.url({
+              brandName: props.company.slug,
+              collect: props.collectSlug,
+          })
+        : home.url(),
+);
 
 const verdict = computed(() =>
     phase.value === 'finished'
@@ -412,6 +424,7 @@ onUnmounted(() => {
                     :verdict="verdict"
                     :total="questions.length"
                     :link-appointment="props.link_appointment"
+                    :site-url="siteUrl"
                     class="game-layer"
                     @appointment="onAppointment"
                     @back="phase = 'map'"
