@@ -88,6 +88,9 @@ function buildAnimations() {
             duration: 0.5,
             delay: 0.55,
             ease: 'power2.out',
+            // GSAP laisse un transform inline qui écraserait le hover:translate
+            // du bouton pixel : on le nettoie en fin d'animation.
+            clearProps: 'transform',
             scrollTrigger: {
                 trigger: '.anim-trophee-text',
                 start: 'top 80%',

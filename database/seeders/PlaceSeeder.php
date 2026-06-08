@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
 use App\Models\Place;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +10,7 @@ class PlaceSeeder extends Seeder
 {
     public function run(): void
     {
+        // Centre de référence : le don se fait aussi au CTS des HUG.
         Place::create([
             'name' => 'HUG Cluse-Roseraie',
             'address' => 'Rue Gabrielle-Perret-Gentil 4',
@@ -17,13 +19,16 @@ class PlaceSeeder extends Seeder
             'room' => 'Centre de transfusion sanguine',
         ]);
 
-        for ($i = 0; $i < 4; $i++) {
+        // Un lieu de collecte par entreprise = son propre site (collecte mobile
+        // sur place). L'adresse vient directement de la fiche entreprise, ce qui
+        // évite de dupliquer la donnée. CollectSeeder retrouve ce lieu par le nom.
+        foreach (Company::whereNotNull('street')->get() as $company) {
             Place::create([
-                'name' => 'Siège '.\fake()->unique()->company(),
-                'address' => \fake()->streetAddress(),
-                'locality' => \fake()->numberBetween(1000, 9999),
-                'city' => \fake()->city(),
-                'room' => \fake()->optional(0.5)->bothify('Salle ##'),
+                'name' => $company->name,
+                'address' => $company->street,
+                'locality' => (int) $company->postal_code,
+                'city' => $company->city,
+                'room' => 'Salle polyvalente',
             ]);
         }
     }

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CollectSeeder::class,
             TropheeSeeder::class,
             FormSubmissionSeeder::class,
+            EligibilityReminderSeeder::class,
             KpiTrackingSeeder::class,
         ]);
     }
