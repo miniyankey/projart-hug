@@ -17,7 +17,7 @@ export const QUIZ_VIEWS = {
         buttonUrl: 'mailto:accueil.donneurs@hug.ch',
     },
     travel: {
-        integrationUrl:
+        buttonUrl:
             'https://integrations.spenderservice.ch/fr/travel_check/irb/',
     },
     vaccine: {

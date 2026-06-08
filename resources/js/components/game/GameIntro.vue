@@ -1,6 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import GamePochy from './GamePochy.vue';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 defineProps({
@@ -14,7 +15,7 @@ const { t } = useI18n();
 
 <template>
     <div
-        class="intro-bg flex flex-col justify-between overflow-hidden px-6 py-8 sm:px-10 sm:py-12"
+        class="intro-bg relative flex flex-col overflow-hidden px-6 py-8 sm:px-10 sm:py-12"
     >
         <!-- Titre + badge de réassurance -->
         <div class="flex flex-col items-start gap-4">
@@ -24,27 +25,38 @@ const { t } = useI18n();
                 {{ t('eligibilite.ui.intro_title') }}
             </h1>
 
-            <div
-                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-neutral-800 shadow-[3px_3px_0_rgba(0,0,0,0.25)]"
-            >
-                <span>{{ t('eligibilite.ui.badge_duration') }}</span>
-                <span class="text-neutral-400">•</span>
-                <span>{{
-                    t('eligibilite.ui.badge_questions', {
-                        count: questionCount,
-                    })
-                }}</span>
-                <span class="text-neutral-400">•</span>
-                <span>{{ t('eligibilite.ui.badge_no_commitment') }}</span>
+            <div class="flex flex-wrap items-center gap-2">
+                <Badge
+                    variant="pixel"
+                    class="border-black bg-white text-[var(--brand,#7c3aed)] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.35)]"
+                >
+                    {{ t('eligibilite.ui.badge_duration') }}
+                </Badge>
+                <Badge
+                    variant="pixel"
+                    class="border-black bg-white text-[var(--brand,#7c3aed)] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.35)]"
+                >
+                    {{
+                        t('eligibilite.ui.badge_questions', {
+                            count: questionCount,
+                        })
+                    }}
+                </Badge>
+                <Badge
+                    variant="pixel"
+                    class="border-black bg-white text-[var(--brand,#7c3aed)] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.35)]"
+                >
+                    {{ t('eligibilite.ui.badge_no_commitment') }}
+                </Badge>
             </div>
         </div>
 
-        <!-- Pochy sur sa plateforme -->
-        <div class="flex flex-1 items-center justify-center">
+        <!-- Pochy sur sa plateforme — remonté vers le haut de l'écran -->
+        <div class="mt-2 flex items-center justify-center sm:mt-4">
             <div class="relative flex flex-col items-center">
                 <GamePochy
                     variant="0"
-                    class="relative z-10 w-[clamp(240px,42vh,420px)] drop-shadow-[0_14px_22px_rgba(0,0,0,0.3)]"
+                    class="relative z-10 w-[clamp(240px,38vh,420px)] drop-shadow-[0_14px_22px_rgba(0,0,0,0.3)]"
                 />
                 <!-- Zone arrondie sous Pochy : ses pieds reposent dessus -->
                 <div
@@ -53,14 +65,23 @@ const { t } = useI18n();
             </div>
         </div>
 
-        <!-- CTA — blanc sur fond coloré pour rester lisible -->
-        <Button
-            variant="pixel_white"
-            class="mx-auto px-12 py-3.5 font-pixel text-[clamp(0.85rem,1.6vw,1.1rem)] tracking-wider"
-            @click="emit('play')"
+        <!-- CTA -->
+        <div class="mt-5 flex justify-center sm:mt-6">
+            <Button
+                variant="pixel_white"
+                class="px-12 py-3.5 font-pixel text-[clamp(0.85rem,1.6vw,1.1rem)] tracking-wider"
+                @click="emit('play')"
+            >
+                {{ t('eligibilite.ui.play') }}
+            </Button>
+        </div>
+
+        <!-- Réassurance confidentialité — ancrée en bas à droite -->
+        <p
+            class="absolute right-4 bottom-3 max-w-[34ch] text-right text-xs leading-relaxed text-white/80 [text-shadow:1px_1px_0_rgba(0,0,0,0.35)] sm:right-6 sm:bottom-4 sm:text-sm"
         >
-            {{ t('eligibilite.ui.play') }}
-        </Button>
+            {{ t('eligibilite.ui.intro_privacy') }}
+        </p>
     </div>
 </template>
 

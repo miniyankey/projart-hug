@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { update as updateReminder } from '@/actions/App/Http/Controllers/EligibilityReminderController';
 import GameFinish from '@/components/game/GameFinish.vue';
 import GameIntro from '@/components/game/GameIntro.vue';
 import GameLoading from '@/components/game/GameLoading.vue';
@@ -13,6 +14,7 @@ import { useEligibilityQuiz } from '@/composables/useEligibilityQuiz';
 import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { computeResult, overallVerdict } from '@/lib/eligibility';
+import { postJson } from '@/lib/http';
 import { collecte as cobrandCollecte } from '@/routes/cobrand';
 import { home } from '@/routes/index.ts';
 
@@ -60,6 +62,11 @@ const resultDays = ref(0); // jours de rappel à proposer sur le résultat (max,
 const resultDonation = ref(false); // proposer le don (inéligibilité à vie) sur le résultat
 // Le joueur a déjà soumis un rappel OU cliqué sur le don → on ne le sollicite plus.
 const reminderHandled = ref(false);
+// Rappel enregistré : id en base + durée (jours) déjà transmise. Permet de
+// mettre à jour la date `eligible_at` si une réponse ultérieure change la durée
+// d'inéligibilité maximale.
+const reminderId = ref(null);
+const reminderDaysSubmitted = ref(0);
 // Chaque sollicitation (rappel temporaire / don à vie) n'est proposée qu'UNE fois
 // sur le parcours. On retient la question déclencheuse pour autoriser la
 // réaffichage si le joueur revient modifier cette même réponse, pas ailleurs.
@@ -237,6 +244,11 @@ function onAnswer(choiceIds) {
     resultDonation.value = showDonation;
     resultDays.value = showReminder ? overall.days : 0;
 
+    // Si un rappel a déjà été enregistré, on garde sa date alignée sur la durée
+    // d'inéligibilité maximale courante (une réponse a pu l'allonger ou la
+    // raccourcir depuis la soumission).
+    maybeUpdateReminderDate(overall);
+
     // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
     if (!result.eligible) {
         resultPochy.value = result.days < 0 ? '0-sad' : '0-time';
@@ -263,6 +275,34 @@ function onAnswer(choiceIds) {
     }
 
     finishStep();
+}
+
+// Rappel enregistré : on retient son id et la durée transmise, et on ne sollicite
+// plus le joueur (comme pour le don).
+function onReminderSubmitted(id) {
+    reminderHandled.value = true;
+    reminderId.value = id;
+    reminderDaysSubmitted.value = resultDays.value;
+}
+
+// Met à jour la date du rappel en base si la durée d'inéligibilité maximale a
+// changé depuis sa soumission. On ne touche que tant qu'on reste « temporaire »
+// (devenir éligible/inéligible à vie est hors périmètre : pas de date pertinente).
+function maybeUpdateReminderDate(overall) {
+    if (reminderId.value === null) {
+        return;
+    }
+
+    if (overall.status !== 'temporary' || overall.days <= 0) {
+        return;
+    }
+
+    if (overall.days === reminderDaysSubmitted.value) {
+        return;
+    }
+
+    postJson(updateReminder.url(reminderId.value), { days: overall.days });
+    reminderDaysSubmitted.value = overall.days;
 }
 
 // « OK » du résultat termine l'étape ; « Retour » réaffiche la question
@@ -411,6 +451,7 @@ onUnmounted(() => {
                     @ok="onResultOk"
                     @back="onResultBack"
                     @handled="reminderHandled = true"
+                    @reminder-submitted="onReminderSubmitted"
                 />
             </Transition>
 
@@ -425,6 +466,7 @@ onUnmounted(() => {
                     :total="questions.length"
                     :link-appointment="props.link_appointment"
                     :site-url="siteUrl"
+                    :reminder-scheduled="reminderId !== null"
                     class="game-layer"
                     @appointment="onAppointment"
                     @back="phase = 'map'"

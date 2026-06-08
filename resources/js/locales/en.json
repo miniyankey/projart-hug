@@ -408,10 +408,11 @@
         "mascotte_close": "Close",
         "ui": {
             "intro_title": "Can you give blood? Walk the path with Pochy to find out.",
-            "badge_duration": "2 min",
+            "badge_duration": "2 minutes",
             "badge_questions": "{count} questions",
             "badge_no_commitment": "No commitment",
             "play": "PLAY",
+            "intro_privacy": "No data is stored. Your answers stay private and never leave your device.",
             "back": "Back",
             "validate": "Continue",
             "ok": "Continue",
@@ -435,6 +436,7 @@
             "temporary": {
                 "title": "Almost!",
                 "message": "You'll be able to donate in {duration}.",
+                "message_unknown": "You can't donate yet: check the exact waiting period before coming back.",
                 "text": "These steps temporarily prevent you from donating. Come back after the indicated period."
             },
             "lifetime": {
@@ -443,6 +445,8 @@
                 "text": "Some situations make donation permanently impossible. Thank you for taking the step!",
                 "label": "Lifetime"
             },
+            "unknown_label": "To check",
+            "reminder_scheduled": "Got it! We'll email you as soon as your waiting period ends, so you can come and give blood.",
             "recap_title": "Summary",
             "share": {
                 "cta": "Share with my colleagues",
@@ -467,13 +471,14 @@
         "quiz": {
             "views": {
                 "medication": {
-                    "message": "Your eligibility depends on the medication you've taken.",
-                    "text": "Contact the CTS for more information about your eligibility to donate.",
+                    "message": "Good news: most medications don't prevent you from donating.",
+                    "text": "Often it's the underlying condition that matters, not the medication itself. Some treatments (antibiotics, anti-inflammatories...) just require a waiting period. Tell the collection doctor about all your treatments: they make the call.",
                     "cta": "Contact the CTS"
                 },
                 "travel": {
                     "message": "Your eligibility depends on the countries you've visited.",
-                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months — the time needed for any pathogens to become detectable."
+                    "text": "Use the Travel Checker to find out how long you need to wait before donating. The maximum is 6 months - the time needed for any pathogens to become detectable.",
+                    "cta": "Open the Travel Checker"
                 },
                 "vaccine": {
                     "message": "If you don't know which type of vaccine you received, use the Check Vaccination tool and fill in your vaccine details to find out whether you're eligible.",
@@ -505,8 +510,8 @@
             },
             "medication": {
                 "titre": "Medication",
-                "question": "Have you taken any medication in the last 4 weeks?",
-                "why": "Some medications can make blood donation unsafe, risking harm to the recipient or the donor.",
+                "question": "Have you taken any treatment or medication in the last 4 weeks?",
+                "why": "It's not the medication itself that's the issue, but sometimes the condition it's prescribed for. Most everyday treatments don't prevent donation; some simply require a waiting period.",
                 "choices": {
                     "yes": { "response": "Yes" },
                     "no": { "response": "No" }
