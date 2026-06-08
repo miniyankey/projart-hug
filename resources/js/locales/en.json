@@ -412,6 +412,7 @@
             "badge_questions": "{count} questions",
             "badge_no_commitment": "No commitment",
             "play": "PLAY",
+            "intro_privacy": "No data is stored. Your answers stay private and never leave your device.",
             "back": "Back",
             "validate": "Continue",
             "ok": "Continue",

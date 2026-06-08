@@ -396,6 +396,7 @@
             "badge_questions": "{count} questions",
             "badge_no_commitment": "Sans engagement",
             "play": "JOUER",
+            "intro_privacy": "Aucune donnée n'est enregistrée. Vos réponses restent confidentielles et ne quittent jamais votre appareil.",
             "back": "Retour",
             "validate": "Continuer",
             "ok": "Continuer",
