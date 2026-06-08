@@ -333,7 +333,7 @@ onUnmounted(() => {
                         class="anim-avantages-header mx-auto mb-14 max-w-2xl text-center"
                     >
                         <h2
-                            class="anim-avantages-title text-3xl font-semibold text-gray-900"
+                            class="anim-avantages-title font-pixel text-[1.2rem] leading-loose text-gray-900"
                         >
                             {{ t('certification.avantages.title') }}
                         </h2>

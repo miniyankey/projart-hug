@@ -13,7 +13,7 @@ const { t } = useI18n();
     <PublicLayout>
         <Head :title="t('collecte.title')" />
         <div class="mx-auto mt-10 max-w-3xl px-4 py-10 sm:px-6 sm:py-16">
-            <h1 class="text-2xl font-semibold text-gray-900 sm:text-3xl">
+            <h1 class="font-pixel text-[1.2rem] leading-loose text-gray-900">
                 {{ t('collecte.title') }}
             </h1>
             <p class="mt-4 text-base leading-relaxed text-gray-600">

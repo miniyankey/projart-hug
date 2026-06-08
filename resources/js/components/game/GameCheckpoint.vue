@@ -158,7 +158,7 @@ function onClick() {
             text-rendering="optimizeLegibility"
             :font-size="cfg.iconSize"
             :font-family="
-                cfg.pixelFont ? `'Press Start 2P', monospace` : undefined
+                cfg.pixelFont ? `'Jersey 15', monospace` : undefined
             "
             :fill="cfg.iconFill"
         >

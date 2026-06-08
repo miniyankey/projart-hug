@@ -283,7 +283,7 @@ onUnmounted(() => {
                     <div class="grid items-start gap-12 lg:grid-cols-2">
                         <div class="anim-trophee-text">
                             <h2
-                                class="anim-trophee-title mt-4 text-3xl font-semibold text-gray-900"
+                                class="anim-trophee-title mt-4 font-pixel text-[1.2rem] leading-loose text-gray-900"
                             >
                                 {{ t('home.trophee.title') }}
                             </h2>
@@ -328,7 +328,7 @@ onUnmounted(() => {
 
                         <div class="anim-label-text order-1 lg:order-2">
                             <h2
-                                class="anim-label-title mt-4 text-3xl font-semibold text-gray-900"
+                                class="anim-label-title mt-4 font-pixel text-[1.2rem] leading-loose text-gray-900"
                             >
                                 {{ t('home.label.title') }}
                             </h2>
@@ -437,7 +437,7 @@ onUnmounted(() => {
             <section class="py-32" style="background-color: #dbeafe">
                 <div class="mx-auto max-w-3xl px-6">
                     <h2
-                        class="anim-faq-title mb-10 text-center text-2xl font-semibold text-gray-900"
+                        class="anim-faq-title mb-10 text-center font-pixel text-[1.1rem] leading-loose text-gray-900"
                     >
                         {{ t('home.faq.title') }}
                     </h2>
