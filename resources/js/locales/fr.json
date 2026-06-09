@@ -867,7 +867,8 @@
         }
     },
     "footer": {
-        "copyright": "© 2026 Centre de Transfusion Sanguine - HUG - Faits par des étudiants de la HEIG-VD dans le cadre d'un projet d'intégration.",
+        "copyright": "© 2026 - Projet d'intégration réalisé par des étudiants de la HEIG-VD.",
+        "disclaimer": "Site fictif réalisé à des fins pédagogiques. Ce n'est pas un site officiel des HUG ou du Centre de Transfusion Sanguine.",
         "description": "Une initiative des HUG pour dynamiser les collectes de sang au sein des entreprises partenaires.",
         "nav_title": "Navigation",
         "nav": {
