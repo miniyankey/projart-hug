@@ -401,6 +401,7 @@
             "back": "Retour",
             "validate": "Continuer",
             "ok": "Continuer",
+            "continue": "Continuer à jouer",
             "learn_more": "En savoir plus",
             "scroll_hint": "Scrolle pour avancer",
             "loading": "Chargement…"

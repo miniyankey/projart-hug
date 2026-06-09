@@ -46,6 +46,7 @@ const resultView = ref(null); // vue de résultat affichée (ou null)
 const resultPochy = ref('0'); // variante Pochy de l'écran de résultat courant
 const resultDays = ref(0); // jours de rappel à proposer sur le résultat (max, 0 sinon)
 const resultDonation = ref(false); // proposer le don (inéligibilité à vie) sur le résultat
+const isResultIneligible = ref(false); // indique si le résultat courant est une inéligibilité
 // Le joueur a déjà soumis un rappel OU cliqué sur le don → on ne le sollicite plus.
 const reminderHandled = ref(false);
 // Chaque sollicitation (rappel temporaire / don à vie) n'est proposée qu'UNE fois
@@ -228,8 +229,10 @@ function onAnswer(choiceIds) {
     // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
     if (!result.eligible) {
         resultPochy.value = result.days < 0 ? '0-sad' : '0-time';
+        isResultIneligible.value = true;
     } else {
         resultPochy.value = question.pochy ?? '0';
+        isResultIneligible.value = false;
     }
 
     if (result.view) {
@@ -395,6 +398,7 @@ onUnmounted(() => {
                     :reminder-days="resultDays"
                     :donation="resultDonation"
                     :collect-id="collect_id"
+                    :is-ineligible="isResultIneligible"
                     class="game-layer"
                     @ok="onResultOk"
                     @back="onResultBack"

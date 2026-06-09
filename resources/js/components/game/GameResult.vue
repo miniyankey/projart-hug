@@ -20,6 +20,8 @@ defineProps({
     // Inéligibilité à vie → proposition de don financier (même composant).
     donation: { type: Boolean, default: false },
     collectId: { type: Number, default: null },
+    // Indique si le résultat est une inéligibilité (pour changer le texte du bouton OK)
+    isIneligible: { type: Boolean, default: false },
 });
 
 // handled : lien de don cliqué → le jeu ne sollicite plus ensuite.
@@ -93,7 +95,11 @@ const { t } = useI18n();
                         class="h-auto px-7 py-3 text-[1.05rem]"
                         @click="$emit('ok')"
                     >
-                        {{ t('eligibilite.ui.ok') }}
+                        {{
+                            isIneligible
+                                ? t('eligibilite.ui.continue')
+                                : t('eligibilite.ui.ok')
+                        }}
                     </Button>
                 </div>
             </div>
