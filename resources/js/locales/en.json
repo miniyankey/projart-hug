@@ -448,7 +448,7 @@
                 "label": "Lifetime"
             },
             "unknown_label": "To check",
-            "reminder_scheduled": "Got it! We'll email you as soon as your waiting period ends, so you can come and give blood.",
+            "reminder_scheduled": "Got it! We'll email you in {duration}, when your waiting period ends, so you can come and give blood.",
             "recap_title": "Summary",
             "share": {
                 "cta": "Share with my colleagues",
