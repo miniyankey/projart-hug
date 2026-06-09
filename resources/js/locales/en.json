@@ -864,7 +864,8 @@
         }
     },
     "footer": {
-        "copyright": "© 2026 Blood Transfusion Centre - HUG - Made by students of HEIG-VD within the context of an integration project.",
+        "copyright": "© 2026 - Integration project made by students of HEIG-VD.",
+        "disclaimer": "Fictional website created for educational purposes. This is not an official website of the HUG or the Blood Transfusion Centre.",
         "description": "A HUG initiative to boost blood donation drives within partner companies.",
         "nav_title": "Navigation",
         "nav": {

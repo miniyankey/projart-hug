@@ -115,8 +115,14 @@ const socials = [
                 </Card>
             </div>
 
+            <p
+                class="border-t border-gray-100 pt-6 text-xs leading-relaxed text-gray-400"
+            >
+                {{ t('footer.disclaimer') }}
+            </p>
+
             <div
-                class="flex flex-col gap-3 border-t border-gray-100 py-6 text-sm text-gray-400 sm:flex-row sm:items-center sm:justify-between"
+                class="flex flex-col gap-3 py-6 text-sm text-gray-400 sm:flex-row sm:items-center sm:justify-between"
             >
                 <span>{{ t('footer.copyright') }}</span>
                 <Link
