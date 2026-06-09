@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { update as updateReminder } from '@/actions/App/Http/Controllers/EligibilityReminderController';
 import GameFinish from '@/components/game/GameFinish.vue';
 import GameIntro from '@/components/game/GameIntro.vue';
 import GameLoading from '@/components/game/GameLoading.vue';
@@ -14,6 +15,7 @@ import { useSessionPersistence } from '@/composables/useSessionPersistence';
 import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { computeResult, overallVerdict } from '@/lib/eligibility';
+import { postJson } from '@/lib/http';
 
 const props = defineProps({
     company: Object,
@@ -47,8 +49,12 @@ const resultView = ref(null); // vue de résultat affichée (ou null)
 const resultPochy = ref('0'); // variante Pochy de l'écran de résultat courant
 const resultDays = ref(0); // jours de rappel à proposer sur le résultat (max, 0 sinon)
 const resultDonation = ref(false); // proposer le don (inéligibilité à vie) sur le résultat
+const isResultIneligible = ref(false); // indique si le résultat courant est une inéligibilité
 // Le joueur a déjà soumis un rappel OU cliqué sur le don → on ne le sollicite plus.
 const reminderHandled = ref(false);
+// Id du rappel enregistré (pour recaler sa date plus tard) + dernière durée envoyée.
+const reminderId = ref(null);
+const reminderDaysSent = ref(0);
 // Chaque sollicitation (rappel temporaire / don à vie) n'est proposée qu'UNE fois
 // sur le parcours. On retient la question déclencheuse pour autoriser la
 // réaffichage si le joueur revient modifier cette même réponse, pas ailleurs.
@@ -260,6 +266,14 @@ function onAppointment() {
     trackAppointmentClick(props.collect_id, 'jeu');
 }
 
+// Rappel enregistré : on retient son id (pour recaler sa date si les réponses
+// suivantes changent la durée max) et on ne sollicite plus ensuite.
+function onReminderSubmitted(id) {
+    reminderHandled.value = true;
+    reminderId.value = id ?? null;
+    reminderDaysSent.value = resultDays.value;
+}
+
 // Validation d'une réponse → enregistrement, statut du checkpoint, puis :
 // vue dédiée du choix › vue générique d'inéligibilité › explication (why) › suite.
 function onAnswer(choiceIds) {
@@ -325,6 +339,29 @@ function onAnswer(choiceIds) {
 
     // Vue de résultat (Pochy + panneau) ; null → étape terminée directement.
     const panel = buildResultPanel(question, choiceIds);
+    // Rappel déjà enregistré : si une réponse ultérieure change la durée
+    // d'inéligibilité max, on recale sa date côté serveur (fire & forget).
+    if (
+        reminderId.value !== null &&
+        overall.status === 'temporary' &&
+        overall.days > 0 &&
+        overall.days !== reminderDaysSent.value
+    ) {
+        reminderDaysSent.value = overall.days;
+        postJson(updateReminder.url(reminderId.value), { days: overall.days });
+    }
+
+    // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
+    if (!result.eligible) {
+        resultPochy.value = result.days < 0 ? '0-sad' : '0-time';
+        isResultIneligible.value = true;
+    } else {
+        resultPochy.value = question.pochy ?? '0';
+        isResultIneligible.value = false;
+    }
+
+    if (result.view) {
+        resultView.value = result.view;
 
     if (panel) {
         resultPochy.value = panel.pochy;
@@ -479,10 +516,12 @@ onUnmounted(() => {
                     :reminder-days="resultDays"
                     :donation="resultDonation"
                     :collect-id="collect_id"
+                    :is-ineligible="isResultIneligible"
                     class="game-layer"
                     @ok="onResultOk"
                     @back="onResultBack"
                     @handled="reminderHandled = true"
+                    @reminder-submitted="onReminderSubmitted"
                 />
             </Transition>
 
@@ -496,6 +535,8 @@ onUnmounted(() => {
                     :verdict="verdict"
                     :total="questions.length"
                     :link-appointment="props.link_appointment"
+                    :site-url="siteUrl"
+                    :reminder-scheduled="reminderId !== null"
                     class="game-layer"
                     @appointment="onAppointment"
                     @back="phase = 'map'"

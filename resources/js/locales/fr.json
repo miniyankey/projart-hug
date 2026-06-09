@@ -401,6 +401,7 @@
             "back": "Retour",
             "validate": "Continuer",
             "ok": "Continuer",
+            "continue": "Continuer à jouer",
             "learn_more": "En savoir plus",
             "scroll_hint": "Scrolle pour avancer",
             "loading": "Chargement…"
@@ -431,7 +432,7 @@
                 "label": "À vie"
             },
             "unknown_label": "À vérifier",
-            "reminder_scheduled": "C'est noté ! Nous t'enverrons un e-mail dès la fin de ton délai d'attente, pour que tu puisses venir donner ton sang.",
+            "reminder_scheduled": "C'est noté ! Nous t'enverrons un e-mail dans {duration}, à la fin de ton délai d'attente, pour que tu puisses venir donner ton sang.",
             "recap_title": "Récapitulatif",
             "share": {
                 "cta": "Partager à mes collègues",
@@ -866,7 +867,8 @@
         }
     },
     "footer": {
-        "copyright": "© 2026 Centre de Transfusion Sanguine - HUG - Faits par des étudiants de la HEIG-VD dans le cadre d'un projet d'intégration.",
+        "copyright": "© 2026 - Projet d'intégration réalisé par des étudiants de la HEIG-VD.",
+        "disclaimer": "Site fictif réalisé à des fins pédagogiques. Ce n'est pas un site officiel des HUG ou du Centre de Transfusion Sanguine.",
         "description": "Une initiative des HUG pour dynamiser les collectes de sang au sein des entreprises partenaires.",
         "nav_title": "Navigation",
         "nav": {

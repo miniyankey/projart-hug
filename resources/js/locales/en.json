@@ -417,6 +417,7 @@
             "back": "Back",
             "validate": "Continue",
             "ok": "Continue",
+            "continue": "Continue playing",
             "learn_more": "Learn more",
             "scroll_hint": "Scroll to move forward",
             "loading": "Loading…"
@@ -447,7 +448,7 @@
                 "label": "Lifetime"
             },
             "unknown_label": "To check",
-            "reminder_scheduled": "Got it! We'll email you as soon as your waiting period ends, so you can come and give blood.",
+            "reminder_scheduled": "Got it! We'll email you in {duration}, when your waiting period ends, so you can come and give blood.",
             "recap_title": "Summary",
             "share": {
                 "cta": "Share with my colleagues",
@@ -864,7 +865,8 @@
         }
     },
     "footer": {
-        "copyright": "© 2026 Blood Transfusion Centre - HUG - Made by students of HEIG-VD within the context of an integration project.",
+        "copyright": "© 2026 - Integration project made by students of HEIG-VD.",
+        "disclaimer": "Fictional website created for educational purposes. This is not an official website of the HUG or the Blood Transfusion Centre.",
         "description": "A HUG initiative to boost blood donation drives within partner companies.",
         "nav_title": "Navigation",
         "nav": {
