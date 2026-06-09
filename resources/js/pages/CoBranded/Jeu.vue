@@ -337,8 +337,6 @@ function onAnswer(choiceIds) {
     resultDonation.value = showDonation;
     resultDays.value = showReminder ? overall.days : 0;
 
-    // Vue de résultat (Pochy + panneau) ; null → étape terminée directement.
-    const panel = buildResultPanel(question, choiceIds);
     // Rappel déjà enregistré : si une réponse ultérieure change la durée
     // d'inéligibilité max, on recale sa date côté serveur (fire & forget).
     if (
@@ -351,17 +349,10 @@ function onAnswer(choiceIds) {
         postJson(updateReminder.url(reminderId.value), { days: overall.days });
     }
 
-    // Pochy du résultat : triste/temporaire si inéligible, sinon celui de la question
-    if (!result.eligible) {
-        resultPochy.value = result.days < 0 ? '0-sad' : '0-time';
-        isResultIneligible.value = true;
-    } else {
-        resultPochy.value = question.pochy ?? '0';
-        isResultIneligible.value = false;
-    }
+    isResultIneligible.value = !result.eligible;
 
-    if (result.view) {
-        resultView.value = result.view;
+    // Vue de résultat (Pochy + panneau) ; null → étape terminée directement.
+    const panel = buildResultPanel(question, choiceIds);
 
     if (panel) {
         resultPochy.value = panel.pochy;
