@@ -55,28 +55,29 @@ watch(
                 <!-- Zone personnage : 1/3 sur desktop ; icône + Pochy centrés.
                      Mobile : empilés et centrés, plus gros. -->
                 <div
-                    class="flex shrink-0 flex-col items-center gap-3 md:relative md:block md:h-[clamp(260px,32vw,460px)] md:basis-1/3 md:self-center"
+                    class="flex shrink-0 flex-col items-center md:relative md:block md:h-[clamp(260px,32vw,460px)] md:basis-1/3 md:self-center"
                 >
                     <!-- Icône thématique -->
                     <img
                         v-if="icon && !iconError"
                         :src="icon"
                         alt=""
-                        class="h-24 w-24 shrink-0 [image-rendering:pixelated] md:absolute md:top-0 md:left-1/2 md:h-auto md:w-[58%] md:-translate-x-1/2"
+                        class="h-28 w-28 shrink-0 [image-rendering:pixelated] md:absolute md:top-0 md:left-1/2 md:h-auto md:w-[62%] md:-translate-x-1/2"
                         @error="iconError = true"
                     />
                     <div
                         v-else
-                        class="flex h-24 w-24 shrink-0 items-center justify-center border-4 border-gray-800 bg-gray-100 font-pixel text-2xl text-gray-400 shadow-[4px_4px_0_rgba(0,0,0,0.7)] md:absolute md:top-0 md:left-1/2 md:aspect-square md:h-auto md:w-[58%] md:-translate-x-1/2"
+                        class="flex h-28 w-28 shrink-0 items-center justify-center border-4 border-gray-800 bg-gray-100 font-pixel text-2xl text-gray-400 shadow-[4px_4px_0_rgba(0,0,0,0.7)] md:absolute md:top-0 md:left-1/2 md:aspect-square md:h-auto md:w-[62%] md:-translate-x-1/2"
                         aria-hidden="true"
                     >
                         ?
                     </div>
 
-                    <!-- Pochy (plus gros, centré) -->
+                    <!-- Pochy : sur mobile, remonte (marge négative) pour chevaucher
+                         l'icône ; sur desktop, positionné en absolu. -->
                     <GamePochy
                         :variant="pochy"
-                        class="h-32 w-32 shrink-0 drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] [image-rendering:pixelated] md:absolute md:bottom-0 md:left-1/2 md:z-[2] md:h-auto md:w-[80%] md:-translate-x-1/2 md:drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
+                        class="relative z-10 -mt-20 h-40 w-40 shrink-0 drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] [image-rendering:pixelated] md:absolute md:bottom-0 md:left-1/2 md:z-[2] md:mt-0 md:h-auto md:w-[86%] md:-translate-x-1/2 md:drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
                     />
                 </div>
 
