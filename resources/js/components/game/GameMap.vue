@@ -28,6 +28,9 @@ const props = defineProps({
     icons: { type: Array, default: () => [] },
     // Variante de la mascotte (suffixe du fichier /img/pochy/pochy-<variant>.webp)
     pochy: { type: String, default: '0' },
+    // Clé de persistance (sessionStorage) : on y garde la position de Pochy pour
+    // la restaurer à travers la navigation interne SPA. Vide → pas de persistance.
+    storageKey: { type: String, default: '' },
 });
 
 // Icônes de début et de fin de parcours
@@ -60,6 +63,26 @@ const moving = ref(false); // Pochy se déplace → animation de marche
 let lastTouchY = 0;
 let resizeObserver = null;
 let resizeRaf = 0;
+let progressSaveTimer = null;
+
+// Position de Pochy persistée (débouncée pour ne pas écrire à chaque frame).
+function persistProgress() {
+    if (!props.storageKey) {
+        return;
+    }
+
+    clearTimeout(progressSaveTimer);
+    progressSaveTimer = setTimeout(() => {
+        try {
+            sessionStorage.setItem(
+                `${props.storageKey}:progress`,
+                String(progress.value),
+            );
+        } catch {
+            /* stockage indisponible → on ignore */
+        }
+    }, 200);
+}
 let moveTimer = null;
 
 // L'indice « Scrolle pour avancer » n'apparaît qu'au lancement : dès le premier
@@ -69,13 +92,15 @@ function markMoved() {
 }
 
 // Pochy « marche » tant que sa position change ; on coupe l'animation après une
-// courte inactivité (le mouvement est terminé).
+// courte inactivité (le mouvement est terminé). On en profite pour persister sa
+// position (débouncé).
 watch(progress, () => {
     moving.value = true;
     clearTimeout(moveTimer);
     moveTimer = setTimeout(() => {
         moving.value = false;
     }, 140);
+    persistProgress();
 });
 
 // ─── Computed ────────────────────────────────────────────────────────────────
@@ -337,6 +362,42 @@ function preloadDecos() {
     );
 }
 
+// Restaure la position de Pochy sauvegardée (navigation interne SPA). On
+// neutralise le déclenchement automatique de `reach`/`finish` au point restauré :
+// la vue en cours (question/résultat) est déjà rétablie côté page, on ne veut pas
+// la réécraser.
+function restoreProgress() {
+    if (!props.storageKey) {
+        return;
+    }
+
+    let saved = NaN;
+
+    try {
+        saved = Number(sessionStorage.getItem(`${props.storageKey}:progress`));
+    } catch {
+        return;
+    }
+
+    if (!Number.isFinite(saved) || saved <= 0) {
+        return;
+    }
+
+    progress.value = Math.max(0, Math.min(saved, cap.value));
+    targetPrg.value = progress.value;
+
+    if (progress.value >= cap.value - 0.5) {
+        stopReached.value = true;
+    }
+
+    if (
+        props.clearedCount >= cps.value.length &&
+        progress.value >= totalLen.value - 0.5
+    ) {
+        endReached.value = true;
+    }
+}
+
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
 const LOADING_MIN_MS = 600;
 
@@ -351,6 +412,7 @@ onMounted(() => {
     groundTile.value = generateGroundTile();
     asphaltTile.value = generateAsphaltTile();
     rebuild();
+    restoreProgress();
 
     preloadDecos().then(() => {
         const elapsed = Date.now() - t0;
@@ -374,6 +436,7 @@ onMounted(() => {
 onUnmounted(() => {
     cancelAnimationFrame(resizeRaf);
     clearTimeout(moveTimer);
+    clearTimeout(progressSaveTimer);
     gsap.killTweensOf(progress);
 
     if (resizeObserver) {
