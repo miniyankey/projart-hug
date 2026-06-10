@@ -21,8 +21,6 @@ export const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         pixel_violet:
           "bg-[var(--brand)] text-white rounded-none shadow-[4px_4px_0px_0px_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
-        pixel_blue:
-          "bg-white text-[var(--brand)] border border-[var(--brand)] rounded-none shadow-[4px_4px_0px_0px_var(--brand-shadow)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_white:
           "bg-white text-[var(--brand)] rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.35)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.35)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_yellow:

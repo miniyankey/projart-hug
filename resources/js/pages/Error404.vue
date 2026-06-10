@@ -69,7 +69,7 @@ const { t } = useI18n();
                                 {{ t('error404.cta_home') }}
                             </Link>
                         </Button>
-                        <Button as-child variant="pixel_blue" size="lg">
+                        <Button as-child variant="pixel_white" size="lg">
                             <Link :href="routes.collecte.url()">
                                 {{ t('error404.cta_collecte') }}
                             </Link>
