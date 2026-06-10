@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cron Token
+    |--------------------------------------------------------------------------
+    |
+    | Secret attendu par la route /cron/eligibility-reminders, déclenchée par
+    | le planificateur de tâches de l'hébergeur (URL uniquement sur mutualisé).
+    | La route répond 404 tant que ce token n'est pas défini.
+    |
+    */
+
+    'cron_token' => env('CRON_TOKEN', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
