@@ -33,6 +33,7 @@ class CobrandController extends Controller
             'collectSlug' => $collect->slug,
             'company' => $this->companyData($company),
             'collect_id' => $collect->id,
+            'collect_is_past' => $collect->is_past,
             'link_appointment' => $collect->link_appointment,
         ]);
     }
@@ -45,6 +46,7 @@ class CobrandController extends Controller
         return Inertia::render('CoBranded/DonSang', [
             'collectSlug' => $collect->slug,
             'company' => $this->companyData($company),
+            'collect_is_past' => $collect->is_past,
             'link_appointment' => $collect->link_appointment,
         ]);
     }

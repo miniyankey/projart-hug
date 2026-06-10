@@ -36,6 +36,12 @@ const props = defineProps({
         type: String,
         default: null,
     },
+    // Collecte passée (semaine de grâce) : s'inscrire n'a plus de sens, le
+    // CTA de la nav est masqué.
+    collectIsPast: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const isCobrand = computed(() => props.company !== null);
@@ -72,6 +78,12 @@ const links = computed(() =>
 const cta = computed(() => {
     if (!isCobrand.value) {
         return { href: routes.collecte.url(), label: 'nav.cta_creer_collecte' };
+    }
+
+    // Collecte terminée (encore accessible pendant la semaine de grâce) :
+    // pas de CTA d'inscription.
+    if (props.collectIsPast) {
+        return null;
     }
 
     // Inscription directe sur la plateforme externe de prise de rendez-vous ;

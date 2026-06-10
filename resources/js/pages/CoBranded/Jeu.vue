@@ -26,6 +26,7 @@ const props = defineProps({
     // Présent uniquement en mode co-brandé (collecte active) ; null en mode
     // public → aucun tracking KPI (pour le moment à voir dans le futur)
     collect_id: { type: Number, default: null },
+    collect_is_past: { type: Boolean, default: false },
     link_appointment: { type: String, default: null },
 });
 
@@ -419,6 +420,7 @@ onUnmounted(() => {
     <PublicLayout
         :company="company"
         :collect-slug="collectSlug"
+        :collect-is-past="collect_is_past"
         :link-appointment="link_appointment"
         hide-footer
     >

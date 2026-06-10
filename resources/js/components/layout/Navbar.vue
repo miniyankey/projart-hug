@@ -17,10 +17,11 @@ const props = defineProps({
         type: Array,
         required: true,
     },
-    // Bouton d'action principal : { href, label } (label = clé i18n)
+    // Bouton d'action principal : { href, label, external? } (label = clé
+    // i18n). null → pas de CTA (ex. collecte terminée).
     cta: {
         type: Object,
-        required: true,
+        default: null,
     },
     // Entreprise partenaire pour le mode co-brandé : { name, logo
     // null = mode HUG normal (logo seul, cliquable vers l'accueil)
@@ -147,6 +148,7 @@ onBeforeUnmount(() => removeListener?.());
 
             <div class="hidden items-center gap-2 lg:flex xl:gap-4">
                 <Button
+                    v-if="cta"
                     as-child
                     variant="cta"
                     class="h-9 px-4 text-xs xl:text-sm"
@@ -205,7 +207,13 @@ onBeforeUnmount(() => removeListener?.());
                 <div
                     class="mt-4 flex flex-col gap-4 border-t border-gray-200 pt-4"
                 >
-                    <Button as-child variant="cta" size="cta" class="w-fit">
+                    <Button
+                        v-if="cta"
+                        as-child
+                        variant="cta"
+                        size="cta"
+                        class="w-fit"
+                    >
                         <a
                             v-if="ctaScrollTarget"
                             :href="ctaScrollTarget"
