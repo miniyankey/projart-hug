@@ -7,12 +7,20 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LabelStepCard from '@/components/cards/LabelStepCard.vue';
 import PixelFeatureCard from '@/components/cards/PixelFeatureCard.vue';
+import LogoMarquee from '@/components/LogoMarquee.vue';
 import MascottePopup from '@/components/MascottePopup.vue';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import * as routes from '@/routes/index.ts';
 
 const { t, locale } = useI18n();
+
+defineProps({
+    labelledCompanies: {
+        type: Array,
+        required: true,
+    },
+});
 
 function scrollTo(target) {
     gsap.to(window, { scrollTo: target, duration: 1, ease: 'power2.inOut' });
@@ -230,6 +238,20 @@ function buildAnimations() {
                 },
             });
         });
+
+        // ── Entreprises labellisées ───────────────────────────
+        if (root.value.querySelector('.anim-labelled-header')) {
+            gsap.from('.anim-labelled-header', {
+                opacity: 0,
+                y: 30,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.anim-labelled-header',
+                    start: 'top 80%',
+                },
+            });
+        }
 
         // ── CTA ───────────────────────────────────────────────
         gsap.from('.anim-cta', {
@@ -450,6 +472,27 @@ onUnmounted(() => {
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- Entreprises labellisées -->
+            <section
+                v-if="labelledCompanies.length"
+                style="background-color: #ede9f8"
+                class="py-24"
+            >
+                <div
+                    class="anim-labelled-header mx-auto mb-12 max-w-4xl px-6 text-center"
+                >
+                    <h2
+                        class="font-pixel text-[1.1rem] leading-loose text-gray-900"
+                    >
+                        {{ t('certification.labelled.title') }}
+                    </h2>
+                    <p class="mt-4 leading-relaxed text-gray-600">
+                        {{ t('certification.labelled.subtitle') }}
+                    </p>
+                </div>
+                <LogoMarquee :items="labelledCompanies" />
             </section>
 
             <!-- CTA final -->
