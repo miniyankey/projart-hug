@@ -16,6 +16,7 @@ return [
     'confirmed' => 'La confirmation du champ :attribute ne correspond pas.',
     'date' => 'Le champ :attribute n\'est pas une date valide.',
     'after' => 'Le champ :attribute doit être postérieur à :date.',
+    'after_or_equal' => 'Le champ :attribute ne peut pas être dans le passé.',
     'array' => 'Le champ :attribute doit être une liste.',
     'boolean' => 'Le champ :attribute doit être vrai ou faux.',
     'max' => [

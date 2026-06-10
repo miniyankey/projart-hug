@@ -267,12 +267,7 @@ onUnmounted(() => {
                                     {{ t('home.hero.cta_primary') }}
                                 </Link>
                             </Button>
-                            <Button
-                                as-child
-                                variant="pixel_blue"
-                                size="cta"
-                                class="border border-blue-600 text-white"
-                            >
+                            <Button as-child variant="pixel_white" size="cta">
                                 <Link :href="routes.eligibilite.url()">
                                     {{ t('home.hero.cta_secondary') }}
                                 </Link>
@@ -355,7 +350,7 @@ onUnmounted(() => {
                                         {{ t('home.label.learn_more') }}
                                     </Link>
                                 </Button>
-                                <Button as-child variant="pixel_blue">
+                                <Button as-child variant="pixel_white">
                                     <Link :href="routes.collecte.url()">
                                         {{ t('home.label.link') }}
                                     </Link>

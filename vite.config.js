@@ -12,7 +12,10 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
-        inertia(),
+        // SSR désactivé : notre setup() manuel dans app.js (i18n, document.lang)
+        // est incompatible avec le SSR auto-généré du plugin, et le site est
+        // rendu côté client uniquement.
+        inertia({ ssr: false }),
         tailwindcss(),
         vue({
             template: {

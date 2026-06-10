@@ -6,6 +6,7 @@ import GameDecorations from './GameDecorations.vue';
 import GamePath from './GamePath.vue';
 import GamePochy from './GamePochy.vue';
 import GameScrollHint from './GameScrollHint.vue';
+import { memoryGet, memorySet } from '@/composables/useSessionPersistence';
 import {
     buildDecos,
     buildMap,
@@ -28,7 +29,7 @@ const props = defineProps({
     icons: { type: Array, default: () => [] },
     // Variante de la mascotte (suffixe du fichier /img/pochy/pochy-<variant>.webp)
     pochy: { type: String, default: '0' },
-    // Clé de persistance (sessionStorage) : on y garde la position de Pochy pour
+    // Clé de persistance (mémoire module) : on y garde la position de Pochy pour
     // la restaurer à travers la navigation interne SPA. Vide → pas de persistance.
     storageKey: { type: String, default: '' },
 });
@@ -73,14 +74,7 @@ function persistProgress() {
 
     clearTimeout(progressSaveTimer);
     progressSaveTimer = setTimeout(() => {
-        try {
-            sessionStorage.setItem(
-                `${props.storageKey}:progress`,
-                String(progress.value),
-            );
-        } catch {
-            /* stockage indisponible → on ignore */
-        }
+        memorySet(`${props.storageKey}:progress`, progress.value);
     }, 200);
 }
 let moveTimer = null;
@@ -371,13 +365,7 @@ function restoreProgress() {
         return;
     }
 
-    let saved = NaN;
-
-    try {
-        saved = Number(sessionStorage.getItem(`${props.storageKey}:progress`));
-    } catch {
-        return;
-    }
+    const saved = Number(memoryGet(`${props.storageKey}:progress`));
 
     if (!Number.isFinite(saved) || saved <= 0) {
         return;

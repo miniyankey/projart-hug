@@ -76,7 +76,11 @@ const mapUrl = computed(() => {
     <PublicLayout
         :company="company"
         :collect-slug="collectSlug"
-        cta-scroll-target="#rdv"
+        :collect-is-past="isPast"
+        :link-appointment="!isPast ? collect?.link_appointment : null"
+        :cta-scroll-target="
+            collect?.link_appointment && !isPast ? null : '#rdv'
+        "
     >
         <Head :title="t('nav.collecte_info')" />
 

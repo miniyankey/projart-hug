@@ -326,7 +326,7 @@ onUnmounted(() => {
                                 </Button>
                                 <Button
                                     as-child
-                                    variant="pixel_blue"
+                                    variant="pixel_white"
                                     size="cta"
                                 >
                                     <a

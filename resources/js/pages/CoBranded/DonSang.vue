@@ -18,6 +18,8 @@ const { t, locale } = useI18n();
 const props = defineProps({
     company: Object,
     collectSlug: String,
+    collect_is_past: { type: Boolean, default: false },
+    link_appointment: { type: String, default: null },
 });
 
 const routeParams = computed(() => ({
@@ -202,7 +204,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :collect-slug="collectSlug">
+    <PublicLayout
+        :company="company"
+        :collect-slug="collectSlug"
+        :collect-is-past="collect_is_past"
+        :link-appointment="link_appointment"
+    >
         <Head :title="t('nav.don_sang_info')" />
 
         <div ref="root">

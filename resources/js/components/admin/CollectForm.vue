@@ -1,5 +1,6 @@
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3';
+import { getLocalTimeZone, today } from '@internationalized/date';
 import { Building2, CalendarDays, Clock, Link2, MapPin } from 'lucide-vue-next';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -81,6 +82,10 @@ const dayValue = useCalendarDate(
         form.day = value;
     },
 );
+
+// Pas de collecte planifiable dans le passé (le jour même reste autorisé),
+// aligné sur la règle back `after_or_equal:today`.
+const minDay = today(getLocalTimeZone());
 
 const formattedDay = computed(() => formatLongDate(form.day));
 
@@ -273,6 +278,7 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                             <Calendar
                                 v-model="dayValue"
                                 :locale="locale"
+                                :min-value="minDay"
                                 class="border-0 shadow-none"
                             />
                         </PopoverContent>
