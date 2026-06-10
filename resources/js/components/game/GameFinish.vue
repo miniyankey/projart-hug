@@ -178,7 +178,7 @@ async function share() {
                         </Button>
                         <Button
                             variant="link"
-                            class="h-auto px-4 py-3 text-[1.05rem]"
+                            class="h-auto px-4 py-3 text-[1.05rem] text-[color:var(--brand,#7c3aed)]"
                             @click="$emit('back')"
                         >
                             {{ t('eligibilite.finish.back_to_game') }}
