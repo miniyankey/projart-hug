@@ -18,8 +18,24 @@ use App\Http\Controllers\WinnerController;
 use App\Models\Collect;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+// Déclencheur HTTP des rappels d'éligibilité, pour le planificateur de tâches
+// de l'hébergement mutualisé (Infomaniak n'accepte qu'une URL, pas de commande
+// shell). Protégé par le token secret CRON_TOKEN ; 404 tant qu'il n'est pas
+// configuré, 403 si le token fourni ne correspond pas.
+Route::get('/cron/eligibility-reminders', function (Request $request) {
+    $token = (string) config('app.cron_token');
+
+    abort_if($token === '', 404);
+    abort_unless(hash_equals($token, (string) $request->query('token')), 403);
+
+    Artisan::call('app:send-eligibility-reminders');
+
+    return response(Artisan::output(), 200)->header('Content-Type', 'text/plain');
+})->name('cron.eligibility-reminders');
 
 // Langue, pour changer
 Route::post('/locale', [LocaleController::class, 'update'])->name('locale.update');
