@@ -239,11 +239,21 @@ DB_PASSWORD=votre_mot_de_passe_fort
 MAIL_MAILER=smtp
 MAIL_HOST=mail.infomaniak.com
 MAIL_PORT=587
-MAIL_USERNAME=
-MAIL_PASSWORD=
+MAIL_USERNAME=info@missiondonneur.ch
+MAIL_PASSWORD=mot_de_passe_de_la_boite_mail
 MAIL_SCHEME=null
 MAIL_FROM_ADDRESS="info@missiondonneur.ch"
 MAIL_FROM_NAME="Mission Donneur - HUG"
+
+# Queue : sync = envoi immédiat des mails pendant la requête.
+# OBLIGATOIRE sur mutualisé : aucun worker (queue:work) ne peut tourner en
+# permanence, donc avec `database` les mails resteraient bloqués dans la
+# table `jobs` sans jamais partir.
+QUEUE_CONNECTION=sync
+
+# Token secret de la route /cron/eligibility-reminders (voir section 16).
+# Générer une longue chaîne aléatoire : openssl rand -hex 32
+CRON_TOKEN=
 
 # Si utilisation de Brevo (service d'emailing)
 BREVO_API_KEY=
@@ -357,8 +367,75 @@ php artisan cache:clear
 
 ---
 
-## 16. Tests post-déploiement ⚠️
+## 16. E-mails automatiques et cron des rappels d'éligibilité
 
-### 16.1 Vérifier l'accès au site
+L'application envoie trois types d'e-mails : notification de nouveau formulaire, lien co-brandé à l'activation d'une collecte, et **rappels d'éligibilité** (visiteurs redevenus éligibles au don). Les deux premiers partent automatiquement pendant la requête grâce à `QUEUE_CONNECTION=sync` (cf. section 10.3). Les rappels, eux, doivent être déclenchés **chaque matin** : c'est l'objet de cette section.
+
+### 16.1 Pourquoi une URL et pas une commande ?
+
+Sur l'hébergement mutualisé, impossible de faire tourner `php artisan schedule:run` via un cron shell : le planificateur Infomaniak n'accepte qu'une **URL**. Le projet expose donc une route HTTP dédiée, protégée par un token secret :
+
+```
+GET /cron/eligibility-reminders?token=<CRON_TOKEN>
+```
+
+Comportement :
+
+- `CRON_TOKEN` absent du `.env` → **404** (route invisible)
+- token incorrect → **403**
+- token correct → exécute `php artisan app:send-eligibility-reminders` et répond **200** avec le texte `Rappels d'éligibilité envoyés : N.`
+
+La commande sélectionne les rappels dus (`sent_at IS NULL` et `eligible_at <= aujourd'hui`), envoie chaque mail immédiatement (queue `sync`), puis marque `sent_at`. Elle est **idempotente** : la relancer dans la même journée n'envoie aucun doublon.
+
+> Le `Schedule::command(...)->dailyAt('09:00')` de `routes/console.php` est volontairement conservé mais **inactif** sur mutualisé (aucun `schedule:run` ne tourne). Il resservira tel quel en cas de migration sur un serveur avec cron shell.
+
+### 16.2 Configurer le token
+
+```bash
+# Générer un token fort
+openssl rand -hex 32
+
+# L'ajouter dans le .env de prod
+CRON_TOKEN=le_token_genere
+
+# Recharger le cache de config (sinon l'ancienne valeur reste servie)
+php artisan config:cache
+```
+
+### 16.3 Créer la tâche planifiée Infomaniak
+
+1. **Manager → Hébergement Web → [Votre produit] → Tâches planifiées (cron)**
+2. **Créer une tâche** de type URL :
+   - **URL** : `https://missiondonneur.ch/cron/eligibility-reminders?token=<CRON_TOKEN>`
+   - **Fréquence** : tous les jours à **09:00**
+3. **Forcer une exécution** depuis la console Infomaniak pour valider : l'historique doit afficher un succès (réponse 2xx)
+
+### 16.4 Vérifier l'envoi des mails
+
+1. **SMTP** : soumettre le formulaire de contact du site → le mail doit arriver en quelques secondes. Une erreur 500 = identifiants SMTP incorrects (détail dans `storage/logs/laravel.log`).
+2. **Route cron** : ouvrir l'URL (avec token) dans un navigateur → `Rappels d'éligibilité envoyés : N.` Tester aussi avec un mauvais token → 403 attendu.
+3. **Bout-en-bout** : créer un rappel de test dû aujourd'hui, puis rappeler l'URL :
+   ```sql
+   UPDATE eligibility_reminders
+   SET eligible_at = CURDATE(), sent_at = NULL
+   WHERE email = 'votre-adresse@exemple.ch';
+   ```
+   Le mail doit arriver et `sent_at` doit être rempli en base.
+
+### 16.5 Dépannage
+
+| Symptôme | Cause probable | Correction |
+| --- | --- | --- |
+| 404 sur l'URL cron | `CRON_TOKEN` absent ou cache de config périmé | Ajouter le token au `.env` puis `php artisan config:cache` |
+| 403 sur l'URL cron | Token de l'URL ≠ token du `.env` | Recopier le token exact dans la tâche Infomaniak |
+| 200 avec `envoyés : N` mais aucun mail reçu | `QUEUE_CONNECTION=database` sans worker : les mails dorment dans la table `jobs` | Passer à `sync`, `config:cache`, puis remettre `sent_at = NULL` sur les rappels concernés et relancer l'URL |
+| Mails visibles dans `laravel.log` mais jamais reçus | `MAIL_MAILER=log` | Passer à `smtp` avec les identifiants de la boîte |
+| Erreur 500 pendant l'appel cron | Échec SMTP en cours d'envoi | Voir `storage/logs/laravel.log` ; les mails déjà partis gardent leur `sent_at`, le passage suivant reprend le reste |
+
+---
+
+## 17. Tests post-déploiement ⚠️
+
+### 17.1 Vérifier l'accès au site
 
 Ouvrir son navigateur et aller sur l'URL du site.
