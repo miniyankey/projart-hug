@@ -751,6 +751,10 @@
             "step4_title": "Certification",
             "step4_desc": "Official handover of your certification and integration into the community of committed companies."
         },
+        "labelled": {
+            "title": "They already have the label",
+            "subtitle": "These companies have committed to blood donation and earned the CTS CSR Label."
+        },
         "cta": {
             "title": "Ready to commit?",
             "subtitle": "Join the companies making a difference. Submit your application and earn the CTS CSR Label.",

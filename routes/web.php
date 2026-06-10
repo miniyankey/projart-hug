@@ -45,7 +45,19 @@ Route::post('/eligibilite/rappel', [EligibilityReminderController::class, 'store
 Route::post('/eligibilite/rappel/{reminder}', [EligibilityReminderController::class, 'update'])
     ->middleware('throttle:30,1')
     ->name('eligibilite.rappel.update');
-Route::inertia('/certification', 'Certification')->name('certification');
+Route::get('/certification', function () {
+    return Inertia::render('Certification', [
+        'labelledCompanies' => Company::where('is_labelled', true)
+            ->orderByDesc('labelled_at')
+            ->get(['id', 'name', 'logo'])
+            ->map(fn (Company $company) => [
+                'id' => $company->id,
+                'name' => $company->name,
+                'logo_url' => $company->logo_url,
+            ])
+            ->values(),
+    ]);
+})->name('certification');
 
 // Tracking KPI : endpoints publics « fire-and-forget » appelés depuis le front (pour register evetns)
 Route::prefix('/track')->name('track.')->middleware('throttle:tracking')->group(function () {
