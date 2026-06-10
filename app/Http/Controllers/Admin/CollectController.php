@@ -72,7 +72,7 @@ class CollectController extends Controller
     {
         $wasActive = $collecte->is_active;
 
-        $collecte->update($this->resolveCollectAttributes($this->validateCollect($request)));
+        $collecte->update($this->resolveCollectAttributes($this->validateCollect($request, $collecte)));
         $this->enforceSingleActiveCollect($collecte);
 
         // On notifie uniquement lors d'un passage inactive -> active, pas à chaque édition.
@@ -102,10 +102,20 @@ class CollectController extends Controller
     /**
      * Validate a collect payload, including an existing place or a new one.
      *
+     * A collect cannot be scheduled in the past. On update, the rule only
+     * applies when the day actually changes, so a collect whose day is
+     * already past stays editable (link, place, activation...).
+     *
      * @return array<string, mixed>
      */
-    private function validateCollect(Request $request): array
+    private function validateCollect(Request $request, ?Collect $collecte = null): array
     {
+        $dayRules = ['required', 'date'];
+
+        if ($collecte === null || $request->input('day') !== $collecte->day?->toDateString()) {
+            $dayRules[] = 'after_or_equal:today';
+        }
+
         return $request->validate([
             'company_id' => ['required', 'exists:companies,id'],
             'place_mode' => ['required', 'in:existing,new'],
@@ -115,7 +125,7 @@ class CollectController extends Controller
             'place.locality' => ['nullable', 'required_if:place_mode,new', 'integer'],
             'place.city' => ['nullable', 'required_if:place_mode,new', 'string', 'max:255'],
             'place.room' => ['nullable', 'string', 'max:255'],
-            'day' => ['required', 'date'],
+            'day' => $dayRules,
             'start_time' => ['nullable', 'date_format:H:i'],
             'end_time' => ['nullable', 'date_format:H:i', 'after:start_time'],
             'link_appointment' => ['nullable', 'url'],

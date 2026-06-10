@@ -7,6 +7,7 @@ return [
     'unique' => 'This :attribute is already taken.',
     'confirmed' => 'The :attribute confirmation does not match.',
     'after' => 'The :attribute must be a date after today.',
+    'after_or_equal' => 'The :attribute cannot be in the past.',
     'max' => [
         'string' => 'The :attribute field must not be greater than :max characters.',
         'array' => 'The :attribute field must not have more than :max items.',
