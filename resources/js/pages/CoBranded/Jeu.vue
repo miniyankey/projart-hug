@@ -16,6 +16,8 @@ import { useTracking } from '@/composables/useTracking';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import { computeResult, overallVerdict } from '@/lib/eligibility';
 import { postJson } from '@/lib/http';
+import { home } from '@/routes';
+import { collecte as cobrandCollecte } from '@/routes/cobrand';
 
 const props = defineProps({
     company: Object,
@@ -29,6 +31,16 @@ const props = defineProps({
 
 const { t } = useI18n();
 const { questions, ineligibleView } = useEligibilityQuiz();
+
+// « Retour au site » : landing co-brandée de la collecte, ou accueil public.
+const siteUrl = computed(() =>
+    props.collectSlug && props.company?.slug
+        ? cobrandCollecte.url({
+              brandName: props.company.slug,
+              collect: props.collectSlug,
+          })
+        : home.url(),
+);
 const { trackEligibiliteStep, trackAppointmentClick } = useTracking();
 
 // 'intro' | 'map' | 'finished'. Les écrans question/résultat sont
@@ -93,10 +105,10 @@ function buildResultPanel(question, choiceIds) {
     return null;
 }
 
-// ─── Persistance de l'état (sessionStorage) ──────────────────────────────────
+// ─── Persistance de l'état (mémoire module) ──────────────────────────────────
 // Le jeu reste « stateful » à travers la navigation interne SPA : la progression,
 // la position de Pochy (gérée par GameMap, cf. storage-key) et la vue en cours
-// (question/résultat) sont restaurées au retour. Lié à l'onglet → fermé = reset.
+// (question/résultat) sont restaurées au retour. Refresh / nouvel onglet = reset.
 // Clé par collecte (ou « public ») pour ne pas mélanger plusieurs parcours.
 const STORAGE_KEY = `eligibilite:game:${props.collectSlug ?? 'public'}`;
 const { read: readSession, persist: persistSession } =
@@ -404,7 +416,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PublicLayout :company="company" :collect-slug="collectSlug" hide-footer>
+    <PublicLayout
+        :company="company"
+        :collect-slug="collectSlug"
+        :link-appointment="link_appointment"
+        hide-footer
+    >
         <Head :title="t('eligibilite.title')" />
 
         <div ref="containerRef" class="game-container">
@@ -540,7 +557,9 @@ onUnmounted(() => {
 <style scoped>
 .game-container {
     position: relative;
-    height: calc(100vh - 64px); /* fallback avant le calcul JS de fitHeight() */
+    /* dvh : suit la barre d'URL mobile (100vh déborderait → bande blanche).
+       Fallback avant le calcul JS de fitHeight(). */
+    height: calc(100dvh - 64px);
     overflow: hidden;
 }
 

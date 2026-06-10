@@ -15,7 +15,7 @@ const { t } = useI18n();
 
 <template>
     <div
-        class="intro-bg relative flex flex-col overflow-hidden px-6 py-8 sm:px-10 sm:py-12"
+        class="intro-bg relative flex flex-col overflow-x-hidden overflow-y-auto px-6 py-8 sm:overflow-hidden sm:px-10 sm:py-12"
     >
         <!-- Titre + badge de réassurance -->
         <div class="flex flex-col items-start gap-4">
@@ -76,9 +76,10 @@ const { t } = useI18n();
             </Button>
         </div>
 
-        <!-- Réassurance confidentialité — ancrée en bas à droite -->
+        <!-- Réassurance confidentialité - dans le flux sous le CTA sur mobile
+             (sinon elle chevauche le bouton), ancrée en bas à droite dès sm -->
         <p
-            class="absolute right-4 bottom-3 max-w-[34ch] text-right text-xs leading-relaxed text-white/80 [text-shadow:1px_1px_0_rgba(0,0,0,0.35)] sm:right-6 sm:bottom-4 sm:text-sm"
+            class="mt-auto pt-5 text-center text-xs leading-relaxed text-white/80 [text-shadow:1px_1px_0_rgba(0,0,0,0.35)] sm:absolute sm:right-6 sm:bottom-4 sm:mt-0 sm:max-w-[34ch] sm:pt-0 sm:text-right sm:text-sm"
         >
             {{ t('eligibilite.ui.intro_privacy') }}
         </p>
