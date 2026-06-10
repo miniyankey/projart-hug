@@ -22,7 +22,7 @@ export const buttonVariants = cva(
         pixel_violet:
           "bg-[var(--brand)] text-white rounded-none shadow-[4px_4px_0px_0px_var(--brand-shadow)] hover:bg-[var(--brand-hover)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_blue:
-          "bg-blue-600 text-white rounded-none shadow-[4px_4px_0px_0px_#3b82f6] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#3b82f6] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
+          "bg-white text-[var(--brand)] border border-[var(--brand)] rounded-none shadow-[4px_4px_0px_0px_var(--brand-shadow)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--brand-shadow)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_white:
           "bg-white text-[var(--brand)] rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.35)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.35)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         pixel_yellow:
@@ -34,8 +34,8 @@ export const buttonVariants = cva(
       },
       size: {
         "default": "h-9 px-4 py-2 has-[>svg]:px-3",
-        "sm": "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        "lg": "h-10 rounded-md px-6 has-[>svg]:px-4",
+        "sm": "h-8 gap-1.5 px-3 has-[>svg]:px-2.5",
+        "lg": "h-10 px-6 has-[>svg]:px-4",
         "cta": "h-11 px-6 py-2.5",
         "quiz": "h-auto px-[1.1rem] py-[0.85rem]",
         "icon": "size-9",

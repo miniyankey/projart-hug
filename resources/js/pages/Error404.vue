@@ -66,15 +66,10 @@ const { t } = useI18n();
                     <div class="mt-8 flex flex-wrap justify-center gap-4">
                         <Button as-child variant="pixel_violet" size="lg">
                             <Link :href="routes.home.url()">
-                                > {{ t('error404.cta_home') }}
+                                {{ t('error404.cta_home') }}
                             </Link>
                         </Button>
-                        <Button
-                            as-child
-                            variant="pixel_blue"
-                            size="lg"
-                            class="border border-blue-600 text-white"
-                        >
+                        <Button as-child variant="pixel_blue" size="lg">
                             <Link :href="routes.collecte.url()">
                                 {{ t('error404.cta_collecte') }}
                             </Link>
