@@ -45,6 +45,7 @@ class CobrandController extends Controller
         return Inertia::render('CoBranded/DonSang', [
             'collectSlug' => $collect->slug,
             'company' => $this->companyData($company),
+            'link_appointment' => $collect->link_appointment,
         ]);
     }
 

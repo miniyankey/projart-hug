@@ -157,6 +157,13 @@ onBeforeUnmount(() => removeListener?.());
                         @click.prevent="scrollToCta"
                         >{{ t(cta.label) }}</a
                     >
+                    <a
+                        v-else-if="cta.external"
+                        :href="cta.href"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >{{ t(cta.label) }}</a
+                    >
                     <Link v-else :href="cta.href">{{ t(cta.label) }}</Link>
                 </Button>
                 <LanguageSwitcher />
@@ -203,6 +210,13 @@ onBeforeUnmount(() => removeListener?.());
                             v-if="ctaScrollTarget"
                             :href="ctaScrollTarget"
                             @click.prevent="scrollToCta"
+                            >{{ t(cta.label) }}</a
+                        >
+                        <a
+                            v-else-if="cta.external"
+                            :href="cta.href"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             >{{ t(cta.label) }}</a
                         >
                         <Link v-else :href="cta.href">{{ t(cta.label) }}</Link>

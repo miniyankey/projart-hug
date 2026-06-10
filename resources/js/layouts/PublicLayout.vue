@@ -30,6 +30,12 @@ const props = defineProps({
         type: String,
         default: null,
     },
+    // Lien externe de prise de rendez-vous de la collecte (mode co-brandé) :
+    // si défini, le CTA « S'inscrire à la collecte » y renvoie directement.
+    linkAppointment: {
+        type: String,
+        default: null,
+    },
 });
 
 const isCobrand = computed(() => props.company !== null);
@@ -63,14 +69,24 @@ const links = computed(() =>
           ],
 );
 
-const cta = computed(() =>
-    isCobrand.value
+const cta = computed(() => {
+    if (!isCobrand.value) {
+        return { href: routes.collecte.url(), label: 'nav.cta_creer_collecte' };
+    }
+
+    // Inscription directe sur la plateforme externe de prise de rendez-vous ;
+    // repli sur la landing de la collecte si elle n'a pas de lien.
+    return props.linkAppointment
         ? {
+              href: props.linkAppointment,
+              label: 'nav.cta_inscrire_collecte',
+              external: true,
+          }
+        : {
               href: cobrandCollecte.url(routeParams.value),
               label: 'nav.cta_inscrire_collecte',
-          }
-        : { href: routes.collecte.url(), label: 'nav.cta_creer_collecte' },
-);
+          };
+});
 
 // Couleur de l'entreprise posée en variables CSS, qui cascadent
 const brandVars = computed(() => {
