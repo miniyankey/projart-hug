@@ -16,6 +16,10 @@ defineEmits(['toggle']);
         variant="quiz"
         size="quiz"
         :class="[
+            // max-w-full : le bouton ne dépasse jamais son conteneur → le label
+            // passe sur plusieurs lignes au lieu de casser le responsive.
+            // Compact sur mobile, plus généreux dès le desktop (md).
+            'max-w-full gap-2 px-3 py-2 md:gap-3 md:px-5 md:py-3.5',
             selected ? 'bg-[var(--brand,#7c3aed)] text-white shadow-none' : '',
             descr ? '' : 'items-center',
         ]"
@@ -25,7 +29,7 @@ defineEmits(['toggle']);
         <!-- Case à cocher (choix multiples uniquement) -->
         <span
             v-if="multiple"
-            class="flex h-[1.9rem] w-[1.9rem] shrink-0 items-center justify-center border-[3px] group-active:border-current"
+            class="flex h-6 w-6 shrink-0 items-center justify-center border-[3px] group-active:border-current md:h-7 md:w-7"
             :class="
                 selected ? 'border-current' : 'border-[var(--brand,#7c3aed)]'
             "
@@ -44,12 +48,14 @@ defineEmits(['toggle']);
         </span>
 
         <span class="flex min-w-0 flex-col gap-[0.15rem] text-left">
-            <span class="text-[0.95rem] leading-[1.3] font-semibold">{{
-                label
-            }}</span>
+            <span
+                class="text-[0.85rem] leading-[1.25] font-semibold break-words hyphens-auto md:text-[1.05rem]"
+            >
+                {{ label }}
+            </span>
             <span
                 v-if="descr"
-                class="text-left text-[0.85rem] leading-[1.3] opacity-[0.85]"
+                class="text-left text-[0.78rem] leading-[1.25] break-words opacity-[0.85] md:text-[0.95rem]"
             >
                 {{ descr }}
             </span>
