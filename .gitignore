@@ -33,5 +33,13 @@ CLAUDE.md
 AGENTS.md
 opencode.json
 plan.md
+/.agents
+/.claude
+/.opencode
+/boost.json
+/.mcp.json
+/skills-lock.json
+/mailPlan.md
+/prep
 
 context/*
