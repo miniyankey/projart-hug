@@ -753,6 +753,10 @@
             "step4_title": "Labellisation",
             "step4_desc": "Remise officielle de votre certification et intégration au club des entreprises solidaires."
         },
+        "labelled": {
+            "title": "Ils ont déjà le label",
+            "subtitle": "Ces entreprises se sont engagées pour le don du sang et ont obtenu le Label CTS RSE."
+        },
         "cta": {
             "title": "Prêt à vous engager ?",
             "subtitle": "Rejoignez les entreprises qui font la différence. Soumettez votre candidature et obtenez le label CTS RSE.",
