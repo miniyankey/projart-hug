@@ -12,7 +12,7 @@ class CollectSeeder extends Seeder
     /**
      * Lien de prise de rendez-vous (CTA des pages collecte / co-brandées).
      */
-    private const APPOINTMENT_URL = 'https://www.hug.ch/don-du-sang/prendre-rendez-vous';
+    private const APPOINTMENT_URL = 'https://www.hug.ch/don-sang/calendrier-collectes';
 
     public function run(): void
     {
