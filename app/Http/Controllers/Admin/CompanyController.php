@@ -19,7 +19,7 @@ class CompanyController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Entreprises/Index', [
-            'companies' => Company::withCount(['collects', 'trophees'])->latest()->get(),
+            'companies' => Company::withCount(['collects', 'trophees'])->orderBy('name')->get(),
         ]);
     }
 
