@@ -3,8 +3,6 @@
 namespace App\Mail;
 
 use App\Models\Collect;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -14,10 +12,13 @@ use Illuminate\Support\Facades\Storage;
 // Mailable déclare deux méthodes qu'on override pour décrire le mail
 // Enveloppe : sujet, expéditeur, etc.
 // Contenu : template + données à injecter
-class CollectCreatedMail extends Mailable implements ShouldQueue
+//
+// Envoi synchrone (pendant la requête HTTP) : l'hébergement mutualisé
+// Infomaniak ne permet aucun worker de queue, un mail mis en file
+// d'attente ne partirait jamais (cf. DEPLOYMENT_INFOMANIAK.md).
+class CollectCreatedMail extends Mailable
 {
-    // le mail n'est pas envoyé pendant la requête HTTP de l'admin (qui resterait bloquée le temps du SMTP), mais poussé dans une file d'attente (table jobs) et envoyé par un worker en arrière-plan
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
     /**
      * Create a new message instance.

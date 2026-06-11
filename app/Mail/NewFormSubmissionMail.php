@@ -4,8 +4,6 @@ namespace App\Mail;
 
 use App\Enums\FormSubmissionType;
 use App\Models\FormSubmission;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
@@ -15,10 +13,11 @@ use Illuminate\Queue\SerializesModels;
 // Notification interne envoyée à l'équipe Mission Donneur à chaque soumission
 // d'un formulaire public (contact ou demande d'organisation de collecte).
 // Volontairement non co-brandé : le destinataire est l'équipe, pas une entreprise.
-class NewFormSubmissionMail extends Mailable implements ShouldQueue
+// Envoi synchrone : pas de worker possible sur le mutualisé Infomaniak,
+// un mail en file d'attente ne partirait jamais (cf. DEPLOYMENT_INFOMANIAK.md).
+class NewFormSubmissionMail extends Mailable
 {
-    // Mail poussé en file d'attente : la requête HTTP du visiteur n'attend pas le SMTP.
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
     /**
      * Create a new message instance.

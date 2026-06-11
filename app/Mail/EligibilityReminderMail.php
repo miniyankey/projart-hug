@@ -3,16 +3,16 @@
 namespace App\Mail;
 
 use App\Models\EligibilityReminder;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EligibilityReminderMail extends Mailable implements ShouldQueue
+// Envoi synchrone : pas de worker possible sur le mutualisé Infomaniak,
+// un mail en file d'attente ne partirait jamais (cf. DEPLOYMENT_INFOMANIAK.md).
+class EligibilityReminderMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
     /**
      * Page officielle HUG vers laquelle pointe le rappel (stable, non co-brandée).
