@@ -7,8 +7,10 @@ use App\Mail\NewFormSubmissionMail;
 use App\Models\FormSubmission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
+use Throwable;
 
 class FormSubmissionController extends Controller
 {
@@ -41,9 +43,17 @@ class FormSubmissionController extends Controller
 
         $submission = FormSubmission::create($validated);
 
-        // Notifier l'équipe Mission Donneur de la nouvelle soumission (en file d'attente,
-        // pour ne pas bloquer la réponse au visiteur si le SMTP est lent/indisponible).
-        Mail::to(config('mail.from.address'))->queue(new NewFormSubmissionMail($submission));
+        // Notifier l'équipe Mission Donneur de la nouvelle soumission. Un échec
+        // SMTP ne doit pas faire échouer la requête du visiteur : la soumission
+        // est déjà enregistrée et reste visible dans l'admin.
+        try {
+            Mail::to(config('mail.from.address'))->send(new NewFormSubmissionMail($submission));
+        } catch (Throwable $exception) {
+            Log::error('Échec de l\'envoi de la notification de soumission de formulaire.', [
+                'form_submission_id' => $submission->id,
+                'exception' => $exception->getMessage(),
+            ]);
+        }
 
         return redirect()->back()
             ->with('success', 'flash.form_submission_sent');

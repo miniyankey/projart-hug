@@ -9,9 +9,11 @@ use App\Models\Company;
 use App\Models\Place;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
+use Throwable;
 
 class CollectController extends Controller
 {
@@ -42,10 +44,9 @@ class CollectController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $collect = Collect::create($this->resolveCollectAttributes($this->validateCollect($request)));
-        $this->enforceSingleActiveCollect($collect);
 
-        // Une collecte active expose immédiatement le lien co-brandé : on en informe le contact.
-        if ($collect->is_active) {
+        // Une collecte en cours expose immédiatement le lien co-brandé : on en informe le contact.
+        if ($collect->isOngoing()) {
             $this->notifyCompanyContact($collect);
         }
 
@@ -70,15 +71,7 @@ class CollectController extends Controller
      */
     public function update(Request $request, Collect $collecte): RedirectResponse
     {
-        $wasActive = $collecte->is_active;
-
         $collecte->update($this->resolveCollectAttributes($this->validateCollect($request, $collecte)));
-        $this->enforceSingleActiveCollect($collecte);
-
-        // On notifie uniquement lors d'un passage inactive -> active, pas à chaque édition.
-        if (! $wasActive && $collecte->is_active) {
-            $this->notifyCompanyContact($collecte);
-        }
 
         return redirect()->route('admin.collectes.index')
             ->with('success', 'flash.collect_updated');
@@ -86,6 +79,10 @@ class CollectController extends Controller
 
     /**
      * Envoie au contact de l'entreprise le lien co-brandé de la collecte.
+     *
+     * Un échec SMTP ne doit pas faire échouer la requête : la collecte est
+     * déjà enregistrée, on logge et l'admin pourra prévenir le contact
+     * manuellement.
      */
     private function notifyCompanyContact(Collect $collect): void
     {
@@ -95,8 +92,15 @@ class CollectController extends Controller
             return;
         }
 
-        // création d'un mail pour informer le contact de l'entreprise que sa collecte est active et que le lien co-brandé est accessible
-        Mail::to($collect->company->email_contact)->queue(new CollectCreatedMail($collect));
+        try {
+            Mail::to($collect->company->email_contact)->send(new CollectCreatedMail($collect));
+        } catch (Throwable $exception) {
+            Log::error('Échec de l\'envoi du mail de collecte au contact entreprise.', [
+                'collect_id' => $collect->id,
+                'email' => $collect->company->email_contact,
+                'exception' => $exception->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -129,7 +133,6 @@ class CollectController extends Controller
             'start_time' => ['nullable', 'date_format:H:i'],
             'end_time' => ['nullable', 'date_format:H:i', 'after:start_time'],
             'link_appointment' => ['nullable', 'url'],
-            'is_active' => ['boolean'],
         ]);
     }
 
@@ -152,27 +155,7 @@ class CollectController extends Controller
             'start_time' => $validated['start_time'] ?? null,
             'end_time' => $validated['end_time'] ?? null,
             'link_appointment' => $validated['link_appointment'] ?? null,
-            'is_active' => $validated['is_active'] ?? false,
         ];
-    }
-
-    /**
-     * Ensure a company exposes a single active collect at a time.
-     *
-     * When the saved collect is active, every other active collect of the same
-     * company is deactivated, so the co-branded link always resolves to it
-     * that might be improved in the future, depending if a company has multiple collects in the same time window or not
-     */
-    private function enforceSingleActiveCollect(Collect $collect): void
-    {
-        if (! $collect->is_active) {
-            return;
-        }
-
-        Collect::where('company_id', $collect->company_id)
-            ->whereKeyNot($collect->id)
-            ->where('is_active', true)
-            ->update(['is_active' => false]);
     }
 
     /**
