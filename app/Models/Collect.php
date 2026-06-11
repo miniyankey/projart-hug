@@ -82,7 +82,7 @@ class Collect extends Model
     protected function casts(): array
     {
         return [
-            'day' => 'date',
+            'day' => 'date:Y-m-d',
         ];
     }
 
