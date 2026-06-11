@@ -22,8 +22,13 @@ class CollectController extends Controller
      */
     public function index(): Response
     {
+        // En cours d'abord (prochaine date en tête), puis terminées (la plus récente en tête).
+        $collects = Collect::with(['company', 'place'])->get();
+
         return Inertia::render('Admin/Collectes/Index', [
-            'collects' => Collect::with(['company', 'place'])->latest()->get(),
+            'collects' => $collects->filter->isOngoing()->sortBy('day')
+                ->concat($collects->reject->isOngoing()->sortByDesc('day'))
+                ->values(),
         ]);
     }
 

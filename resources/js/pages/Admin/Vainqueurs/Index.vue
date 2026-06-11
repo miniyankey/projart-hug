@@ -36,7 +36,7 @@ const {
         <template #subtitle>{{ t('admin.vainqueurs.subtitle') }}</template>
 
         <template #actions>
-            <Button as-child variant="admin">
+            <Button as-child variant="pixel_violet">
                 <Link :href="create.url()">
                     <Plus class="size-4" />
                     {{ t('admin.vainqueurs.new') }}

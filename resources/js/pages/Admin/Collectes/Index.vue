@@ -51,7 +51,7 @@ function formatTimeRange(start, end) {
         <template #subtitle>{{ t('admin.collectes.subtitle') }}</template>
 
         <template #actions>
-            <Button as-child variant="admin">
+            <Button as-child variant="pixel_violet">
                 <Link :href="create.url()">
                     <Plus class="size-4" />
                     {{ t('admin.collectes.new') }}

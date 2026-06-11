@@ -319,7 +319,7 @@ const hasError = computed(() => Object.keys(form.errors).length > 0);
                 </Button>
                 <Button
                     type="submit"
-                    variant="admin"
+                    variant="pixel_violet"
                     :disabled="form.processing"
                 >
                     {{ submitLabel }}
